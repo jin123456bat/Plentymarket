@@ -4,5 +4,5 @@
       "namespace":"jin123456bat",
       "author":"jin123456bat",
       "type":"template",
-      "serviceProvider":"HelloWorld\\Providers\\HelloWorldServiceProvider"
+      "serviceProvider":"jin123456bat\\Providers\\HelloWorldServiceProvider"
 }
