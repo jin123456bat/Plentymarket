@@ -1,0 +1,8 @@
+{
+      "name":"plentymarkets",
+      "description":"plentymarkets-template",
+      "namespace":"jin123456bat",
+      "author":"jin123456bat",
+      "type":"template",
+      "serviceProvider":"HelloWorld\\Providers\\HelloWorldServiceProvider"
+}
