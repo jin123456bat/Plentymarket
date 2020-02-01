@@ -1,6 +1,6 @@
 {
-    "name"              : "Plentymarkets",
-    "namespace"         : "HelloWorld",
+    "name"              : "HelloWorldJcc",
+    "namespace"         : "Plentymarkets",
     "type"              : "template",
     "version"           : "1.0.0",
     "isClosedSource"    : false,
