@@ -1,8 +1,20 @@
 {
-      "name":"plentymarkets",
-      "description":"plentymarkets-template",
-      "namespace":"jin123456bat",
-      "author":"jin123456bat",
-      "type":"template",
-      "serviceProvider":"jin123456bat\\Providers\\HelloWorldServiceProvider"
+    "name"              : "Plentymarkets",
+    "namespace"         : "Jin123456bat",
+    "type"              : "template",
+    "version"           : "1.0.0",
+    "isClosedSource"    : false,
+    "pluginIcon"        : "",
+    "description"       : "plentymarkets-template",
+    "author"            : "jin123456bat",
+    "authorIcon"        : "",
+    "email"             : "326550324@qq.com",
+    "phone"             : "15868481019",
+    "serviceProvider"   : "jin123456bat\\Providers\\HelloWorldServiceProvider",
+    "containers"        : [],
+    "dataProviders"     : [],
+    "javaScriptFiles"   : [],
+    "require"           : [],
+    "dependencies"      : [],
+    "runOnBuild"        : []
 }

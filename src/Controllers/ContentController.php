@@ -1,5 +1,5 @@
 <?php
-namespace jin123456bat\Controllers;
+namespace Jin123456bat\Controllers;
 
 use Plenty\Plugin\Controller;
 use Plenty\Plugin\Templates\Twig;
