@@ -1,5 +1,5 @@
 <?php
-namespace Jin123456bat\Providers;
+namespace HelloWorldIsy\Providers;
 
 use Plenty\Plugin\ServiceProvider;
 

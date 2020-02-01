@@ -1,6 +1,6 @@
 {
     "name"              : "Plentymarkets",
-    "namespace"         : "Jin123456bat",
+    "namespace"         : "HelloWorld",
     "type"              : "template",
     "version"           : "1.0.0",
     "isClosedSource"    : false,
@@ -10,7 +10,7 @@
     "authorIcon"        : "",
     "email"             : "326550324@qq.com",
     "phone"             : "15868481019",
-    "serviceProvider"   : "jin123456bat\\Providers\\HelloWorldServiceProvider",
+    "serviceProvider"   : "HelloWorld\\Providers\\HelloWorldServiceProvider",
     "containers"        : [],
     "dataProviders"     : [],
     "javaScriptFiles"   : [],

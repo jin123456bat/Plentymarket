@@ -1,5 +1,5 @@
 <?php
-namespace Jin123456bat\Providers;
+namespace HelloWorldIsy\Providers;
 
 use Plenty\Plugin\RouteServiceProvider;
 use Plenty\Plugin\Routing\Router;
@@ -15,7 +15,7 @@ class HelloWorldRouteServiceProvider extends RouteServiceProvider
 	 */
 	public function map(Router $router)
 	{
-		$router->get('hello', 'Jin123456bat\Controllers\ContentController@sayHello');
+		$router->get('hello', 'HelloWorld\Controllers\ContentController@sayHello');
 	}
 
 }
