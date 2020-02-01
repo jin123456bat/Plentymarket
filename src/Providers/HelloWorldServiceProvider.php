@@ -1,5 +1,5 @@
 <?php
-namespace HelloWorldIsy\Providers;
+namespace Plentymarkets\Providers;
 
 use Plenty\Plugin\ServiceProvider;
 

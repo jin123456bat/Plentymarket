@@ -10,7 +10,7 @@
     "authorIcon"        : "",
     "email"             : "326550324@qq.com",
     "phone"             : "15868481019",
-    "serviceProvider"   : "HelloWorld\\Providers\\HelloWorldServiceProvider",
+    "serviceProvider"   : "Plentymarkets\\Providers\\HelloWorldServiceProvider",
     "containers"        : [],
     "dataProviders"     : [],
     "javaScriptFiles"   : [],
