@@ -1,5 +1,6 @@
 {
 	"name" : "plentymarkets/plentymarkets",
 	"require" : {
+		"plentymarkets/plugin-interface": "dev-beta7"
 	}
 }
