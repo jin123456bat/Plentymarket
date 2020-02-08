@@ -1,5 +1,5 @@
 <?php
-namespace Plentymarkets\Providers;
+namespace Plentymarket\Providers;
 
 use Plenty\Plugin\RouteServiceProvider;
 use Plenty\Plugin\Routing\Router;
@@ -8,14 +8,14 @@ use Plenty\Plugin\Routing\Router;
  * Class HelloWorldRouteServiceProvider
  * @package HelloWorld\Providers
  */
-class PlentymarketsRouteServiceProvider extends RouteServiceProvider
+class PlentymarketRouteServiceProvider extends RouteServiceProvider
 {
 	/**
 	 * @param Router $router
 	 */
 	public function map(Router $router)
 	{
-		$router->get('hello', 'Plentymarkets\Controllers\ContentController@sayHello');
+		$router->get('hello', 'Plentymarket\Controllers\ContentController@sayHello');
 	}
 
 }

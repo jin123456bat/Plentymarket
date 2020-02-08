@@ -1,5 +1,5 @@
 <?php
-namespace Plentymarkets\Controllers;
+namespace Plentymarket\Controllers;
 
 use Plenty\Plugin\Controller;
 use Plenty\Plugin\Templates\Twig;
@@ -16,6 +16,6 @@ class ContentController extends Controller
 	 */
 	public function sayHello(Twig $twig):string
 	{
-		return $twig->render('Plentymarkets::content.hello');
+		return $twig->render('Plentymarket::content.hello');
 	}
 }
