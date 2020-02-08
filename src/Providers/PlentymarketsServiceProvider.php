@@ -7,7 +7,7 @@ use Plenty\Plugin\ServiceProvider;
  * Class HelloWorldServiceProvider
  * @package HelloWorld\Providers
  */
-class HelloWorldServiceProvider extends ServiceProvider
+class PlentymarketsServiceProvider extends ServiceProvider
 {
 
 	/**
@@ -15,6 +15,6 @@ class HelloWorldServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->getApplication()->register(HelloWorldRouteServiceProvider::class);
+		$this->getApplication()->register(PlentymarketsRouteServiceProvider::class);
 	}
 }

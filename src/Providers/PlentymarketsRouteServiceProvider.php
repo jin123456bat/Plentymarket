@@ -8,7 +8,7 @@ use Plenty\Plugin\Routing\Router;
  * Class HelloWorldRouteServiceProvider
  * @package HelloWorld\Providers
  */
-class HelloWorldRouteServiceProvider extends RouteServiceProvider
+class PlentymarketsRouteServiceProvider extends RouteServiceProvider
 {
 	/**
 	 * @param Router $router
