@@ -1,6 +1,5 @@
 {
 	"name" : "plentymarkets/plentymarkets",
 	"require" : {
-		"laravel/framework" : "~6.13"
 	}
 }
