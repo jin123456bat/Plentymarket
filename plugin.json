@@ -1,5 +1,5 @@
 {
-    "name"              : "HelloWorldJcc",
+    "name"              : "Plentymarkets",
     "namespace"         : "Plentymarkets",
     "type"              : "template",
     "version"           : "1.0.0",
@@ -10,7 +10,7 @@
     "authorIcon"        : "",
     "email"             : "326550324@qq.com",
     "phone"             : "15868481019",
-    "serviceProvider"   : "Plentymarkets\\Providers\\HelloWorldServiceProvider",
+    "serviceProvider"   : "Plentymarkets\\Providers\\PlentymarketsServiceProvider",
     "containers"        : [],
     "dataProviders"     : [],
     "javaScriptFiles"   : [],
