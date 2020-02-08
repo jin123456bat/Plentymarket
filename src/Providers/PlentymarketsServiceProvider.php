@@ -16,5 +16,7 @@ class PlentymarketsServiceProvider extends ServiceProvider
 	public function register()
 	{
 		$this->getApplication()->register(PlentymarketsRouteServiceProvider::class);
+		
+		
 	}
 }
