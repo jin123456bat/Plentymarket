@@ -1,0 +1,10 @@
+{
+	"sections": [
+		{
+			"name": "Config.globalSiteName",
+			"prefix": "globalSiteName"
+		}
+	],
+	"nonTranslatableKeys": [
+	]
+}
