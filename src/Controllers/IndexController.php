@@ -8,7 +8,7 @@ use Plenty\Plugin\Templates\Twig;
  * Class ContentController
  * @package HelloWorld\Controllers
  */
-class ContentController extends Controller
+class IndexController extends Controller
 {
 	/**
 	 * @param Twig $twig
