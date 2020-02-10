@@ -14,7 +14,7 @@ class IndexController extends Controller
 	/**
 	 *
 	 */
-	public function login(Request $request):string
+	public function login(Request $request)
 	{
 		return new Json([
 			'code' => 1,

@@ -25,14 +25,4 @@ class AccountController extends Controller
 	{
 		return $twig->render('Plentymarket::account.wishlist');
 	}
-
-	function login()
-	{
-
-	}
-
-	function register()
-	{
-
-	}
 }
