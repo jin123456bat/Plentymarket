@@ -15,8 +15,10 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 	 */
 	public function map(Router $router)
 	{
-	    $router->get('/','Plentymarket\Controllers\IndexController@index');
-		$router->get('hello', 'Plentymarket\Controllers\ContentController@sayHello');
+	    $router->get('/','Plentymarket\Controllers\Web\IndexController@index');
+
+	    $router->post('/api/login','Plentymarket\Controller\Api\IndexController@login');
+		$router->post('/api/register','Plentymarket\Controller\Api\IndexController@register');
 	}
 
 }

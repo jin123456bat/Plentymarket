@@ -1,5 +1,5 @@
 <?php
-namespace Plentymarket\Controllers;
+namespace Plentymarket\Controllers\Web;
 
 use Plenty\Plugin\Controller;
 use Plenty\Plugin\Templates\Twig;
