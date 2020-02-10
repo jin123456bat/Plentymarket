@@ -1,32 +1,24 @@
 <?php
 namespace Plentymarket\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Plenty\Plugin\Controller;
-use Plentymarket\Response\Json;
+use Plentymarket\Controllers\BaseApiController;
 
 /**
  * Class ContentController
  * @package HelloWorld\Controllers
  */
-class IndexController extends Controller
+class IndexController extends BaseApiController
 {
 	/**
 	 *
 	 */
-	public function login(Request $request)
+	public function login()
 	{
-		return new Json([
-			'code' => 1,
-			'message'=>'OK',
-		]);
+		return $this->success('登录成功');
 	}
 
 	public function register()
 	{
-		return new Json([
-			'code' => 1,
-			'message'=>'OK',
-		]);
+		return $this->error('注册失败');
 	}
 }
