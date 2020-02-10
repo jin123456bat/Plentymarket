@@ -18,4 +18,24 @@ class IndexController extends Controller
 	{
 		return $twig->render('Plentymarket::index.index');
 	}
+
+	function about(Twig $twig):string
+	{
+		return $twig->render('Plentymarket::index.about');
+	}
+
+	function contact(Twig $twig):string
+	{
+		return $twig->render('Plentymarket::index.contact');
+	}
+
+	function faq(Twig $twig):string
+	{
+		return $twig->render('Plentymarket::index.faq');
+	}
+
+	function login_register(Twig $twig):string
+	{
+		return $twig->render('Plentymarket::index.login-register');
+	}
 }
