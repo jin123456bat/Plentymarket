@@ -45,7 +45,7 @@ class BaseApiController extends Controller
 	 */
 	protected function trans($key)
 	{
-		return $this->translator->trans($key);
+		return $this->translator->trans('Plentymarket::'.$key);
 	}
 
 	/**

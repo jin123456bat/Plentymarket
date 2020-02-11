@@ -36,7 +36,16 @@ class IndexController extends BaseApiController
 	 */
 	public function login ()
 	{
-		return $this->success('登录成功');
+		$email = $this->request->get('email');
+		$password = $this->request->get('password');
+
+		if (empty($email) || empty($password))
+		{
+			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
+		}
+
+		$this->accountService->login($email,$password);
+		return $this->success($this->trans('ApiIndex.loginSuccess'));
 	}
 
 	/**
@@ -49,13 +58,13 @@ class IndexController extends BaseApiController
 
 		if (empty($email) || empty($password))
 		{
-			return $this->error($this->trans("Plentymarket::Register.emailOrPasswordError"));
+			return $this->error($this->trans("ApiIndex.registerEmailOrPasswordError"));
 		}
 
 		if ($this->accountService->register($email, $password)) {
-			return $this->success($this->trans("Plentymarket::Register.success"));
+			return $this->success($this->trans("ApiIndex.registerSuccess"));
 		} else {
-			return $this->error($this->trans("Plentymarket::Register.emailExist"));
+			return $this->error($this->trans("ApiIndex.registerEmailExist"));
 		}
 	}
 }
