@@ -52,9 +52,14 @@ class AccountService
 	 * @param $email
 	 * @param $password
 	 */
-	function login($email, $password)
+	function login ($email, $password): bool
 	{
-		$this->contactAuthenticationRepositoryContract->authenticateWithContactEmail($email,$password);
+		try {
+			$this->contactAuthenticationRepositoryContract->authenticateWithContactEmail($email, $password);
+			return true;
+		} catch (\Exception $e) {
+			return false;
+		}
 	}
 
 	/**
