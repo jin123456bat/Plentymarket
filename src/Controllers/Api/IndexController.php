@@ -4,7 +4,6 @@ namespace Plentymarket\Controllers\Api;
 
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
-use Plenty\Plugin\Translation\Translator;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 
@@ -39,13 +38,15 @@ class IndexController extends BaseApiController
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
 
-		if (empty($email) || empty($password))
-		{
+		if (empty($email) || empty($password)) {
 			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
 		}
 
-		$this->accountService->login($email,$password);
-		return $this->success($this->trans('ApiIndex.loginSuccess'));
+		if ($this->accountService->login($email, $password)) {
+			return $this->success($this->trans('ApiIndex.loginSuccess'));
+		} else {
+			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
+		}
 	}
 
 	/**
@@ -56,8 +57,7 @@ class IndexController extends BaseApiController
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
 
-		if (empty($email) || empty($password))
-		{
+		if (empty($email) || empty($password)) {
 			return $this->error($this->trans("ApiIndex.registerEmailOrPasswordError"));
 		}
 
