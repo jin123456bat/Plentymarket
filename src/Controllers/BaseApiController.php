@@ -7,9 +7,9 @@ use Plenty\Plugin\Http\Response;
 
 class BaseApiController extends Controller
 {
-	private $response;
+	protected $response;
 
-	private $request;
+	protected $request;
 
 	public function __construct (Request $request,Response $response)
 	{
@@ -26,12 +26,11 @@ class BaseApiController extends Controller
 		],JSON_UNESCAPED_UNICODE),200);
 	}
 
-	protected function error($data):Response
+	protected function error($message):Response
 	{
 		return $this->response->make(json_encode([
 			'code' => 0,
-			'message'=>'error',
-			'data' => $data
+			'message'=>$message,
 		],JSON_UNESCAPED_UNICODE),200);
 	}
 }
