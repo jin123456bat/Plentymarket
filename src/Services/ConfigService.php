@@ -18,6 +18,6 @@ class ConfigService
 			$this->webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class)->findByWebstoreId(Utils::getWebstoreId());
 		}
 
-		return $this->webstoreConfig->$key;
+		return $this->webstoreConfig->toArray()[$key]??null;
 	}
 }
