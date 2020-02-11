@@ -28,12 +28,13 @@ class SessionService
 		$this->frontendSessionStorageFactoryContract = $frontendSessionStorageFactoryContract;
 		$eventDispatcher->listen(FrontendLanguageChanged::class, function(FrontendLanguageChanged $event)
 		{
+			//设置当前语言
 			$this->language = $event->getLanguage();
 		});
 	}
 
 	/**
-	 * Get the language from session
+	 * 获取当前语言
 	 * @return string
 	 */
 	public function getLang()
@@ -54,7 +55,7 @@ class SessionService
 
 			if(is_null($this->language) || !strlen($this->language))
 			{
-				$this->language = Utils::getDefaultLang();
+				$this->language = pluginApp(ConfigService::class)->get('defaultLanguage');
 			}
 		}
 

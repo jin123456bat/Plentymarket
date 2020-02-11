@@ -1,34 +1,26 @@
 <?php
-
 namespace Plentymarket\Services;
 
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
 use Plenty\Modules\System\Models\WebstoreConfiguration;
 use Plenty\Plugin\Application;
+use Plentymarket\Helper\Utils;
 
 class ConfigService
 {
-
-	/**
-	 * Get the activate languages of the webstore
+	/*
+	 * @var WebstoreConfiguration
 	 */
-    public function getLanguageList()
+	private $webstoreConfiguration;
+
+	public function get($key)
 	{
-        $activeLanguages = [];
+		if( $this->webstoreConfiguration === null )
+		{
+			$webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
+			$this->webstoreConfiguration = $webstoreConfig->findByWebstoreId(Utils::getWebstoreId());
+		}
 
-        $templateConfigService = pluginApp(TemplateConfigService::class);
-        $languages = $templateConfigService->get('language.active_languages');
-
-        if(!is_null($languages) && strlen($languages))
-        {
-            $activeLanguages = explode(', ', $languages);
-        }
-
-        if(!in_array($this->getWebstoreConfig()->defaultLanguage, $activeLanguages))
-        {
-            $activeLanguages[] = $this->getWebstoreConfig()->defaultLanguage;
-        }
-
-		return $activeLanguages;
+		return $this->webstoreConfiguration->$key;
 	}
 }

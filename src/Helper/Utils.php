@@ -3,6 +3,7 @@
 namespace Plentymarket\Helper;
 
 use Plenty\Plugin\Application;
+use Plentymarket\Services\ConfigService;
 
 /**
  * Class Utils
@@ -27,18 +28,7 @@ class Utils
 	 */
 	public static function getWebstoreId()
     {
-        /** @var Application $app */
         $app = pluginApp(Application::class);
         return (int) $app->getWebstoreId();
     }
-
-	/**
-	 * 获取支持的语言列表
-	 * @return mixed
-	 */
-	public static function getLanguageList()
-	{
-		$webstoreConfigService = pluginApp(WebstoreConfigurationService::class);
-		return $webstoreConfigService->getActiveLanguageList();
-	}
 }
