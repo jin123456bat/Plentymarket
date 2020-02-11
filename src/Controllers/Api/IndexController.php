@@ -31,7 +31,7 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 *
+	 * @return Response
 	 */
 	public function login (): Response
 	{
