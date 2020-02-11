@@ -34,9 +34,9 @@ class BaseApiController extends Controller
 	 */
 	public function __construct (Request $request, Response $response)
 	{
-		$this->translator = pluginApp( Translator::class );
 		$this->request = $request;
 		$this->response = $response;
+		$this->translator = pluginApp(Translator::class);
 	}
 
 	/**
