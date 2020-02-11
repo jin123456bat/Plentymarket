@@ -1,14 +1,14 @@
 <?php
 namespace Plentymarket\Controllers\Web;
 
-use Plenty\Plugin\Controller;
 use Plenty\Plugin\Templates\Twig;
+use Plentymarket\Controllers\BaseWebController;
 
 /**
  * Class ContentController
- * @package HelloWorld\Controllers
+ * @package Plentymarket\Controllers\Web
  */
-class IndexController extends Controller
+class IndexController extends BaseWebController
 {
 	/**
 	 * @param Twig $twig

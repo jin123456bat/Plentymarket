@@ -2,8 +2,6 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\System\Contracts\WebstoreConfigurationRepositoryContract;
-use Plenty\Modules\System\Models\WebstoreConfiguration;
-use Plenty\Plugin\Application;
 use Plentymarket\Helper\Utils;
 
 class ConfigService
@@ -17,8 +15,7 @@ class ConfigService
 	{
 		if( $this->webstoreConfig === null )
 		{
-			$webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
-			$this->webstoreConfig = $webstoreConfig->findByWebstoreId(Utils::getWebstoreId());
+			$this->webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class)->findByWebstoreId(Utils::getWebstoreId());
 		}
 
 		return $this->webstoreConfig->$key;

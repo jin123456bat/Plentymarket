@@ -14,8 +14,17 @@ use Plentymarket\Services\AccountService;
  */
 class IndexController extends BaseApiController
 {
+	/**
+	 * @var AccountService
+	 */
 	private $accountService;
 
+	/**
+	 * IndexController constructor.
+	 * @param Request $request
+	 * @param Response $response
+	 * @param AccountService $accountService
+	 */
 	function __construct (Request $request, Response $response, AccountService $accountService)
 	{
 		parent::__construct($request, $response);
@@ -30,6 +39,9 @@ class IndexController extends BaseApiController
 		return $this->success('登录成功');
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function register ()
 	{
 		$email = $this->request->get('email');
