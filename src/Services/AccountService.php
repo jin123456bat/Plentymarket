@@ -60,7 +60,7 @@ class AccountService
 	/**
 	 * 添加账户
 	 */
-	function register($email,$password):Contact
+	function register($email,$password):bool
 	{
 		try{
 			$contact = $this->contactRepositoryContract->createContact([

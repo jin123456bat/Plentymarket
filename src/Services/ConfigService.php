@@ -11,16 +11,16 @@ class ConfigService
 	/*
 	 * @var WebstoreConfiguration
 	 */
-	private $webstoreConfiguration;
+	private $webstoreConfig;
 
 	public function get($key)
 	{
-		if( $this->webstoreConfiguration === null )
+		if( $this->webstoreConfig === null )
 		{
 			$webstoreConfig = pluginApp(WebstoreConfigurationRepositoryContract::class);
-			$this->webstoreConfiguration = $webstoreConfig->findByWebstoreId(Utils::getWebstoreId());
+			$this->webstoreConfig = $webstoreConfig->findByWebstoreId(Utils::getWebstoreId());
 		}
 
-		return $this->webstoreConfiguration->$key;
+		return $this->webstoreConfig->$key;
 	}
 }
