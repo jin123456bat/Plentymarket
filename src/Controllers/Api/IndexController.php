@@ -17,7 +17,7 @@ class IndexController extends BaseApiController
 	/**
 	 * @var AccountService
 	 */
-	private $accountService;
+//	private $accountService;
 
 	/**
 	 * IndexController constructor.
@@ -25,10 +25,16 @@ class IndexController extends BaseApiController
 	 * @param Response $response
 	 * @param AccountService $accountService
 	 */
-	function __construct (Request $request, Response $response, AccountService $accountService)
+//	function __construct (Request $request, Response $response, AccountService $accountService)
+//	{
+//		parent::__construct($request, $response);
+//		$this->accountService = $accountService;
+//	}
+
+	function __construct (Request $request, Response $response)
 	{
 		parent::__construct($request, $response);
-		$this->accountService = $accountService;
+//		$this->accountService = $accountService;
 	}
 
 	// Get all
@@ -49,19 +55,19 @@ class IndexController extends BaseApiController
 	public function store (): Response
 	{
 		return $this->response->make('login', 200);
-		$email = $this->request->get('email');
-		$password = $this->request->get('password');
-
-		if (empty($email) || empty($password)) {
-//			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
-		}
-
-		if ($this->accountService->login($email, $password)) {
-//			return $this->success($this->trans('ApiIndex.loginSuccess'));
-		} else {
-//			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
-		}
-		//return $this->response->create(null, $this->defaultCode);
+//		$email = $this->request->get('email');
+//		$password = $this->request->get('password');
+//
+//		if (empty($email) || empty($password)) {
+////			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
+//		}
+//
+//		if ($this->accountService->login($email, $password)) {
+////			return $this->success($this->trans('ApiIndex.loginSuccess'));
+//		} else {
+////			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
+//		}
+//		//return $this->response->create(null, $this->defaultCode);
 	}
 
 	// Get
