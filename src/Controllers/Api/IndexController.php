@@ -33,7 +33,7 @@ class IndexController extends BaseApiController
 	/**
 	 * @return string
 	 */
-	public function login (): string
+	public function login (): Response
 	{
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
