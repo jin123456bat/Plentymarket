@@ -42,9 +42,9 @@ class BaseApiController extends Controller
 	/**
 	 * 翻译
 	 * @param $key
-	 * @return mixed
+	 * @return string
 	 */
-	protected function trans($key)
+	protected function trans ($key): string
 	{
 		return $this->translator->trans('Plentymarket::' . $key);
 	}
