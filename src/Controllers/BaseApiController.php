@@ -46,33 +46,61 @@ class BaseApiController extends Controller
 	 */
 	protected function trans($key)
 	{
-		return $this->translator->trans('Plentymarket::'.$key);
+		return $key;
+//		return $this->translator->trans('Plentymarket::'.$key);
 	}
 
 	/**
 	 * 返回成功信息
 	 * @param $data
-	 * @return Response
+	 * @return string
 	 */
-	protected function success($data):Response
+	protected function success ($data): string
 	{
-		return $this->response->make(json_encode([
+		return json_encode([
 			'code' => 1,
-			'message'=>'OK',
+			'message' => 'OK',
 			'data' => $data
-		],JSON_UNESCAPED_UNICODE),200);
+		]);
 	}
 
 	/**
 	 * 返回失败信息
 	 * @param $message
-	 * @return Response
+	 * @return string
 	 */
-	protected function error($message):Response
+	protected function error ($message): string
 	{
-		return $this->response->make(json_encode([
+		return json_encode([
 			'code' => 0,
 			'message' => $message,
-		]), 200);
+		]);
 	}
+
+//	/**
+//	 * 返回成功信息
+//	 * @param $data
+//	 * @return Response
+//	 */
+//	protected function success($data):Response
+//	{
+//		return $this->response->make(json_encode([
+//			'code' => 1,
+//			'message'=>'OK',
+//			'data' => $data
+//		],JSON_UNESCAPED_UNICODE),200);
+//	}
+//
+//	/**
+//	 * 返回失败信息
+//	 * @param $message
+//	 * @return Response
+//	 */
+//	protected function error($message):Response
+//	{
+//		return $this->response->make(json_encode([
+//			'code' => 0,
+//			'message' => $message,
+//		]), 200);
+//	}
 }

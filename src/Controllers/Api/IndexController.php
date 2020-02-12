@@ -31,9 +31,9 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 * @return Response
+	 * @return string
 	 */
-	public function login (): Response
+	public function login (): string
 	{
 		try {
 			$email = $this->request->get('email');
@@ -49,14 +49,14 @@ class IndexController extends BaseApiController
 				return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
 			}
 		} catch (\Exception $e) {
-			return $this->response->make('Exception!!!!', 200);
+//			return $this->response->make('Exception!!!!', 200);
 		}
 	}
 
 	/**
-	 * @return Response
+	 * @return string
 	 */
-	public function register (): Response
+	public function register (): string
 	{
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
