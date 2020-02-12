@@ -31,9 +31,9 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 * @return string
+	 * @return Response
 	 */
-	public function login (): string
+	public function login (): Response
 	{
 		try {
 			$email = $this->request->get('email');
@@ -54,9 +54,9 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 * @return string
+	 * @return Response
 	 */
-	public function register (): string
+	public function register (): Response
 	{
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
