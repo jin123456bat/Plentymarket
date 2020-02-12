@@ -34,7 +34,7 @@ class IndexController extends BaseApiController
 	/**
 	 * @return string
 	 */
-	public function login (Twig $twig): string
+	public function login (): string
 	{
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
