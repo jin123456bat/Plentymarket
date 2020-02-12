@@ -38,7 +38,7 @@ class IndexController extends BaseApiController
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
 
-		return '账号密码不能为空:email:' . $email . ',password:' . $password;
+		return 'email:' . $email . ',password:' . $password;
 
 		if (empty($email) || empty($password)) {
 			//return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
