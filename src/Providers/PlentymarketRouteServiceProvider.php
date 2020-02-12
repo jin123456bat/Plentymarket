@@ -18,12 +18,10 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 	public function map (Router $router, ApiRouter $api)
 	{
 		//接口声明
-//		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api'], function (ApiRouter $api) {
-//			$api->post('api/index/login', 'IndexController@login');
-//			$api->post('api/index/register', 'IndexController@register');
-//		});
-
-		$api->post('api/index/login', 'Plentymarket\Controllers\Api\IndexController@login');
+		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api'], function (ApiRouter $api) {
+			$api->post('api/index/login', 'IndexController@login');
+			$api->post('api/index/register', 'IndexController@register');
+		});
 
 		//页面声明
 		$router->get('/', 'Plentymarket\Controllers\Web\IndexController@index');

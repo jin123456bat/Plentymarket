@@ -39,22 +39,15 @@ class IndexController extends BaseApiController
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
 
-		return $twig->render('Plentymarket::common.json', [
-			'data' => [
-				'code' => 1,
-				'message' => '成功',
-			]
-		]);
+		if (empty($email) || empty($password)) {
+			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
+		}
 
-//		if (empty($email) || empty($password)) {
-//			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
-//		}
-//
-//		if ($this->accountService->login($email, $password)) {
-//			return $this->success($this->trans('ApiIndex.loginSuccess'));
-//		} else {
-//			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
-//		}
+		if ($this->accountService->login($email, $password)) {
+			return $this->success($this->trans('ApiIndex.loginSuccess'));
+		} else {
+			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
+		}
 	}
 
 	/**
