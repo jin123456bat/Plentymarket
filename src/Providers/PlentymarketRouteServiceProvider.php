@@ -16,6 +16,12 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 	 */
 	public function map (Router $router, ApiRouter $api)
 	{
+		//接口声明
+		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api', 'middleware' => []], function (ApiRouter $apiRouter) {
+			$apiRouter->post('/api/index/login', 'IndexController@login');
+			$apiRouter->post('/api/index/register', 'IndexController@register');
+		});
+
 		$router->get('/', 'Plentymarket\Controllers\Web\IndexController@index');
 		$router->get('/index/about', 'Plentymarket\Controllers\Web\IndexController@about');
 		$router->get('/index/contact', 'Plentymarket\Controllers\Web\IndexController@contact');
@@ -26,9 +32,6 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/account/cart', 'Plentymarket\Controllers\Web\AccountController@cart');
 		$router->get('/account/checkout', 'Plentymarket\Controllers\Web\AccountController@checkout');
 		$router->get('/account/wishlist', 'Plentymarket\Controllers\Web\AccountController@wishlist');
-
-		$api->post('/api/index/login', 'Plentymarket\Controller\Api\IndexController@login');
-		$api->post('/api/index/register', 'Plentymarket\Controller\Api\IndexController@register');
 	}
 
 }
