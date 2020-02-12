@@ -87,7 +87,7 @@ class BaseApiController extends Controller
 			'code' => 1,
 			'message' => 'OK',
 			'data' => $data
-		]), 200);
+		], JSON_UNESCAPED_UNICODE), 200);
 	}
 
 	/**
@@ -100,6 +100,6 @@ class BaseApiController extends Controller
 		return $this->response->make(json_encode([
 			'code' => 0,
 			'message' => $message,
-		]), 200);
+		], JSON_UNESCAPED_UNICODE), 200);
 	}
 }
