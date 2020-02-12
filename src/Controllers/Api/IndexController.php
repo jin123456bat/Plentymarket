@@ -31,23 +31,22 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 * @return Response
+	 * @return string
 	 */
-	public function login (): Response
+	public function login (): string
 	{
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
 
+		return '账号密码不能为空:email:' . $email . ',password:' . $password;
+
 		if (empty($email) || empty($password)) {
-			return $this->error('账号密码错误');
-//			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
+			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
 		}
 
 		if ($this->accountService->login($email, $password)) {
-			return $this->success('登录成功');
-//			return $this->success($this->trans('ApiIndex.loginSuccess'));
+			return $this->success($this->trans('ApiIndex.loginSuccess'));
 		} else {
-			return $this->error('账号密码错误');
 			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
 		}
 	}
