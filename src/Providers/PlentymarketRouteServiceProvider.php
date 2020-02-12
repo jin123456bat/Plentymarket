@@ -17,7 +17,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 	public function map (Router $router, ApiRouter $api)
 	{
 		//接口声明
-		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api', 'middleware' => []], function (ApiRouter $apiRouter) {
+		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api'], function (ApiRouter $apiRouter) {
 			$apiRouter->post('/api/index/login', 'IndexController@login');
 			$apiRouter->post('/api/index/register', 'IndexController@register');
 		});
