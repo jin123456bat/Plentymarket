@@ -42,39 +42,12 @@ class BaseApiController extends Controller
 	/**
 	 * 翻译
 	 * @param $key
-	 * @return string
+	 * @return mixed
 	 */
-	protected function trans ($key): string
+	protected function trans ($key)
 	{
 		return $this->translator->trans('Plentymarket::' . $key);
 	}
-
-//	/**
-//	 * 返回成功信息
-//	 * @param $data
-//	 * @return string
-//	 */
-//	protected function success ($data): string
-//	{
-//		return json_encode([
-//			'code' => 1,
-//			'message' => 'OK',
-//			'data' => $data
-//		]);
-//	}
-//
-//	/**
-//	 * 返回失败信息
-//	 * @param $message
-//	 * @return string
-//	 */
-//	protected function error ($message): string
-//	{
-//		return json_encode([
-//			'code' => 0,
-//			'message' => $message,
-//		]);
-//	}
 
 	/**
 	 * 返回成功信息
@@ -88,7 +61,7 @@ class BaseApiController extends Controller
 			'message' => 'OK',
 			'data' => $data
 		], JSON_UNESCAPED_UNICODE), 200, [
-			'Content-Type' => 'application/json',
+			'Content-Type: application/json',
 		]);
 	}
 
@@ -103,7 +76,7 @@ class BaseApiController extends Controller
 			'code' => 0,
 			'message' => $message,
 		], JSON_UNESCAPED_UNICODE), 200, [
-			'Content-Type' => 'application/json',
+			'Content-Type: application/json',
 		]);
 	}
 }
