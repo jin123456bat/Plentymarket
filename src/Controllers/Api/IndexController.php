@@ -41,13 +41,13 @@ class IndexController extends BaseApiController
 		return '账号密码不能为空:email:' . $email . ',password:' . $password;
 
 		if (empty($email) || empty($password)) {
-			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
+			//return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
 		}
 
 		if ($this->accountService->login($email, $password)) {
-			return $this->success($this->trans('ApiIndex.loginSuccess'));
+			//return $this->success($this->trans('ApiIndex.loginSuccess'));
 		} else {
-			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
+			//return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
 		}
 	}
 
