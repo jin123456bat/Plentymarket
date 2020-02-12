@@ -6,6 +6,10 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\SessionService;
 
+/**
+ * Class PlentymarketServiceProvider
+ * @package Plentymarket\Providers
+ */
 class PlentymarketServiceProvider extends ServiceProvider
 {
 
@@ -23,6 +27,9 @@ class PlentymarketServiceProvider extends ServiceProvider
 		]);
 	}
 
+	/**
+	 * @param $classes
+	 */
 	private function registerSingletons ($classes)
 	{
 		foreach ($classes as $class) {

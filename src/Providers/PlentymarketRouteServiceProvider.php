@@ -6,21 +6,24 @@ use Plenty\Plugin\Routing\ApiRouter;
 use Plenty\Plugin\Routing\Router;
 
 /**
- * Class HelloWorldRouteServiceProvider
- * @package HelloWorld\Providers
+ * Class PlentymarketRouteServiceProvider
+ * @package Plentymarket\Providers
  */
 class PlentymarketRouteServiceProvider extends RouteServiceProvider
 {
 	/**
 	 * @param Router $router
+	 * @param ApiRouter $api
 	 */
 	public function map (Router $router, ApiRouter $api)
 	{
 		//接口声明
-		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api'], function (ApiRouter $api) {
-			$api->post('api/index/login', 'IndexController@login');
-			$api->post('api/index/register', 'IndexController@register');
-		});
+//		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api'], function (ApiRouter $api) {
+//			$api->post('api/index/login', 'IndexController@login');
+//			$api->post('api/index/register', 'IndexController@register');
+//		});
+
+		$api->post('api/index/login', 'Plentymarket\Controllers\Api\IndexController@login');
 
 		//页面声明
 		$router->get('/', 'Plentymarket\Controllers\Web\IndexController@index');
