@@ -9,7 +9,7 @@ use Plentymarket\Services\AccountService;
 
 /**
  * Class IndexController
- * @package Plentymarket\Controllers
+ * @package Plentymarket\Controllers\Api
  */
 class IndexController extends BaseApiController
 {
