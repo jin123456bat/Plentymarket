@@ -40,6 +40,7 @@ class BaseApiController extends Controller
 	}
 
 	/**
+	 * 翻译
 	 * @param $key
 	 * @return mixed
 	 */
@@ -49,6 +50,7 @@ class BaseApiController extends Controller
 	}
 
 	/**
+	 * 返回成功信息
 	 * @param $data
 	 * @return Response
 	 */
@@ -62,6 +64,7 @@ class BaseApiController extends Controller
 	}
 
 	/**
+	 * 返回失败信息
 	 * @param $message
 	 * @return Response
 	 */

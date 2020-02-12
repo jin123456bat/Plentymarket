@@ -31,35 +31,12 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 * @return string
-	 */
-	public function store (): Response
-	{
-		$email = $this->request->get('email');
-		$password = $this->request->get('password');
-
-//		return 'email:' . $email . ',password:' . $password;
-
-		if (empty($email) || empty($password)) {
-			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
-		}
-
-		if ($this->accountService->login($email, $password)) {
-			return $this->success($this->trans('ApiIndex.loginSuccess'));
-		} else {
-			return $this->error($this->trans('ApiIndex.loginEmailOrPasswordError'));
-		}
-	}
-
-	/**
-	 * @return string
+	 * @return Response
 	 */
 	public function login (): Response
 	{
 		$email = $this->request->get('email');
 		$password = $this->request->get('password');
-
-//		return 'email:' . $email . ',password:' . $password;
 
 		if (empty($email) || empty($password)) {
 			return $this->error($this->trans("ApiIndex.loginEmailOrPasswordError"));
