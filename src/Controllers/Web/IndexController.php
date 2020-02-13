@@ -43,7 +43,7 @@ class IndexController extends BaseWebController
 	 * @param Twig $twig
 	 * @return string
 	 */
-	function faq(Twig $twig):string
+	function faq (Twig $twig): string
 	{
 		return $twig->render('Plentymarket::index.faq');
 	}
@@ -53,8 +53,8 @@ class IndexController extends BaseWebController
 	 * @param Twig $twig
 	 * @return string
 	 */
-	function login_register(Twig $twig):string
+	function login_register (): string
 	{
-		return $twig->render('Plentymarket::index.login-register');
+		return $this->render('index.login-register');
 	}
 }

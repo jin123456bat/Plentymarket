@@ -8,8 +8,13 @@
 			<div class="col-lg-12">
 				<div class="breadcrumb-container">
 					<ul>
-						<li><a href="index.html">Home</a> <span class="separator">/</span></li>
-						<li class="active">Cart</li>
+						{%for key, value in breadcrumb%}
+							<li {%if loop.last%}class="active"{%endif%}>
+								<a href="{{value}}">{{key}}</a> {%if !loop.last %}
+									<span class="separator">/</span> {%endif%}</li>
+						{%endfor%}
+						{#						<li><a href="/">Home</a> <span class="separator">/</span></li>#}
+						{#						<li class="active">Cart</li>#}
 					</ul>
 				</div>
 			</div>
