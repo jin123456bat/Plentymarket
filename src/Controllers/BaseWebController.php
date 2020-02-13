@@ -1,8 +1,8 @@
 <?php
 namespace Plentymarket\Controllers;
 
-use http\Env\Request;
 use Plenty\Plugin\Controller;
+use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
 
