@@ -23,7 +23,7 @@ class BaseApiController extends Controller
 	protected $request;
 
 	/**
-	 * @var |null
+	 * @var Translator
 	 */
 	private $translator;
 
