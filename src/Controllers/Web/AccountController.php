@@ -11,38 +11,46 @@ use Plentymarket\Controllers\BaseWebController;
 class AccountController extends BaseWebController
 {
 	/**
-	 * @param Twig $twig
+	 * 个人中心首页
 	 * @return string
 	 */
-	function index(Twig $twig):string
+	function index (): string
 	{
-		return $twig->render('Plentymarket::account.index');
+		return $this->render('account.index', [
+			$this->trans('WebAccountIndex.account') => '/account/index'
+		]);
 	}
 
 	/**
-	 * @param Twig $twig
+	 * 购物车页面
 	 * @return string
 	 */
-	function cart(Twig $twig):string
+	function cart (): string
 	{
-		return $twig->render('Plentymarket::account.cart');
+		return $this->render('account.cart', [
+			$this->trans('WebAccountCart.cart') => '/account/cart'
+		]);
 	}
 
 	/**
-	 * @param Twig $twig
+	 * 结算
 	 * @return string
 	 */
-	function checkout(Twig $twig):string
+	function checkout (): string
 	{
-		return $twig->render('Plentymarket::account.checkout');
+		return $this->render('account.checkout', [
+			$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
+		]);
 	}
 
 	/**
-	 * @param Twig $twig
+	 * 愿望清单
 	 * @return string
 	 */
-	function wishlist(Twig $twig):string
+	function wishlist (): string
 	{
-		return $twig->render('Plentymarket::account.wishlist');
+		return $this->render('account.wishlist', [
+			$this->trans('WebAccountWishlist.wishlist') => '/account/wishlist'
+		]);
 	}
 }

@@ -11,50 +11,55 @@ use Plentymarket\Controllers\BaseWebController;
 class IndexController extends BaseWebController
 {
 	/**
-	 * @param Twig $twig
+	 * 首页
 	 * @return string
 	 */
-	public function index(Twig $twig):string
+	public function index (): string
 	{
-		return $twig->render('Plentymarket::index.index');
+		return $this->render('index.index');
 	}
 
 	/**
-	 * @param Twig $twig
+	 * 关于我们页面
 	 * @return string
 	 */
-	function about(Twig $twig):string
+	function about (): string
 	{
-		return $twig->render('Plentymarket::index.about');
+		return $this->render('index.about', [
+			$this->trans('WebIndexAbout.about') => '/index/about'
+		]);
 	}
 
 	/**
 	 * 联系我们页面
-	 * @param Twig $twig
 	 * @return string
 	 */
-	function contact(Twig $twig):string
+	function contact (): string
 	{
-		return $twig->render('Plentymarket::index.contact');
+		return $this->render('index.contact', [
+			$this->trans('WebIndexContact.contact') => '/index/contact'
+		]);
 	}
 
 	/**
 	 * FAQ页面
-	 * @param Twig $twig
 	 * @return string
 	 */
-	function faq (Twig $twig): string
+	function faq (): string
 	{
-		return $twig->render('Plentymarket::index.faq');
+		return $this->render('index.faq', [
+			$this->trans('WebIndexFaq.faq') => '/index/faq'
+		]);
 	}
 
 	/**
 	 * 登录或者注册页面
-	 * @param Twig $twig
 	 * @return string
 	 */
 	function login_register (): string
 	{
-		return $this->render('index.login-register');
+		return $this->render('index.login-register', [
+			$this->trans('WebIndexLoginRegister.loginRegister') => '/index/login_register'
+		]);
 	}
 }

@@ -1,16 +1,14 @@
 <?php
 namespace Plentymarket\Controllers;
 
-use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
-use Plenty\Plugin\Translation\Translator;
 
 /**
  * Class BaseApiController
  * @package Plentymarket\Controllers
  */
-class BaseApiController extends Controller
+class BaseApiController extends BaseController
 {
 	/**
 	 * @var Response
@@ -23,11 +21,6 @@ class BaseApiController extends Controller
 	protected $request;
 
 	/**
-	 * @var Translator
-	 */
-	private $translator;
-
-	/**
 	 * BaseApiController constructor.
 	 * @param Request $request
 	 * @param Response $response
@@ -36,17 +29,7 @@ class BaseApiController extends Controller
 	{
 		$this->request = $request;
 		$this->response = $response;
-		$this->translator = pluginApp(Translator::class);
-	}
-
-	/**
-	 * 翻译
-	 * @param $key
-	 * @return mixed
-	 */
-	protected function trans ($key)
-	{
-		return $this->translator->trans('Plentymarket::' . $key);
+		parent::__construct();
 	}
 
 	/**

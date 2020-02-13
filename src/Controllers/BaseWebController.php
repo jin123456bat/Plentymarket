@@ -1,7 +1,6 @@
 <?php
 namespace Plentymarket\Controllers;
 
-use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
@@ -10,7 +9,7 @@ use Plenty\Plugin\Templates\Twig;
  * Class BaseWebController
  * @package Plentymarket\Controllers
  */
-class BaseWebController extends Controller
+class BaseWebController extends BaseController
 {
 	/**
 	 * @var |null
@@ -35,6 +34,7 @@ class BaseWebController extends Controller
 		$this->request = $request;
 		$this->response = $response;
 		$this->twig = pluginApp(Twig::class);
+		parent::__construct();
 	}
 
 	/**
@@ -42,12 +42,11 @@ class BaseWebController extends Controller
 	 * @param array $context
 	 * @return string
 	 */
-	function render (string $template, array $context = []): string
+	function render (string $template, array $breadcrumb = [], array $context = []): string
 	{
-		$context['breadcrumb'] = [
-			'Home' => '/',
-			'Login Register' => '/index/login_register'
-		];
+		$context['breadcrumb'] = array_merge([
+			$this->trans('Common.home') => '/',
+		], $breadcrumb);
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
 }
