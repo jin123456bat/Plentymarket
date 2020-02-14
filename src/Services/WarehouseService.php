@@ -21,7 +21,7 @@ class WarehouseService
 	 */
 	function __construct (WarehouseRepositoryContract $warehouseRepositoryContract)
 	{
-		$this->$warehouseRepositoryContract = $warehouseRepositoryContract;
+		$this->warehouseRepositoryContract = $warehouseRepositoryContract;
 	}
 
 	/**
