@@ -31,7 +31,9 @@ class CategoryService
 	 */
 	function getAll ()
 	{
-		return $this->categoryRepositoryContract->search(null, 0, 99999, [], []);
+		return $this->categoryRepositoryContract->search(null, 0, 99999, [], [
+			'type' => 'item'
+		]);
 	}
 
 	/**
