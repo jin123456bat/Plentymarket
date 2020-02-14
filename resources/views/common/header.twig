@@ -242,27 +242,27 @@
 						<!-- Category Toggle Wrap -->
 						<div class="category-toggle-wrap">
 							<!-- Category Toggle -->
-							<button class="category-toggle"><span class="lnr lnr-text-align-left"></span> Browse
-								Categories <span class="lnr lnr-chevron-down"></span></button>
+							<button class="category-toggle">
+								<span class="lnr lnr-text-align-left"></span> {{trans("Plentymarket::Common.browseCategories")}}
+								<span class="lnr lnr-chevron-down"></span></button>
 						</div>
-
 						<!-- Category Menu -->
 						<nav class="category-menu">
 							<ul>
-								{%for value in category%}
+								{%for key,value in category|slice(0,7)%}
 									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>
-										<a href="/index/product_list_category/{{value.id}}}">{{value.details.0.name}}</a>
+										<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>
 										{%if value.children|length > 0%}
 											<!-- Mega Category Menu Start -->
 											<ul class="category-mega-menu">
 												{%for value2 in value.children|slice(0,3)%}
 													<li class="menu-item-has-children">
-														<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}}">{{value2.details.0.name}}</a>
+														<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
 														{%if value2.children|length > 0%}
 															<ul>
-																{%for value3 in value2.children%}
+																{%for value3 in value2.children|slice(0,5)%}
 																	<li>
-																		<a href="/index/product_list_category/{{value3.id}}}">{{value3.details.0.name}}</a>
+																		<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
 																	</li>
 																{%endfor%}
 															</ul>
@@ -273,9 +273,35 @@
 										{%endif%}
 									</li>
 								{%endfor%}
-								{#								<li class="hidden"><a href="shop-left-sidebar.html">New Sofas</a></li>#}
-								{#								<li class="hidden"><a href="shop-left-sidebar.html">Sleight Sofas</a></li>#}
-								{#								<li><a href="#" id="more-btn"><span class="lnr lnr-plus-circle"></span> More Categories</a></li>#}
+								{%if category|length > 7%}
+									{%for key,value in 1..(7 - category|length)%}
+										<li class="hidden {%if value.children|length > 0%}menu-item-has-children{%endif%}">
+											<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>
+											{%if value.children|length > 0%}
+												<!-- Mega Category Menu Start -->
+												<ul class="category-mega-menu">
+													{%for value2 in value.children|slice(0,3)%}
+														<li class="menu-item-has-children">
+															<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
+															{%if value2.children|length > 0%}
+																<ul>
+																	{%for value3 in value2.children|slice(0,5)%}
+																		<li>
+																			<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
+																		</li>
+																	{%endfor%}
+																</ul>
+															{%endif%}
+														</li>
+													{%endfor%}
+												</ul><!-- Mega Category Menu End -->
+											{%endif%}
+										</li>
+									{%endfor%}
+									<li>
+										<a href="#" id="more-btn"><span class="lnr lnr-plus-circle"></span> {{trans('Plentymarket::Common.moreCategories')}}
+										</a></li>
+								{%endif%}
 							</ul>
 						</nav>
 					</div>
@@ -287,7 +313,7 @@
 					<div class="main-menu">
 						<nav>
 							<ul>
-								<li class="active"><a href="/">{{trans("Plentymarket::common.home")}}</a>
+								<li class="active"><a href="/">{{trans("Plentymarket::Common.home")}}</a>
 								</li>
 								<li class="menu-item-has-children"><a href="shop-left-sidebar.html">Shop</a>
 									<ul class="sub-menu">
