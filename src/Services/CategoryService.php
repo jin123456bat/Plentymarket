@@ -32,7 +32,6 @@ class CategoryService
 	function getAll ()
 	{
 		return $this->categoryRepositoryContract->search(null, 0, 99999, [], [
-			'type' => 'item'
 		]);
 	}
 
@@ -45,7 +44,7 @@ class CategoryService
 		$categoryTree = [];
 		$category_list = $this->getAll()->getResult();
 		foreach ($category_list as $value) {
-			if (empty($value['parentCategoryId'])) {
+			if (empty($value['parentCategoryId']) && $value['type'] == 'item') {
 				$value['children'] = $this->getSubCategory($category_list, $value['id']);
 				$categoryTree[] = $value;
 			}
@@ -63,7 +62,7 @@ class CategoryService
 	{
 		$temp_category_list = [];
 		foreach ($category_list as $value) {
-			if ($value['parentCategoryId'] == $category_id) {
+			if ($value['parentCategoryId'] == $category_id && $value['type'] == 'item') {
 				$value['children'] = $this->getSubCategory($category_list, $value['id']);
 				$temp_category_list[] = $value;
 			}

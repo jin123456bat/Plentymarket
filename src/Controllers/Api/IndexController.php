@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ItemSetService;
 
 /**
  * Class IndexController
@@ -72,8 +73,16 @@ class IndexController extends BaseApiController
 	/**
 	 * @return Response
 	 */
-	public function test (): Response
+	public function category (): Response
 	{
 		return $this->success(pluginApp(CategoryService::class)->getAll());
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function itemset (): Response
+	{
+		return $this->success(pluginApp(ItemSetService::class)->getAll());
 	}
 }
