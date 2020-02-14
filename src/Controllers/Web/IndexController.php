@@ -62,4 +62,16 @@ class IndexController extends BaseWebController
 			$this->trans('WebIndexLoginRegister.loginRegister') => '/index/login_register'
 		]);
 	}
+
+	/**
+	 * 分类商品列表
+	 * @return string
+	 */
+	function product_list_category ($category_id): string
+	{
+		return $this->render('index.product-list-category', [
+		], [
+			'category_id' => $category_id
+		]);
+	}
 }

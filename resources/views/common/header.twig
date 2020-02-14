@@ -249,85 +249,33 @@
 						<!-- Category Menu -->
 						<nav class="category-menu">
 							<ul>
-								<li><a href="shop-left-sidebar.html">Sofas &amp; Chairs</a></li>
-								<li class="menu-item-has-children"><a href="shop-left-sidebar.html">Drawing Room</a>
-
-									<!-- Mega Category Menu Start -->
-									<ul class="category-mega-menu">
-										<li class="menu-item-has-children">
-											<a class="megamenu-head" href="shop-left-sidebar.html">Living Chairs</a>
-											<ul>
-												<li><a href="shop-left-sidebar.html">Sofas</a></li>
-												<li><a href="shop-left-sidebar.html">Armchairs</a></li>
-												<li><a href="shop-left-sidebar.html">Dining Chairs &amp; Benches</a>
-												</li>
-												<li><a href="shop-left-sidebar.html">Desk Chairs</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children">
-											<a class="megamenu-head" href="shop-left-sidebar.html">Sofa</a>
-											<ul>
-												<li><a href="shop-left-sidebar.html">Dining Tables</a></li>
-												<li><a href="shop-left-sidebar.html">Dining Chairs</a></li>
-												<li><a href="shop-left-sidebar.html">Side Boards</a></li>
-												<li><a href="shop-left-sidebar.html">Coffee Tables</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children">
-											<a class="megamenu-head" href="shop-left-sidebar.html">Storage</a>
-											<ul>
-												<li><a href="shop-left-sidebar.html">Chair &amp; Sofas</a></li>
-												<li><a href="shop-left-sidebar.html">Tables</a></li>
-												<li><a href="shop-left-sidebar.html">Sets</a></li>
-												<li><a href="shop-left-sidebar.html">Loungers</a></li>
-											</ul>
-										</li>
-									</ul><!-- Mega Category Menu End -->
-
-								</li>
-								<li class="menu-item-has-children"><a href="shop-left-sidebar.html">Dinning Room</a>
-
-									<!-- Mega Category Menu Start -->
-									<ul class="category-mega-menu">
-										<li class="menu-item-has-children">
-											<a class="megamenu-head" href="shop-left-sidebar.html">Living Chairs</a>
-											<ul>
-												<li><a href="shop-left-sidebar.html">Sofas</a></li>
-												<li><a href="shop-left-sidebar.html">Armchairs</a></li>
-												<li><a href="shop-left-sidebar.html">Dining Chairs &amp; Benches</a>
-												</li>
-												<li><a href="shop-left-sidebar.html">Desk Chairs</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children">
-											<a class="megamenu-head" href="shop-left-sidebar.html">Sofa</a>
-											<ul>
-												<li><a href="shop-left-sidebar.html">Dining Tables</a></li>
-												<li><a href="shop-left-sidebar.html">Dining Chairs</a></li>
-												<li><a href="shop-left-sidebar.html">Side Boards</a></li>
-												<li><a href="shop-left-sidebar.html">Coffee Tables</a></li>
-											</ul>
-										</li>
-										<li class="menu-item-has-children">
-											<a class="megamenu-head" href="shop-left-sidebar.html">Storage</a>
-											<ul>
-												<li><a href="shop-left-sidebar.html">Chair &amp; Sofas</a></li>
-												<li><a href="shop-left-sidebar.html">Tables</a></li>
-												<li><a href="shop-left-sidebar.html">Sets</a></li>
-												<li><a href="shop-left-sidebar.html">Loungers</a></li>
-											</ul>
-										</li>
-									</ul><!-- Mega Category Menu End -->
-
-								</li>
-								<li><a href="shop-left-sidebar.html">Out Door Room</a></li>
-								<li><a href="shop-left-sidebar.html">Room living</a></li>
-								<li><a href="shop-left-sidebar.html">Estilo</a></li>
-								<li><a href="shop-left-sidebar.html">Living Chairs</a></li>
-								<li class="hidden"><a href="shop-left-sidebar.html">New Sofas</a></li>
-								<li class="hidden"><a href="shop-left-sidebar.html">Sleight Sofas</a></li>
-								<li><a href="#" id="more-btn"><span class="lnr lnr-plus-circle"></span> More Categories</a>
-								</li>
+								{%for value in category%}
+									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>
+										<a href="/index/product_list_category/{{value.id}}}">{{value.details.0.name}}</a>
+										{%if value.children|length > 0%}
+											<!-- Mega Category Menu Start -->
+											<ul class="category-mega-menu">
+												{%for value2 in value.children|slice(0,3)%}
+													<li class="menu-item-has-children">
+														<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}}">{{value2.details.0.name}}</a>
+														{%if value2.children|length > 0%}
+															<ul>
+																{%for value3 in value2.children%}
+																	<li>
+																		<a href="/index/product_list_category/{{value3.id}}}">{{value3.details.0.name}}</a>
+																	</li>
+																{%endfor%}
+															</ul>
+														{%endif%}
+													</li>
+												{%endfor%}
+											</ul><!-- Mega Category Menu End -->
+										{%endif%}
+									</li>
+								{%endfor%}
+								{#								<li class="hidden"><a href="shop-left-sidebar.html">New Sofas</a></li>#}
+								{#								<li class="hidden"><a href="shop-left-sidebar.html">Sleight Sofas</a></li>#}
+								{#								<li><a href="#" id="more-btn"><span class="lnr lnr-plus-circle"></span> More Categories</a></li>#}
 							</ul>
 						</nav>
 					</div>

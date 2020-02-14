@@ -4,6 +4,7 @@ namespace Plentymarket\Controllers;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
+use Plentymarket\Services\CategoryService;
 
 /**
  * Class BaseWebController
@@ -44,9 +45,14 @@ class BaseWebController extends BaseController
 	 */
 	function render (string $template, array $breadcrumb = [], array $context = []): string
 	{
+		//面包屑
 		$context['breadcrumb'] = array_merge([
 			$this->trans('Common.home') => '/',
 		], $breadcrumb);
+
+		//分类
+		$context['category'] = pluginApp(CategoryService::class)->getTree();
+
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
 }

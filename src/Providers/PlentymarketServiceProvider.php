@@ -3,6 +3,7 @@ namespace Plentymarket\Providers;
 
 use Plenty\Plugin\ServiceProvider;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\SessionService;
 
@@ -22,6 +23,7 @@ class PlentymarketServiceProvider extends ServiceProvider
 
 		$this->registerSingletons([
 			AccountService::class,
+			CategoryService::class,
 			ConfigService::class,
 			SessionService::class,
 		]);
