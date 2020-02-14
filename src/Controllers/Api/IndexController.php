@@ -6,6 +6,7 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\CategoryService;
 
 /**
  * Class IndexController
@@ -66,5 +67,13 @@ class IndexController extends BaseApiController
 		} else {
 			return $this->error($this->trans("ApiIndex.registerEmailExist"));
 		}
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function test (): Response
+	{
+		return $this->success(pluginApp(CategoryService::class)->getAll());
 	}
 }

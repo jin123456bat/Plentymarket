@@ -23,6 +23,9 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 //			$api->post('api/index/register', 'IndexController@register');
 //		});
 
+		$router->get('/api/index/test', 'Plentymarket\Controllers\Api\IndexController@test');
+
+		$router->get('/api/index/register', 'Plentymarket\Controllers\Api\IndexController@register');
 		$router->get('/api/index/login', 'Plentymarket\Controllers\Api\IndexController@login');
 
 		//页面声明
