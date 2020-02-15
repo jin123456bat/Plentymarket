@@ -8,6 +8,7 @@ use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\ItemSetService;
+use Plentymarket\Services\StockService;
 use Plentymarket\Services\WarehouseService;
 
 /**
@@ -93,5 +94,13 @@ class IndexController extends BaseApiController
 	public function warehouse (): Response
 	{
 		return $this->success(pluginApp(WarehouseService::class)->getAll());
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function stock (): Response
+	{
+		return $this->success(pluginApp(StockService::class)->listStock());
 	}
 }
