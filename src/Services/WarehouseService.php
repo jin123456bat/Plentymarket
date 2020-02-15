@@ -31,6 +31,6 @@ class WarehouseService
 	 */
 	function getAll ($with = ['repairWarehouse'])
 	{
-		return $this->warehouseRepositoryContract->all($with, []);
+		return $this->warehouseRepositoryContract->all($with);
 	}
 }
