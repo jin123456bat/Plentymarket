@@ -46,6 +46,6 @@ class StockService
 	 */
 	function listStockByWarehouse (int $warehouseId, int $page = 1, int $itemsPerPage = 50): PaginatedResult
 	{
-		return $this->stockRepositoryContract->listStockByWarehouseId($warehouseId, [], $page, $itemsPerPage);
+		return $this->stockRepositoryContract->listStockByWarehouseId($warehouseId, ['*'], $page, $itemsPerPage);
 	}
 }
