@@ -115,10 +115,9 @@ class IndexController extends BaseApiController
 		$stockService = pluginApp(StockService::class);
 		$stock_list = [];
 		foreach ($warehouse_list as $warehouse) {
-			return $this->success($stockService->listStockByWarehouse($warehouse['id']));
-			//$stock_list = array_merge($stock_list,$stockService->listStockByWarehouse($warehouse['id']));
+			$stock_list = array_merge($stock_list, $stockService->listStockByWarehouse($warehouse['id'])->getResult());
 		}
-		return $this->success(pluginApp(StockService::class)->listStock());
+		return $this->success($stock_list);
 	}
 
 	/**
