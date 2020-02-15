@@ -26,11 +26,10 @@ class WarehouseService
 
 	/**
 	 * 获取所有仓库列表
-	 * @param array $with
 	 * @return array
 	 */
-	function getAll ($with = ['repairWarehouse'])
+	function getAll ()
 	{
-		return $this->warehouseRepositoryContract->all($with);
+		return $this->warehouseRepositoryContract->all();
 	}
 }
