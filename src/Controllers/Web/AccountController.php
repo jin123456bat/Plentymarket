@@ -1,7 +1,7 @@
 <?php
+
 namespace Plentymarket\Controllers\Web;
 
-use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Controllers\BaseWebController;
 
 /**

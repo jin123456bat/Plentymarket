@@ -1,4 +1,5 @@
 <?php
+
 namespace Plentymarket\Providers;
 
 use Plenty\Plugin\ServiceProvider;

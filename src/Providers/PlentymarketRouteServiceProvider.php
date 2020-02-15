@@ -1,4 +1,5 @@
 <?php
+
 namespace Plentymarket\Providers;
 
 use Plenty\Plugin\RouteServiceProvider;
@@ -27,6 +28,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/api/index/itemset', 'Plentymarket\Controllers\Api\IndexController@itemset');
 		$router->get('/api/index/warehouse', 'Plentymarket\Controllers\Api\IndexController@warehouse');
 		$router->get('/api/index/stock', 'Plentymarket\Controllers\Api\IndexController@stock');
+		$router->get('/api/index/warehousestock', 'Plentymarket\Controllers\Api\IndexController@warehousestock');
 
 		$router->get('/api/index/register', 'Plentymarket\Controllers\Api\IndexController@register');
 		$router->get('/api/index/login', 'Plentymarket\Controllers\Api\IndexController@login');
@@ -38,6 +40,8 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/index/faq', 'Plentymarket\Controllers\Web\IndexController@faq');
 		$router->get('/index/login_register', 'Plentymarket\Controllers\Web\IndexController@login_register');
 		$router->get('/index/product_list_category/{category_id}', 'Plentymarket\Controllers\Web\IndexController@product_list_category');
+		$router->get('/index/blog_list', 'Plentymarket\Controllers\Web\IndexController@blog_list');
+		$router->get('/index/blog/{blog_id}', 'Plentymarket\Controllers\Web\IndexController@blog');
 
 		$router->get('/account/index', 'Plentymarket\Controllers\Web\AccountController@index');
 		$router->get('/account/cart', 'Plentymarket\Controllers\Web\AccountController@cart');

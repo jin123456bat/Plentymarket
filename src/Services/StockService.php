@@ -3,6 +3,7 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\StockManagement\Stock\Contracts\StockRepositoryContract;
+use Plenty\Repositories\Models\PaginatedResult;
 
 /**
  * Class StockService
@@ -25,13 +26,26 @@ class StockService
 	}
 
 	/**
+	 * 获取所有库存
 	 * @param array $columns
 	 * @param int $page
 	 * @param int $itemsPerPage
-	 * @return \Plenty\Repositories\Models\PaginatedResult
+	 * @return PaginatedResult
 	 */
-	function listStock (array $columns = [], int $page = 1, int $itemsPerPage = 50)
+	function listStock (int $page = 1, int $itemsPerPage = 50)
 	{
-		return $this->stockRepositoryContract->listStock($columns, $page, $itemsPerPage);
+		return $this->stockRepositoryContract->listStock([], $page, $itemsPerPage);
+	}
+
+	/**
+	 * 根据仓库ID获取仓库库存
+	 * @param int $warehouseId
+	 * @param int $page
+	 * @param int $itemsPerPage
+	 * @return PaginatedResult
+	 */
+	function listStockByWarehouse (int $warehouseId, int $page = 1, int $itemsPerPage = 50): PaginatedResult
+	{
+		return $this->stockRepositoryContract->listStockByWarehouseId([], $page, $itemsPerPage);
 	}
 }

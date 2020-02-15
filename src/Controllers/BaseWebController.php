@@ -1,4 +1,5 @@
 <?php
+
 namespace Plentymarket\Controllers;
 
 use Plenty\Plugin\Http\Request;

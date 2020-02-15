@@ -1,5 +1,8 @@
 <?php
+
 namespace Plentymarket\Services;
+
+use Exception;
 use Plenty\Modules\Account\Contact\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Account\Contact\Models\Contact;
 use Plenty\Modules\Authentication\Contracts\ContactAuthenticationRepositoryContract;
@@ -39,7 +42,7 @@ class AccountService
 	 * @param ContactRepositoryContract $contactRepositoryContract
 	 * @param ContactAuthenticationRepositoryContract
 	 */
-	public function __construct (ContactRepositoryContract $contactRepositoryContract,ContactAuthenticationRepositoryContract $contactAuthenticationRepositoryContract)
+	public function __construct (ContactRepositoryContract $contactRepositoryContract, ContactAuthenticationRepositoryContract $contactAuthenticationRepositoryContract)
 	{
 		$this->contactRepositoryContract = $contactRepositoryContract;
 		$this->contactAuthenticationRepositoryContract = $contactAuthenticationRepositoryContract;
@@ -57,7 +60,7 @@ class AccountService
 		try {
 			$this->contactAuthenticationRepositoryContract->authenticateWithContactEmail($email, $password);
 			return true;
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			return false;
 		}
 	}
@@ -65,9 +68,9 @@ class AccountService
 	/**
 	 * 添加账户
 	 */
-	function register($email,$password):bool
+	function register ($email, $password): bool
 	{
-		try{
+		try {
 			$contact = $this->contactRepositoryContract->createContact([
 				'checkForExistingEmail' => true,
 				'plentyId' => Utils::getPlentyId(),
@@ -83,18 +86,15 @@ class AccountService
 						'priority' => 0,
 					]
 				],
-				'password' =>$password
+				'password' => $password
 			]);
-		}
-		catch(\Exception $e)
-		{
+		} catch (Exception $e) {
 			return false;
 		}
 
-
 		if ($contact instanceof Contact && $contact->id > 0) {
 			//注册成功后立即登录
-			$this->login($email,$password);
+			$this->login($email, $password);
 
 			//发送注册邮件
 			$params = [

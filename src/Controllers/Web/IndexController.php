@@ -1,7 +1,7 @@
 <?php
+
 namespace Plentymarket\Controllers\Web;
 
-use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Controllers\BaseWebController;
 
 /**
@@ -72,6 +72,31 @@ class IndexController extends BaseWebController
 		return $this->render('index.product-list-category', [
 		], [
 			'category_id' => $category_id
+		]);
+	}
+
+	/**
+	 * 文章列表
+	 * @return string
+	 */
+	function blog_list (): string
+	{
+		return $this->render('index.blog-list', [
+			$this->trans('WebIndexBlogList.blog') => '/index/blog_list'
+		]);
+	}
+
+	/**
+	 * 文章详情
+	 * @param $blog_id
+	 * @return string
+	 */
+	function blog ($blog_id): string
+	{
+		return $this->render('index.product-list-category', [
+			$this->trans('WebIndexBlog.blog') => '/index/blog',
+		], [
+			'blog_id' => $blog_id
 		]);
 	}
 }
