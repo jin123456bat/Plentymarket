@@ -8,6 +8,7 @@ use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ItemService;
 use Plentymarket\Services\ItemSetService;
 use Plentymarket\Services\PaymentMethodService;
 use Plentymarket\Services\StockService;
@@ -119,6 +120,14 @@ class IndexController extends BaseApiController
 			//$stock_list = array_merge($stock_list, $stockService->listStockByWarehouse($warehouse['id'])->getResult());
 		}
 		return $this->success($stock_list);
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function item (): Response
+	{
+		return $this->success(pluginApp(ItemService::class)->getAll());
 	}
 
 	/**
