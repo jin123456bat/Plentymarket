@@ -33,6 +33,6 @@ class ItemService
 	 */
 	function getAll (int $page = 1, int $itemsPerPage = 50, array $with = [], $lang = [])
 	{
-		return $this->itemRepositoryContract->search($lang, $page, $itemsPerPage, $with);
+		return $this->itemRepositoryContract->search([], $lang, $page, $itemsPerPage, $with);
 	}
 }

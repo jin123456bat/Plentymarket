@@ -23,7 +23,7 @@ class ManufacturerService
 	 */
 	function __construct (ManufacturerRepositoryContract $manufacturerRepositoryContract)
 	{
-		$this->$manufacturerRepositoryContract = $manufacturerRepositoryContract;
+		$this->manufacturerRepositoryContract = $manufacturerRepositoryContract;
 	}
 
 	/**
