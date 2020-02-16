@@ -3,6 +3,7 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\Item\Item\Contracts\ItemRepositoryContract;
+use Plenty\Modules\Item\ItemProperty\Contracts\ItemPropertyRepositoryContract;
 
 /**
  * Class ItemService
@@ -16,12 +17,19 @@ class ItemService
 	private $itemRepositoryContract;
 
 	/**
+	 * @var ItemPropertyRepositoryContract
+	 */
+	private $itemPropertyRepositoryContract;
+
+	/**
 	 * ItemService constructor.
 	 * @param ItemRepositoryContract $itemRepositoryContract
+	 * @param ItemPropertyRepositoryContract $itemPropertyRepositoryContract
 	 */
-	function __construct (ItemRepositoryContract $itemRepositoryContract)
+	function __construct (ItemRepositoryContract $itemRepositoryContract, ItemPropertyRepositoryContract $itemPropertyRepositoryContract)
 	{
 		$this->itemRepositoryContract = $itemRepositoryContract;
+		$this->itemPropertyRepositoryContract = $itemPropertyRepositoryContract;
 	}
 
 	/**

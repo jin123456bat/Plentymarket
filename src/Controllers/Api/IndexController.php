@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchMultiSearchRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -136,5 +137,13 @@ class IndexController extends BaseApiController
 	public function blog (): Response
 	{
 		return $this->success(pluginApp(BlogService::class)->getAll());
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function search (): Response
+	{
+		return $this->success(pluginApp(VariationElasticSearchMultiSearchRepositoryContract::class)->execute());
 	}
 }
