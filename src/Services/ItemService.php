@@ -41,6 +41,12 @@ class ItemService
 	 */
 	function getAll (int $page = 1, int $itemsPerPage = 50, array $with = [], $lang = [])
 	{
-		return $this->itemRepositoryContract->search([], $lang, $page, $itemsPerPage, $with);
+		$item_list = $this->itemRepositoryContract->search([], $lang, $page, $itemsPerPage, $with);
+		$image = pluginApp(ImageService::class);
+		$item_list = $item_list->getResult();
+		foreach ($item_list as &$item) {
+			$item['images'] = $image->getData($item['id']);
+		}
+		return $item_list;
 	}
 }
