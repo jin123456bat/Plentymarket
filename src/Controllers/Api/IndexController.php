@@ -155,4 +155,17 @@ class IndexController extends BaseApiController
 		$data = pluginApp(ImageService::class)->getAll();
 		return $this->success($data);
 	}
+
+	public function preload (): Response
+	{
+		$data = pluginApp(ItemService::class)->getAll();
+		$item_id = [];
+		foreach ($data->getResult() as $item) {
+			$item_id[] = $item['id'];
+		}
+		$imageService = pluginApp(ImageService::class);
+		$imageService->preload($item_id);
+		$data = pluginApp(ItemService::class)->getAll();
+		return $this->success($data);
+	}
 }

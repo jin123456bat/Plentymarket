@@ -25,6 +25,16 @@ class ImageService
 	}
 
 	/**
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	function preload (array $data): array
+	{
+		return $this->variationImageServiceContract->preload($data);
+	}
+
+	/**
 	 * @return array
 	 */
 	function getAll (): array
