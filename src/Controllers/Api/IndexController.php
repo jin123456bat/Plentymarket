@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSearchRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -143,12 +144,13 @@ class IndexController extends BaseApiController
 	 */
 	public function search (): Response
 	{
-		$data = pluginApp(ItemService::class)->getAll();
+		$data = pluginApp(VariationElasticSearchSearchRepositoryContract::class)->execute();
 		return $this->success($data);
 	}
 
 	/**
 	 * @return Response
+	 * @deprecated
 	 */
 	public function itemimage (): Response
 	{
@@ -157,6 +159,7 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * @deprecated
 	 * @return Response
 	 */
 	public function preload (): Response
