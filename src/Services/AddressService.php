@@ -2,10 +2,8 @@
 
 namespace Plentymarket\Services;
 
-use Plenty\Modules\Account\Address\Contracts\AddressContactRelationRepositoryContract;
-use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
 use Plenty\Modules\Account\Address\Models\Address;
-use Plenty\Modules\Account\Contact\Models\Contact;
+use Plenty\Modules\Account\Contact\Contracts\ContactAddressRepositoryContract;
 
 /**
  * Class AddressService
@@ -25,16 +23,6 @@ class AddressService
 	function __construct (ContactAddressRepositoryContract $contactAddressRepositoryContract)
 	{
 		$this->contactAddressRepositoryContract = $contactAddressRepositoryContract;
-	}
-
-	/**
-	 * 获取一个默认的地址
-	 * @param int $contactId
-	 * @return array
-	 */
-	function getPrimary (int $contactId): array
-	{
-		$this->contactAddressRepositoryContract->getPrimaryOrLastCreatedContactAddresses($contactId);
 	}
 
 	/**
