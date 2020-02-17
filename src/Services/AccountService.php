@@ -40,7 +40,7 @@ class AccountService
 	/**
 	 * AccountService constructor.
 	 * @param ContactRepositoryContract $contactRepositoryContract
-	 * @param ContactAuthenticationRepositoryContract
+	 * @param ContactAuthenticationRepositoryContract $contactAuthenticationRepositoryContract
 	 */
 	public function __construct (ContactRepositoryContract $contactRepositoryContract, ContactAuthenticationRepositoryContract $contactAuthenticationRepositoryContract)
 	{
@@ -52,10 +52,11 @@ class AccountService
 
 	/**
 	 * 登录
-	 * @param $email
-	 * @param $password
+	 * @param string $email
+	 * @param string $password
+	 * @return bool
 	 */
-	function login ($email, $password): bool
+	function login (string $email, string $password): bool
 	{
 		try {
 			$this->contactAuthenticationRepositoryContract->authenticateWithContactEmail($email, $password);
@@ -66,9 +67,20 @@ class AccountService
 	}
 
 	/**
-	 * 添加账户
+	 * 注销登录
 	 */
-	function register ($email, $password): bool
+	function logout ()
+	{
+		$this->contactAuthenticationRepositoryContract->logout();
+	}
+
+	/**
+	 * 添加账户
+	 * @param string $email
+	 * @param string $password
+	 * @return bool
+	 */
+	function register (string $email, string $password): bool
 	{
 		try {
 			$contact = $this->contactRepositoryContract->createContact([
