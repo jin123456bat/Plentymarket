@@ -39,7 +39,7 @@ class ItemService
 	 * @param array $lang
 	 * @return mixed
 	 */
-	function getAll (int $page = 1, int $itemsPerPage = 50, array $with = [], $lang = [])
+	function getAll (int $page = 1, int $itemsPerPage = 50, array $with = ['image'], $lang = [])
 	{
 		return $this->itemRepositoryContract->search([], $lang, $page, $itemsPerPage, $with);
 	}
