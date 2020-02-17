@@ -28,9 +28,8 @@ class CountryService
 
 	/**
 	 * 获取所有的可用的国家列表
-	 * @return Collection
 	 */
-	function getAll (): Collection
+	function getAll ()
 	{
 		return $this->countryRepositoryContract->getActiveCountriesList();
 	}
