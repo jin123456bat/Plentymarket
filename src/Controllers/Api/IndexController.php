@@ -8,6 +8,7 @@ use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ImageService;
 use Plentymarket\Services\ItemService;
 use Plentymarket\Services\ItemSetService;
 use Plentymarket\Services\StockService;
@@ -143,6 +144,15 @@ class IndexController extends BaseApiController
 	public function search (): Response
 	{
 		$data = pluginApp(ItemService::class)->getAll();
+		return $this->success($data);
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function itemimage (): Response
+	{
+		$data = pluginApp(ImageService::class)->getAll();
 		return $this->success($data);
 	}
 }
