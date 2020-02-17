@@ -156,6 +156,9 @@ class IndexController extends BaseApiController
 		return $this->success($data);
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function preload (): Response
 	{
 		$data = pluginApp(ItemService::class)->getAll();
@@ -164,8 +167,8 @@ class IndexController extends BaseApiController
 			$item_id[] = $item['id'];
 		}
 		$imageService = pluginApp(ImageService::class);
-		$imageService->preload($item_id);
-		$data = pluginApp(ItemService::class)->getAll();
-		return $this->success($data);
+//		$imageService->preload($item_id);
+		//$data = pluginApp(ItemService::class)->getAll();
+		return $this->success($imageService->preload($item_id));
 	}
 }
