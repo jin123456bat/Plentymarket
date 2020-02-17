@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Services;
 
+use Illuminate\Support\Collection;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Models\Country;
 
@@ -27,11 +28,11 @@ class CountryService
 
 	/**
 	 * 获取所有的可用的国家列表
-	 * @return array
+	 * @return Collection
 	 */
-	function getAll (): array
+	function getAll (): Collection
 	{
-		return $this->countryRepositoryContract->getActiveCountriesList()->toArray();
+		return $this->countryRepositoryContract->getActiveCountriesList();
 	}
 
 	/**
