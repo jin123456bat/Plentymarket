@@ -39,6 +39,7 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * 用户登录接口
 	 * @return Response
 	 */
 	public function login (): Response
@@ -58,6 +59,7 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * 用户注册接口
 	 * @return Response
 	 */
 	public function register (): Response

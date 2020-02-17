@@ -51,10 +51,10 @@ class BaseApiController extends BaseController
 
 	/**
 	 * 返回失败信息
-	 * @param $message
+	 * @param string $message
 	 * @return Response
 	 */
-	protected function error ($message): Response
+	protected function error (string $message): Response
 	{
 		return $this->response->make(json_encode([
 			'code' => 0,
