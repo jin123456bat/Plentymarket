@@ -3,6 +3,7 @@
 namespace Plentymarket\Controllers\Web;
 
 use Plentymarket\Controllers\BaseWebController;
+use Plentymarket\Services\ItemListService;
 
 /**
  * Class ContentController
@@ -69,10 +70,29 @@ class IndexController extends BaseWebController
 	 */
 	function product_list_category ($category_id): string
 	{
+		$page = $this->request->get('page', 1);
+		$sort = $this->request->get('sort');
+
+		/** @var ItemListService $itemListService */
+		$itemListService = pluginApp(ItemListService::class);
+		$itemList = $itemListService->getCategoryItem($category_id, $sort, $page, 12);
+
 		return $this->render('index.product-list-category', [
 		], [
-			'category_id' => $category_id
+			'category_id' => $category_id,
+			'items' => $itemList,
+			'page' => $page
 		]);
+	}
+
+	/**
+	 * 商品详情页
+	 * @param $product_id
+	 * @return string
+	 */
+	function product ($product_id): string
+	{
+		return $this->render('index.product');
 	}
 
 	/**

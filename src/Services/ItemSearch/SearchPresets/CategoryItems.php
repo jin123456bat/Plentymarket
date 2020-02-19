@@ -33,8 +33,6 @@ class CategoryItems implements SearchPreset
 		$facets = $options['facets'];
 		$sorting = SortingHelper::getCategorySorting($options['sorting']);
 
-		$page = 1;
-		$itemsPerPage = 20;
 		$priceMin = 0;
 		$priceMax = 0;
 
@@ -56,7 +54,6 @@ class CategoryItems implements SearchPreset
 			->hasPriceInRange($priceMin, $priceMax)
 			->hasFacets($facets)
 			->sortByMultiple($sorting)
-			->setPage($page, $itemsPerPage)
 			->groupByTemplateConfig()
 			->withLinkToContent()
 			->withGroupedAttributeValues()
