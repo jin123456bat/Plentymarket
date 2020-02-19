@@ -163,7 +163,10 @@ class AccountService
 	 */
 	public function getContact ()
 	{
-		return $this->contactRepositoryContract->findContactById($this->getContactId());
+		if ($this->getContactId() > 0) {
+			return $this->contactRepositoryContract->findContactById($this->getContactId());
+		}
+		return null;
 	}
 
 	/**
