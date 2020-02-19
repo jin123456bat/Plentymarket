@@ -169,7 +169,7 @@
                                 <ul>
                                     <li><a href="?page={{page-1}}"><i class="fa fa-angle-left"></i> Previous</a></li>
 
-                                    {%for i in 1..{{ (items.total / 12)|ceil }}%}
+                                    {%for i in 1..((items.total/12)|ceil)%}
                                         <li><a {%if page == i%}class="active"{%endif%} href="?page={{i}}">{{i}}</a></li>
                                     {%endfor%}
 
