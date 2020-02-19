@@ -3,6 +3,7 @@
 namespace Plentymarket\Extensions;
 
 use Plenty\Plugin\Templates\Extensions\Twig_Extension;
+use Plenty\Plugin\Templates\Factories\TwigFactory;
 
 /**
  * Provide services and helper functions to twig engine
@@ -11,8 +12,11 @@ use Plenty\Plugin\Templates\Extensions\Twig_Extension;
  */
 class TwigServiceProvider extends Twig_Extension
 {
-	public function __construct ()
+	private $twigFactory;
+
+	public function __construct (TwigFactory $twigFactory)
 	{
+		$this->twigFactory = $twigFactory;
 	}
 
 	/**
@@ -32,7 +36,11 @@ class TwigServiceProvider extends Twig_Extension
 	 */
 	public function getFilters (): array
 	{
-		return [];
+		return [
+			$this->twigFactory->createSimpleFilter('ceil', function ($value) {
+				return ceil($value);
+			})
+		];
 	}
 
 	/**
