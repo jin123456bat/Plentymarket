@@ -168,8 +168,8 @@
                             <div class="pagination-content text-center text-md-right">
                                 <ul>
                                     <li><a href="?page={{page-1}}"><i class="fa fa-angle-left"></i> Previous</a></li>
-
-                                    {%for i in 1..((items.total/12)|ceil)%}
+                                    {%set max = ceil(items.total/12)%}
+                                    {%for i in 1..max%}
                                         <li><a {%if page == i%}class="active"{%endif%} href="?page={{i}}">{{i}}</a></li>
                                     {%endfor%}
 
