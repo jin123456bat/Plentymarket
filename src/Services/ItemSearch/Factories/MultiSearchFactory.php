@@ -92,7 +92,6 @@ class MultiSearchFactory
 	{
 		/** @var VariationElasticSearchMultiSearchRepositoryContract $searchRepository */
 		$searchRepository = pluginApp(VariationElasticSearchMultiSearchRepositoryContract::class);
-		dd($this->searches);
 		$primarySearchNames = [];
 		foreach ($this->searches as $resultName => $searches) {
 			// add all searches (primary & secondary)
