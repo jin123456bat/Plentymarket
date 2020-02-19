@@ -14,7 +14,7 @@ use Plentymarket\Services\CategoryService;
 class BaseWebController extends BaseController
 {
 	/**
-	 * @var |null
+	 * @var Twig
 	 */
 	protected $twig;
 	/**
@@ -36,6 +36,8 @@ class BaseWebController extends BaseController
 		$this->request = $request;
 		$this->response = $response;
 		$this->twig = pluginApp(Twig::class);
+		$this->twig->addExtension();
+
 		parent::__construct();
 	}
 
