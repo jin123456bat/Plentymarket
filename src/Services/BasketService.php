@@ -2,7 +2,6 @@
 
 namespace Plentymarket\Services;
 
-use IO\Services\CheckoutService;
 use Plenty\Modules\Basket\Contracts\BasketItemRepositoryContract;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Basket\Exceptions\BasketCheckException;

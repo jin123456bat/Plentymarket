@@ -30,7 +30,7 @@ trait LoadResultFields
 		/** @var LoggerFactory $loggerFactory */
 		$loggerFactory = pluginApp(LoggerFactory::class);
 		$loggerFactory
-			->getLogger("IO", __CLASS__)
+			->getLogger("Plentymarket", __CLASS__)
 			->warning(
 				"Plentymarket::Debug.LoadResultFields_notFound",
 				[

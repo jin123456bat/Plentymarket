@@ -29,7 +29,7 @@ use Plentymarket\Services\ItemSearch\Helper\LoadResultFields;
  *
  * Base factory to build elastic search requests.
  *
- * @package IO\Services\ItemSearch\Factories
+ * @package Plentymarket\Services\ItemSearch\Factories
  */
 class BaseSearchFactory
 {

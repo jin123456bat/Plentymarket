@@ -1,4 +1,4 @@
-<?php //strict
+<?php
 
 namespace Plentymarket\Extensions\Filters;
 
@@ -6,7 +6,7 @@ use Plentymarket\Extensions\AbstractFilter;
 
 /**
  * Class ItemImagesFilter
- * @package IO\Extensions\Filters
+ * @package Plentymarket\Extensions\Filters
  */
 class ItemImagesFilter extends AbstractFilter
 {

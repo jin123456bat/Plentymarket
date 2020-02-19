@@ -13,7 +13,7 @@ use Plentymarket\Services\UrlBuilder\VariationUrlBuilder;
  * Check if item data already contains a calculated item url.
  * Otherwise generate item url and store url for later usage.
  *
- * @package IO\Services\ItemSearch\Extensions
+ * @package Plentymarket\Services\ItemSearch\Extensions
  */
 class ItemUrlExtension implements ItemSearchExtension
 {

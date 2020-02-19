@@ -12,7 +12,7 @@ use Plentymarket\Helper\Utils;
 
 /**
  * Class PriceDetectService
- * @package IO\Services
+ * @package Plentymarket\Services
  */
 class PriceDetectService
 {
