@@ -145,11 +145,20 @@ class IndexController extends BaseApiController
 	 */
 	public function search (): Response
 	{
-		/** @var ItemListService $itemListService */
-		$itemListService = pluginApp(ItemListService::class);
+		try {
+			/** @var ItemListService $itemListService */
+			$itemListService = pluginApp(ItemListService::class);
 
-		$itemList = $itemListService->getItemList(16, null, 1);
-		return $this->success($itemList);
+			$itemList = $itemListService->getItemList(16, null, 1);
+			return $this->success($itemList);
+		} catch (\Exception $e) {
+			return $this->success([
+				'code' => $e->getCode(),
+				'file' => $e->getFile(),
+				'message' => $e->getMessage(),
+				'trace' => $e->getTrace(),
+			]);
+		}
 	}
 
 
