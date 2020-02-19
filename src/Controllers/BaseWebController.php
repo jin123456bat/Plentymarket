@@ -36,7 +36,6 @@ class BaseWebController extends BaseController
 		$this->request = $request;
 		$this->response = $response;
 		$this->twig = pluginApp(Twig::class);
-		$this->twig->addExtension();
 
 		parent::__construct();
 	}

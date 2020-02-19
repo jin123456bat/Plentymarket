@@ -2,7 +2,11 @@
 
 namespace Plentymarket\Providers;
 
+use Plenty\Modules\Cron\Services\CronContainer;
+use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\ServiceProvider;
+use Plenty\Plugin\Templates\Twig;
+use Plentymarket\Extensions\TwigServiceProvider;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\ConfigService;
@@ -28,6 +32,11 @@ class PlentymarketServiceProvider extends ServiceProvider
 			ConfigService::class,
 			SessionService::class,
 		]);
+	}
+
+	public function boot (Twig $twig, Dispatcher $dispatcher, CronContainer $cronContainer)
+	{
+		$twig->addExtension(TwigServiceProvider::class);
 	}
 
 	/**
