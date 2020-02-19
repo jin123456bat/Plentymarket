@@ -3,7 +3,10 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
+use Plenty\Modules\Category\Models\Category;
 use Plenty\Repositories\Models\PaginatedResult;
+use Plentymarket\Helper\Utils;
+use Plentymarket\Services\UrlBuilder\UrlQuery;
 
 /**
  * Class CategoryService
@@ -15,6 +18,24 @@ class CategoryService
 	 * @var CategoryRepositoryContract
 	 */
 	private $categoryRepositoryContract;
+
+	/**
+	 * copy
+	 * @var Category
+	 */
+	private $currentCategory = null;
+
+	/**
+	 * copy
+	 * @var array
+	 */
+	private $currentCategoryTree = [];
+
+	/**
+	 * copy
+	 * @var array
+	 */
+	private $currentItem = [];
 
 	/**
 	 * CategoryService constructor.
@@ -32,6 +53,80 @@ class CategoryService
 	function getAll ()
 	{
 		return $this->categoryRepositoryContract->search(null, 0, 99999, [], []);
+	}
+
+	/**
+	 * 获取一个分类信息
+	 * @param int $catID The category ID
+	 * @param string $lang The language to get the category
+	 * @return Category
+	 */
+	public function get ($catID, $lang = null)
+	{
+		if ($lang === null) {
+			$lang = Utils::getLang();
+		}
+		return $this->categoryRepositoryContract->get($catID, $lang);;
+	}
+
+	/**
+	 * Return the URL for a given category ID.
+	 * @param Category $category the category to get the URL for
+	 * @param string $lang the language to get the URL for
+	 * @param int |null $webstoreId
+	 * @return string|null
+	 */
+	public function getURL (Category $category, $lang = null, $webstoreId = null)
+	{
+		if (empty($lang)) {
+			$lang = Utils::getLang();
+		}
+
+		if (is_null($webstoreId)) {
+			$webstoreId = Utils::getWebstoreId();
+		}
+
+		if ($category->details->first() === null) {
+			return null;
+		}
+
+		$categoryURL = pluginApp(
+			UrlQuery::class,
+			['path' => $this->categoryRepositoryContract->getUrl($category->id, $lang, false, $webstoreId), 'lang' => $lang]
+		);
+		return $categoryURL->toRelativeUrl($lang !== $lang);
+	}
+
+	/**
+	 * copy
+	 * Set the current category by ID.
+	 * @param Category $cat The current category
+	 */
+	public function setCurrentCategory ($cat)
+	{
+		$lang = Utils::getLang();
+		$this->currentCategory = null;
+		$this->currentCategoryTree = [];
+
+		if ($cat === null) {
+			return;
+		}
+
+		// List parent/open categories
+		$this->currentCategory = $cat;
+		while ($cat !== null) {
+			$this->currentCategoryTree[$cat->level] = $cat;
+			$cat = $this->categoryRepositoryContract->get($cat->parentCategoryId, $lang, Utils::getWebstoreId());
+		}
+	}
+
+	/**
+	 * copy
+	 * @param $item
+	 */
+	public function setCurrentItem ($item)
+	{
+		$this->currentItem = $item;
 	}
 
 	/**

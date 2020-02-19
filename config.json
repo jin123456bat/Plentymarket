@@ -1,6 +1,115 @@
 {
 	"formatVersion": 1,
 	"menu": {
-
+		"Config.LanguagesTab": {
+			"label": "Config.languagesTab",
+			"formFields": {
+				"language.active_languages": {
+					"type": "multiCheckBox",
+					"required": false,
+					"label": "Config.languageActiveLanguagesLabel",
+					"options": {
+						"defaultValue": "de",
+						"checkBoxValues": [
+							{
+								"value": "de",
+								"caption": "Config.languageActiveLanguagesDe"
+							},
+							{
+								"value": "en",
+								"caption": "Config.languageActiveLanguagesEn"
+							}
+						]
+					}
+				}
+			}
+		},
+		"Config.ItemViewTab": {
+			"label": "Config.itemViewTab",
+			"formFields": {
+				"item.name": {
+					"type": "selectBox",
+					"required": false,
+					"label": "Config.itemNameLabel",
+					"options": {
+						"defaultValue": "0",
+						"selectBoxValues": [
+							{
+								"value": "0",
+								"caption": "Config.itemName0"
+							},
+							{
+								"value": "1",
+								"caption": "Config.itemName1"
+							},
+							{
+								"value": "2",
+								"caption": "Config.itemName2"
+							}
+						]
+					}
+				}
+			}
+		},
+		"Config.GlobalTab": {
+			"label": "Config.globalTab",
+			"formFields": {
+				"global.enableOldUrlPattern": {
+					"type": "checkBox",
+					"required": false,
+					"label": "Config.globalEnableOldUrlPatternLabel",
+					"options": {
+						"defaultValue": "false"
+					}
+				}
+			}
+		},
+		"Config.NumberFormatsTab": {
+			"label": "Config.NumberFormatsTab",
+			"formFields": {
+				"format.number_decimals": {
+					"type": "inputText",
+					"required": false,
+					"label": "Config.formatNumberDecimalsLabel",
+					"options": {
+						"defaultValue": "2"
+					}
+				},
+				"format.separator_decimal": {
+					"type": "inputText",
+					"required": false,
+					"label": "Config.formatSeparatorDecimalLabel",
+					"options": {
+						"defaultValue": ","
+					}
+				},
+				"format.separator_thousands": {
+					"type": "inputText",
+					"required": false,
+					"label": "Config.formatSeparatorThousandsLabel",
+					"options": {
+						"defaultValue": "."
+					}
+				},
+				"format.use_locale_currency_format": {
+					"type": "selectBox",
+					"required": false,
+					"label": "Config.formatUseLocaleCurrencyFormatLabel",
+					"options": {
+						"defaultValue": "1",
+						"selectBoxValues": [
+							{
+								"value": "0",
+								"caption": "Config.formatUseLocaleCurrencyFormatPossibleValue0"
+							},
+							{
+								"value": "1",
+								"caption": "Config.formatUseLocaleCurrencyFormatPossibleValue1"
+							}
+						]
+					}
+				}
+			}
+		}
 	}
 }

@@ -2,14 +2,13 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSearchRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
-use Plentymarket\Services\ImageService;
+use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\ItemService;
 use Plentymarket\Services\ItemSetService;
 use Plentymarket\Services\StockService;
@@ -146,34 +145,12 @@ class IndexController extends BaseApiController
 	 */
 	public function search (): Response
 	{
-		$data = pluginApp(VariationElasticSearchSearchRepositoryContract::class)->execute();
-		return $this->success($data);
+		/** @var ItemListService $itemListService */
+		$itemListService = pluginApp(ItemListService::class);
+
+		$itemList = $itemListService->getItemList(16, null, 1);
+		return $this->success($itemList);
 	}
 
-	/**
-	 * @return Response
-	 * @deprecated
-	 */
-	public function itemimage (): Response
-	{
-		$data = pluginApp(ImageService::class)->getAll();
-		return $this->success($data);
-	}
 
-	/**
-	 * @deprecated
-	 * @return Response
-	 */
-	public function preload (): Response
-	{
-		$data = pluginApp(ItemService::class)->getAll();
-		$item_id = [];
-		foreach ($data->getResult() as $item) {
-			$item_id[] = $item['id'];
-		}
-		$imageService = pluginApp(ImageService::class);
-//		$imageService->preload($item_id);
-		//$data = pluginApp(ItemService::class)->getAll();
-		return $this->success($imageService->preload($item_id));
-	}
 }

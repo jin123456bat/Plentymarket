@@ -3,9 +3,12 @@
 namespace Plentymarket\Services;
 
 use Exception;
+use Plenty\Modules\Account\Contact\Contracts\ContactClassRepositoryContract;
 use Plenty\Modules\Account\Contact\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Account\Contact\Models\Contact;
 use Plenty\Modules\Authentication\Contracts\ContactAuthenticationRepositoryContract;
+use Plenty\Modules\Authorization\Services\AuthHelper;
+use Plenty\Modules\Frontend\Session\Storage\Models\Customer;
 use Plenty\Modules\Helper\AutomaticEmail\Models\AutomaticEmailContact;
 use Plenty\Modules\Helper\AutomaticEmail\Models\AutomaticEmailTemplate;
 use Plentymarket\Extensions\SendMail;
@@ -120,5 +123,85 @@ class AccountService
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param int $contactClassId
+	 * @return array|null
+	 */
+	public function getContactClassData ($contactClassId)
+	{
+		/** @var ContactClassRepositoryContract $contactClassRepo */
+		$contactClassRepo = pluginApp(ContactClassRepositoryContract::class);
+
+		/** @var AuthHelper $authHelper */
+		$authHelper = pluginApp(AuthHelper::class);
+
+		return $authHelper->processUnguarded(
+			function () use ($contactClassRepo, $contactClassId) {
+				return $contactClassRepo->findContactClassDataById($contactClassId);
+			}
+		);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getContactClassId (): int
+	{
+		$contact = $this->getContact();
+		if ($contact !== null && $contact->classId !== null) {
+			return $contact->classId;
+		} else {
+			return pluginApp(ConfigService::class)->getWebsiteConfig('defaultCustomerClassId') ?? 0;
+		}
+	}
+
+	/**
+	 * 获取当前登录的用户
+	 * @return null|Contact  null为未登录
+	 */
+	public function getContact ()
+	{
+		return $this->contactRepositoryContract->findContactById($this->getContactId());
+	}
+
+	/**
+	 * 获取当前登录用户的id
+	 * @return int  0为未登录
+	 */
+	public function getContactId (): int
+	{
+		/** @var \Plenty\Modules\Frontend\Services\AccountService $accountService */
+		$accountService = pluginApp(\Plenty\Modules\Frontend\Services\AccountService::class);
+		return $accountService->getAccountContactId();
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function showNetPrices (): bool
+	{
+		$customerShowNet = false;
+		/** @var Customer $customer */
+		$customer = $sessionService = pluginApp(SessionService::class)->getCustomer();
+		if ($customer !== null) {
+			$customerShowNet = $customer->showNetPrice;
+		}
+
+		if ($customerShowNet) {
+			return true;
+		}
+
+		$contactClassShowNet = false;
+		$contactClassId = $this->getContactClassId();
+		if ($contactClassId !== null) {
+			$contactClass = $this->getContactClassData($contactClassId);
+			if ($contactClass !== null) {
+				$contactClassShowNet = $contactClass['showNetPrice'];
+			}
+		}
+
+		return $contactClassShowNet;
 	}
 }

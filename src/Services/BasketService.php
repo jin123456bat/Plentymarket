@@ -2,8 +2,11 @@
 
 namespace Plentymarket\Services;
 
+use IO\Services\CheckoutService;
 use Plenty\Modules\Basket\Contracts\BasketItemRepositoryContract;
+use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Basket\Exceptions\BasketCheckException;
+use Plenty\Modules\Basket\Models\Basket;
 use Plenty\Modules\Basket\Models\BasketItem;
 
 /**
@@ -18,12 +21,19 @@ class BasketService
 	private $basketItemRepositoryContract;
 
 	/**
+	 * @var BasketRepositoryContract
+	 */
+	private $basketRepositoryContract;
+
+	/**
 	 * BasketService constructor.
 	 * @param BasketItemRepositoryContract $basketItemRepositoryContract
+	 * @param BasketRepositoryContract $basketRepositoryContract
 	 */
-	function __construct (BasketItemRepositoryContract $basketItemRepositoryContract)
+	function __construct (BasketItemRepositoryContract $basketItemRepositoryContract, BasketRepositoryContract $basketRepositoryContract)
 	{
 		$this->basketItemRepositoryContract = $basketItemRepositoryContract;
+		$this->basketRepositoryContract = $basketRepositoryContract;
 	}
 
 	/**
@@ -76,6 +86,14 @@ class BasketService
 	function delete (int $basketItemId, bool $dispatchAfterBasketChangedEvent = true): void
 	{
 		$this->basketItemRepositoryContract->removeBasketItem($basketItemId, $dispatchAfterBasketChangedEvent);
+	}
+
+	/**
+	 * @return Basket
+	 */
+	function getBasket ()
+	{
+		return $this->basketRepositoryContract->load();
 	}
 
 }

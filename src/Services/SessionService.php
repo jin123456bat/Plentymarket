@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Services;
 
+use Plenty\Modules\Frontend\Contracts\Checkout;
 use Plenty\Modules\Frontend\Events\FrontendLanguageChanged;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Frontend\Session\Storage\Models\Customer;
@@ -18,6 +19,9 @@ class SessionService
 	 */
 	private $frontendSessionStorageFactoryContract;
 
+	/**
+	 * @var string
+	 */
 	private $language;
 
 	/**
@@ -41,23 +45,29 @@ class SessionService
 	{
 		if (is_null($this->language)) {
 			$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
-
-//			if(is_null($this->language) || !strlen($this->language))
-//			{
-//				$request = pluginApp(Request::class);
-//				$splittedURL = explode('/', $request->get('plentyMarkets'));
-//				if(strpos(end($splittedURL), '.') === false && in_array($splittedURL[0], Utils::getLanguageList()))
-//				{
-//					$this->language = $splittedURL[0];
-//				}
-//			}
-
 			if (is_null($this->language) || !strlen($this->language)) {
-				$this->language = pluginApp(ConfigService::class)->get('defaultLanguage');
+				$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
 			}
 		}
 
 		return $this->language;
+	}
+
+	/**
+	 * 获取当前的货币类型
+	 * @return string
+	 */
+	public function getCurrency (): string
+	{
+		$currency = (string)$this->get('currency');
+		if (empty($currency)) {
+			$currency = 'EUR';
+		}
+
+		/** @var Checkout $checkout */
+		$checkout = pluginApp(Checkout::class);
+		$checkout->setCurrency($currency);
+		return $currency;
 	}
 
 	/**
@@ -81,7 +91,6 @@ class SessionService
 	}
 
 	/**
-	 * 貌似是当前登录的用户信息
 	 * @return Customer
 	 */
 	public function getCustomer (): Customer

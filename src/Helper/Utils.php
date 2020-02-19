@@ -13,13 +13,33 @@ use Plentymarket\Services\SessionService;
 class Utils
 {
 	/**
+	 * 是否是管理员预览模式
+	 * @return mixed
+	 */
+	public static function isAdminPreview ()
+	{
+		$app = pluginApp(Application::class);
+		return $app->isAdminPreview();
+	}
+
+	/**
+	 * 获取当前选择的货币类型
+	 * @return mixed
+	 */
+	public static function getCurrency ()
+	{
+		$sessionStorage = pluginApp(SessionService::class);
+		return $sessionStorage->getCurrency();
+	}
+
+	/**
 	 * 获取plentymarket平台ID
 	 * @return int
 	 */
-	public static function getPlentyId()
+	public static function getPlentyId ()
 	{
 		$app = pluginApp(Application::class);
-		return (int) $app->getPlentyId();
+		return (int)$app->getPlentyId();
 	}
 
 	/**
@@ -39,6 +59,10 @@ class Utils
 	public static function getLang ()
 	{
 		$sessionStorage = pluginApp(SessionService::class);
-		return $sessionStorage->getLang();
+		$lang = $sessionStorage->getLang();
+		if (empty($lang)) {
+			$lang = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
+		}
+		return $lang;
 	}
 }
