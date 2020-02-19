@@ -2,9 +2,9 @@
 
 namespace Plentymarket\Services\ItemSearch\SearchPresets;
 
-use IO\Services\ItemSearch\Helper\SortingHelper;
 use Plentymarket\Services\ItemSearch\Factories\VariationSearchFactory;
 use Plentymarket\Services\ItemSearch\Helper\ResultFieldTemplate;
+use Plentymarket\Services\ItemSearch\Helper\SortingHelper;
 
 /**
  * Class CategoryItems
