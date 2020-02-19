@@ -252,25 +252,26 @@ class VariationUrlBuilder
 			/** @var CategoryUrlBuilder $categoryUrlBuilder */
 			$categoryUrlBuilder = pluginApp(CategoryUrlBuilder::class);
 
-			if (!is_null($category->branch)) {
-				$branch = $category->branch->toArray();
-				for ($i = $maxLevel; $i >= 0; $i--) {
-					if (!is_null($branch['category' . $i . 'Id']) && $branch['category' . $i . 'Id'] > 0) {
-						return $categoryUrlBuilder->buildUrl(
-							$branch['category' . $i . 'Id'],
-							$lang
-						);
-					}
-				}
-			} else {
-				$this->getLogger(__CLASS__)->error(
-					'Plentymarket::Debug.VariationUrlBuilder_noCategoryBranch',
-					[
-						'categoryId' => $categoryId,
-						'lang' => $lang
-					]
-				);
-			}
+			//这段代码不知道plugin-io里面是怎么通过的，编译都不通过
+//			if (!is_null($category->branch)) {
+//				$branch = $category->branch->toArray();
+//				for ($i = $maxLevel; $i >= 0; $i--) {
+//					if (!is_null($branch['category' . $i . 'Id']) && $branch['category' . $i . 'Id'] > 0) {
+//						return $categoryUrlBuilder->buildUrl(
+//							$branch['category' . $i . 'Id'],
+//							$lang
+//						);
+//					}
+//				}
+//			} else {
+//				$this->getLogger(__CLASS__)->error(
+//					'Plentymarket::Debug.VariationUrlBuilder_noCategoryBranch',
+//					[
+//						'categoryId' => $categoryId,
+//						'lang' => $lang
+//					]
+//				);
+//			}
 
 			/** @var CategoryUrlBuilder $categoryUrlBuilder */
 			$categoryUrlBuilder = pluginApp(CategoryUrlBuilder::class);

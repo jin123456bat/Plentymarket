@@ -141,14 +141,14 @@ class VariationPriceList
 				$salesPriceSearchRequest = pluginApp(SalesPriceSearchRequest::class);
 				$salesPriceSearchRequest->accountId = 0;
 
-				/** @var CustomerService $customerService */
-				$customerService = pluginApp(CustomerService::class);
-				$contact = $customerService->getContact();
+				/** @var AccountService $accountService */
+				$accountService = pluginApp(AccountService::class);
+				$contact = $accountService->getContact();
 
 				if ($contact instanceof Contact) {
 					$salesPriceSearchRequest->accountType = $contact->singleAccess;
 				}
-				$salesPriceSearchRequest->customerClassId = $customerService->getContactClassId();
+				$salesPriceSearchRequest->customerClassId = $accountService->getContactClassId();
 
 				/** @var BasketService $basketService */
 				$basketService = pluginApp(BasketService::class);
