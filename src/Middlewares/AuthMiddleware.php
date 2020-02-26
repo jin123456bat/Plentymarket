@@ -11,7 +11,7 @@ use Plentymarket\Guards\AuthGuard;
  * Class Auth
  * @package Plentymarket\Middlewares
  */
-class Auth extends Middleware
+class AuthMiddleware extends Middleware
 {
 
 	/**

@@ -5,7 +5,7 @@ namespace Plentymarket\Providers;
 use Plenty\Plugin\RouteServiceProvider;
 use Plenty\Plugin\Routing\ApiRouter;
 use Plenty\Plugin\Routing\Router;
-use Plentymarket\Middlewares\Auth;
+use Plentymarket\Middlewares\AuthMiddleware;
 
 /**
  * Class PlentymarketRouteServiceProvider
@@ -50,10 +50,10 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/index/blog_list', 'Plentymarket\Controllers\Web\IndexController@blog_list');
 		$router->get('/index/blog/{blog_id}', 'Plentymarket\Controllers\Web\IndexController@blog');
 
-		$router->middleware('auth', Auth::class)->get('/account/index', 'Plentymarket\Controllers\Web\AccountController@index');
-		$router->middleware('auth', Auth::class)->get('/account/cart', 'Plentymarket\Controllers\Web\AccountController@cart');
-		$router->middleware('auth', Auth::class)->get('/account/checkout', 'Plentymarket\Controllers\Web\AccountController@checkout');
-		$router->middleware('auth', Auth::class)->get('/account/wishlist', 'Plentymarket\Controllers\Web\AccountController@wishlist');
+		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/index', 'Plentymarket\Controllers\Web\AccountController@index');
+		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/cart', 'Plentymarket\Controllers\Web\AccountController@cart');
+		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/checkout', 'Plentymarket\Controllers\Web\AccountController@checkout');
+		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/wishlist', 'Plentymarket\Controllers\Web\AccountController@wishlist');
 	}
 
 }
