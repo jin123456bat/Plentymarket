@@ -19,7 +19,11 @@ class AuthMiddleware extends Middleware
 	 */
 	public function before (Request $request)
 	{
-		AuthGuard::assertOrRedirect(true, '/index/login_register');
+		$path = $request->getRequestUri();
+		$path_first = current(array_filter(explode('/', $path)));
+		if (in_array($path_first, ['account'])) {
+			AuthGuard::assertOrRedirect(true, '/index/login_register');
+		}
 	}
 
 	/**
