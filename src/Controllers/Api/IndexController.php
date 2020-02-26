@@ -161,6 +161,10 @@ class IndexController extends BaseApiController
 		}
 	}
 
+	/**
+	 * test
+	 * @return Response
+	 */
 	public function test (): Response
 	{
 		return $this->success([
