@@ -4,10 +4,10 @@
     Version: 1.0
     URL: http://www.bootstrapmb.com
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     01. Theme default CSS
     02. Modal
     03. Header
@@ -30,7 +30,7 @@
     20. About
     21. Footer
 
-  
+
 
 -----------------------------------------------------------------------------------*/
 /*----------------------------------------*/
@@ -140,7 +140,7 @@ ul {
   margin: 0;
   padding: 0; }
 
-/*-- 
+/*--
     - Input Placeholder
 -----------------------------------------*/
 input:-moz-placeholder, textarea:-moz-placeholder {
@@ -4695,8 +4695,11 @@ a#more-btn {
     margin-bottom: 20px; }
     .ptk-product .image a {
       display: block; }
-      .ptk-product .image a img {
-        width: 100%; }
+      .ptk-product .image a img
+      {
+        width: 255px;
+        height: 306px;
+      }
       .ptk-product .image a.hover-icon {
         position: absolute;
         display: inline-block;
