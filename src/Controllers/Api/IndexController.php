@@ -162,6 +162,16 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * @return Response
+	 */
+	public function contact (): Response
+	{
+		return $this->success([
+			'getIsAccountLoggedIn' => pluginApp(\Plenty\Modules\Frontend\Services\AccountService::class)->getIsAccountLoggedIn(),
+		]);
+	}
+
+	/**
 	 * test
 	 * @return Response
 	 */
