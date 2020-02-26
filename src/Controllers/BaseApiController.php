@@ -63,4 +63,20 @@ class BaseApiController extends BaseController
 			'Content-Type: application/json',
 		]);
 	}
+
+	protected function exception (\Exception $e): Response
+	{
+		return $this->response->make(json_encode([
+			'code' => 0,
+			'message' => $e->getMessage(),
+			'data' => [
+				'code' => $e->getCode(),
+				'file' => $e->getFile(),
+				'line' => $e->getLine(),
+				'trace' => $e->getTrace(),
+			]
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
+			'Content-Type: application/json',
+		]);
+	}
 }

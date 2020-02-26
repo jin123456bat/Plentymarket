@@ -167,10 +167,14 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
-		return $this->success([
-			//'getUriForPath' => $this->request->getUriForPath(),
-			'getUri' => $this->request->getUri(),
-			'getRequestUri' => $this->request->getRequestUri(),
-		]);
+		try {
+			return $this->success([
+				'getUriForPath' => $this->request->getUriForPath(),
+				'getUri' => $this->request->getUri(),
+				'getRequestUri' => $this->request->getRequestUri(),
+			]);
+		} catch (\Exception $e) {
+			return $this->exception($e);
+		}
 	}
 }
