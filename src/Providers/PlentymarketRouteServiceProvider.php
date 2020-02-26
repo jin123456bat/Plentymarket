@@ -5,7 +5,6 @@ namespace Plentymarket\Providers;
 use Plenty\Plugin\RouteServiceProvider;
 use Plenty\Plugin\Routing\ApiRouter;
 use Plenty\Plugin\Routing\Router;
-use Plentymarket\Middlewares\AuthMiddleware;
 
 /**
  * Class PlentymarketRouteServiceProvider
@@ -34,6 +33,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/api/index/blog', 'Plentymarket\Controllers\Api\IndexController@blog');
 		$router->get('/api/index/item', 'Plentymarket\Controllers\Api\IndexController@item');
 		$router->get('/api/index/search', 'Plentymarket\Controllers\Api\IndexController@search');
+		$router->get('/api/index/test', 'Plentymarket\Controllers\Api\IndexController@test');
 
 		//生产api
 		$router->get('/api/index/register', 'Plentymarket\Controllers\Api\IndexController@register');
@@ -50,10 +50,10 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/index/blog_list', 'Plentymarket\Controllers\Web\IndexController@blog_list');
 		$router->get('/index/blog/{blog_id}', 'Plentymarket\Controllers\Web\IndexController@blog');
 
-		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/index', 'Plentymarket\Controllers\Web\AccountController@index');
-		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/cart', 'Plentymarket\Controllers\Web\AccountController@cart');
-		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/checkout', 'Plentymarket\Controllers\Web\AccountController@checkout');
-		$router->middleware('auth_middleware', AuthMiddleware::class)->get('/account/wishlist', 'Plentymarket\Controllers\Web\AccountController@wishlist');
+		$router->get('/account/index', 'Plentymarket\Controllers\Web\AccountController@index');
+		$router->get('/account/cart', 'Plentymarket\Controllers\Web\AccountController@cart');
+		$router->get('/account/checkout', 'Plentymarket\Controllers\Web\AccountController@checkout');
+		$router->get('/account/wishlist', 'Plentymarket\Controllers\Web\AccountController@wishlist');
 	}
 
 }

@@ -24,6 +24,8 @@ class PlentymarketServiceProvider extends ServiceProvider
 	 */
 	public function register ()
 	{
+//		$this->addGlobalMiddleware(AuthMiddleware::class);
+
 		$this->getApplication()->register(PlentymarketRouteServiceProvider::class);
 
 		$this->registerSingletons([
