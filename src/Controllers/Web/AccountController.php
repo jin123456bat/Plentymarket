@@ -2,6 +2,8 @@
 
 namespace Plentymarket\Controllers\Web;
 
+use Plenty\Plugin\Http\Request;
+use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseWebController;
 
 /**
@@ -10,6 +12,11 @@ use Plentymarket\Controllers\BaseWebController;
  */
 class AccountController extends BaseWebController
 {
+	function __construct (Request $request, Response $response)
+	{
+		parent::__construct($request, $response);
+	}
+
 	/**
 	 * 个人中心首页
 	 * @return string

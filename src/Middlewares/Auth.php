@@ -5,6 +5,7 @@ namespace Plentymarket\Middlewares;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Middleware;
+use Plentymarket\Guards\AuthGuard;
 
 /**
  * Class Auth
@@ -18,7 +19,7 @@ class Auth extends Middleware
 	 */
 	public function before (Request $request)
 	{
-		// TODO: Implement before() method.
+		AuthGuard::assertOrRedirect(true, '/index/login_register');
 	}
 
 	/**
