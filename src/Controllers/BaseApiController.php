@@ -44,7 +44,7 @@ class BaseApiController extends BaseController
 			'code' => 1,
 			'message' => 'OK',
 			'data' => $data
-		], JSON_UNESCAPED_UNICODE), 200, [
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
 			'Content-Type: application/json',
 		]);
 	}
@@ -59,7 +59,7 @@ class BaseApiController extends BaseController
 		return $this->response->make(json_encode([
 			'code' => 0,
 			'message' => $message,
-		], JSON_UNESCAPED_UNICODE), 200, [
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
 			'Content-Type: application/json',
 		]);
 	}
