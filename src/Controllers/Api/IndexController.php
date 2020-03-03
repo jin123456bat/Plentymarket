@@ -178,10 +178,10 @@ class IndexController extends BaseApiController
 	public function test (): Response
 	{
 		try {
-//			$itemListService = pluginApp(ItemListService::class);
-//			$item = $itemListService->getItem(1007);
-			throw new \Exception('this is a exception string');
-			return $this->success('this is a test string');
+			$itemListService = pluginApp(ItemListService::class);
+			$item = $itemListService->getItem(1007);
+//			throw new \Exception('this is a exception string');
+			return $this->success($item);
 		} catch (\Exception $e) {
 			return $this->exception($e);
 		}
