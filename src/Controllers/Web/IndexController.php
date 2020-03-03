@@ -97,9 +97,6 @@ class IndexController extends BaseWebController
 			$itemListService = pluginApp(ItemListService::class);
 			$item = $itemListService->getItem($product_id);
 
-			print_r($item);
-			exit();
-
 			return $this->render('index.product', [
 			], [
 				'item' => $item
