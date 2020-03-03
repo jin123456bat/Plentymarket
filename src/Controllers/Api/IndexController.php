@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Exception;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -13,6 +14,7 @@ use Plentymarket\Services\ItemService;
 use Plentymarket\Services\ItemSetService;
 use Plentymarket\Services\StockService;
 use Plentymarket\Services\WarehouseService;
+use Throwable;
 
 /**
  * Class IndexController
@@ -151,7 +153,7 @@ class IndexController extends BaseApiController
 
 			$itemList = $itemListService->getCategoryItem(16, null, 1, 12);
 			return $this->success($itemList);
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			return $this->success([
 				'code' => $e->getCode(),
 				'file' => $e->getFile(),
@@ -181,7 +183,7 @@ class IndexController extends BaseApiController
 			$itemListService = pluginApp(ItemListService::class);
 			$item = $itemListService->getItem(1007);
 			return $this->success($item);
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			return $this->exception($e);
 		}
 	}
