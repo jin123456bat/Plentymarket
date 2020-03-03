@@ -12,25 +12,13 @@ use Plenty\Plugin\Http\Response;
 class BaseApiController extends BaseController
 {
 	/**
-	 * @var Response
-	 */
-	protected $response;
-
-	/**
-	 * @var Request
-	 */
-	protected $request;
-
-	/**
 	 * BaseApiController constructor.
 	 * @param Request $request
 	 * @param Response $response
 	 */
 	public function __construct (Request $request, Response $response)
 	{
-		$this->request = $request;
-		$this->response = $response;
-		parent::__construct();
+		parent::__construct($request, $response);
 	}
 
 	/**
@@ -59,22 +47,6 @@ class BaseApiController extends BaseController
 		return $this->response->make(json_encode([
 			'code' => 0,
 			'message' => $message,
-		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
-			'Content-Type: application/json',
-		]);
-	}
-
-	protected function exception (\Exception $e): Response
-	{
-		return $this->response->make(json_encode([
-			'code' => 0,
-			'message' => $e->getMessage(),
-			'data' => [
-				'code' => $e->getCode(),
-				'file' => $e->getFile(),
-				'line' => $e->getLine(),
-				'trace' => $e->getTrace(),
-			]
 		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
 			'Content-Type: application/json',
 		]);

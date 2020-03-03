@@ -17,14 +17,6 @@ class BaseWebController extends BaseController
 	 * @var Twig
 	 */
 	protected $twig;
-	/**
-	 * @var Request
-	 */
-	protected $request;
-	/**
-	 * @var Response
-	 */
-	protected $response;
 
 	/**
 	 * BaseWebController constructor.
@@ -33,11 +25,8 @@ class BaseWebController extends BaseController
 	 */
 	function __construct (Request $request, Response $response)
 	{
-		$this->request = $request;
-		$this->response = $response;
 		$this->twig = pluginApp(Twig::class);
-
-		parent::__construct();
+		parent::__construct($request, $response);
 	}
 
 	/**

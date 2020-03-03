@@ -92,14 +92,18 @@ class IndexController extends BaseWebController
 	 */
 	function product ($product_id): string
 	{
-		/** @var ItemListService $itemListService */
-		$itemListService = pluginApp(ItemListService::class);
-		$item = $itemListService->getItem($product_id);
+		try {
+			/** @var ItemListService $itemListService */
+			$itemListService = pluginApp(ItemListService::class);
+			$item = $itemListService->getItem($product_id);
 
-		return $this->render('index.product', [
-		], [
-			'item' => $item
-		]);
+			return $this->render('index.product', [
+			], [
+				'item' => $item
+			]);
+		} catch (\Exception $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
