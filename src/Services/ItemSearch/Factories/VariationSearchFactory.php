@@ -109,11 +109,12 @@ class VariationSearchFactory extends BaseSearchFactory
 	 *
 	 * @return $this
 	 */
-	public function hasItemId ($itemId)
+	public function hasItemId ($itemId = null)
 	{
-		/** @var VariationBaseFilter $variationFilter */
-		$variationFilter = $this->createFilter(VariationBaseFilter::class);
-		$variationFilter->hasItemId($itemId);
+		if (!empty($itemId)) {
+			$variationFilter = $this->createFilter(VariationBaseFilter::class);
+			$variationFilter->hasItemId($itemId);
+		}
 		return $this;
 	}
 
@@ -367,11 +368,13 @@ class VariationSearchFactory extends BaseSearchFactory
 	 *
 	 * @return $this
 	 */
-	public function isInCategory ($categoryId)
+	public function isInCategory ($categoryId = null)
 	{
-		/** @var CategoryFilter $categoryFilter */
-		$categoryFilter = $this->createFilter(CategoryFilter::class);
-		$categoryFilter->isInCategory($categoryId);
+		if (!empty($categoryId)) {
+			/** @var CategoryFilter $categoryFilter */
+			$categoryFilter = $this->createFilter(CategoryFilter::class);
+			$categoryFilter->isInCategory($categoryId);
+		}
 		return $this;
 	}
 
