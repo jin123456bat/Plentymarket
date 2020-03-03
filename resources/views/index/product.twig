@@ -67,7 +67,7 @@
                         <span class="discounted-price">{{item.format_discount_price}}</span>
                     </p>
                     <p class="product-description mb-15">
-                        {{item.short_desc}}
+                        {{strip_tags(item.short_desc)}}
                     </p>
                     <div class="cart-buttons mb-30">
                         <p class="mb-15">{{trans("Plentymarket::WebIndexProduct.quantity")}}</p>
@@ -124,27 +124,27 @@
                 <div class="tab-slider-wrapper">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-	                        <a class="nav-item nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
-	                           aria-selected="true">Description</a>
-	                        <a class="nav-item nav-link" id="features-tab" data-toggle="tab" href="#features" role="tab"
-	                           aria-selected="false">Features</a>
-	                        <a class="nav-item nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
-	                           aria-selected="false">Reviews (3)</a>
+                            <a class="nav-item nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                               aria-selected="true">Description</a>
+                            <a class="nav-item nav-link" id="features-tab" data-toggle="tab" href="#features" role="tab"
+                               aria-selected="false">Features</a>
+                            <a class="nav-item nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                               aria-selected="false">Reviews (3)</a>
                         </div>
                     </nav>
-	                <div class="tab-content" id="nav-tabContent">
-		                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-			                <p class="product-desc">{{item.desc}}</p>
-		                </div>
-		                <div class="tab-pane fade" id="features" role="tabpanel" aria-labelledby="features-tab">
-			                <table class="table-data-sheet">
-				                <tbody>
-				                <tr class="odd">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                            <p class="product-desc">{{strip_tags(item.desc)}}</p>
+                        </div>
+                        <div class="tab-pane fade" id="features" role="tabpanel" aria-labelledby="features-tab">
+                            <table class="table-data-sheet">
+                                <tbody>
+                                <tr class="odd">
 
-					                <td>Name</td>
-					                <td>Kaoreet lobortis sagittis laoreet</td>
-				                </tr>
-				                <tr class="even">
+                                    <td>Name</td>
+                                    <td>Kaoreet lobortis sagittis laoreet</td>
+                                </tr>
+                                <tr class="even">
 
                                     <td>Color</td>
                                     <td>Yellow</td>

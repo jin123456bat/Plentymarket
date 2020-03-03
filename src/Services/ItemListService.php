@@ -85,7 +85,7 @@ class ItemListService
 	private function formatItem ($data)
 	{
 		return [
-			'id' => $data['id'],//商品ID
+			'id' => $data['data']['item']['id'],//商品ID
 			'name' => $data['data']['texts']['name1'],//商品名称
 			'images' => array_column($data['data']['images']['all'], 'url'),//商品图片
 			'category_id' => array_column($data['data']['defaultCategories'], 'id'),//所处分类
