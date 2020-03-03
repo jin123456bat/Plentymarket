@@ -16,5 +16,7 @@
 	"javaScriptFiles": [],
 	"require": [],
 	"dependencies": [],
-	"runOnBuild": []
+	"runOnBuild": [
+		"Plentymarket\\Migrations\\CreateWishlistTable"
+	]
 }
