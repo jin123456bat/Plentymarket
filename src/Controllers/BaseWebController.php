@@ -46,4 +46,23 @@ class BaseWebController extends BaseController
 
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
+
+	/**
+	 * 输出异常信息
+	 * @param \Exception $e
+	 * @return string
+	 */
+	protected function exception (\Exception $e): string
+	{
+		return json_encode([
+			'code' => 0,
+			'message' => $e->getMessage(),
+			'data' => [
+				'code' => $e->getCode(),
+				'file' => $e->getFile(),
+				'line' => $e->getLine(),
+				'trace' => $e->getTrace(),
+			]
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+	}
 }
