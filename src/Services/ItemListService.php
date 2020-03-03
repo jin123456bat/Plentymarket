@@ -32,16 +32,22 @@ class ItemListService
 
 		$searchFactory->setPage(1, 1);
 		$result = $searchService->getResult($searchFactory);
+
+		return current($result['documents']);
+
 		return $this->formatItem(current($result['documents']));
 	}
 
-	private function getSalesPrices (array $data, string $key)
+	private function getSalesPrices ($data, string $key)
 	{
-		foreach ($data as $r) {
-			if ($r['type'] == 'default') {
-				return $r[$key];
+		if (is_array($data)) {
+			foreach ($data as $r) {
+				if ($r['type'] == 'default') {
+					return $r[$key];
+				}
 			}
 		}
+		return 0;
 	}
 
 	private function formatItem ($data)
