@@ -31,22 +31,13 @@
                     <!--product small image slider Start-->
                     <div class="product-small-image-list pts-product-small-image-list pts3-product-small-image-list">
                         <div class="nav small-image-slider pts3-small-image-slider" role="tablist">
-                            <div class="single-small-image img-full">
-                                <a data-toggle="tab" id="single-slide-tab-1" href="#single-slide-1"><img src="{{plugin_path("Plentymarket")}}/images/single-product-slider/01.jpg"
-                                                                                                         class="img-fluid" alt=""></a>
-                            </div>
-                            <div class="single-small-image img-full">
-                                <a data-toggle="tab" id="single-slide-tab-2" href="#single-slide-2"><img src="{{plugin_path("Plentymarket")}}/images/single-product-slider/02.jpg"
-                                                                                                         class="img-fluid" alt=""></a>
-                            </div>
-                            <div class="single-small-image img-full">
-                                <a data-toggle="tab" id="single-slide-tab-3" href="#single-slide-3"><img src="{{plugin_path("Plentymarket")}}/images/single-product-slider/03.jpg"
-                                                                                                         class="img-fluid" alt=""></a>
-                            </div>
-                            <div class="single-small-image img-full">
-                                <a data-toggle="tab" id="single-slide-tab-4" href="#single-slide-4"><img src="{{plugin_path("Plentymarket")}}/images/single-product-slider/04.jpg"
-                                                                                                         alt=""></a>
-                            </div>
+                            {%for image in item.images%}
+                                <div class="single-small-image img-full">
+                                    <a data-toggle="tab" id="single-slide-tab-{{loop.index}}" href="#single-slide-{{loop.index}}">
+                                        <img src="{{image}}" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                            {%endfor%}
                         </div>
                     </div>
                     <!--product small image slider End-->
