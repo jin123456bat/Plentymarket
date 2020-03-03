@@ -33,7 +33,7 @@ class ItemListService
 		$searchFactory->setPage(1, 1);
 		$result = $searchService->getResult($searchFactory);
 
-		return current($result['documents']);
+		return $result['documents'];
 
 		return $this->formatItem(current($result['documents']));
 	}
