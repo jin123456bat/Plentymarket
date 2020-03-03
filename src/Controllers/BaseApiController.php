@@ -54,10 +54,10 @@ class BaseApiController extends BaseController
 
 	/**
 	 * 输出异常信息
-	 * @param \Exception $e
+	 * @param \Throwable $e
 	 * @return Response
 	 */
-	protected function exception (\Exception $e): Response
+	protected function exception (\Throwable $e): Response
 	{
 		return $this->response->make(json_encode([
 			'code' => 0,

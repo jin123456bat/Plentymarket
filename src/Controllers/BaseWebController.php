@@ -50,10 +50,10 @@ class BaseWebController extends BaseController
 
 	/**
 	 * 输出异常信息
-	 * @param \Exception $e
+	 * @param \Throwable $e
 	 * @return string
 	 */
-	protected function exception (\Exception $e): string
+	protected function exception (\Throwable $e): string
 	{
 		return json_encode([
 			'code' => 0,
