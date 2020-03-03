@@ -64,6 +64,7 @@ class ItemListService
 			'currency' => $data['data']['prices']['default']['currency'],//货币
 			'stock' => $data['data']['stock']['net'],//库存
 			'desc' => $data['data']['texts']['description'],//商品描述
+			'short_desc' => $data['data']['texts']['shortDescription'],//短描述
 			'unit' => $data['data']['unit']['names']['name'],//单位
 			'vat' => $data['data']['prices']['default']['vat']['value'],//增值税
 		];
