@@ -151,7 +151,7 @@ class IndexController extends BaseApiController
 			/** @var ItemListService $itemListService */
 			$itemListService = pluginApp(ItemListService::class);
 
-			$itemList = $itemListService->getCategoryItem(16, null, 1, 12);
+			$itemList = $itemListService->getCategoryItem(16, null, 1, 12, true);
 			return $this->success($itemList);
 		} catch (Exception $e) {
 			return $this->success([

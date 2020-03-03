@@ -5,9 +5,21 @@ namespace Plentymarket\Services;
 use Plentymarket\Services\ItemSearch\SearchPresets\CategoryItems;
 use Plentymarket\Services\ItemSearch\Services\ItemSearchService;
 
+/**
+ * Class ItemListService
+ * @package Plentymarket\Services
+ */
 class ItemListService
 {
-	public function getCategoryItem ($id = null, $sorting = null, $page = 1, $maxItems = 12)
+	/**
+	 * @param null $id
+	 * @param null $sorting
+	 * @param int $page
+	 * @param int $maxItems
+	 * @param bool $source
+	 * @return array
+	 */
+	public function getCategoryItem ($id = null, $sorting = null, $page = 1, $maxItems = 12, $source = false)
 	{
 		/** @var ItemSearchService $searchService */
 		$searchService = pluginApp(ItemSearchService::class);
@@ -19,10 +31,18 @@ class ItemListService
 
 		$searchFactory->setPage($page, $maxItems);
 
+		if ($source) {
+			return $searchService->getResult($searchFactory);
+		}
 		return $this->formatItemsList($searchService->getResult($searchFactory));
 	}
 
-	public function getItem ($itemId)
+	/**
+	 * @param $itemId
+	 * @param bool $source
+	 * @return array|mixed
+	 */
+	public function getItem ($itemId, $source = false)
 	{
 		$searchService = pluginApp(ItemSearchService::class);
 
@@ -37,9 +57,18 @@ class ItemListService
 			return [];
 		}
 
+		if ($source) {
+			return current($result['documents']);
+		}
+
 		return $this->formatItem(current($result['documents']));
 	}
 
+	/**
+	 * @param $data
+	 * @param string $key
+	 * @return mixed
+	 */
 	private function getSalesPrices ($data, string $key)
 	{
 		foreach ($data as $r) {
@@ -49,6 +78,10 @@ class ItemListService
 		}
 	}
 
+	/**
+	 * @param $data
+	 * @return array
+	 */
 	private function formatItem ($data)
 	{
 		return [
@@ -75,6 +108,10 @@ class ItemListService
 		];
 	}
 
+	/**
+	 * @param $data
+	 * @return array
+	 */
 	private function formatItemsList ($data)
 	{
 		$list = [];
