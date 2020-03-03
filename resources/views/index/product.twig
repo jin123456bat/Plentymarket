@@ -14,6 +14,16 @@
                     <!--product large image start -->
                     <div class="tab-content product-large-image-list pts-product-large-image-list pts3-product-large-image-list" id="myTabContent">
 
+                        {%for image in item.images%}
+                            <div class="tab-pane fade {%if loop.first%}show active{%endif%}" id="single-slide-{{loop.index}}" role="tabpanel" aria-labelledby="single-slide-tab-{{loop.index}}">
+                                <!--Single Product Image Start-->
+                                <div class="single-product-img img-full">
+                                    <img src="{{image}}" class="img-fluid" alt="">
+                                    <a href="{{image}}" class="big-image-popup"><i class="fa fa-search-plus"></i></a>
+                                </div>
+                                <!--Single Product Image End-->
+                            </div>
+                        {%endfor%}
 
                     </div>
                     <!--product large image End-->

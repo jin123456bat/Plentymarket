@@ -178,9 +178,10 @@ class IndexController extends BaseApiController
 	public function test (): Response
 	{
 		try {
-			return $this->success([
-				'path' => $this->request->getUriForPath(),
-			]);
+			$itemListService = pluginApp(ItemListService::class);
+			$item = $itemListService->getItem(1007);
+
+			return $this->success($item);
 		} catch (\Exception $e) {
 			return $this->exception($e);
 		}
