@@ -31,6 +31,7 @@ class BaseWebController extends BaseController
 
 	/**
 	 * @param string $template
+	 * @param array $breadcrumb
 	 * @param array $context
 	 * @return string
 	 */
@@ -63,6 +64,6 @@ class BaseWebController extends BaseController
 				'line' => $e->getLine(),
 				'trace' => $e->getTrace(),
 			]
-		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 	}
 }
