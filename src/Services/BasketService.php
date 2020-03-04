@@ -38,7 +38,7 @@ class BasketService
 	/**
 	 * 获取当前用户的购物车列表
 	 */
-	function getAll (): array
+	function getAll ()
 	{
 		return $this->basketItemRepositoryContract->all();
 	}
