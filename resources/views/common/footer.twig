@@ -230,6 +230,25 @@
 <!-- Main JS -->
 <script src="{{plugin_path("Plentymarket")}}/js/main.js"></script>
 
+<script src="{{plugin_path("Plentymarket")}}/js/spop.min.js"></script>
+
+<script type="text/javascript">
+    spop.defaults = {
+        autoclose: 5000,
+        position: "top-center",
+        icon: true
+    };
+
+    $.get("/api/basket/num", function(response)
+    {
+        $("#cart-num").text(response.data);
+    });
+
+    $.get("/api/wishlist/num", function(response)
+    {
+        $("#wishlist-num").text(response.data);
+    });
+</script>
 </body>
 
 </html>

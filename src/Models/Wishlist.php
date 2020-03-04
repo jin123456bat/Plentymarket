@@ -44,6 +44,22 @@ class Wishlist extends Model
 	}
 
 	/**
+	 * 愿望清单中的商品数量
+	 * @return int
+	 */
+	public function num ()
+	{
+		$accountService = pluginApp(AccountService::class);
+		$contactId = $accountService->getContactId();
+		if (!empty($contactId)) {
+			$database = pluginApp(DataBase::class);
+			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->get();
+			return count($wishlist);
+		}
+		return 0;
+	}
+
+	/**
 	 * 添加商品到愿望清单
 	 * @param $itemId
 	 * @return Wishlist|null 成功返回Wishlist 失败返回null

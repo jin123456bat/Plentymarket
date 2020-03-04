@@ -28,4 +28,13 @@ class BasketController extends BaseApiController
 		]);
 		return $this->success();
 	}
+
+	/**
+	 * 购物车中商品数量
+	 * @return Response
+	 */
+	function num (): Response
+	{
+		return $this->success(count(pluginApp(BasketService::class)->getAll()));
+	}
 }

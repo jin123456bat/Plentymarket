@@ -17,6 +17,9 @@
 	<!-- Linear Icon CSS -->
 	<link href="{{plugin_path("Plentymarket")}}/css/linear-icon.css" rel="stylesheet">
 
+	<!-- Linear Icon CSS -->
+	<link href="{{plugin_path("Plentymarket")}}/css/spop.min.css" rel="stylesheet">
+
 	<!-- Plugins CSS -->
 	<link href="{{plugin_path("Plentymarket")}}/css/plugins.css" rel="stylesheet">
 
@@ -30,6 +33,7 @@
 	<script src="{{plugin_path("Plentymarket")}}/js/vendor/modernizr-2.8.3.min.js"></script>
 
 	<script src="https://use.fontawesome.com/c30a5809a1.js"></script>
+
 </head>
 
 <body>
@@ -158,8 +162,8 @@
 						<div class="single-icon mr-20">
 							<a href="wishlist.html">
 								<i class="lnr lnr-heart"></i>
-								<span class="text">Wishlist</span>
-								<span class="count">0</span>
+								<span class="text">{{trans('Plentymarket::Common.wishlist')}}</span>
+								<span class="count" id="wishlist-num">0</span>
 							</a>
 						</div>
 
@@ -170,8 +174,8 @@
 						<div class="single-icon">
 							<a href="javascript:void(0)" id="cart-icon">
 								<i class="lnr lnr-cart"></i>
-								<span class="text">My Cart</span>
-								<span class="count">0</span>
+								<span class="text">{{trans('Plentymarket::Common.my_cart')}}</span>
+								<span class="count" id="cart-num">0</span>
 							</a>
 							<!-- cart floating box -->
 							<div class="cart-floating-box hidden" id="cart-floating-box">
