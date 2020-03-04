@@ -74,7 +74,7 @@
                         <div class="pro-qty mr-10">
                             <input type="text" value="{{item.min_num}}" min="{{item.min_num}}" max="{{item.stock}}">
                         </div>
-                        <a href="#" class="pataku-btn" data-variationId="{{item.variationId}}"><i class="fa fa-shopping-cart"></i> {{trans("Plentymarket::WebIndexProduct.add_to_cart")}}
+                        <a href="#" class="pataku-btn" data-variationid="{{item.variationId}}"><i class="fa fa-shopping-cart"></i> {{trans("Plentymarket::WebIndexProduct.add_to_cart")}}
                         </a>
                     </div>
                     <p class="wishlist-link mb-30">
@@ -695,7 +695,7 @@
     $(".pataku-btn").on("click", function()
     {
         var quantity = $(this).prev(".pro-qty").find("input").val();
-        $.get("/api/basket/create/" + $(this).data("variationId"), { quantity: quantity }, function(response)
+        $.get("/api/basket/create/" + $(this).data("variationid"), { quantity: quantity }, function(response)
         {
             if (response.code == 1)
             {
