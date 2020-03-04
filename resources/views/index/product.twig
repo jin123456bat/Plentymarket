@@ -72,7 +72,7 @@
                     <div class="cart-buttons mb-30">
                         <p class="mb-15">{{trans("Plentymarket::WebIndexProduct.quantity")}}</p>
                         <div class="pro-qty mr-10">
-                            <input type="text" value="{{item.min_num}}" min="{{item.min_num}}">
+                            <input type="text" value="{{item.min_num}}" min="{{item.min_num}}" max="{{item.stock}}">
                         </div>
                         <a href="#" class="pataku-btn"><i class="fa fa-shopping-cart"></i> {{trans("Plentymarket::WebIndexProduct.add_to_cart")}}
                         </a>

@@ -86,6 +86,7 @@ class ItemListService
 	{
 		return [
 			'id' => $data['data']['item']['id'],//商品ID
+			'variationId' => $data['id'],//添加购物车用这个ID
 			'name' => $data['data']['texts']['name1'],//商品名称
 			'images' => array_column($data['data']['images']['all'], 'url'),//商品图片
 			'category_id' => array_column($data['data']['defaultCategories'], 'id'),//所处分类

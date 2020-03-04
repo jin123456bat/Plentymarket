@@ -50,13 +50,17 @@ class BasketService
 	 */
 	function create ($data): bool
 	{
-		try {
+		$data['referrerId'] = $this->getBasket()->referrerId;
+		$basketItem = $this->basketRepositoryContract->findExistingOneByData($data);
+		if ($basketItem instanceof BasketItem) {
+			$data['id'] = $basketItem['id'];
+			$data['quantity'] = (float)$data['quantity'] + $basketItem->quantity;
+			return $this->update($basketItem->id, $data);
+		} else {
 			$basketItem = $this->basketItemRepositoryContract->addBasketItem($data);
 			if ($basketItem instanceof BasketItem) {
 				return true;
 			}
-			return false;
-		} catch (BasketCheckException $e) {
 			return false;
 		}
 	}

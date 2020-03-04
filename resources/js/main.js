@@ -272,13 +272,25 @@
 		var $button = $(this);
 		var oldValue = $button.parent().find('input').val();
 		if ($button.hasClass('inc')) {
-			var newVal = parseFloat(oldValue) + 1;
+			var max = $(".pro-qty input").attr("max");
+			if (max != undefined)
+			{
+				if (parseFloat(oldValue) + 1 <= max)
+				{
+					var newVal = parseFloat(oldValue) + 1;
+				}
+			}
+			else
+			{
+				var newVal = parseFloat(oldValue) + 1;
+			}
 		} else {
 			var min = $(".pro-qty input").attr("min");
 			if (min == undefined)
 			{
 				min = 1;
 			}
+
 			// Don't allow decrementing below zero
 			if (oldValue > min)
 			{
