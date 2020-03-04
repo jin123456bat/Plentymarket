@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Services;
 
+use Plentymarket\Models\Wishlist;
 use Plentymarket\Services\ItemSearch\SearchPresets\CategoryItems;
 use Plentymarket\Services\ItemSearch\Services\ItemSearchService;
 
@@ -84,6 +85,11 @@ class ItemListService
 	 */
 	private function formatItem ($data)
 	{
+		static $wishlist;
+		if (empty($wishlist)) {
+			$wishlist = pluginApp(Wishlist::class);
+		}
+
 		return [
 			'id' => $data['data']['item']['id'],//商品ID
 			'variationId' => $data['id'],//添加购物车用这个ID
@@ -106,6 +112,8 @@ class ItemListService
 			'short_desc' => strip_tags($data['data']['texts']['shortDescription']),//短描述
 			'unit' => $data['data']['unit']['names']['name'],//单位
 			'vat' => $data['data']['prices']['default']['vat']['value'],//增值税
+
+			'wishlist' => $wishlist->has($data['id']),//是否添加到愿望清单了
 		];
 	}
 
