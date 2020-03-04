@@ -695,7 +695,7 @@
     $(".pataku-btn").on("click", function()
     {
         var quantity = $(this).prev(".pro-qty").find("input").val();
-        $.get("/api/basket/create", { variationId: $(this).data("variationId"), quantity: quantity }, function(response)
+        $.get("/api/basket/create/" + $(this).data("variationId"), { quantity: quantity }, function(response)
         {
             if (response.code == 1)
             {
