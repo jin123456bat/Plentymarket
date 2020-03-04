@@ -49,13 +49,13 @@ class IndexController extends BaseApiController
 		$password = $this->request->get('password');
 
 		if (empty($email) || empty($password)) {
-			return $this->error('email或者密码补不能为空');
+			return $this->error('');
 		}
 
 		if ($this->accountService->login($email, $password)) {
-			return $this->success('登录成功');
+			return $this->success([]);
 		} else {
-			return $this->error('email或者密码错误');
+			return $this->error('');
 		}
 	}
 
@@ -69,13 +69,13 @@ class IndexController extends BaseApiController
 		$password = $this->request->get('password');
 
 		if (empty($email) || empty($password)) {
-			return $this->error('email或者密码补不能为空');
+			return $this->error('');
 		}
 
 		if ($this->accountService->register($email, $password)) {
-			return $this->success('注册');
+			return $this->success([]);
 		} else {
-			return $this->error('email或者密码错误');
+			return $this->error('');
 		}
 	}
 
