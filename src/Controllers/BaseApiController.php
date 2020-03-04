@@ -26,7 +26,7 @@ class BaseApiController extends BaseController
 	 * @param $data
 	 * @return Response
 	 */
-	protected function success ($data): Response
+	protected function success ($data = []): Response
 	{
 		return $this->response->make(json_encode([
 			'code' => 1,

@@ -53,7 +53,7 @@ class BasketService
 		$data['referrerId'] = $this->getBasket()->referrerId;
 		$basketItem = $this->basketItemRepositoryContract->findExistingOneByData($data);
 		if ($basketItem instanceof BasketItem) {
-			$data['id'] = $basketItem['id'];
+			$data['id'] = $basketItem->id;
 			$data['quantity'] = (float)$data['quantity'] + $basketItem->quantity;
 			return $this->update($basketItem->id, $data);
 		} else {
