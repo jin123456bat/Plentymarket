@@ -51,7 +51,7 @@ class BasketService
 	function create ($data): bool
 	{
 		$data['referrerId'] = $this->getBasket()->referrerId;
-		$basketItem = $this->basketRepositoryContract->findExistingOneByData($data);
+		$basketItem = $this->basketItemRepositoryContract->findExistingOneByData($data);
 		if ($basketItem instanceof BasketItem) {
 			$data['id'] = $basketItem['id'];
 			$data['quantity'] = (float)$data['quantity'] + $basketItem->quantity;
