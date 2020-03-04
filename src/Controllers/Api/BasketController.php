@@ -26,7 +26,7 @@ class BasketController extends BaseApiController
 			'variationId' => $variationId,
 			'quantity' => $quantity,
 		]);
-		return $this->success();
+		return $this->success('ok');
 	}
 
 	/**

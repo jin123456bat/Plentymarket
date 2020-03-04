@@ -21,7 +21,7 @@ class WishlistController extends BaseApiController
 	{
 		$wishlist = pluginApp(Wishlist::class);
 		$wishlist->create($itemId);
-		return $this->success();
+		return $this->success('yes');
 	}
 
 	/**
@@ -33,7 +33,7 @@ class WishlistController extends BaseApiController
 	{
 		$wishlist = pluginApp(Wishlist::class);
 		$wishlist->delete($itemId);
-		return $this->success();
+		return $this->success('yes');
 	}
 
 	/**
@@ -45,9 +45,9 @@ class WishlistController extends BaseApiController
 	{
 		$wishlist = pluginApp(Wishlist::class);
 		if ($wishlist->has($itemId)) {
-			return $this->success();
+			return $this->success('yes');
 		} else {
-			return $this->error();
+			return $this->error('false');
 		}
 	}
 
