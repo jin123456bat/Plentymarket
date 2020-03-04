@@ -19,9 +19,13 @@ class WishlistController extends BaseApiController
 	 */
 	function create ($itemId): Response
 	{
-		$wishlist = pluginApp(Wishlist::class);
-		$wishlist->create($itemId);
-		return $this->success('yes');
+		try {
+			$wishlist = pluginApp(Wishlist::class);
+			$wishlist->create($itemId);
+			return $this->success([]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
@@ -31,9 +35,13 @@ class WishlistController extends BaseApiController
 	 */
 	function delete ($itemId): Response
 	{
-		$wishlist = pluginApp(Wishlist::class);
-		$wishlist->delete($itemId);
-		return $this->success('yes');
+		try {
+			$wishlist = pluginApp(Wishlist::class);
+			$wishlist->delete($itemId);
+			return $this->success([]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
@@ -43,11 +51,15 @@ class WishlistController extends BaseApiController
 	 */
 	function has ($itemId): Response
 	{
-		$wishlist = pluginApp(Wishlist::class);
-		if ($wishlist->has($itemId)) {
-			return $this->success('yes');
-		} else {
-			return $this->error('false');
+		try {
+			$wishlist = pluginApp(Wishlist::class);
+			if ($wishlist->has($itemId)) {
+				return $this->success([]);
+			} else {
+				return $this->error('');
+			}
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
 	}
 
@@ -57,6 +69,10 @@ class WishlistController extends BaseApiController
 	 */
 	function num (): Response
 	{
-		return $this->success(pluginApp(Wishlist::class)->num());
+		try {
+			return $this->success(pluginApp(Wishlist::class)->num());
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 }

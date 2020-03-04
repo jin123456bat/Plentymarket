@@ -18,15 +18,19 @@ class BasketController extends BaseApiController
 	 */
 	function create (): Response
 	{
-		$variationId = $this->request->input('variationId');
-		$quantity = $this->request->input('quantity');
+		try {
+			$variationId = $this->request->input('variationId');
+			$quantity = $this->request->input('quantity');
 
-		$basket = pluginApp(BasketService::class);
-		$basket->create([
-			'variationId' => $variationId,
-			'quantity' => $quantity,
-		]);
-		return $this->success('ok');
+			$basket = pluginApp(BasketService::class);
+			$basket->create([
+				'variationId' => $variationId,
+				'quantity' => $quantity,
+			]);
+			return $this->success([]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
@@ -35,6 +39,10 @@ class BasketController extends BaseApiController
 	 */
 	function num (): Response
 	{
-		return $this->success(count(pluginApp(BasketService::class)->getAll()));
+		try {
+			return $this->success(count(pluginApp(BasketService::class)->getAll()));
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 }

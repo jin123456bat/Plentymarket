@@ -23,7 +23,7 @@ class BaseApiController extends BaseController
 
 	/**
 	 * 返回成功信息
-	 * @param $data
+	 * @param mixed $data
 	 * @return Response
 	 */
 	protected function success ($data): Response
