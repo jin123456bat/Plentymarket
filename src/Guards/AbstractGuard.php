@@ -70,7 +70,7 @@ abstract class AbstractGuard
 			$query = "?" . implode("&", $queryParams);
 		}
 
-		header('Location: ' . $url . $query);
+		header('Location: ' . $url . $query, true, 302);
 		exit;
 	}
 
