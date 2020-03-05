@@ -34,6 +34,19 @@ class BasketController extends BaseApiController
 	}
 
 	/**
+	 * 购物车列表
+	 * @return Response
+	 */
+	function index (): Response
+	{
+		try {
+			return $this->success(pluginApp(BasketService::class)->getAll());
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
+	}
+
+	/**
 	 * 购物车中商品数量
 	 * @return Response
 	 */
