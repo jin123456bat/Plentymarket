@@ -694,7 +694,7 @@
 <script type="text/javascript">
     $(".pataku-btn").on("click", function()
     {
-        var quantity = $(this).prev(".pro-qty").find("input").val();
+        var quantity = parseInt($(this).prev(".pro-qty").find("input").val());
         $.get("/api/basket/create", { variationId: $(this).data("variationid"), quantity: quantity }, function(response)
         {
             response = JSON.parse(response);

@@ -241,11 +241,13 @@
 
     $.get("/api/basket/num", function(response)
     {
+        response = JSON.parse(response);
         $("#cart-num").text(response.data);
     });
 
     $.get("/api/wishlist/num", function(response)
     {
+        response = JSON.parse(response);
         $("#wishlist-num").text(response.data);
     });
 </script>
