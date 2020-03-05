@@ -77,6 +77,7 @@ class BasketController extends BaseApiController
 				$r['quantity'] = $dict[$r['variationId']]['quantity'];
 				$r['basketItemId'] = $dict[$r['variationId']]['basketItemId'];
 			}
+
 			return $this->success([
 				'list' => $item_list,
 				'total' => $total,
