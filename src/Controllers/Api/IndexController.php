@@ -168,7 +168,7 @@ class IndexController extends BaseApiController
 			return $this->success([
 				'getRequestUri' => $this->request->getRequestUri(),
 				'getUri' => $this->request->getUri(),
-				'getUriForPath' => $this->request->getUriForPath(),
+				//'getUriForPath' => $this->request->getUriForPath(),
 				'getUserInfo' => $this->request->getUserInfo(),
 				'getQueryString' => $this->request->getQueryString(),
 			]);
