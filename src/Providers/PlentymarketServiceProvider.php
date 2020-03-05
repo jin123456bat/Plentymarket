@@ -7,6 +7,7 @@ use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Extensions\TwigServiceProvider;
+use Plentymarket\Middlewares\AuthMiddleware;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\ConfigService;
@@ -24,7 +25,7 @@ class PlentymarketServiceProvider extends ServiceProvider
 	 */
 	public function register ()
 	{
-//		$this->addGlobalMiddleware(AuthMiddleware::class);
+		$this->addGlobalMiddleware(AuthMiddleware::class);
 
 		$this->getApplication()->register(PlentymarketRouteServiceProvider::class);
 
