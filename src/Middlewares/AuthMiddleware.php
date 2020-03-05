@@ -24,7 +24,7 @@ class AuthMiddleware extends Middleware
 			$path = $request->getRequestUri();
 			$path_first = current(array_filter(explode('/', $path)));
 			if (in_array($path_first, ['account'])) {
-				AuthGuard::assertOrRedirect(true, '/index/login_register');
+				pluginApp(AuthGuard::class)->assertOrRedirect(true, '/index/login_register');
 			}
 		} catch (\Throwable $e) {
 			throw new \Exception('中间件判断登录异常:' . $e->getMessage());
