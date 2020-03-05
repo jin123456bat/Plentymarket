@@ -9,6 +9,7 @@ use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\ItemService;
 use Plentymarket\Services\ItemSetService;
@@ -156,6 +157,11 @@ class IndexController extends BaseApiController
 		return $this->success([
 			'getIsAccountLoggedIn' => pluginApp(\Plenty\Modules\Frontend\Services\AccountService::class)->getIsAccountLoggedIn(),
 		]);
+	}
+
+	public function country (): Response
+	{
+		return $this->success(pluginApp(CountryService::class)->getAll());
 	}
 
 	/**
