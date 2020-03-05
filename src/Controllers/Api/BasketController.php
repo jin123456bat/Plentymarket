@@ -72,10 +72,10 @@ class BasketController extends BaseApiController
 				$total += $value['quantity'] * $value['price'];
 			}
 			$item_list = $itemListService->getItemVariationIds($variationId);
-			foreach ($item_list as &$r) {
-				$r['image'] = current($r['images']);
-				$r['quantity'] = $dict[$r['variationId']]['quantity'];
-				$r['basketItemId'] = $dict[$r['variationId']]['basketItemId'];
+			foreach ($item_list as $key => $r) {
+				$r[$key]['image'] = current($r['images']);
+				$r[$key]['quantity'] = $dict[$r['variationId']]['quantity'];
+				$r[$key]['basketItemId'] = $dict[$r['variationId']]['basketItemId'];
 			}
 
 			return $this->success([

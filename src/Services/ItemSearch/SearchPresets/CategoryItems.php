@@ -54,6 +54,7 @@ class CategoryItems implements SearchPreset
 			->isInCategory($categoryId)
 			->isVisibleForClient()
 			->isActive()
+			->isSalable()
 			->isHiddenInCategoryList(false)
 			->hasNameInLanguage()
 			->hasPriceForCustomer()
