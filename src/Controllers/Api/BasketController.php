@@ -5,6 +5,7 @@ namespace Plentymarket\Controllers\Api;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\BasketService;
+use Plentymarket\Services\ItemListService;
 
 /**
  * Class BasketController
@@ -34,13 +35,52 @@ class BasketController extends BaseApiController
 	}
 
 	/**
+	 * 删除购物车中的商品，不论数量
+	 * @return Response
+	 */
+	function delete ()
+	{
+		try {
+			$basketItemId = $this->request->input('basketItemId');
+
+			$basket = pluginApp(BasketService::class);
+			$basket->delete($basketItemId);
+			return $this->success([]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
+	}
+
+	/**
 	 * 购物车列表
 	 * @return Response
 	 */
 	function index (): Response
 	{
 		try {
-			return $this->success(pluginApp(BasketService::class)->getAll());
+			$list = pluginApp(BasketService::class)->getAll();
+			$variationId = [];
+			$dict = [];
+			$total = 0;
+			$itemListService = pluginApp(ItemListService::class);
+			foreach ($list as $value) {
+				$variationId[] = $value['variationId'];
+				$dict[$value['variationId']] = [
+					'quantity' => $value['quantity'],
+					'basketItemId' => $value['id'],
+				];
+				$total += $value['quantity'] * $value['price'];
+			}
+			$list = $itemListService->getItemVariationIds($variationId);
+			foreach ($list as &$value) {
+				$value['image'] = current($value['images']);
+				$value['quantity'] = $dict[$value['variationId']]['quantity'];
+				$value['basketItemId'] = $dict[$value['variationId']]['basketItemId'];
+			}
+			return $this->success([
+				'list' => $list,
+				'total' => $total,
+			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
@@ -53,7 +93,12 @@ class BasketController extends BaseApiController
 	function num (): Response
 	{
 		try {
-			return $this->success(count(pluginApp(BasketService::class)->getAll()));
+			$list = pluginApp(BasketService::class)->getAll();
+			$quantity = 0;
+			foreach ($list as $value) {
+				$quantity += $value['quantity'];
+			}
+			return $this->success($quantity);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}

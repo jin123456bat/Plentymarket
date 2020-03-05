@@ -87,21 +87,62 @@
 	$("body:not(#changeLanguage)").on("click", function () {
 		$("#languageList").slideUp("slow");
 	});
-	$("body:not(#changeCurrency)").on("click", function () {
+	$("body:not(#changeCurrency)").on("click", function()
+	{
 		$("#currencyList").slideUp("slow");
 	});
-	$("body:not(#changeAccount)").on("click", function () {
+	$("body:not(#changeAccount)").on("click", function()
+	{
 		$("#accountList").slideUp("slow");
 	});
 
 
 	/*----------  cart minibox toggle  ----------*/
-	$("#cart-icon").on("click", function (event) {
-		event.stopPropagation();
-		$("#cart-floating-box").slideToggle();
+	$("#cart-floating-box").on("flush", function()
+	{
+		$.get("/api/basket/index", function(response)
+		{
+			response = JSON.parse(response);
+			if (response.code == 1)
+			{
+				$("#cart-floating-box .cart-items").empty();
+				var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
+				$.each(response.data.list, function(index, value)
+				{
+					var tpl = $($("#basket_item_tpl").html().replace(reg, function(node, key)
+					{
+						return value[key];
+					}));
+
+					tpl.find(".remove-item").on("click", function()
+					{
+						$.get("/api/basket/delete", { basketItemId: $(this).data("id") }, function(response)
+						{
+							response = JSON.parse(response);
+							if (response.code == 1)
+							{
+								$("#cart-floating-box").trigger("flush");
+							}
+						});
+					});
+
+					$("#cart-floating-box .cart-items").append(tpl);
+				});
+
+				$("#basket_total_price").html(response.data.total);
+			}
+		});
 	});
 
-	$("body:not(#cart-icon)").on("click", function () {
+	$("#cart-icon").on("click", function(event)
+	{
+		event.stopPropagation();
+		$("#cart-floating-box").slideToggle();
+		$(this).trigger("flush");
+	});
+
+	$("body:not(#cart-icon)").on("click", function()
+	{
 		$("#cart-floating-box").slideUp("slow");
 	});
 

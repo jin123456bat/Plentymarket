@@ -32,6 +32,9 @@ class CategoryItems implements SearchPreset
 		$categoryId = $options['categoryId'] ?? null;
 		$itemId = $options['itemId'] ?? null;
 		$facets = $options['facets'];
+
+		$variationIds = $options['variationIds'] ?? null;
+
 		$sorting = SortingHelper::getCategorySorting($options['sorting']);
 
 		$priceMin = 0;
@@ -41,6 +44,7 @@ class CategoryItems implements SearchPreset
 		$searchFactory = pluginApp(VariationSearchFactory::class);
 
 		$searchFactory->withResultFields(ResultFieldTemplate::load(ResultFieldTemplate::TEMPLATE_LIST_ITEM))
+			->hasVariationIds($variationIds)
 			->hasItemId($itemId)
 			->withLanguage()
 			->withImages()

@@ -39,6 +39,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/api/index/register', 'Plentymarket\Controllers\Api\IndexController@register');
 		$router->get('/api/index/login', 'Plentymarket\Controllers\Api\IndexController@login');
 		$router->get('/api/basket/create', 'Plentymarket\Controllers\Api\BasketController@create');
+		$router->get('/api/basket/delete', 'Plentymarket\Controllers\Api\BasketController@delete');
 		$router->get('/api/basket/num', 'Plentymarket\Controllers\Api\BasketController@num');
 		$router->get('/api/basket/index', 'Plentymarket\Controllers\Api\BasketController@index');
 		$router->get('/api/wishlist/create/{itemId}', 'Plentymarket\Controllers\Api\WishlistController@create');

@@ -157,9 +157,11 @@ class VariationSearchFactory extends BaseSearchFactory
 	 */
 	public function hasVariationIds ($variationIds)
 	{
-		/** @var VariationBaseFilter $variationFilter */
-		$variationFilter = $this->createFilter(VariationBaseFilter::class);
-		$variationFilter->hasIds($variationIds);
+		if (!empty($variationIds)) {
+			/** @var VariationBaseFilter $variationFilter */
+			$variationFilter = $this->createFilter(VariationBaseFilter::class);
+			$variationFilter->hasIds($variationIds);
+		}
 		return $this;
 	}
 

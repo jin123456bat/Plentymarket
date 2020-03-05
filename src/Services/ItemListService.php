@@ -39,6 +39,30 @@ class ItemListService
 	}
 
 	/**
+	 * @param $variationIds
+	 * @param int $page
+	 * @param int $maxItems
+	 * @param bool $source
+	 * @return array
+	 */
+	public function getItemVariationIds ($variationIds, $page = 1, $maxItems = 12, $source = false)
+	{
+		/** @var ItemSearchService $searchService */
+		$searchService = pluginApp(ItemSearchService::class);
+
+		$searchFactory = CategoryItems::getSearchFactory([
+			'variationIds' => $variationIds,
+		]);
+
+		$searchFactory->setPage($page, $maxItems);
+
+		if ($source) {
+			return $searchService->getResult($searchFactory);
+		}
+		return $this->formatItemsList($searchService->getResult($searchFactory));
+	}
+
+	/**
 	 * @param $itemId
 	 * @param bool $source
 	 * @return array|mixed
@@ -99,7 +123,7 @@ class ItemListService
 			'country' => $data['data']['item']['producingCountry']['names']['name'],//原产国
 			'manufacturer' => $data['data']['item']['manufacturer']['name'],//供应商
 			'min_num' => $this->getSalesPrices($data['data']['salesPrices'], 'minimumOrderQuantity'),//最低购买量
-
+			'currency' => $data['data']['prices']['default']['currency'],//货币单位
 			'main_price' => $data['data']['prices']['default']['price']['value'],//价格
 			'format_main_price' => $data['data']['prices']['default']['price']['formatted'],//格式化价格
 
