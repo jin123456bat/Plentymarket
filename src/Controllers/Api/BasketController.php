@@ -58,28 +58,15 @@ class BasketController extends BaseApiController
 	function index (): Response
 	{
 		try {
-			$list = pluginApp(BasketService::class)->getAll();
-			$variationId = [];
-			$dict = [];
 			$total = 0;
 			$itemListService = pluginApp(ItemListService::class);
+			$list = $itemListService->getItemsFromBasket();
 			foreach ($list as $value) {
-				$variationId[] = $value['variationId'];
-				$dict[$value['variationId']] = [
-					'quantity' => $value['quantity'],
-					'basketItemId' => $value['id'],
-				];
-				$total += $value['quantity'] * $value['price'];
-			}
-			$item_list = $itemListService->getItemVariationIds($variationId);
-			foreach ($item_list as $key => $r) {
-				$r[$key]['image'] = current($r['images']);
-				$r[$key]['quantity'] = $dict[$r['variationId']]['quantity'];
-				$r[$key]['basketItemId'] = $dict[$r['variationId']]['basketItemId'];
+				$total += ($value['quantity'] * $value['price']);
 			}
 
 			return $this->success([
-				'list' => $item_list,
+				'list' => $list,
 				'total' => $total,
 			]);
 		} catch (\Throwable $e) {

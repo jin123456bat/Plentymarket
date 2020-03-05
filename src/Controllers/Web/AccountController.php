@@ -5,7 +5,6 @@ namespace Plentymarket\Controllers\Web;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseWebController;
-use Plentymarket\Services\BasketService;
 use Plentymarket\Services\ItemListService;
 
 /**
@@ -36,32 +35,18 @@ class AccountController extends BaseWebController
 	 */
 	function cart (): string
 	{
-		$list = pluginApp(BasketService::class)->getAll();
-		$variationId = [];
-		$dict = [];
-		$total = 0;//商品累计
-		$vat = 0;//VAT累计
-		$itemListService = pluginApp(ItemListService::class);
-		foreach ($list as $value) {
-			$variationId[] = $value['variationId'];
-			$dict[$value['variationId']] = [
-				'quantity' => $value['quantity'],
-				'basketItemId' => $value['id'],
-			];
-			$total += $value['quantity'] * $value['price'];
-			$vat += $value['quantity'] * $value['price'] * $value['vat'] / 100;
-		}
-		$item_list = $itemListService->getItemVariationIds($variationId);
-		foreach ($item_list as $key => $r) {
-			$r[$key]['image'] = current($r['images']);
-			$r[$key]['quantity'] = $dict[$r['variationId']]['quantity'];
-			$r[$key]['basketItemId'] = $dict[$r['variationId']]['basketItemId'];
+		$total = 0;//商品总金额
+		$vat = 0;//增值税
+		$list = pluginApp(ItemListService::class)->getItemsFromBasket();
+		foreach ($list as $r) {
+			$total += ($r['quantity'] * $r['price']);
+			$vat += ($r['quantity'] * $r['price'] * $r['vat'] / 100);
 		}
 
 		return $this->render('account.cart', [
 			$this->trans('WebAccountCart.cart') => '/account/cart'
 		], [
-			'list' => $item_list,
+			'list' => $list,
 			'total' => $total,
 			'vat' => $vat,
 		]);

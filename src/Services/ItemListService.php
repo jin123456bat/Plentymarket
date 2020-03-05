@@ -13,6 +13,30 @@ use Plentymarket\Services\ItemSearch\Services\ItemSearchService;
 class ItemListService
 {
 	/**
+	 * 获取购物车中的商品列表
+	 * @return array
+	 */
+	public function getItemsFromBasket ()
+	{
+		$list = pluginApp(BasketService::class)->getAll();
+		$variationId = [];
+		$dict = [];
+		foreach ($list as $value) {
+			$variationId[] = $value['variationId'];
+			$dict[$value['variationId']] = [
+				'quantity' => $value['quantity'],
+				'basketItemId' => $value['id'],
+			];
+		}
+		return array_map(function ($item) use ($dict) {
+			$item['image'] = empty($item['images']) ? '' : current($item['images']);
+			$item['quantity'] = $dict[$item['variationId']]['quantity'];
+			$item['basketItemId'] = $dict[$item['variationId']]['basketItemId'];
+			return $item;
+		}, $this->getItemVariationIds($variationId));
+	}
+
+	/**
 	 * @param null $id
 	 * @param null $sorting
 	 * @param int $page
