@@ -137,8 +137,7 @@
 	$("#cart-icon").on("click", function(event)
 	{
 		event.stopPropagation();
-		$("#cart-floating-box").slideToggle();
-		$(this).trigger("flush");
+		$("#cart-floating-box").trigger("flush").slideToggle();
 	});
 
 	$("body:not(#cart-icon)").on("click", function()
