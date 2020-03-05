@@ -21,14 +21,6 @@ abstract class AbstractGuard
 	public function assertOrRedirect ($expected, string $redirectUri)
 	{
 		if ($this->assert() !== $expected) {
-			$this->getLogger(__CLASS__)->info(
-				"Plentymarket::Debug.AbstractGuard_redirectToLogin",
-				[
-					"expected" => $expected,
-					"actual" => $this->assert(),
-					"backlink" => self::getUrl()
-				]
-			);
 			self::redirect($redirectUri, ["backlink" => self::getUrl()]);
 		}
 	}
