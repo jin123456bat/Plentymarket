@@ -40,7 +40,8 @@ class BasketController extends BaseApiController
 	function num (): Response
 	{
 		try {
-			return $this->success(pluginApp(BasketService::class)->getAll());
+			$result = count(pluginApp(BasketService::class)->getAll());
+			return $this->success($result);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
