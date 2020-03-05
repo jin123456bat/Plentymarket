@@ -27,7 +27,7 @@ class AuthMiddleware extends Middleware
 				AuthGuard::assertOrRedirect(true, '/index/login_register');
 			}
 		} catch (\Throwable $e) {
-			throw new \Exception('中间件判断登录异常');
+			throw new \Exception('中间件判断登录异常:' . $e->getMessage());
 		}
 	}
 
