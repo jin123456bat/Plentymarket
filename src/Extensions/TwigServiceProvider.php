@@ -39,7 +39,10 @@ class TwigServiceProvider extends Twig_Extension
 		return [
 			$this->twigFactory->createSimpleFilter('ceil', function ($value) {
 				return ceil($value);
-			})
+			}),
+			$this->twigFactory->createSimpleFilter('json_encode', function ($value) {
+				return json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+			}),
 		];
 	}
 
