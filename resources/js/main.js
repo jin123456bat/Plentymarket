@@ -147,6 +147,8 @@
 							if (response.code == 1)
 							{
 								item.remove();
+								var quantity = parseInt(item.find(".quantity").html().replace(" ", "").replace("x", ""));
+								$("#cart-num").html(parseInt($("#cart-num").html()) - quantity);
 								if ($(".cart-items").children().length == 0)
 								{
 									$("#cart-floating-box").html($("#basket_empty").html());
@@ -195,6 +197,9 @@
 								if (response.code == 1)
 								{
 									tpl.remove();
+									var quantity = parseInt(tpl.find(".quantity").html().replace(" ", "").replace("x", ""));
+									$("#cart-num").html(parseInt($("#cart-num").html()) - quantity);
+
 									if ($(".cart-items").children().length == 0)
 									{
 										$("#cart-floating-box").html($("#basket_empty").html());
