@@ -144,7 +144,7 @@
         return false;
     });
 
-    var country_list = '{{json_encode(country)}}';
+    var country_list = '{{country|json_encode}}';
 
     var loadState = function(country_id)
     {
