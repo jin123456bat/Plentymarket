@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseWebController;
 use Plentymarket\Extensions\Filters\NumberFormatFilter;
 use Plentymarket\Helper\Utils;
+use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 
 /**
@@ -48,6 +49,28 @@ class AccountController extends BaseWebController
 
 		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
 
+		$country_list = pluginApp(CountryService::class)->getAll();
+		$country = [];
+		foreach ($country_list as $c) {
+			$states = [];
+			foreach ($c['states'] as $state) {
+				$states[] = [
+					'id' => $state['id'],
+					'name' => $state['name']
+				];
+			}
+
+			foreach ($c['names'] as $c_name) {
+				if ($c_name['language'] == Utils::getLang()) {
+					$country[] = [
+						'id' => $c_name['country_id'],
+						'name' => $c_name['name'],
+						'states' => $states
+					];
+				}
+			}
+		}
+
 		return $this->render('account.cart', [
 			$this->trans('WebAccountCart.cart') => '/account/cart'
 		], [
@@ -56,6 +79,7 @@ class AccountController extends BaseWebController
 			'vat' => $numberFormatFilter->formatMonetary($vat, Utils::getCurrency()),
 			'ship' => $numberFormatFilter->formatMonetary($ship, Utils::getCurrency()),
 			'summary' => $numberFormatFilter->formatMonetary($total + $vat + $ship, Utils::getCurrency()),
+			'country' => $country,
 		]);
 	}
 

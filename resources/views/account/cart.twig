@@ -58,24 +58,17 @@
 
 						<div class="calculate-shipping">
 							<h4>Calculate Shipping</h4>
-							<form action="#">
+							<form id="ship_form">
 								<div class="row">
 									<div class="col-md-6 col-12 mb-25">
-										<select class="nice-select">
-											<option>Bangladesh</option>
-											<option>China</option>
-											<option>country</option>
-											<option>India</option>
-											<option>Japan</option>
+										<select class="nice-select" id="country">
+											{%for c in country%}
+												<option value="{{c.id}}">{{c.name}}</option>
+											{%endfor%}
 										</select>
 									</div>
 									<div class="col-md-6 col-12 mb-25">
-										<select class="nice-select">
-											<option>Dhaka</option>
-											<option>Barisal</option>
-											<option>Khulna</option>
-											<option>Comilla</option>
-											<option>Chittagong</option>
+										<select class="nice-select" id="state">
 										</select>
 									</div>
 									<div class="col-md-6 col-12 mb-25">
@@ -94,7 +87,7 @@
 
 						<div class="discount-coupon">
 							<h4>{{trans('Plentymarket::WebAccountCart.discount_coupon_code')}}</h4>
-							<form action="#">
+							<form id="coupon_form">
 								<div class="row">
 									<div class="col-md-6 col-12 mb-25">
 										<input type="text" placeholder="{{trans('Plentymarket::WebAccountCart.coupon_code')}}">
@@ -141,3 +134,37 @@
 
 <!--=====  End of Cart page content  ======-->
 {%include 'Plentymarket::common.footer'%}
+<script type="text/javascript">
+    $("#ship_form").on("submit", function()
+    {
+        return false;
+    });
+    $("#coupon_form").on("submit", function()
+    {
+        return false;
+    });
+
+    var country_list = '{{json_encode(country)}}';
+
+    var loadState = function(country_id)
+    {
+        $("#state").empty();
+        var data = JSON.parse(country_list);
+        $.each(data, function(key, value)
+        {
+            if (value.id == country_id)
+            {
+                $.each(value.state, function(k, v)
+                {
+                    $("#state").append("<option value=\"" + v.id + "\">" + v.name + "</option>");
+                });
+                return false;
+            }
+        });
+    };
+
+    $("#country").on("change", function()
+    {
+        loadState($(this).val());
+    });
+</script>
