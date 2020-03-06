@@ -46,23 +46,26 @@ class BasketService
 	/**
 	 * 添加到购物车
 	 * @param $data
-	 * @return bool 成功返回true 失败返回false
+	 * @return BasketItem
+	 * @throws \Exception
 	 */
-	function create ($data): bool
+	function create ($data): BasketItem
 	{
 		$data['referrerId'] = $this->getBasket()->referrerId;
 		$basketItem = $this->basketItemRepositoryContract->findExistingOneByData($data);
 		if ($basketItem instanceof BasketItem) {
 			$data['id'] = $basketItem->id;
 			$data['quantity'] = (float)$data['quantity'] + $basketItem->quantity;
-			return $this->update($basketItem->id, $data);
+			if ($this->update($basketItem->id, $data)) {
+				return $basketItem;
+			}
 		} else {
 			$basketItem = $this->basketItemRepositoryContract->addBasketItem($data);
 			if ($basketItem instanceof BasketItem) {
-				return true;
+				return $basketItem;
 			}
-			return false;
 		}
+		throw new \Exception('添加购物车失败');
 	}
 
 	/**

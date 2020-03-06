@@ -96,6 +96,55 @@
 		$("#accountList").slideUp("slow");
 	});
 
+	var addBasket = function(variationId, quantity, args, callback)
+	{
+		if ($("#cart-floating-box .cart-empty").length != 0)
+		{
+			$("#cart-floating-box").html($("#basket_not_empty").html());
+		}
+
+		quantity = parseInt(quantity);
+
+
+		$.get("/api/basket/create", { variationId: variationId, quantity: quantity }, function(response)
+		{
+			response = JSON.parse(response);
+			if (response.code == 1)
+			{
+				$("#cart-num").text(parseInt($("#cart-num").text()) + quantity);
+
+
+				var hasInBasket = false;
+				$(".cart-items").find(".cart-float-single-item").each(function(key, value)
+				{
+					if ($(value).data("id") == variationId)
+					{
+						hasInBasket = true;
+
+						var quantity_div = $(value).find(".quantity");
+						var old_quantity = parseInt(quantity_div.html().replace(" ", "").replace("x", ""));
+						quantity_div.html((old_quantity + quantity) + " x");
+					}
+				});
+
+				if (!hasInBasket)
+				{
+
+					args.basketItemId = response.data.basketItemId;
+					args.quantity = quantity;
+
+					var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
+					var item = $($("#basket_item_tpl").html().replace(reg, function(node, key)
+					{
+						return args[key];
+					}));
+					$(".cart-items").append(item);
+				}
+			}
+
+			callback(response.code);
+		});
+	};
 
 	/*----------  cart minibox toggle  ----------*/
 	$("#cart-floating-box").on("flush", function()
@@ -105,31 +154,39 @@
 			response = JSON.parse(response);
 			if (response.code == 1)
 			{
-				$("#cart-floating-box .cart-items").empty();
-				var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
-				$.each(response.data.list, function(index, value)
+				if (response.data.list.length == 0)
 				{
-					var tpl = $($("#basket_item_tpl").html().replace(reg, function(node, key)
+					$(".cart-items").replaceWith($("#basket_empty").html());
+					$(".cart-calculation").remove();
+				}
+				else
+				{
+					$("#cart-floating-box .cart-items").empty();
+					var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
+					$.each(response.data.list, function(index, value)
 					{
-						return value[key];
-					}));
-
-					tpl.find(".remove-item").on("click", function()
-					{
-						$.get("/api/basket/delete", { basketItemId: $(this).data("id") }, function(response)
+						var tpl = $($("#basket_item_tpl").html().replace(reg, function(node, key)
 						{
-							response = JSON.parse(response);
-							if (response.code == 1)
+							return value[key];
+						}));
+
+						tpl.find(".remove-item").on("click", function()
+						{
+							$.get("/api/basket/delete", { basketItemId: $(this).data("id") }, function(response)
 							{
-								$("#cart-floating-box").trigger("flush");
-							}
+								response = JSON.parse(response);
+								if (response.code == 1)
+								{
+									$("#cart-floating-box").trigger("flush");
+								}
+							});
 						});
+
+						$("#cart-floating-box .cart-items").append(tpl);
 					});
 
-					$("#cart-floating-box .cart-items").append(tpl);
-				});
-
-				$("#basket_total_price").html(response.data.total);
+					$("#basket_total_price").html(response.data.total);
+				}
 			}
 		});
 	});

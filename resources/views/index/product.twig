@@ -695,13 +695,16 @@
     $(".pataku-btn").on("click", function()
     {
         var quantity = parseInt($(this).prev(".pro-qty").find("input").val());
-        $.get("/api/basket/create", { variationId: $(this).data("variationid"), quantity: quantity }, function(response)
+        var variationId = $(this).data("variationid");
+        addBasket(variationId, quantity, {
+            name: '{{item.name}}',
+            image: '{{item.images.0}}',
+            format_discount_price: '{{item.format_discount_price}}',
+            variationId:{{item.id}}
+        }, function(success)
         {
-            response = JSON.parse(response);
-            if (response.code == 1)
+            if (success)
             {
-                $("#cart-num").text(parseInt($("#cart-num").text()) + quantity);
-
                 spop({
                     template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
                     style: "success"

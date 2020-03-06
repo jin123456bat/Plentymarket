@@ -1477,24 +1477,47 @@ a.scroll-top {
   .home-four-wrapper .menu-top .menu-top-icons .single-icon > a span.count {
     background-color: #ffffff;
     color: #000000; }
-    @media only screen and (max-width: 575px) {
-      .home-four-wrapper .menu-top .menu-top-icons .single-icon > a span.count {
-        top: -15px; } }
 
-@media only screen and (max-width: 767px) {
-  .home-four-wrapper .menu-top .menu-top-icons .single-icon .cart-floating-box {
+@media only screen and (max-width: 575px)
+{
+  .home-four-wrapper .menu-top .menu-top-icons .single-icon > a span.count
+  {
+    top: -15px;
+  }
+}
+
+@media only screen and (max-width: 767px)
+{
+  .home-four-wrapper .menu-top .menu-top-icons .single-icon .cart-floating-box
+  {
     right: 0;
     left: auto;
-    margin-left: 0; } }
+    margin-left: 0;
+  }
+}
 
-@media only screen and (max-width: 479px) {
-  .home-four-wrapper .menu-top .menu-top-icons .single-icon .cart-floating-box {
+.cart-empty
+{
+  text-align: center;
+  padding: 20px;
+}
+
+@media only screen and (max-width: 479px)
+{
+  .home-four-wrapper .menu-top .menu-top-icons .single-icon .cart-floating-box
+  {
     width: 300px;
-    right: 10px; } }
+    right: 10px;
+  }
+}
 
-@media only screen and (max-width: 479px) {
-  .home-four-wrapper .menu-top .menu-top-icons .single-icon .cart-floating-box a.floating-cart-btn {
-    min-width: 120px; } }
+@media only screen and (max-width: 479px)
+{
+  .home-four-wrapper .menu-top .menu-top-icons .single-icon .cart-floating-box a.floating-cart-btn
+  {
+    min-width: 120px;
+  }
+}
 
 .home-four-wrapper .main-menu nav > ul {
   text-align: center; }

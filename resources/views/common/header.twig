@@ -392,8 +392,27 @@
 </div>
 
 <!--=====  End of Header One  ======-->
+<script type="text/html" id="basket_not_empty">
+	<div class="cart-items">
+
+	</div>
+	<div class="cart-calculation">
+		<div class="calculation-details">
+			<p class="total">Subtotal <span id="basket_total_price">0</span></p>
+		</div>
+		<div class="floating-cart-btn text-center">
+			<a class="floating-cart-btn" href="/account/checkout">{{trans('Plentymarket::Common.checkout')}}</a>
+			<a class="floating-cart-btn" href="/account/cart">{{trans('Plentymarket::Common.view_cart')}}</a>
+		</div>
+	</div>
+</script>
+<script type="text/html" id="basket_empty">
+	<div class="cart-empty">
+		{{trans('Plentymarket::Common.cart_empty')}}
+	</div>
+</script>
 <script type="text/html" id="basket_item_tpl">
-	<div class="cart-float-single-item d-flex">
+	<div class="cart-float-single-item d-flex" data-id="[variationId]">
 		<span class="remove-item" data-id="[basketItemId]">
 			<a href="#">
 				<i class="fa fa-times"></i>

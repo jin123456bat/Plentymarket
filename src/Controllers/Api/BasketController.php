@@ -24,11 +24,13 @@ class BasketController extends BaseApiController
 			$quantity = $this->request->input('quantity');
 
 			$basket = pluginApp(BasketService::class);
-			$basket->create([
+			$basketItem = $basket->create([
 				'variationId' => $variationId,
 				'quantity' => $quantity,
 			]);
-			return $this->success([]);
+			return $this->success([
+				'basketItemId' => $basketItem->id
+			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
