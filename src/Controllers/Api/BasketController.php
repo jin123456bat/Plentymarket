@@ -62,7 +62,7 @@ class BasketController extends BaseApiController
 			$itemListService = pluginApp(ItemListService::class);
 			$list = $itemListService->getItemsFromBasket();
 			foreach ($list as $value) {
-				$total += ($value['quantity'] * $value['price']);
+				$total += ($value['quantity'] * $value['discount_price']);
 			}
 
 			return $this->success([

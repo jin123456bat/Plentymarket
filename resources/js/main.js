@@ -137,14 +137,16 @@
 	$("#cart-icon").on("click", function(event)
 	{
 		event.stopPropagation();
-		$("#cart-floating-box").trigger("flush").slideToggle();
+		$("#cart-floating-box").slideToggle();
 	});
+
+	//页面加载的时候加载购物车
+	$("#cart-floating-box").trigger("flush");
 
 	$("body:not(#cart-icon)").on("click", function()
 	{
 		$("#cart-floating-box").slideUp("slow");
 	});
-
 
 
 	/*----------  Category menu  ----------*/

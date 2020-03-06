@@ -28,6 +28,11 @@ class ItemListService
 				'basketItemId' => $value['id'],
 			];
 		}
+
+		if (empty($variationId)) {
+			return [];
+		}
+
 		$data = $this->getItemVariationIds($variationId);
 
 		return array_map(function ($item) use ($dict) {
