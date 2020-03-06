@@ -139,6 +139,7 @@
 									}
 								}
 							});
+							return false;
 						});
 
 						$("#cart-floating-box .cart-items").append(tpl);
@@ -1370,6 +1371,7 @@ var addBasket = function(variationId, quantity, args, callback)
 					quantity_div.html((old_quantity + quantity) + " x");
 					//调整金额
 					$("#basket_total_price").html(parseFloat(parseFloat($("#basket_total_price").html()) + args.discount_price).toFixed(2));
+					return false;
 				}
 			});
 
@@ -1405,6 +1407,7 @@ var addBasket = function(variationId, quantity, args, callback)
 							}
 						}
 					});
+					return false;
 				});
 
 				$(".cart-items").append(item);
