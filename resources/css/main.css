@@ -6087,25 +6087,44 @@ h3.comment-counter {
   display: block; }
   .cart-table td.pro-thumbnail a img {
     width: 100%;
-    background-color: #f6f7f8; }
+    background-color: #f6f7f8;
+  }
 
-.cart-table td.pro-title a {
+.cart-table td.pro-title a
+{
   font-size: 16px;
   font-weight: 500;
-  color: #232323; }
-  .cart-table td.pro-title a:hover {
-    color: #cea45f; }
+  color: #232323;
+}
 
-.cart-table td.pro-price span {
+.cart-table td.pro-title a:hover
+{
+  color: #cea45f;
+}
+
+.cart-table td.pro-price span
+{
   display: block;
   font-size: 15px;
   font-weight: 500;
-  color: #232323; }
+  color: #232323;
+}
 
-.cart-table td.pro-quantity {
-  /*----------  Additional cart quantity style will be placed here  ----------*/ }
+.cart-table td.pro-vat span
+{
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  color: #232323;
+}
 
-.cart-table td.pro-subtotal span {
+.cart-table td.pro-quantity
+{
+  /*----------  Additional cart quantity style will be placed here  ----------*/
+}
+
+.cart-table td.pro-subtotal span
+{
   display: block;
   font-size: 15px;
   font-weight: 500;

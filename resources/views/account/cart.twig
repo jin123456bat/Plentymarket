@@ -16,66 +16,32 @@
 						<table class="table">
 							<thead>
 							<tr>
-								<th class="pro-thumbnail">Image</th>
-								<th class="pro-title">Product</th>
-								<th class="pro-price">Price</th>
-								<th class="pro-quantity">Quantity</th>
-								<th class="pro-subtotal">Total</th>
-								<th class="pro-remove">Remove</th>
+								<th class="pro-thumbnail">{{trans('Plentymarket::WebAccountCart.image')}}</th>
+								<th class="pro-title">{{trans('Plentymarket::WebAccountCart.product')}}</th>
+								<th class="pro-price">{{trans('Plentymarket::WebAccountCart.price')}}</th>
+								<th class="pro-vat">{{trans('Plentymarket::WebAccountCart.vat')}}</th>
+								<th class="pro-quantity">{{trans('Plentymarket::WebAccountCart.quantity')}}</th>
+								<th class="pro-subtotal">{{trans('Plentymarket::WebAccountCart.total')}}</th>
+								<th class="pro-remove">{{trans('Plentymarket::WebAccountCart.remove')}}</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product01.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Cillum dolore tortor nisl
-										fermentum</a></td>
-								<td class="pro-price"><span>$29.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="1"></div>
-								</td>
-								<td class="pro-subtotal"><span>$29.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product02.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Auctor gravida pellentesque</a></td>
-								<td class="pro-price"><span>$30.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="2"></div>
-								</td>
-								<td class="pro-subtotal"><span>$60.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product03.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Condimentum posuere consectetur</a>
-								</td>
-								<td class="pro-price"><span>$25.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="1"></div>
-								</td>
-								<td class="pro-subtotal"><span>$25.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product04.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Habitasse dictumst elementum</a>
-								</td>
-								<td class="pro-price"><span>$11.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="1"></div>
-								</td>
-								<td class="pro-subtotal"><span>$11.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
+							{%for item in list%}
+								<tr>
+									<td class="pro-thumbnail">
+										<a href="/index/product/{{item.id}}"><img src="{{item.images.0}}" class="img-fluid" alt="Product"></a>
+									</td>
+									<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a></td>
+									<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
+									<td class="pro-vat"><span>{{item.vat_price}}</span></td>
+									<td class="pro-quantity">
+										<div class="pro-qty"><input type="text" value="{{item.quantity}}"></div>
+									</td>
+									<td class="pro-subtotal"><span>{{item.format_discount_price_quantity}}</span></td>
+									<td class="pro-remove" data-id="{{item.basketItemId}}">
+										<a href="#"><i class="fa fa-trash-o"></i></a></td>
+								</tr>
+							{%endfor%}
 							</tbody>
 						</table>
 					</div>
@@ -150,14 +116,15 @@
 
 						<div class="cart-summary">
 							<div class="cart-summary-wrap">
-								<h4>Cart Summary</h4>
-								<p>Sub Total <span>$1250.00</span></p>
-								<p>Shipping Cost <span>$00.00</span></p>
-								<h2>Grand Total <span>$1250.00</span></h2>
+								<h4>{{trans('Plentymarket.WebAccountCart.cart_summary')}}</h4>
+								<p>{{trans('Plentymarket.WebAccountCart.sub_total')}}<span>{{total}}</span></p>
+								<p>{{trans('Plentymarket.WebAccountCart.vat')}}<span>{{vat}}</span></p>
+								<p>{{trans('Plentymarket.WebAccountCart.shipping_cost')}}<span>{{ship}}</span></p>
+								<h2>{{trans('Plentymarket.WebAccountCart.grand_total')}} <span>{{summary}}</span></h2>
 							</div>
 							<div class="cart-summary-button">
-								<button class="checkout-btn">Checkout</button>
-								<button class="update-btn">Update Cart</button>
+								<button class="checkout-btn">{{trans('Plentymarket.WebAccountCart.checkout')}}</button>
+								<button class="update-btn">{{trans('Plentymarket.WebAccountCart.update_cart')}}</button>
 							</div>
 						</div>
 

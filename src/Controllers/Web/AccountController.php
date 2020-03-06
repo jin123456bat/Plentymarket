@@ -5,6 +5,8 @@ namespace Plentymarket\Controllers\Web;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseWebController;
+use Plentymarket\Extensions\Filters\NumberFormatFilter;
+use Plentymarket\Helper\Utils;
 use Plentymarket\Services\ItemListService;
 
 /**
@@ -37,18 +39,23 @@ class AccountController extends BaseWebController
 	{
 		$total = 0;//商品总金额
 		$vat = 0;//增值税
+		$ship = 0;//运费
 		$list = pluginApp(ItemListService::class)->getItemsFromBasket();
 		foreach ($list as $r) {
 			$total += ($r['quantity'] * $r['price']);
 			$vat += ($r['quantity'] * $r['price'] * $r['vat'] / 100);
 		}
 
+		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
+
 		return $this->render('account.cart', [
 			$this->trans('WebAccountCart.cart') => '/account/cart'
 		], [
 			'list' => $list,
-			'total' => $total,
-			'vat' => $vat,
+			'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
+			'vat' => $numberFormatFilter->formatMonetary($vat, Utils::getCurrency()),
+			'ship' => $numberFormatFilter->formatMonetary($ship, Utils::getCurrency()),
+			'summary' => $numberFormatFilter->formatMonetary($total + $vat + $ship, Utils::getCurrency()),
 		]);
 	}
 
