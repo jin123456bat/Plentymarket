@@ -81,11 +81,11 @@ class IndexController extends BaseApiController
 	}
 
 	/**
-	 * @param $country_id
 	 * @return Response
 	 */
-	public function state ($country_id): Response
+	public function state (): Response
 	{
+		$country_id = $this->request->input('country_id');
 		$country_list = pluginApp(CountryService::class)->getAll();
 		$states = [];
 		foreach ($country_list as $c) {
