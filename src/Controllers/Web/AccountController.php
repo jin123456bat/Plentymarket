@@ -42,8 +42,8 @@ class AccountController extends BaseWebController
 		$ship = 0;//运费
 		$list = pluginApp(ItemListService::class)->getItemsFromBasket();
 		foreach ($list as $r) {
-			$total += ($r['quantity'] * $r['price']);
-			$vat += ($r['quantity'] * $r['price'] * $r['vat'] / 100);
+			$total += ($r['quantity'] * $r['discount_price']);
+			$vat += ($r['quantity'] * $r['discount_price'] * $r['vat'] / 100);
 		}
 
 		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
