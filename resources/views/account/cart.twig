@@ -144,22 +144,22 @@
         return false;
     });
 
-    var country_list = '{{jsonencode(country)}}';
-
     var loadState = function(country_id)
     {
         $("#state").empty();
-        var data = JSON.parse(country_list);
-        $.each(data, function(key, value)
+        $.get("/api/index/state", { country_id: country_id }, function(response)
         {
-            if (value.id == country_id)
+            $.each(response.data, function(key, value)
             {
-                $.each(value.state, function(k, v)
+                if (value.id == country_id)
                 {
-                    $("#state").append("<option value=\"" + v.id + "\">" + v.name + "</option>");
-                });
-                return false;
-            }
+                    $.each(value.state, function(k, v)
+                    {
+                        $("#state").append("<option value=\"" + v.id + "\">" + v.name + "</option>");
+                    });
+                    return false;
+                }
+            });
         });
     };
     loadState($("#country").val());

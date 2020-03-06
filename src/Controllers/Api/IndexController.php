@@ -81,6 +81,28 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * @param $country_id
+	 * @return Response
+	 */
+	public function state ($country_id): Response
+	{
+		$country_list = pluginApp(CountryService::class)->getAll();
+		$states = [];
+		foreach ($country_list as $c) {
+			if ($c['id'] == $country_id) {
+				foreach ($c['states'] as $state) {
+					$states[] = [
+						'id' => $state['id'],
+						'name' => $state['name'],
+					];
+				}
+			}
+		}
+
+		return $this->success($states);
+	}
+
+	/**
 	 * @return Response
 	 */
 	public function category (): Response
@@ -159,6 +181,9 @@ class IndexController extends BaseApiController
 		]);
 	}
 
+	/**
+	 * @return Response
+	 */
 	public function country (): Response
 	{
 		return $this->success(pluginApp(CountryService::class)->getAll());
