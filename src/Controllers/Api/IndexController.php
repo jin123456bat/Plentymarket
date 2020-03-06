@@ -85,21 +85,25 @@ class IndexController extends BaseApiController
 	 */
 	public function state (): Response
 	{
-		$country_id = $this->request->input('country_id');
-		$country_list = pluginApp(CountryService::class)->getAll();
-		$states = [];
-		foreach ($country_list as $c) {
-			if ($c['id'] == $country_id) {
-				foreach ($c['states'] as $state) {
-					$states[] = [
-						'id' => $state['id'],
-						'name' => $state['name'],
-					];
+		try {
+			$country_id = $this->request->input('country_id');
+			$country_list = pluginApp(CountryService::class)->getAll();
+			$states = [];
+			foreach ($country_list as $c) {
+				if ($c['id'] == $country_id) {
+					foreach ($c['states'] as $state) {
+						$states[] = [
+							'id' => $state['id'],
+							'name' => $state['name'],
+						];
+					}
 				}
 			}
-		}
 
-		return $this->success($states);
+			return $this->success($states);
+		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
