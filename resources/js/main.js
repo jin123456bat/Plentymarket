@@ -138,6 +138,23 @@
 					{
 						return args[key];
 					}));
+
+					item.find(".remove-item").on("click", function()
+					{
+						$.get("/api/basket/delete", { basketItemId: $(this).data("id") }, function(response)
+						{
+							response = JSON.parse(response);
+							if (response.code == 1)
+							{
+								item.remove();
+								if ($(".cart-items").children().length == 0)
+								{
+									$("#cart-floating-box").html($("#basket_empty").html());
+								}
+							}
+						});
+					});
+
 					$(".cart-items").append(item);
 				}
 			}
@@ -177,7 +194,11 @@
 								response = JSON.parse(response);
 								if (response.code == 1)
 								{
-									$("#cart-floating-box").trigger("flush");
+									tpl.remove();
+									if ($(".cart-items").children().length == 0)
+									{
+										$("#cart-floating-box").html($("#basket_empty").html());
+									}
 								}
 							});
 						});
