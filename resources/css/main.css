@@ -6086,7 +6086,8 @@ h3.comment-counter {
 .cart-table td.pro-thumbnail a {
   display: block; }
   .cart-table td.pro-thumbnail a img {
-    width: 100%;
+    width: 120px;
+    height: 140px;
     background-color: #f6f7f8;
   }
 
