@@ -52,7 +52,7 @@ class TwigServiceProvider extends Twig_Extension
 	{
 		return [
 			$this->twigFactory->createSimpleFunction('jsonencode', function ($value) {
-				return json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+				return json_encode($value);
 			})
 		];
 	}
