@@ -131,6 +131,8 @@
 									var quantity = parseInt(tpl.find(".quantity").html().replace(" ", "").replace("x", ""));
 									$("#cart-num").html(parseInt($("#cart-num").html()) - quantity);
 
+									$("#basket_total_price").html(parseFloat(parseFloat($("#basket_total_price").html()) - parseFloat(tpl.find(".format_discount_price").data("price"))).toFixed(2));
+
 									if ($(".cart-items").children().length == 0)
 									{
 										$("#cart-floating-box").html($("#basket_empty").html());
@@ -1362,9 +1364,12 @@ var addBasket = function(variationId, quantity, args, callback)
 				{
 					hasInBasket = true;
 
+					//调整数量
 					var quantity_div = $(value).find(".quantity");
 					var old_quantity = parseInt(quantity_div.html().replace(" ", "").replace("x", ""));
 					quantity_div.html((old_quantity + quantity) + " x");
+					//调整金额
+					$("#basket_total_price").html(parseFloat(parseFloat($("#basket_total_price").html()) + args.discount_price).toFixed(2));
 				}
 			});
 
@@ -1390,6 +1395,10 @@ var addBasket = function(variationId, quantity, args, callback)
 							item.remove();
 							var quantity = parseInt(item.find(".quantity").html().replace(" ", "").replace("x", ""));
 							$("#cart-num").html(parseInt($("#cart-num").html()) - quantity);
+
+							//调整金额
+							$("#basket_total_price").html(parseFloat(parseFloat($("#basket_total_price").html()) - parseFloat(item.find(".format_discount_price").data("price"))).toFixed(2));
+
 							if ($(".cart-items").children().length == 0)
 							{
 								$("#cart-floating-box").html($("#basket_empty").html());

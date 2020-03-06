@@ -412,7 +412,7 @@
 	</div>
 </script>
 <script type="text/html" id="basket_item_tpl">
-	<div class="cart-float-single-item d-flex" data-id="[variationId]">
+	<div class="cart-float-single-item d-flex" data-id="[variationId]" data-price="[discount_price]">
 		<span class="remove-item" data-id="[basketItemId]">
 			<a href="#">
 				<i class="fa fa-times"></i>
@@ -429,7 +429,10 @@
 					[name]
 				</a>
 			</p>
-			<p class="price"><span class="quantity">[quantity] x</span> [format_discount_price]</p>
+			<p class="price">
+				<span class="quantity">[quantity] x</span>
+				<span class="format_discount_price">[format_discount_price]</span>
+			</p>
 		</div>
 	</div>
 </script>
