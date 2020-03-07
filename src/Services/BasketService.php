@@ -69,6 +69,28 @@ class BasketService
 	}
 
 	/**
+	 * 根据ID更新数量
+	 * @param int $basketItemId
+	 * @param int $quantity
+	 * @return bool
+	 * @throws \Exception
+	 */
+	function updateQuantity (int $basketItemId, int $quantity): bool
+	{
+		$basketItem = $this->basketItemRepositoryContract->findOneById($basketItemId);
+		if ($basketItem instanceof BasketItem) {
+			$data = [
+				'id' => $basketItemId,
+				'variationId' => $basketItem->variationId,
+				'referrerId' => $this->getBasket()->referrerId,
+				'quantity' => $quantity
+			];
+			return $this->update($basketItemId, $data);
+		}
+		return false;
+	}
+
+	/**
 	 * 更新购物车
 	 * @param int $basketItemId
 	 * @param array $data

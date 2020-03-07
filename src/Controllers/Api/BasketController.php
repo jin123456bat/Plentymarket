@@ -52,7 +52,9 @@ class BasketController extends BaseApiController
 				$isInBasket = false;
 				foreach ($cart_data as $c) {
 					if ($item['basketItemId'] == $c['id'] && $item['quantity'] != $c['quantity']) {
-						$basket->update($item['basketItemId'], $c['quantity']);
+						if (!$basket->updateQuantity($item['basketItemId'], $c['quantity'])) {
+							throw new \Exception('更新数量失败');
+						}
 					}
 
 					if ($c['id'] == $item['basketItemId']) {
