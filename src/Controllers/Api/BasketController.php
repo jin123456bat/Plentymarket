@@ -43,7 +43,7 @@ class BasketController extends BaseApiController
 	function update (): Response
 	{
 		$cart = $this->request->input('cart');
-		$cart = json_decode($cart);
+		$cart = json_decode($cart, true);
 		$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
 		$basket = pluginApp(BasketService::class);
 		foreach ($basket_list as $item) {

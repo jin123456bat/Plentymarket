@@ -198,7 +198,7 @@
 
     $(".update-btn").on("click", function()
     {
-        $.post("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
+        $.get("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
         {
             if (response.code == 1)
             {
