@@ -51,6 +51,9 @@ class TwigServiceProvider extends Twig_Extension
 	public function getFunctions (): array
 	{
 		return [
+			$this->twigFactory->createSimpleFunction('json_encode', function ($value) {
+				return json_encode($value);
+			})
 		];
 	}
 

@@ -141,8 +141,15 @@
     });
     $("#coupon_form").on("submit", function()
     {
+        spop({
+            template: '{{trans('Plentymarket::WebAccountCart.coupon_not_avaliable')}}',
+            style: "error"
+        });
+
         return false;
     });
+
+    var cart = '{{json_encode(list)}}';
 
     var loadState = function(country_id)
     {
