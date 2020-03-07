@@ -213,6 +213,54 @@
 <a href="#" class="scroll-top"></a>
 <!-- end of scroll to top -->
 
+<style>
+	.cookie
+	{
+		position: fixed;
+		bottom: 0px;
+		color: #fff;
+		width: 100%;
+		padding: 30px 0px;
+		background-color: #000;
+	}
+
+	.cookie-desc
+	{
+		width: 90%;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	.cookie-accept
+	{
+		width: 9%;
+		display: inline-block;
+		vertical-align: top;
+		background-color: #FFF;
+		color: #000;
+		text-align: center;
+		padding: 10px;
+		border: none;
+		outline: none;
+	}
+</style>
+<div class="cookie" style="display: none;">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="cookie-desc">
+					MADE.COM and our partners use cookies to manage performance, advertising and customer experience. By
+					continuing, you agree to our use of cookies. Please review our policy to learn about managing
+					cookies.
+				</div>
+				<button class="cookie-accept">
+					ACCEPT
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- JS
 ============================================ -->
 <!-- jQuery JS -->
@@ -249,6 +297,17 @@
     {
         response = JSON.parse(response);
         $("#wishlist-num").text(response.data);
+    });
+
+    var storage = window.localStorage;
+    if (storage.getItem("read-cookie") != "1")
+    {
+        $(".cookie").fadeIn();
+    }
+    $(".cookie-accept").on("click", function()
+    {
+        storage.setItem("read-cookie", 1);
+        $(".cookie").fadeOut();
     });
 </script>
 </body>

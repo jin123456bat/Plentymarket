@@ -23,6 +23,7 @@ class AuthMiddleware extends Middleware
 		try {
 			$path = $request->getRequestUri();
 			$path_first = current(array_filter(explode('/', $path)));
+			exit($path_first);
 			if (in_array($path_first, ['account'])) {
 				pluginApp(AuthGuard::class)->assertOrRedirect(true, '/index/login_register');
 			}
