@@ -42,28 +42,38 @@ class BasketController extends BaseApiController
 	 */
 	function update (): Response
 	{
-		$cart = $this->request->input('cart');
-		$cart = json_decode($cart, true);
-		$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
-		$basket = pluginApp(BasketService::class);
-		foreach ($basket_list as $item) {
-			$isInBasket = false;
-			foreach ($cart as $c) {
-				if ($item['basketItemId'] == $c['id'] && $item['quantity'] != $c['quantity']) {
-					$basket->update($item['basketItemId'], $c['quantity']);
+		try {
+			$cart = $this->request->input('cart');
+			$cart_data = json_decode($cart, true);
+
+			return $this->success([
+				'cart' => $cart,
+				'cart_data' => $cart_data
+			]);
+
+			$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
+			$basket = pluginApp(BasketService::class);
+			foreach ($basket_list as $item) {
+				$isInBasket = false;
+				foreach ($cart_data as $c) {
+					if ($item['basketItemId'] == $c['id'] && $item['quantity'] != $c['quantity']) {
+						$basket->update($item['basketItemId'], $c['quantity']);
+					}
+
+					if ($c['id'] == $item['basketItemId']) {
+						$isInBasket = true;
+					}
 				}
 
-				if ($c['id'] == $item['basketItemId']) {
-					$isInBasket = true;
+				if (!$isInBasket) {
+					$basket->delete($item['basketItemId']);
 				}
 			}
 
-			if (!$isInBasket) {
-				$basket->delete($item['basketItemId']);
-			}
+			return $this->success([]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
-
-		return $this->success([]);
 	}
 
 	/**
