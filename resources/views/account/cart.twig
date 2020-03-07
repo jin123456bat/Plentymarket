@@ -9,17 +9,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<form action="#">
-					<!--=======  cart table  =======-->
+				{%if list|length > 0%}
+					<form action="#">
+						<!--=======  cart table  =======-->
 
-					<div class="cart-table table-responsive mb-40">
-						<table class="table">
-							<thead>
-							<tr>
-								<th class="pro-thumbnail">{{trans('Plentymarket::WebAccountCart.image')}}</th>
-								<th class="pro-title">{{trans('Plentymarket::WebAccountCart.product')}}</th>
-								<th class="pro-price">{{trans('Plentymarket::WebAccountCart.price')}}</th>
-								<th class="pro-vat">{{trans('Plentymarket::WebAccountCart.vat')}}</th>
+						<div class="cart-table table-responsive mb-40">
+							<table class="table">
+								<thead>
+								<tr>
+									<th class="pro-thumbnail">{{trans('Plentymarket::WebAccountCart.image')}}</th>
+									<th class="pro-title">{{trans('Plentymarket::WebAccountCart.product')}}</th>
+									<th class="pro-price">{{trans('Plentymarket::WebAccountCart.price')}}</th>
+									<th class="pro-vat">{{trans('Plentymarket::WebAccountCart.vat')}}</th>
 								<th class="pro-quantity">{{trans('Plentymarket::WebAccountCart.quantity')}}</th>
 								<th class="pro-subtotal">{{trans('Plentymarket::WebAccountCart.total')}}</th>
 								<th class="pro-remove">{{trans('Plentymarket::WebAccountCart.remove')}}</th>
@@ -46,25 +47,24 @@
 								</tr>
 							{%endfor%}
 							</tbody>
-						</table>
-					</div>
+							</table>
+						</div>
 
-					<!--=======  End of cart table  =======-->
+						<!--=======  End of cart table  =======-->
 
 
-				</form>
+					</form>
+					<div class="row">
 
-				<div class="row">
+						<div class="col-lg-6 col-12">
+							<!--=======  Calculate Shipping  =======-->
 
-					<div class="col-lg-6 col-12">
-						<!--=======  Calculate Shipping  =======-->
-
-						<div class="calculate-shipping">
-							<h4>Calculate Shipping</h4>
-							<form id="ship_form">
-								<div class="row">
-									<div class="col-md-6 col-12 mb-25">
-										<select class="nice-select" id="country">
+							<div class="calculate-shipping">
+								<h4>Calculate Shipping</h4>
+								<form id="ship_form">
+									<div class="row">
+										<div class="col-md-6 col-12 mb-25">
+											<select class="nice-select" id="country">
 											{%for c in country%}
 												<option value="{{c.id}}">{{c.name}}</option>
 											{%endfor%}
@@ -128,8 +128,29 @@
 
 					</div>
 
-				</div>
-
+					</div>
+				{%else%}
+					<div class="cart empty">
+						<div class="page-title" style="border-bottom: 1px solid #000;">
+							<h1>Shopping Basket</h1>
+						</div>
+						<div class="cart-empty">
+							<p style="background-color: #fefad7;
+    padding: 15px;
+    margin-top: 15px;font-size: 14px;
+    font-weight: 400;">You have no items in your shopping basket.</p>
+							<div class="buttons-set">
+								<a href="/" title="Continue shopping" class="checkout-btn" style="font-weight: 400;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #1e1e1e;
+    border-color: #1e1e1e;    padding: 15px;">
+									<span class="button_label">Continue shopping</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				{%endif%}
 			</div>
 		</div>
 	</div>
