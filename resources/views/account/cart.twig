@@ -182,7 +182,7 @@
 
     $(".update-btn").on("click", function()
     {
-        $.get("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
+        $.post("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
         {
             if (response.code == 1)
             {
