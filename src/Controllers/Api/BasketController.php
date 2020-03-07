@@ -46,12 +46,6 @@ class BasketController extends BaseApiController
 			$cart = $this->request->input('cart');
 			$cart_data = json_decode($cart, true);
 
-			return $this->success([
-				'cart' => $cart,
-				'cart_data' => $cart_data,
-				'aaa' => 111,
-			]);
-
 			$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
 			$basket = pluginApp(BasketService::class);
 			foreach ($basket_list as $item) {
