@@ -156,6 +156,7 @@
                     $("#state").append("<option value=\"" + value.id + "\">" + value.name + "</option>");
                 }
             });
+            $("#state").niceSelect("update");
         });
     };
     loadState($("#country").val());
