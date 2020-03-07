@@ -37,6 +37,36 @@ class BasketController extends BaseApiController
 	}
 
 	/**
+	 * 更新购物车的商品数量
+	 * @return Response
+	 */
+	function update (): Response
+	{
+		$cart = $this->request->input('cart');
+		$cart = json_decode($cart);
+		$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
+		$basket = pluginApp(BasketService::class);
+		foreach ($basket_list as $item) {
+			$isInBasket = false;
+			foreach ($cart as $c) {
+				if ($item['basketItemId'] == $c['id'] && $item['quantity'] != $c['quantity']) {
+					$basket->update($item['basketItemId'], $c['quantity']);
+				}
+
+				if ($c['id'] == $item['basketItemId']) {
+					$isInBasket = true;
+				}
+			}
+
+			if (!$isInBasket) {
+				$basket->delete($item['basketItemId']);
+			}
+		}
+
+		return $this->success([]);
+	}
+
+	/**
 	 * 删除购物车中的商品，不论数量
 	 * @return Response
 	 */

@@ -351,18 +351,18 @@
 				min = 1;
 			}
 
-			// Don't allow decrementing below zero
-			if (oldValue > min)
-			{
-				var newVal = parseFloat(oldValue) - 1;
-			}
-			else
-			{
-				newVal = min;
-			}
-		}
-		$button.parent().find('input').val(newVal);
-	});
+            // Don't allow decrementing below zero
+            if (oldValue > min)
+            {
+                var newVal = parseFloat(oldValue) - 1;
+            }
+            else
+            {
+                newVal = min;
+            }
+        }
+        $button.parent().find("input").val(newVal).trigger("change");
+    });
 
 
 	/*----------  Nice Select  ----------*/

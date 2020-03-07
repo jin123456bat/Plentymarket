@@ -42,9 +42,15 @@ class AccountController extends BaseWebController
 		$vat = 0;//增值税
 		$ship = 0;//运费
 		$list = pluginApp(ItemListService::class)->getItemsFromBasket();
+		$virtaul_cart = [];
 		foreach ($list as $r) {
 			$total += ($r['quantity'] * $r['discount_price']);
 			$vat += ($r['quantity'] * $r['discount_price'] * $r['vat'] / 100);
+
+			$virtaul_cart[] = [
+				'id' => $r['basketItemId'],
+				'quantity' => $r['quantity'],
+			];
 		}
 
 		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
@@ -80,6 +86,7 @@ class AccountController extends BaseWebController
 			'ship' => $numberFormatFilter->formatMonetary($ship, Utils::getCurrency()),
 			'summary' => $numberFormatFilter->formatMonetary($total + $vat + $ship, Utils::getCurrency()),
 			'country' => $country,
+			'virtual_cart' => json_encode($virtaul_cart),
 		]);
 	}
 

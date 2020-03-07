@@ -35,11 +35,14 @@
 									<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
 									<td class="pro-vat"><span>{{item.vat_price}}</span></td>
 									<td class="pro-quantity">
-										<div class="pro-qty"><input type="text" value="{{item.quantity}}"></div>
+										<div class="pro-qty" data-id="{{item.id}}">
+											<input type="text" value="{{item.quantity}}" min="{{item.min_num}}" max="{{item.stock}}">
+										</div>
 									</td>
 									<td class="pro-subtotal"><span>{{item.format_discount_price_quantity}}</span></td>
 									<td class="pro-remove" data-id="{{item.basketItemId}}">
-										<a href="#"><i class="fa fa-trash-o"></i></a></td>
+										<a href="#"><i class="fa fa-trash-o"></i></a>
+									</td>
 								</tr>
 							{%endfor%}
 							</tbody>
@@ -149,7 +152,45 @@
         return false;
     });
 
-    var cart = '{{json_encode(list)}}';
+    var cart = JSON.parse('{{virtual_cart}}');
+
+    $(".pro-qty input").on("change", function()
+    {
+        var id = $(this).parent(".pro-qty").data("id");
+        var num = $(this).val();
+        $.each(cart, function(key, value)
+        {
+            if (value.id == id)
+            {
+                cart[key].quantity = num;
+            }
+        });
+    });
+
+    $(".pro-remove").on("click", function()
+    {
+        var id = $(this).data("id");
+        $.each(cart, function(key, value)
+        {
+            if (value.id == id)
+            {
+                cart[key].quantity = 0;
+            }
+        });
+        $(this).parents("tr").remove();
+    });
+
+    $(".update-btn").on("click", function()
+    {
+        $.get("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
+        {
+            if (response.code == 1)
+            {
+                window.location.reload();
+            }
+        });
+        return false;
+    });
 
     var loadState = function(country_id)
     {
