@@ -153,11 +153,7 @@
             {
                 if (value.country_id == country_id)
                 {
-                    $.each(value.state, function(k, v)
-                    {
-                        $("#state").append("<option value=\"" + v.id + "\">" + v.name + "</option>");
-                    });
-                    return false;
+                    $("#state").append("<option value=\"" + value.id + "\">" + value.name + "</option>");
                 }
             });
         });
