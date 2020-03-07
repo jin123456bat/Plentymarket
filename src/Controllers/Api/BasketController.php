@@ -48,7 +48,8 @@ class BasketController extends BaseApiController
 
 			return $this->success([
 				'cart' => $cart,
-				'cart_data' => $cart_data
+				'cart_data' => $cart_data,
+				'aaa' => 111,
 			]);
 
 			$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
