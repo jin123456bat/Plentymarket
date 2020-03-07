@@ -7,6 +7,7 @@ use Plenty\Plugin\Events\Dispatcher;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Extensions\TwigServiceProvider;
+use Plentymarket\Middlewares\AuthMiddleware;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\AddressService;
 use Plentymarket\Services\BasketService;
