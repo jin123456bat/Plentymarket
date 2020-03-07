@@ -49,21 +49,16 @@ class BasketController extends BaseApiController
 			$basket_list = pluginApp(ItemListService::class)->getItemsFromBasket();
 			$basket = pluginApp(BasketService::class);
 			foreach ($basket_list as $item) {
-				$isInBasket = false;
 				foreach ($cart_data as $c) {
 					if ($item['basketItemId'] == $c['id'] && $item['quantity'] != $c['quantity']) {
-						if (!$basket->updateQuantity($item['basketItemId'], $c['quantity'])) {
-							throw new \Exception('更新数量失败');
+						if (empty($c['quantity'])) {
+							$basket->delete($item['basketItemId']);
+						} else {
+							if (!$basket->updateQuantity($item['basketItemId'], $c['quantity'])) {
+								throw new \Exception('更新数量失败');
+							}
 						}
 					}
-
-					if ($c['id'] == $item['basketItemId']) {
-						$isInBasket = true;
-					}
-				}
-
-				if (!$isInBasket) {
-					$basket->delete($item['basketItemId']);
 				}
 			}
 
