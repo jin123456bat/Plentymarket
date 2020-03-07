@@ -95,6 +95,7 @@ class IndexController extends BaseApiController
 						$states[] = [
 							'id' => $state['id'],
 							'name' => $state['name'],
+							'country_id' => $state['country_id'],
 						];
 					}
 				}
