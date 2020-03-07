@@ -21,6 +21,7 @@ abstract class AbstractGuard
 	public function assertOrRedirect ($expected, string $redirectUri)
 	{
 		if ($this->assert() !== $expected) {
+			exit('立即跳转...');
 			self::redirect($redirectUri, ["backlink" => self::getUrl()]);
 		}
 	}

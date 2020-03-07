@@ -132,20 +132,20 @@
 				{%else%}
 					<div class="cart empty">
 						<div class="page-title" style="border-bottom: 1px solid #000;">
-							<h1>Shopping Basket</h1>
+							<h1>{{trans('Plentymarket::WebAccountCart.shopping_basket')}}</h1>
 						</div>
 						<div class="cart-empty">
 							<p style="background-color: #fefad7;
     padding: 15px;
     margin-top: 15px;font-size: 14px;
-    font-weight: 400;">You have no items in your shopping basket.</p>
+    font-weight: 400;">{{trans('Plentymarket::WebAccountCart.basket_empty_desc')}}</p>
 							<div class="buttons-set">
-								<a href="/" title="Continue shopping" class="checkout-btn" style="font-weight: 400;
+								<a href="/" title="{{trans('Plentymarket::WebAccountCart.continue_shopping')}}" class="checkout-btn" style="font-weight: 400;
     text-transform: uppercase;
     color: #ffffff;
     background-color: #1e1e1e;
     border-color: #1e1e1e;    padding: 15px;">
-									<span class="button_label">Continue shopping</span>
+									<span class="button_label">{{trans('Plentymarket::WebAccountCart.continue_shopping')}}</span>
 								</a>
 							</div>
 						</div>
