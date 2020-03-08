@@ -38,7 +38,6 @@
 
 <body>
 
-
 <!--=============================================
 =            Header One         =
 =============================================-->
@@ -51,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-6 text-center text-md-left mb-sm-15">
-					<span class="header-top-text">Welcome to Pataku Online Shopping Store !</span>
+					<span class="header-top-text">{{trans('Plentymarket::Common.welcome')}}</span>
 				</div>
 				<div class="col-12 col-md-6">
 
@@ -61,18 +60,19 @@
 
 						<!--=======  single dropdown  =======-->
 
-
-						<div class="single-dropdown">
-							<a href="#" id="changeAccount"><span id="accountMenuName">My Account <i
-										class="fa fa-angle-down"></i></span></a>
-							<div class="language-currency-list hidden" id="accountList">
-								<ul>
-									<li><a href="my-account.html">My Account</a></li>
-									<li><a href="checkout.html">Checkout</a></li>
-									<li><a href="login-register.html">Login</a></li>
-								</ul>
+						{%if contact is null%}
+							<div class="single-dropdown">
+								<a href="/account/login_register">
+									<span id="accountMenuName">{{trans('Plentymarket::Common.my_account')}}</span>
+								</a>
 							</div>
-						</div>
+						{%else%}
+							<div class="single-dropdown">
+								<a href="/account/index">
+									<span id="accountMenuName">{{contact.email}}</span>
+								</a>
+							</div>
+						{%endif%}
 
 						<span class="separator pl-15 pr-15">|</span>
 
@@ -80,13 +80,17 @@
 
 						<!--=======  single dropdown  =======-->
 
-
 						<div class="single-dropdown">
-							<a href="#" id="changeCurrency"><span id="currencyName">USD $ <i
-										class="fa fa-angle-down"></i></span></a>
+							<a href="#" id="changeCurrency">
+								<span id="currencyName">
+									EURO €<i class="fa fa-angle-down"></i>
+								</span>
+							</a>
 							<div class="language-currency-list hidden" id="currencyList">
 								<ul>
+									<!--
 									<li><a href="#">USD $</a></li>
+									-->
 									<li><a href="#">EURO €</a></li>
 								</ul>
 							</div>
@@ -114,9 +118,7 @@
 
 						<!--=======  End of single dropdown  =======-->
 
-
 					</div>
-
 
 					<!--=======  End of header top dropdowns  =======-->
 				</div>
@@ -311,7 +313,7 @@
 											</ul>
 										</li>
 										<li class="menu-item-has-children"><a href="single-product.html">Single
-												Product</a>
+										                                                                 Product</a>
 											<ul class="sub-menu">
 												<li><a href="single-product.html">Single Product</a></li>
 												<li><a href="single-product-variable.html">Single Product variable</a>

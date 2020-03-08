@@ -107,6 +107,8 @@ class AccountController extends BaseWebController
 	 */
 	function wishlist (): string
 	{
+		$list = pluginApp(ItemListService::class)->getItemsFromWishlist();
+
 		return $this->render('account.wishlist', [
 			$this->trans('WebAccountWishlist.wishlist') => '/account/wishlist'
 		]);

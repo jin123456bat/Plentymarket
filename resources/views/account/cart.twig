@@ -21,37 +21,38 @@
 									<th class="pro-title">{{trans('Plentymarket::WebAccountCart.product')}}</th>
 									<th class="pro-price">{{trans('Plentymarket::WebAccountCart.price')}}</th>
 									<th class="pro-vat">{{trans('Plentymarket::WebAccountCart.vat')}}</th>
-								<th class="pro-quantity">{{trans('Plentymarket::WebAccountCart.quantity')}}</th>
-								<th class="pro-subtotal">{{trans('Plentymarket::WebAccountCart.total')}}</th>
-								<th class="pro-remove">{{trans('Plentymarket::WebAccountCart.remove')}}</th>
-							</tr>
-							</thead>
-							<tbody>
-							{%for item in list%}
-								<tr>
-									<td class="pro-thumbnail">
-										<a href="/index/product/{{item.id}}"><img src="{{item.images.0}}" class="img-fluid" alt="Product"></a>
-									</td>
-									<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a></td>
-									<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
-									<td class="pro-vat"><span>{{item.vat_price}}</span></td>
-									<td class="pro-quantity">
-										<div class="pro-qty" data-id="{{item.basketItemId}}">
-											<input type="text" value="{{item.quantity}}" min="{{item.min_num}}" max="{{item.stock}}">
-										</div>
-									</td>
-									<td class="pro-subtotal"><span>{{item.format_discount_price_quantity}}</span></td>
-									<td class="pro-remove" data-id="{{item.basketItemId}}">
-										<a href="#"><i class="fa fa-trash-o"></i></a>
-									</td>
+									<th class="pro-quantity">{{trans('Plentymarket::WebAccountCart.quantity')}}</th>
+									<th class="pro-subtotal">{{trans('Plentymarket::WebAccountCart.total')}}</th>
+									<th class="pro-remove">{{trans('Plentymarket::WebAccountCart.remove')}}</th>
 								</tr>
-							{%endfor%}
-							</tbody>
+								</thead>
+								<tbody>
+								{%for item in list%}
+									<tr>
+										<td class="pro-thumbnail">
+											<a href="/index/product/{{item.id}}"><img src="{{item.images.0}}" class="img-fluid" alt="Product"></a>
+										</td>
+										<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a>
+										</td>
+										<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
+										<td class="pro-vat"><span>{{item.vat_price}}</span></td>
+										<td class="pro-quantity">
+											<div class="pro-qty" data-id="{{item.basketItemId}}">
+												<input type="text" value="{{item.quantity}}" min="{{item.min_num}}" max="{{item.stock}}">
+											</div>
+										</td>
+										<td class="pro-subtotal"><span>{{item.format_discount_price_quantity}}</span>
+										</td>
+										<td class="pro-remove" data-id="{{item.basketItemId}}">
+											<a href="#"><i class="fa fa-trash-o"></i></a>
+										</td>
+									</tr>
+								{%endfor%}
+								</tbody>
 							</table>
 						</div>
 
 						<!--=======  End of cart table  =======-->
-
 
 					</form>
 					<div class="row">
@@ -65,68 +66,68 @@
 									<div class="row">
 										<div class="col-md-6 col-12 mb-25">
 											<select class="nice-select" id="country">
-											{%for c in country%}
-												<option value="{{c.id}}">{{c.name}}</option>
-											{%endfor%}
-										</select>
+												{%for c in country%}
+													<option value="{{c.id}}">{{c.name}}</option>
+												{%endfor%}
+											</select>
+										</div>
+										<div class="col-md-6 col-12 mb-25">
+											<select class="nice-select" id="state">
+											</select>
+										</div>
+										<div class="col-md-6 col-12 mb-25">
+											<input type="text" placeholder="Postcode / Zip">
+										</div>
+										<div class="col-md-6 col-12 mb-25">
+											<input type="submit" value="Estimate">
+										</div>
 									</div>
-									<div class="col-md-6 col-12 mb-25">
-										<select class="nice-select" id="state">
-										</select>
-									</div>
-									<div class="col-md-6 col-12 mb-25">
-										<input type="text" placeholder="Postcode / Zip">
-									</div>
-									<div class="col-md-6 col-12 mb-25">
-										<input type="submit" value="Estimate">
-									</div>
-								</div>
-							</form>
-						</div>
-
-						<!--=======  End of Calculate Shipping  =======-->
-
-						<!--=======  Discount Coupon  =======-->
-
-						<div class="discount-coupon">
-							<h4>{{trans('Plentymarket::WebAccountCart.discount_coupon_code')}}</h4>
-							<form id="coupon_form">
-								<div class="row">
-									<div class="col-md-6 col-12 mb-25">
-										<input type="text" placeholder="{{trans('Plentymarket::WebAccountCart.coupon_code')}}">
-									</div>
-									<div class="col-md-6 col-12 mb-25">
-										<input type="submit" value="{{trans('Plentymarket::WebAccountCart.apply_code')}}">
-									</div>
-								</div>
-							</form>
-						</div>
-
-						<!--=======  End of Discount Coupon  =======-->
-
-					</div>
-
-
-					<div class="col-lg-6 col-12 d-flex">
-						<!--=======  Cart summery  =======-->
-
-						<div class="cart-summary">
-							<div class="cart-summary-wrap">
-								<h4>{{trans('Plentymarket::WebAccountCart.cart_summary')}}</h4>
-								<p>{{trans('Plentymarket::WebAccountCart.sub_total')}}<span>{{total}}</span></p>
-								<p>{{trans('Plentymarket::WebAccountCart.vat')}}<span>{{vat}}</span></p>
-								<p>{{trans('Plentymarket::WebAccountCart.shipping_cost')}}<span>{{ship}}</span></p>
-								<h2>{{trans('Plentymarket::WebAccountCart.grand_total')}} <span>{{summary}}</span></h2>
+								</form>
 							</div>
-							<div class="cart-summary-button">
-								<button class="checkout-btn">{{trans('Plentymarket::WebAccountCart.checkout')}}</button>
-								<button class="update-btn">{{trans('Plentymarket::WebAccountCart.update_cart')}}</button>
+
+							<!--=======  End of Calculate Shipping  =======-->
+
+							<!--=======  Discount Coupon  =======-->
+
+							<div class="discount-coupon">
+								<h4>{{trans('Plentymarket::WebAccountCart.discount_coupon_code')}}</h4>
+								<form id="coupon_form">
+									<div class="row">
+										<div class="col-md-6 col-12 mb-25">
+											<input type="text" placeholder="{{trans('Plentymarket::WebAccountCart.coupon_code')}}">
+										</div>
+										<div class="col-md-6 col-12 mb-25">
+											<input type="submit" value="{{trans('Plentymarket::WebAccountCart.apply_code')}}">
+										</div>
+									</div>
+								</form>
 							</div>
+
+							<!--=======  End of Discount Coupon  =======-->
+
 						</div>
 
-						<!--=======  End of Cart summery  =======-->
+						<div class="col-lg-6 col-12 d-flex">
+							<!--=======  Cart summery  =======-->
 
-					</div>
+							<div class="cart-summary">
+								<div class="cart-summary-wrap">
+									<h4>{{trans('Plentymarket::WebAccountCart.cart_summary')}}</h4>
+									<p>{{trans('Plentymarket::WebAccountCart.sub_total')}}<span>{{total}}</span></p>
+									<p>{{trans('Plentymarket::WebAccountCart.vat')}}<span>{{vat}}</span></p>
+									<p>{{trans('Plentymarket::WebAccountCart.shipping_cost')}}<span>{{ship}}</span></p>
+									<h2>{{trans('Plentymarket::WebAccountCart.grand_total')}} <span>{{summary}}</span>
+									</h2>
+								</div>
+								<div class="cart-summary-button">
+									<button class="checkout-btn">{{trans('Plentymarket::WebAccountCart.checkout')}}</button>
+									<button class="update-btn">{{trans('Plentymarket::WebAccountCart.update_cart')}}</button>
+								</div>
+							</div>
+
+							<!--=======  End of Cart summery  =======-->
+
+						</div>
 
 					</div>
 				{%else%}

@@ -5,6 +5,7 @@ namespace Plentymarket\Controllers;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
+use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
 
 /**
@@ -41,6 +42,9 @@ class BaseWebController extends BaseController
 		$context['breadcrumb'] = array_merge([
 			$this->trans('Common.home') => '/',
 		], $breadcrumb);
+
+		//用户信息
+		$context['contact'] = pluginApp(AccountService::class)->getContact();
 
 		//分类
 		$context['category'] = pluginApp(CategoryService::class)->getTree();

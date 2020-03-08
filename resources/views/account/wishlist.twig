@@ -2,28 +2,6 @@
 {%include 'Plentymarket::common.breadcrumb'%}
 
 <!--=============================================
-=            Breadcrumb Area         =
-=============================================-->
-
-<div class="breadcrumb-area breadcrumb-bg pt-85 pb-85 mb-80">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="breadcrumb-container">
-					<ul>
-						<li><a href="index.html">Home</a> <span class="separator">/</span></li>
-						<li class="active">Wishlist</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!--=====  End of Breadcrumb Area  ======-->
-
-
-<!--=============================================
 =            Wishlist page content         =
 =============================================-->
 
@@ -38,66 +16,27 @@
 						<table class="table">
 							<thead>
 							<tr>
-								<th class="pro-thumbnail">Image</th>
-								<th class="pro-title">Product</th>
-								<th class="pro-price">Price</th>
-								<th class="pro-quantity">Quantity</th>
-								<th class="pro-subtotal">Total</th>
-								<th class="pro-remove">Remove</th>
+								<th class="pro-thumbnail">{{trans('Plentymarket::WebAccountCart.image')}}</th>
+								<th class="pro-title">{{trans('Plentymarket::WebAccountCart.product')}}</th>
+								<th class="pro-price">{{trans('Plentymarket::WebAccountCart.price')}}</th>
+								<th class="pro-vat">{{trans('Plentymarket::WebAccountCart.vat')}}</th>
+								<th class="pro-remove">{{trans('Plentymarket::WebAccountCart.remove')}}</th>
 							</tr>
 							</thead>
 							<tbody>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product01.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Cillum dolore tortor nisl
-										fermentum</a></td>
-								<td class="pro-price"><span>$29.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="1"></div>
-								</td>
-								<td class="pro-subtotal"><span>$29.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product02.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Auctor gravida pellentesque</a></td>
-								<td class="pro-price"><span>$30.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="2"></div>
-								</td>
-								<td class="pro-subtotal"><span>$60.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product03.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Condimentum posuere consectetur</a>
-								</td>
-								<td class="pro-price"><span>$25.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="1"></div>
-								</td>
-								<td class="pro-subtotal"><span>$25.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
-							<tr>
-								<td class="pro-thumbnail">
-									<a href="single-product.html"><img src="assets/images/products/product04.jpg" class="img-fluid" alt="Product"></a>
-								</td>
-								<td class="pro-title"><a href="single-product.html">Habitasse dictumst elementum</a>
-								</td>
-								<td class="pro-price"><span>$11.00</span></td>
-								<td class="pro-quantity">
-									<div class="pro-qty"><input type="text" value="1"></div>
-								</td>
-								<td class="pro-subtotal"><span>$11.00</span></td>
-								<td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-							</tr>
+							{%for item in list%}
+								<tr>
+									<td class="pro-thumbnail">
+										<a href="/index/product/{{item.id}}"><img src="{{item.images.0}}" class="img-fluid" alt="Product"></a>
+									</td>
+									<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a></td>
+									<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
+									<td class="pro-vat"><span>{{item.vat_price}}</span></td>
+									<td class="pro-remove" data-id="{{item.variationId}}">
+										<a href="#"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+							{%endfor%}
 							</tbody>
 						</table>
 					</div>
@@ -112,3 +51,27 @@
 
 <!--=====  End of Wishlist page content  ======-->
 {%include 'Plentymarket::common.footer'%}
+<script type="text/javascript">
+    $(".pro-remove").on("click", function()
+    {
+        var tr = $(this).parents("tr");
+        var id = $(this).data("id");
+        $.get("/api/wishlist/delete/" + id, function(response)
+        {
+            response = JSON.parse(response);
+            if (response.code == 1)
+            {
+                tr.remove();
+                $("#wishlist-num").text(parseInt($("#wishlist-num").text()) - 1);
+            }
+            else
+            {
+                spop({
+                    template: "system_error!",
+                    style: "error"
+                });
+            }
+        });
+        return false;
+    });
+</script>
