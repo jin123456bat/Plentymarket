@@ -25,11 +25,13 @@ class BlogService
 	}
 
 	/**
-	 * 获取所有的文档列表
+	 * 获取文档列表
+	 * @param int $page
+	 * @param int $itemsPerPage
 	 * @return array
 	 */
-	function getAll ()
+	function getAll (int $page = 1, int $itemsPerPage = 50)
 	{
-		return $this->blogPostRepositoryContract->listPosts();
+		return $this->blogPostRepositoryContract->listPosts($page, $itemsPerPage);
 	}
 }
