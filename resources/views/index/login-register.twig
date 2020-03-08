@@ -18,11 +18,11 @@
 						<div class="row">
 							<div class="col-md-12 col-12 mb-20">
 								<label>{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}*</label>
-								<input class="mb-0" type="email" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
+								<input class="mb-0" type="email" name="email" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
 							</div>
 							<div class="col-12 mb-20">
 								<label>{{trans("Plentymarket::WebIndexLoginRegister.password")}}</label>
-								<input class="mb-0" type="password" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.password")}}">
+								<input class="mb-0" type="password" name="password" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.password")}}">
 							</div>
 							<div class="col-md-8">
 
@@ -53,15 +53,15 @@
 						<div class="row">
 							<div class="col-md-12 mb-20">
 								<label>{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}*</label>
-								<input class="mb-0" type="email" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
+								<input class="mb-0" type="email" name="email" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
 							</div>
 							<div class="col-md-6 mb-20">
 								<label>{{trans("Plentymarket::WebIndexLoginRegister.password")}}</label>
-								<input class="mb-0" type="password" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.password")}}">
+								<input class="mb-0" type="password" name="password" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.password")}}">
 							</div>
 							<div class="col-md-6 mb-20">
 								<label>{{trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}</label>
-								<input class="mb-0" type="password" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}">
+								<input class="mb-0" type="password" name="repassword" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}">
 							</div>
 							<div class="col-12">
 								<button class="register-button mt-0">{{trans("Plentymarket::WebIndexLoginRegister.register")}}</button>
@@ -79,20 +79,24 @@
 <script type="text/javascript">
     $("#login").on("submit", function()
     {
-        var email = $(this).find("input[name=email]").val();
-        var password = $(this).find("input[name=password]").val();
+        var email = $.trim($(this).find("input[name=email]").val());
+        var password = $.trim($(this).find("input[name=password]").val());
         $.get("/api/index/login", {
             email: email,
             password: password
         }, function(response)
         {
+            response = JSON.parse(response);
             if (response.code == 1)
             {
                 window.location = "/";
             }
             else
             {
-                alert(response.message);
+                spop({
+                    template: '{{trans('Plentymarket::WebIndexLoginRegister.emailOrPasswordError')}}',
+                    style: "error"
+                });
             }
         });
         return false;
@@ -100,20 +104,33 @@
 
     $("#register").on("submit", function()
     {
-        var email = $(this).find("input[name=email]").val();
-        var password = $(this).find("input[name=password]").val();
+        var email = $.trim($(this).find("input[name=email]").val());
+        var password = $.trim($(this).find("input[name=password]").val());
+        var repassword = $.trim($(this).find("input[name=repassword]").val());
+        if (password != repassword)
+        {
+            spop({
+                template: '{{trans('Plentymarket::WebIndexLoginRegister.RepasswordError')}}',
+                style: "error"
+            });
+            return false;
+        }
         $.get("/api/index/register", {
             email: email,
             password: password
-        }, function()
+        }, function(response)
         {
+            response = JSON.parse(response);
             if (response.code == 1)
             {
                 window.location = "/";
             }
             else
             {
-                alert(response.message);
+                spop({
+                    template: '{{trans('Plentymarket::WebIndexLoginRegister.emailUsed')}}',
+                    style: "error"
+                });
             }
         });
         return false;
