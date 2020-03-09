@@ -41,7 +41,7 @@ class Wishlist extends Model
 	 */
 	public function getTableName (): string
 	{
-		return 'Plentymarket::Wishlist';
+		return 'Plentymarket::wishlist';
 	}
 
 	/**

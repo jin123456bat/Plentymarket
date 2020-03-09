@@ -17,6 +17,6 @@
 	"require": [],
 	"dependencies": [],
 	"runOnBuild": [
-		"Plentymarket\\Migrations\\CreateWishlistTable"
+		"Plentymarket\\Migrations\\WishlistMigration_0_0_1"
 	]
 }
