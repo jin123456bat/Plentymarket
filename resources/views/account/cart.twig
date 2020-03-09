@@ -222,6 +222,7 @@
     {
         $.get("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
         {
+            response = JSON.parse(response);
             if (response.code == 1)
             {
                 window.location.reload();

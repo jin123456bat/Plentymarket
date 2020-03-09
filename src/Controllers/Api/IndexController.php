@@ -3,7 +3,6 @@
 namespace Plentymarket\Controllers\Api;
 
 use Exception;
-use Plenty\Modules\Blog\Contracts\BlogPostRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -153,10 +152,7 @@ class IndexController extends BaseApiController
 	 */
 	public function blog (): Response
 	{
-		return $this->success([
-			'filter' => pluginApp(BlogPostRepositoryContract::class)->getFilters(),
-			'page' => $this->success(pluginApp(BlogService::class)->getAll())
-		]);
+		return $this->success($this->success(pluginApp(BlogService::class)->getAll()));
 	}
 
 	/**
