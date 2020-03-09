@@ -13,6 +13,7 @@ use Plentymarket\Services\AccountService;
  * @property int $id
  * @property int $contactId
  * @property int $itemId
+ * @Relation(model="Plenty\Modules\Account\Contact\Models\Contact", name="wishlist_contact_id_fk", attribute="id", column="contactId", onUpdate="Cascade", onDelete="Cascade")
  */
 class Wishlist extends Model
 {
@@ -40,7 +41,7 @@ class Wishlist extends Model
 	 */
 	public function getTableName (): string
 	{
-		return 'Plentymarket::wishlist';
+		return 'Plentymarket::Wishlist';
 	}
 
 	/**
