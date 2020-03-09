@@ -18,10 +18,11 @@ class ItemListService
 	{
 		$wishlist = pluginApp(Wishlist::class);
 		$itemIds = $wishlist->getContactItemId();
+		if (empty($itemIds)) {
+			return [];
+		}
 
-		$list = $this->getItemVariationIds(array_map(function ($item) {
-			return $item->itemId;
-		}, $wishlist));
+		$list = $this->getItemVariationIds($itemIds);
 
 		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
 
