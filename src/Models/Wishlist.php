@@ -2,9 +2,9 @@
 
 namespace Plentymarket\Models;
 
-use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use Plenty\Modules\Plugin\DataBase\Contracts\Model;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\SessionService;
 
 /**
  * Class Wishlist
@@ -45,6 +45,34 @@ class Wishlist extends Model
 	}
 
 	/**
+	 * 获取商品ID列表
+	 * @return array
+	 */
+	public function getContactItemId ()
+	{
+		$accountService = pluginApp(AccountService::class);
+		$contactId = $accountService->getContactId();
+		if (!empty($contactId)) {
+			$session = pluginApp(SessionService::class);
+			$wishlist = $session->get('wishlist');
+			if (empty($wishlist)) {
+				return [];
+			}
+
+			$result = [];
+			$wishlist = json_decode($wishlist, true);
+			foreach ($wishlist as $value) {
+				if ($value['contactId'] == $contactId) {
+					$result[] = $value['itemId'];
+				}
+			}
+
+			return $result;
+		}
+		return [];
+	}
+
+	/**
 	 * 愿望清单中的商品数量
 	 * @return int
 	 */
@@ -53,8 +81,17 @@ class Wishlist extends Model
 		$accountService = pluginApp(AccountService::class);
 		$contactId = $accountService->getContactId();
 		if (!empty($contactId)) {
-			$database = pluginApp(DataBase::class);
-			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->get();
+//			$database = pluginApp(DataBase::class);
+//			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->get();
+//			return count($wishlist);
+
+			$session = pluginApp(SessionService::class);
+			$wishlist = $session->get('wishlist');
+			if (empty($wishlist)) {
+				return 0;
+			}
+
+			$wishlist = json_decode($wishlist, true);
 			return count($wishlist);
 		}
 		return 0;
@@ -63,20 +100,34 @@ class Wishlist extends Model
 	/**
 	 * 添加商品到愿望清单
 	 * @param $itemId
-	 * @return Wishlist|null 成功返回Wishlist 失败返回null
+	 * @return bool
 	 */
 	public function create ($itemId)
 	{
 		$accountService = pluginApp(AccountService::class);
 		$contactId = $accountService->getContactId();
 		if (!empty($contactId) && !$this->has($itemId)) {
-			$database = pluginApp(DataBase::class);
-			$wishlist = pluginApp(Wishlist::class);
-			$wishlist->contactId = $contactId;
-			$wishlist->itemId = $itemId;
-			return $database->save($wishlist);
+//			$database = pluginApp(DataBase::class);
+//			$wishlist = pluginApp(Wishlist::class);
+//			$wishlist->contactId = $contactId;
+//			$wishlist->itemId = $itemId;
+//			return $database->save($wishlist);
+
+			$session = pluginApp(SessionService::class);
+			$wishlist = $session->get('wishlist');
+			if (empty($wishlist)) {
+				$wishlist = [];
+			}
+
+			$wishlist[] = [
+				'contactId' => $contactId,
+				'itemId' => $itemId,
+			];
+
+			$session->set('wishlist', json_encode($wishlist));
+			return true;
 		}
-		return null;
+		return false;
 	}
 
 	/**
@@ -89,12 +140,26 @@ class Wishlist extends Model
 		$accountService = pluginApp(AccountService::class);
 		$contactId = $accountService->getContactId();
 		if (!empty($contactId)) {
-			$database = pluginApp(DataBase::class);
-			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->where('itemId', '=', $itemId)->get();
+//			$database = pluginApp(DataBase::class);
+//			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->where('itemId', '=', $itemId)->get();
+//			if (empty($wishlist)) {
+//				return false;
+//			}
+//			return true;
+
+			$session = pluginApp(SessionService::class);
+			$wishlist = $session->get('wishlist');
 			if (empty($wishlist)) {
 				return false;
 			}
-			return true;
+
+			$wishlist = json_decode($wishlist, true);
+			foreach ($wishlist as $list) {
+				if ($list['contactId'] == $contactId && $list['itemId'] == $itemId) {
+					return true;
+				}
+			}
+			return false;
 		}
 		return false;
 	}
@@ -109,9 +174,26 @@ class Wishlist extends Model
 		$accountService = pluginApp(AccountService::class);
 		$contactId = $accountService->getContactId();
 		if (!empty($contactId) && $this->has($itemId)) {
-			$database = pluginApp(DataBase::class);
-			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->where('itemId', '=', $itemId)->get();
-			return $database->delete($wishlist[0]);
+//			$database = pluginApp(DataBase::class);
+//			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->where('itemId', '=', $itemId)->get();
+//			return $database->delete($wishlist[0]);
+
+			$session = pluginApp(SessionService::class);
+			$wishlist = $session->get('wishlist');
+			if (empty($wishlist)) {
+				return false;
+			}
+
+			$wishlist = json_decode($wishlist, true);
+			foreach ($wishlist as $key => $value) {
+				if ($value['contactId'] == $contactId && $value['itemId'] == $itemId) {
+					unset($wishlist[$key]);
+				}
+			}
+
+			$session->set('wishlist', json_encode($wishlist));
+
+			return true;
 		}
 		return false;
 	}

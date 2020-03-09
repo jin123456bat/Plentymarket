@@ -2,7 +2,6 @@
 
 namespace Plentymarket\Services;
 
-use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use Plentymarket\Extensions\Filters\NumberFormatFilter;
 use Plentymarket\Helper\Utils;
 use Plentymarket\Models\Wishlist;
@@ -17,30 +16,22 @@ class ItemListService
 {
 	public function getItemsFromWishlist ()
 	{
-		$accountService = pluginApp(AccountService::class);
-		$contactId = $accountService->getContactId();
-		if (!empty($contactId)) {
-			$database = pluginApp(DataBase::class);
-			$wishlist = $database->query(Wishlist::class)->where('contactId', '=', $contactId)->get();
-			if (empty($wishlist)) {
-				return [];
-			}
+		$wishlist = pluginApp(Wishlist::class);
+		$itemIds = $wishlist->getContactItemId();
 
-			$list = $this->getItemVariationIds(array_map(function ($item) {
-				return $item->itemId;
-			}, $wishlist));
+		$list = $this->getItemVariationIds(array_map(function ($item) {
+			return $item->itemId;
+		}, $wishlist));
 
-			$numberFormatFilter = pluginApp(NumberFormatFilter::class);
+		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
 
-			$list = array_map(function ($item) use ($numberFormatFilter) {
-				$item['image'] = empty($item['images']) ? '' : current($item['images']);
-				$item['vat_price'] = $numberFormatFilter->formatMonetary($item['vat'] * $item['discount_price'] / 100, Utils::getCurrency());
-				return $item;
-			}, $list);
+		$list = array_map(function ($item) use ($numberFormatFilter) {
+			$item['image'] = empty($item['images']) ? '' : current($item['images']);
+			$item['vat_price'] = $numberFormatFilter->formatMonetary($item['vat'] * $item['discount_price'] / 100, Utils::getCurrency());
+			return $item;
+		}, $list);
 
-			return $list;
-		}
-		return [];
+		return $list;
 	}
 
 	/**
