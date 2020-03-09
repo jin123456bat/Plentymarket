@@ -111,6 +111,8 @@ class AccountController extends BaseWebController
 
 		return $this->render('account.wishlist', [
 			$this->trans('WebAccountWishlist.wishlist') => '/account/wishlist'
+		], [
+			'list' => $list
 		]);
 	}
 }
