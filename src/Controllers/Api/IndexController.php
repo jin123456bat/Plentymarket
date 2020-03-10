@@ -152,7 +152,11 @@ class IndexController extends BaseApiController
 	 */
 	public function blog (): Response
 	{
-		return $this->success($this->success(pluginApp(BlogService::class)->getAll()));
+		try {
+			return $this->success($this->success(pluginApp(BlogService::class)->getAll()));
+		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**

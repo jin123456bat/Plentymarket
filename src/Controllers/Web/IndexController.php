@@ -3,6 +3,7 @@
 namespace Plentymarket\Controllers\Web;
 
 use Plentymarket\Controllers\BaseWebController;
+use Plentymarket\Services\BlogService;
 use Plentymarket\Services\ItemListService;
 
 /**
@@ -112,8 +113,13 @@ class IndexController extends BaseWebController
 	 */
 	function blog_list (): string
 	{
+		$page = $this->request->get('page', 1);
+		$list = pluginApp(BlogService::class)->getAll($page, 9);
+
 		return $this->render('index.blog-list', [
 			$this->trans('WebIndexBlogList.blog') => '/index/blog_list'
+		], [
+			'list' => $list
 		]);
 	}
 
