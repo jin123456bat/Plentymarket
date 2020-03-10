@@ -48,35 +48,27 @@
 
 					<div class="row">
 
-						{%for item in list%}
+						{%for item in list.entries%}
 							<div class="col-lg-4 col-md-6">
 								<!--=======  single blog post  =======-->
 
 								<div class="single-blog-post gallery-type-post mb-35">
 									<div class="row">
 										<div class="col-lg-12">
-
-											{%if item.images|length > 1%}
-
+											{%if item.data.images|length > 1%}
 												<div class="single-blog-post-media mb-20">
 													<div class="blog-image-gallery">
-														<div class="single-image">
-															<a href="blog-post-image-gallery.html"><img src="assets/images/blog-image/02.jpg" class="img-fluid" alt=""></a>
-														</div>
-
-														<div class="single-image">
-															<a href="blog-post-image-gallery.html"><img src="assets/images/blog-image/01.jpg" class="img-fluid" alt=""></a>
-														</div>
-
-														<div class="single-image">
-															<a href="blog-post-image-gallery.html"><img src="assets/images/blog-image/03.jpg" class="img-fluid" alt=""></a>
-														</div>
+														{%for image in item.data.images%}
+															<div class="single-image">
+																<a href="/index/blog/{{item.id}}"><img src="{{image}}" class="img-fluid" alt=""></a>
+															</div>
+														{%endfor%}
 													</div>
 												</div>
 											{%else%}
 												<div class="single-blog-post-media mb-20">
 													<div class="image">
-														<a href="blog-post-image-format.html"><img src="assets/images/blog-image/01.jpg" class="img-fluid" alt=""></a>
+														<a href="/index/blog/{{item.id}}"><img src="{{item.data.images.0}}" class="img-fluid" alt=""></a>
 													</div>
 												</div>
 											{%endif%}
@@ -84,30 +76,26 @@
 										</div>
 										<div class="col-lg-12">
 											<div class="single-blog-post-content">
-												<h3 class="post-title"><a href="blog-post-image-gallery.html"> How to
-												                                                               improve
-												                                                               furniture
-												                                                               quality</a>
+												<h3 class="post-title">
+													<a href="/index/blog/{{item.id}}">{{item.data.post.title}}</a>
 												</h3>
 												<div class="post-meta">
 													<p><span><i class="fa fa-user-circle"></i> </span>
-														<a href="#">admin</a>
+														<a>{{item.data.user.realName}}</a>
 														<span class="separator">/</span>
-														<span><i class="fa fa-calendar"></i> <a href="#">24 August, 2018</a></span>
-												</p>
-											</div>
+														<span><i class="fa fa-calendar"></i> <a href="#">{{item.createdAt}}</a></span>
+													</p>
+												</div>
 
-											<p class="post-excerpt">
-												Donec vitae hendrerit arcu, sit amet faucibus nisl. Cras pretium arcu
-												ex. Aenean posuere libero eu augue condimentum rhoncus.
-											</p>
-												<a href="blog-post-image-gallery.html" class="blog-readmore-btn">continue
+												<p class="post-excerpt">
+													{{item.data.post.shortDescription}}
+												</p>
+												<a href="/index/blog/{{item.id}}" class="blog-readmore-btn">{{trans('Plentymarket::WebIndexBlogList.continue')}}
 													<i class="fa fa-long-arrow-right"></i></a>
 											</div>
 										</div>
 									</div>
 								</div>
-
 								<!--=======  End of single blog post  =======-->
 							</div>
 						{%endfor%}
@@ -116,32 +104,39 @@
 				</div>
 
 				<!--=======  End of blog post container  =======-->
-				<!--=======  Pagination container  =======-->
+				{%if list.totalsCount > 9%}
+					<!--=======  Pagination container  =======-->
+					<div class="pagination-container pb-20 mb-md-80 mb-sm-80">
+						<div class="container">
+							<div class="row">
+								<div class="col-lg-12">
+									<!--=======  pagination-content  =======-->
 
-				<div class="pagination-container pb-20 mb-md-80 mb-sm-80">
-					<div class="container">
-						<div class="row">
-							<div class="col-lg-12">
-								<!--=======  pagination-content  =======-->
+									<div class="pagination-content text-center">
+										<ul>
+											<li>
+												<a href="?page={{page-1}}"><i class="fa fa-angle-left"></i>{{trans('Plentymarket::WebIndexProductListCategory.previous')}}
+												</a></li>
+											{%set max = (list.totalsCount/9)|ceil%}
+											{%for i in 1..max%}
+												<li>
+													<a {%if page==i%}class="active"{%endif%} href="?page={{i}}">{{i}}</a>
+												</li>
+											{%endfor%}
+											<li>
+												<a href="?page={{page+1}}">{{trans('Plentymarket::WebIndexProductListCategory.next')}}
+													<i class="fa fa-angle-right"></i> </a></li>
+										</ul>
+									</div>
 
-								<div class="pagination-content text-center">
-									<ul>
-										<li><a href="#"><i class="fa fa-angle-left"></i> Previous</a></li>
-										<li><a class="active" href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">Next <i class="fa fa-angle-right"></i> </a></li>
-									</ul>
+									<!--=======  End of pagination-content  =======-->
 								</div>
-
-								<!--=======  End of pagination-content  =======-->
 							</div>
 						</div>
 					</div>
-				</div>
+					<!--=======  End of Pagination container  =======-->
+				{%endif%}
 
-				<!--=======  End of Pagination container  =======-->
 			</div>
 		</div>
 	</div>

@@ -3,6 +3,7 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\Blog\Contracts\BlogPostRepositoryContract;
+use Plenty\Modules\Blog\Models\BlogPost;
 
 /**
  * Class BlogService
@@ -33,5 +34,14 @@ class BlogService
 	function getAll (int $page = 1, int $itemsPerPage = 50)
 	{
 		return $this->blogPostRepositoryContract->listPosts($page, $itemsPerPage);
+	}
+
+	/**
+	 * @param $id
+	 * @return BlogPost
+	 */
+	function get ($id): BlogPost
+	{
+		return $this->blogPostRepositoryContract->getPost($id);
 	}
 }

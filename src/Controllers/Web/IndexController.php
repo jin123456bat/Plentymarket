@@ -116,6 +116,14 @@ class IndexController extends BaseWebController
 		$page = $this->request->get('page', 1);
 		$list = pluginApp(BlogService::class)->getAll($page, 9);
 
+		foreach ($list['entries'] as $key => $r) {
+			$list['entries'][$key]['createdAt'] = date('d F, Y', strtotime($list['entries'][$key]['createdAt']));
+
+			$list['entries'][$key]['data']['images'] = array_filter(array_map(function ($value) {
+				return $value['path'];
+			}, $r['data']['images']));
+		}
+
 		return $this->render('index.blog-list', [
 			$this->trans('WebIndexBlogList.blog') => '/index/blog_list'
 		], [
@@ -130,10 +138,12 @@ class IndexController extends BaseWebController
 	 */
 	function blog ($blog_id): string
 	{
+		$blog = pluginApp(BlogService::class)->get($blog_id);
+
 		return $this->render('index.product-list-category', [
 			$this->trans('WebIndexBlog.blog') => '/index/blog',
 		], [
-			'blog_id' => $blog_id
+			'blog' => $blog
 		]);
 	}
 }
