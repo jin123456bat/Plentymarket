@@ -60,7 +60,7 @@
 													<div class="blog-image-gallery">
 														{%for image in item.data.images%}
 															<div class="single-image">
-																<a href="/index/blog/{{item.id}}"><img src="{{image}}" class="img-fluid" alt=""></a>
+																<a href="/index/blog/{{item.id}}"><img src="{{image}}" class="img-fluid blog-preview-image" alt=""></a>
 															</div>
 														{%endfor%}
 													</div>
@@ -68,7 +68,7 @@
 											{%else%}
 												<div class="single-blog-post-media mb-20">
 													<div class="image">
-														<a href="/index/blog/{{item.id}}"><img src="{{item.data.images.0}}" class="img-fluid" alt=""></a>
+														<a href="/index/blog/{{item.id}}"><img src="{{item.data.images.0}}" class="img-fluid blog-preview-image" alt=""></a>
 													</div>
 												</div>
 											{%endif%}
@@ -83,7 +83,7 @@
 													<p><span><i class="fa fa-user-circle"></i> </span>
 														<a>{{item.data.user.realName}}</a>
 														<span class="separator">/</span>
-														<span><i class="fa fa-calendar"></i> <a href="#">{{item.createdAt}}</a></span>
+														<span><i class="fa fa-calendar"></i> <a>{{item.createdAt}}</a></span>
 													</p>
 												</div>
 
