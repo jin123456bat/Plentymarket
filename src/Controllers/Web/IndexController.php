@@ -140,7 +140,7 @@ class IndexController extends BaseWebController
 	{
 		$blog = pluginApp(BlogService::class)->get($blog_id);
 
-		return $this->render('index.product-list-category', [
+		return $this->render('index.blog', [
 			$this->trans('WebIndexBlog.blog') => '/index/blog',
 		], [
 			'blog' => $blog
