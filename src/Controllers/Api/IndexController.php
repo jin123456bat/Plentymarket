@@ -159,6 +159,11 @@ class IndexController extends BaseApiController
 		}
 	}
 
+	public function comment ()
+	{
+		return $this->success();
+	}
+
 	/**
 	 * @return Response
 	 */
