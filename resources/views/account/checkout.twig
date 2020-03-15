@@ -9,11 +9,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-
 				<!-- Checkout Form s-->
 				<div id="create-order-form" class="checkout-form">
 					<div class="row row-40">
-
 						<div class="col-lg-7 mb-20">
 
 							<!-- Shipping Address -->
@@ -44,106 +42,94 @@
 									<button class="create-address">添加一个新地址</button>
 								</div>
 							</div>
-						</div>
-					</div>
 
-					<!-- Shipping Address -->
-					<div id="shipping-form" class="mb-40">
-						<h4 class="checkout-title">New Address</h4>
+							<!-- Shipping Address -->
+							<div id="shipping-form" class="mb-40">
+								<h4 class="checkout-title">New Address</h4>
 
-						<div class="row">
+								<div class="row">
 
-							<div class="col-md-6 col-12 mb-20">
-								<label>First Name*</label>
-									<input type="text" placeholder="First Name" name="first_name">
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>First Name*</label>
+										<input type="text" placeholder="First Name" name="first_name">
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>Last Name*</label>
-									<input type="text" placeholder="Last Name" name="second_name">
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>Last Name*</label>
+										<input type="text" placeholder="Last Name" name="second_name">
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>Email Address*</label>
-									<input type="email" placeholder="Email Address" name="email">
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>Email Address*</label>
+										<input type="email" placeholder="Email Address" name="email">
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>Phone no*</label>
-									<input type="text" placeholder="Phone number" name="phone">
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>Phone no*</label>
+										<input type="text" placeholder="Phone number" name="phone">
+									</div>
 
-								<div class="col-12 mb-20">
-									<label>Company Name</label>
-									<input type="text" placeholder="Company Name" name="company_name">
-								</div>
+									<div class="col-12 mb-20">
+										<label>Company Name</label>
+										<input type="text" placeholder="Company Name" name="company_name">
+									</div>
 
-								<div class="col-12 mb-20">
-									<label>Address*</label>
-									<input type="text" placeholder="Address line 1" name="address1">
-									<input type="text" placeholder="Address line 2" name="address2">
-								</div>
+									<div class="col-12 mb-20">
+										<label>Address*</label>
+										<input type="text" placeholder="Address line 1" name="address1">
+										<input type="text" placeholder="Address line 2" name="address2">
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>Country*</label>
-									<select class="nice-select" name="country">
-									</select>
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>Country*</label>
+										<select class="nice-select" name="country">
+										</select>
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>State*</label>
-									<select class="nice-select" name="state">
-									</select>
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>State*</label>
+										<select class="nice-select" name="state">
+										</select>
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>Town/City*</label>
-									<input type="text" placeholder="Town/City" name="town">
-								</div>
+									<div class="col-md-6 col-12 mb-20">
+										<label>Town/City*</label>
+										<input type="text" placeholder="Town/City" name="town">
+									</div>
 
-								<div class="col-md-6 col-12 mb-20">
-									<label>Zip Code*</label>
-									<input type="text" placeholder="Zip Code" name="zipcode">
-								</div>
-
-							</div>
-
-							<div class="col-md-12 col-12 mb-20">
-								<button class="save-address">保存</button>
-							</div>
-
-						</div>
-
-					</div>
-
-						<div class="col-lg-5">
-							<div class="row">
-
-								<!-- Cart Total -->
-								<div class="col-12 mb-60">
-
-									<h4 class="checkout-title">Cart Total</h4>
-
-									<div class="checkout-cart-total">
-
-										<h4>Product <span>Total</span></h4>
-
-										<ul>
-											{%for item in items%}
-												<li>{{item.name}} X {{item.quantity}}
-													<span>{{item.format_discount_price_quantity}}</span></li>
-											{%endfor%}
-										</ul>
-
-										<p>Sub Total <span>{{total}}</span></p>
-										<p>Shipping Fee <span>{{ship}}</span></p>
-
-										<h4>Grand Total <span>{{total}}</span></h4>
-
+									<div class="col-md-6 col-12 mb-20">
+										<label>Zip Code*</label>
+										<input type="text" placeholder="Zip Code" name="zipcode">
 									</div>
 
 								</div>
 
+								<div class="col-md-12 col-12 mb-20">
+									<button class="save-address">保存</button>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+					<div class="col-lg-5">
+						<div class="row">
+							<!-- Cart Total -->
+							<div class="col-12 mb-60">
+								<h4 class="checkout-title">Cart Total</h4>
+								<div class="checkout-cart-total">
+									<h4>Product <span>Total</span></h4>
+									<ul>
+										{%for item in items%}
+												<li>{{item.name}} X {{item.quantity}}
+													<span>{{item.format_discount_price_quantity}}</span></li>
+											{%endfor%}
+										</ul>
+										<p>Sub Total <span>{{total}}</span></p>
+										<p>Shipping Fee <span>{{ship}}</span></p>
+										<h4>Grand Total <span>{{total}}</span></h4>
+									</div>
+								</div>
 								<!-- Payment Method -->
 								<div class="col-12">
 									<h4 class="checkout-title">Payment Method</h4>
@@ -162,12 +148,12 @@
 									<button class="place-order">Place order</button>
 								</div>
 
-							</div>
 						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 </div>
 
