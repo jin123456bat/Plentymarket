@@ -184,13 +184,13 @@ class IndexController extends BaseApiController
 		return $this->success([
 			'delivery' => $addressModel,
 			'invoice' => $invoiceAddress,
-			'list' => $address->getAddresses()
+			'list' => $address->getAddresses($contactId, 2)
 		]);
 	}
 
 	public function comment ()
 	{
-		return $this->success();
+		return $this->success([]);
 	}
 
 	/**
