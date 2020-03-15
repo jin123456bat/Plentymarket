@@ -17,6 +17,16 @@ class AddressService
 	private $contactAddressRepositoryContract;
 
 	/**
+	 * 配送地址
+	 */
+	const Address_Delivery = 2;
+
+	/**
+	 * 账单地址
+	 */
+	const Address_Invoice = 1;
+
+	/**
 	 * AddressService constructor.
 	 * @param ContactAddressRepositoryContract $contactAddressRepositoryContract
 	 */
@@ -28,13 +38,25 @@ class AddressService
 	/**
 	 * 添加地址
 	 * @param array $data 地址数据
-	 * @param int $contactId 用户
-	 * @param int $typeId 地址类型 Invoice address = 1 Delivery address = 2
 	 * @return Address
 	 */
-	function create (array $data, int $contactId, int $typeId): Address
+	function create (array $data): Address
 	{
-		$this->contactAddressRepositoryContract->createAddress($data, $contactId, $typeId);
+		$contactId = pluginApp(AccountService::class)->getContactId();
+		if (!empty($contactId)) {
+			//添加配送地址
+			$address = $this->contactAddressRepositoryContract->createAddress($data, $contactId, self::Address_Delivery);
+
+			//把配送地址关联到账单地址上
+			$this->contactAddressRepositoryContract->addAddress($address->id, $contactId, self::Address_Invoice);
+
+			//设置默认地址
+			$this->contactAddressRepositoryContract->setPrimaryAddress($address->id, $contactId, self::Address_Delivery);
+			$this->contactAddressRepositoryContract->setPrimaryAddress($address->id, $contactId, self::Address_Invoice);
+
+			return $address;
+		}
+		return null;
 	}
 
 	/**
