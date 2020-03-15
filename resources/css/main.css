@@ -6308,19 +6308,27 @@ h3.comment-counter {
       float: right; }
       .cart-summary .cart-summary-button button:last-child {
         margin-left: 0; }
-      .cart-summary .cart-summary-button button:hover {
-        background-color: #cea45f;
-        border-color: #cea45f;
-        color: #ffffff; }
-      .cart-summary .cart-summary-button button.checkout-btn {
-        font-weight: 400;
-        text-transform: uppercase;
-        color: #ffffff;
-        background-color: #1e1e1e;
-        border-color: #1e1e1e; }
-        .cart-summary .cart-summary-button button.checkout-btn:hover {
-          background-color: #cea45f;
-          border-color: #cea45f; }
+.cart-summary .cart-summary-button button:hover
+{
+  background-color: #cea45f;
+  border-color: #cea45f;
+  color: #ffffff;
+}
+
+.cart-summary .cart-summary-button button.checkout-btn, a.checkout-btn
+{
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #1e1e1e;
+  border-color: #1e1e1e;
+}
+
+.cart-summary .cart-summary-button button.checkout-btn:hover
+{
+  background-color: #cea45f;
+  border-color: #cea45f;
+}
       @media only screen and (min-width: 768px) and (max-width: 991px) {
         .cart-summary .cart-summary-button button {
           margin-left: 0;

@@ -97,25 +97,29 @@ class AccountController extends BaseWebController
 	 */
 	function checkout (): string
 	{
-		$address = pluginApp(AddressService::class)->getAll();
+		try {
+			$address = pluginApp(AddressService::class)->getAll();
 
-		$total = 0;
-		$itemListService = pluginApp(ItemListService::class);
-		$list = $itemListService->getItemsFromBasket();
-		foreach ($list as $value) {
-			$total += ($value['quantity'] * $value['discount_price'] * (1 + $value['vat'] / 100));
+			$total = 0;
+			$itemListService = pluginApp(ItemListService::class);
+			$list = $itemListService->getItemsFromBasket();
+			foreach ($list as $value) {
+				$total += ($value['quantity'] * $value['discount_price'] * (1 + $value['vat'] / 100));
+			}
+
+			$numberFormatFilter = pluginApp(NumberFormatFilter::class);
+
+			return $this->render('account.checkout', [
+				$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
+			], [
+				'addresses' => $address,
+				'items' => $list,
+				'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
+				'ship' => $numberFormatFilter->formatMonetary(0, Utils::getCurrency()),
+			]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
-
-		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-
-		return $this->render('account.checkout', [
-			$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
-		], [
-			'addresses' => $address,
-			'items' => $list,
-			'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
-			'ship' => $numberFormatFilter->formatMonetary(0, Utils::getCurrency()),
-		]);
 	}
 
 	/**
