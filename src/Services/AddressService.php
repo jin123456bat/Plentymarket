@@ -63,7 +63,7 @@ class AddressService
 	 * 更新地址信息
 	 * @param int $addressId
 	 * @param array $data
-	 * @return Address
+	 * @return bool
 	 */
 	function update (int $addressId, array $data): Address
 	{
