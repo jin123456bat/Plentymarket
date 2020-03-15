@@ -162,30 +162,34 @@ class IndexController extends BaseApiController
 
 	public function address ()
 	{
-		$address = pluginApp(ContactAddressRepositoryContract::class);
-		$account = pluginApp(AccountService::class);
-		$contactId = $account->getContactId();
-		$addressModel = $address->createAddress([
-			'gender' => 'male',
-			'countryId' => 1,//德国
-			'name1' => '',
-			'name2' => '金',
-			'name3' => '程晨',
-			'vatNumber' => '',
-			'contactPerson' => '',
-			'address1' => '浙江省杭州市萧山区江南国际城4-2804',
-			'address2' => '浙江省杭州市萧山区江南国际城4-2804',
-			'postalCode' => '01013011',
-			'town' => '杭州市',
-		], $contactId, 2);
+		try {
+			$address = pluginApp(ContactAddressRepositoryContract::class);
+			$account = pluginApp(AccountService::class);
+			$contactId = $account->getContactId();
+			$addressModel = $address->createAddress([
+				'gender' => 'male',
+				'countryId' => 1,//德国
+				'name1' => '',
+				'name2' => '金',
+				'name3' => '程晨',
+				'vatNumber' => '',
+				'contactPerson' => '',
+				'address1' => '浙江省杭州市萧山区江南国际城4-2804',
+				'address2' => '浙江省杭州市萧山区江南国际城4-2804',
+				'postalCode' => '01013011',
+				'town' => '杭州市',
+			], $contactId, 2);
 
-		$invoiceAddress = $address->addAddress($addressModel->id, $contactId, 1);
+			$invoiceAddress = $address->addAddress($addressModel->id, $contactId, 1);
 
-		return $this->success([
-			'delivery' => $addressModel,
-			'invoice' => $invoiceAddress,
-			'list' => $address->getAddresses($contactId, 2)
-		]);
+			return $this->success([
+				'delivery' => $addressModel,
+				'invoice' => $invoiceAddress,
+				'list' => $address->getAddresses($contactId, 2)
+			]);
+		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	public function comment ()
