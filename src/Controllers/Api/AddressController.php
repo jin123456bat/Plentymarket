@@ -32,6 +32,6 @@ class AddressController extends BaseApiController
 	function delete (): Response
 	{
 		$address = pluginApp(AddressService::class);
-		return $this->success();
+		return $this->success([]);
 	}
 }
