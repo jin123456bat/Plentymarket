@@ -63,7 +63,7 @@ class AddressService
 	 * 更新地址信息
 	 * @param int $addressId
 	 * @param array $data
-	 * @return bool
+	 * @return Address|null
 	 */
 	function update (int $addressId, array $data): Address
 	{
@@ -72,11 +72,11 @@ class AddressService
 			$address = $this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Delivery);
 			if ($address instanceof Address) {
 				$this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Invoice);
-				return true;
+				return $address;
 			}
-			return false;
+			return null;
 		}
-		return false;
+		return null;
 	}
 
 	/**
