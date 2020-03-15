@@ -183,7 +183,8 @@ class IndexController extends BaseApiController
 
 		return $this->success([
 			'delivery' => $addressModel,
-			'invoice' => $invoiceAddress
+			'invoice' => $invoiceAddress,
+			'list' => $address->getAddresses()
 		]);
 	}
 
