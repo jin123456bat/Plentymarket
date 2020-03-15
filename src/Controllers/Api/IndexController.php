@@ -187,6 +187,7 @@ class IndexController extends BaseApiController
 			$invoiceAddress = $address->addAddress($addressModel->id, $contactId, 1);
 
 			return $this->success([
+				'version' => 1.0,
 				'delivery' => $addressModel,
 				'invoice' => $invoiceAddress,
 				'list' => $address->getAddresses($contactId)
