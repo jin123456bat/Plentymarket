@@ -6,8 +6,16 @@ use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AddressService;
 
+/**
+ * Class AddressController
+ * @package Plentymarket\Controllers\Api
+ */
 class AddressController extends BaseApiController
 {
+	/**
+	 * 添加地址
+	 * @return Response
+	 */
 	function create (): Response
 	{
 		$address = pluginApp(AddressService::class);
@@ -18,10 +26,12 @@ class AddressController extends BaseApiController
 		return $this->success($address);
 	}
 
+	/**
+	 * @return Response
+	 */
 	function delete (): Response
 	{
 		$address = pluginApp(AddressService::class);
-		$address->delete();
 		return $this->success();
 	}
 }
