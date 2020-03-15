@@ -23,7 +23,7 @@ class AddressController extends BaseApiController
 
 		]);
 
-		return $this->success($address);
+		return $this->success($address->toArray());
 	}
 
 	/**
