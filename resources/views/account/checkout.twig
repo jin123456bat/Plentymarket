@@ -111,16 +111,15 @@
 							</div>
 
 						</div>
-					</div>
-					<div class="col-lg-5">
-						<div class="row">
-							<!-- Cart Total -->
-							<div class="col-12 mb-60">
-								<h4 class="checkout-title">Cart Total</h4>
-								<div class="checkout-cart-total">
-									<h4>Product <span>Total</span></h4>
-									<ul>
-										{%for item in items%}
+						<div class="col-lg-5">
+							<div class="row">
+								<!-- Cart Total -->
+								<div class="col-12 mb-60">
+									<h4 class="checkout-title">Cart Total</h4>
+									<div class="checkout-cart-total">
+										<h4>Product <span>Total</span></h4>
+										<ul>
+											{%for item in items%}
 												<li>{{item.name}} X {{item.quantity}}
 													<span>{{item.format_discount_price_quantity}}</span></li>
 											{%endfor%}
@@ -148,6 +147,7 @@
 									<button class="place-order">Place order</button>
 								</div>
 
+							</div>
 						</div>
 					</div>
 				</div>
