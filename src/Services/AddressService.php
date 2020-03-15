@@ -103,7 +103,7 @@ class AddressService
 	{
 		$contactId = pluginApp(AccountService::class)->getContactId();
 		if (!empty($contactId)) {
-			return $this->contactAddressRepositoryContract->getAddresses($contactId, self::Address_Delivery)->toArray();
+			return $this->contactAddressRepositoryContract->getAddresses($contactId, self::Address_Delivery);
 		}
 		return [];
 	}
