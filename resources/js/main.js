@@ -371,34 +371,44 @@
 
 	/*----------  Payment method select  ----------*/
 
-	$('[name="payment-method"]').on('click', function () {
+	$("[name=\"payment-method\"]").on("click", function()
+	{
 
-		var $value = $(this).attr('value');
+		var $value = $(this).attr("value");
 
-		$('.single-method p').slideUp();
-		$('[data-method="' + $value + '"]').slideDown();
+		$(".single-method p").slideUp();
+		$("[data-method=\"" + $value + "\"]").slideDown();
 
 	});
 
 
-
-	/*----------  Shipping form toggle  ----------*/
-
-	$('[data-shipping]').on('click', function () {
-		if ($('[data-shipping]:checked').length > 0) {
-			$('#shipping-form').slideDown();
-		} else {
-			$('#shipping-form').slideUp();
+	$(".create-address").on("click", function()
+	{
+		if ($("#shipping-form").is(":visible"))
+		{
+			$("#shipping-form").slideUp();
 		}
+		else
+		{
+			$("#shipping-form").slideDown();
+			$(".create-address").parent().fadeOut();
+		}
+		return false;
 	});
 
+
+	$(".address-select").on("click", function()
+	{
+		$(this).parents(".address").siblings().removeClass("selected");
+		$(this).parents(".address").addClass("selected");
+		return false;
+	});
 
 
 	/*----------  Slider one active  ----------*/
 
 
-
-	var heroSlider = $('.hero-slider-one');
+	var heroSlider = $(".hero-slider-one");
 	heroSlider.slick({
 		arrows: true,
 		autoplay: true,

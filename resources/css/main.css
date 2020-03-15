@@ -6437,25 +6437,116 @@ h3.comment-counter {
         text-align: center;
         -webkit-transition: all 0.3s ease 0s;
         -o-transition: all 0.3s ease 0s;
-        transition: all 0.3s ease 0s; }
-    .checkout-form .check-box input[type="checkbox"]:checked + label::before {
-      border: 2px solid #1e1e1e; }
-    .checkout-form .check-box input[type="checkbox"]:checked + label::after {
-      opacity: 1; }
+        transition: all 0.3s ease 0s;
+      }
+
+.checkout-form .check-box input[type="checkbox"]:checked + label::before
+{
+  border: 2px solid #1e1e1e;
+}
+
+.checkout-form .check-box input[type="checkbox"]:checked + label::after
+{
+  opacity: 1;
+}
 
 /*-- Shipping Form --*/
-#shipping-form {
-  display: none; }
+#shipping-form
+{
+  display: none;
+}
+
+.address-list
+{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.address
+{
+  width: calc(50% - 10px);
+  border: 1px dashed #eeeeee;
+  padding: 10px;
+  margin: 10px;
+}
+
+.address:nth-child(odd)
+{
+  margin-left: 0px;
+}
+
+.address:nth-child(even)
+{
+  margin-right: 0px;
+}
+
+.address:hover
+{
+  box-shadow: 0px 0px 2px 0px;
+  border: 1px solid transparent;
+}
+
+.address .address-select, .create-address, .save-address
+{
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #1e1e1e;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 0;
+}
+
+.address .address-name, .address .address-address, .address .address-mobile
+{
+  padding: 10px 0px;
+}
+
+.address.selected
+{
+  box-shadow: 0px 0px 2px 0px;
+  border: 1px solid transparent;
+}
+
+.address.selected .address-select, .create-address
+{
+  border-color: #999999;
+  background-color: white;
+  color: #232323;
+}
+
+.create-address
+{
+  width: 100%;
+}
+
+.address .address-select:hover, .create-address:hover
+{
+  background-color: #cea45f;
+  border-color: #cea45f;
+  color: white;
+}
 
 /*-- Checkout Cart Total --*/
-.checkout-cart-total {
+.checkout-cart-total
+{
   background-color: #ddd;
-  padding: 45px; }
-  @media only screen and (max-width: 575px) {
-    .checkout-cart-total {
-      padding: 30px; } }
-  .checkout-cart-total h4 {
-    -ms-flex-preferred-size: 18px;
+  padding: 45px;
+}
+
+@media only screen and (max-width: 575px)
+{
+  .checkout-cart-total
+  {
+    padding: 30px;
+  }
+}
+
+.checkout-cart-total h4
+{
+  -ms-flex-preferred-size: 18px;
     flex-basis: 18px;
     line-height: 23px;
     font-weight: 700; }
