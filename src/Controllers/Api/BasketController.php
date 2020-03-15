@@ -107,22 +107,4 @@ class BasketController extends BaseApiController
 			return $this->exception($e);
 		}
 	}
-
-	/**
-	 * 购物车中商品数量
-	 * @return Response
-	 */
-	function num (): Response
-	{
-		try {
-			$list = pluginApp(BasketService::class)->getAll();
-			$quantity = 0;
-			foreach ($list as $value) {
-				$quantity += $value['quantity'];
-			}
-			return $this->success($quantity);
-		} catch (\Throwable $e) {
-			return $this->exception($e);
-		}
-	}
 }

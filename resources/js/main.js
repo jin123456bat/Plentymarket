@@ -102,6 +102,7 @@
 		$.get("/api/basket/index", function(response)
 		{
 			response = JSON.parse(response);
+			$("#cart-num").text(0);
 			if (response.code == 1)
 			{
 				if (response.data.list.length == 0)
@@ -113,8 +114,11 @@
 				{
 					$("#cart-floating-box .cart-items").empty();
 					var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
+					var quantity = 0;
 					$.each(response.data.list, function(index, value)
 					{
+						quantity += value.quantity;
+
 						var tpl = $($("#basket_item_tpl").html().replace(reg, function(node, key)
 						{
 							return value[key];
@@ -144,6 +148,8 @@
 
 						$("#cart-floating-box .cart-items").append(tpl);
 					});
+
+					$("#cart-num").text(quantity);
 
 					$("#basket_total_price").html(response.data.total);
 				}
