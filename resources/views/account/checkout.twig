@@ -83,6 +83,9 @@
 									<div class="col-md-6 col-12 mb-20">
 										<label>Country*</label>
 										<select class="nice-select" name="country">
+											{%for c in country%}
+												<option value="{{c.id}}">{{c.name}}</option>
+											{%endfor%}
 										</select>
 									</div>
 

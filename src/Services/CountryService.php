@@ -2,9 +2,9 @@
 
 namespace Plentymarket\Services;
 
-use Illuminate\Support\Collection;
 use Plenty\Modules\Order\Shipping\Countries\Contracts\CountryRepositoryContract;
 use Plenty\Modules\Order\Shipping\Countries\Models\Country;
+use Plentymarket\Helper\Utils;
 
 /**
  * Class CountryService
@@ -32,6 +32,35 @@ class CountryService
 	function getAll ()
 	{
 		return $this->countryRepositoryContract->getActiveCountriesList();
+	}
+
+	/**
+	 * @return array
+	 */
+	function getTree ()
+	{
+		$country_list = $this->getAll();
+		$country = [];
+		foreach ($country_list as $c) {
+			$states = [];
+			foreach ($c['states'] as $state) {
+				$states[] = [
+					'id' => $state['id'],
+					'name' => $state['name']
+				];
+			}
+
+			foreach ($c['names'] as $c_name) {
+				if ($c_name['language'] == Utils::getLang()) {
+					$country[] = [
+						'id' => $c_name['country_id'],
+						'name' => $c_name['name'],
+						'states' => $states
+					];
+				}
+			}
+		}
+		return $country;
 	}
 
 	/**

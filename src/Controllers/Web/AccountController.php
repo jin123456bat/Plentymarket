@@ -56,27 +56,7 @@ class AccountController extends BaseWebController
 
 		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
 
-		$country_list = pluginApp(CountryService::class)->getAll();
-		$country = [];
-		foreach ($country_list as $c) {
-			$states = [];
-			foreach ($c['states'] as $state) {
-				$states[] = [
-					'id' => $state['id'],
-					'name' => $state['name']
-				];
-			}
-
-			foreach ($c['names'] as $c_name) {
-				if ($c_name['language'] == Utils::getLang()) {
-					$country[] = [
-						'id' => $c_name['country_id'],
-						'name' => $c_name['name'],
-						'states' => $states
-					];
-				}
-			}
-		}
+		$country = pluginApp(CountryService::class)->getTree();
 
 		return $this->render('account.cart', [
 			$this->trans('WebAccountCart.cart') => '/account/cart'
@@ -109,6 +89,8 @@ class AccountController extends BaseWebController
 
 			$numberFormatFilter = pluginApp(NumberFormatFilter::class);
 
+			$country = pluginApp(CountryService::class)->getTree();
+
 			return $this->render('account.checkout', [
 				$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
 			], [
@@ -116,6 +98,7 @@ class AccountController extends BaseWebController
 				'items' => $list,
 				'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
 				'ship' => $numberFormatFilter->formatMonetary(0, Utils::getCurrency()),
+				'country' => $country,
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);

@@ -49,6 +49,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/api/wishlist/delete/{itemId}', 'Plentymarket\Controllers\Api\WishlistController@delete');
 		$router->get('/api/wishlist/has/{itemId}', 'Plentymarket\Controllers\Api\WishlistController@has');
 		$router->get('/api/wishlist/num', 'Plentymarket\Controllers\Api\WishlistController@num');
+		$router->get('/api/address/create', 'Plentymarket\Controllers\Api\AddressController@create');
 
 		//页面声明
 		$router->get('/', 'Plentymarket\Controllers\Web\IndexController@index');
