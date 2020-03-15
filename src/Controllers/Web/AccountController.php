@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseWebController;
 use Plentymarket\Extensions\Filters\NumberFormatFilter;
 use Plentymarket\Helper\Utils;
+use Plentymarket\Services\AddressService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 
@@ -96,8 +97,24 @@ class AccountController extends BaseWebController
 	 */
 	function checkout (): string
 	{
+		$address = pluginApp(AddressService::class)->getAll();
+
+		$total = 0;
+		$itemListService = pluginApp(ItemListService::class);
+		$list = $itemListService->getItemsFromBasket();
+		foreach ($list as $value) {
+			$total += ($value['quantity'] * $value['discount_price'] * (1 + $value['vat'] / 100));
+		}
+
+		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
+
 		return $this->render('account.checkout', [
 			$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
+		], [
+			'addresses' => $address,
+			'items' => $list,
+			'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
+			'ship' => $numberFormatFilter->formatMonetary(0, Utils::getCurrency()),
 		]);
 	}
 

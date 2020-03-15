@@ -393,25 +393,25 @@
 		if ($("#shipping-form").is(":visible"))
 		{
 			$("#shipping-form").slideUp();
-		}
-		else
-		{
-			$("#shipping-form").slideDown();
-			$(".create-address").parent().fadeOut();
-		}
-		return false;
-	});
+        }
+        else
+        {
+            $("#shipping-form").slideDown();
+            $(".create-address").parent().fadeOut();
+        }
+        return false;
+    });
 
 
-	$(".address-select").on("click", function()
-	{
-		$(this).parents(".address").siblings().removeClass("selected");
-		$(this).parents(".address").addClass("selected");
-		return false;
-	});
+    $(".address-list").on("click", ".address-select", function()
+    {
+        $(this).parents(".address").siblings().removeClass("selected");
+        $(this).parents(".address").addClass("selected");
+        return false;
+    });
 
 
-	/*----------  Slider one active  ----------*/
+    /*----------  Slider one active  ----------*/
 
 
 	var heroSlider = $(".hero-slider-one");

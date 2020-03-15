@@ -62,36 +62,49 @@ class AddressService
 	/**
 	 * 更新地址信息
 	 * @param int $addressId
-	 * @param int $contactId
-	 * @param int $typeId
 	 * @param array $data
 	 * @return Address
 	 */
-	function update (int $addressId, int $contactId, int $typeId, array $data): Address
+	function update (int $addressId, array $data): Address
 	{
-		return $this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, $typeId);
+		$contactId = pluginApp(AccountService::class)->getContactId();
+		if (!empty($contactId)) {
+			$address = $this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Delivery);
+			if ($address instanceof Address) {
+				$this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Invoice);
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
 	/**
 	 * 删除地址
 	 * @param int $addressId
-	 * @param int $contactId
-	 * @param int $typeId
 	 * @return bool
 	 */
-	function delete (int $addressId, int $contactId, int $typeId): bool
+	function delete (int $addressId): bool
 	{
-		return $this->contactAddressRepositoryContract->deleteAddress($addressId, $contactId, $typeId);
+		$contactId = pluginApp(AccountService::class)->getContactId();
+		if (!empty($contactId)) {
+			$result1 = $this->contactAddressRepositoryContract->deleteAddress($addressId, $contactId, self::Address_Delivery);
+			$result2 = $this->contactAddressRepositoryContract->deleteAddress($addressId, $contactId, self::Address_Invoice);
+			return $result1 && $result2;
+		}
+		return false;
 	}
 
 	/**
 	 * 获取所有地址列表
-	 * @param int $contactId
-	 * @param int|null $typeId
 	 * @return array
 	 */
-	function getAll (int $contactId, int $typeId = null): array
+	function getAll (): array
 	{
-		return $this->contactAddressRepositoryContract->getAddresses($contactId, $typeId);
+		$contactId = pluginApp(AccountService::class)->getContactId();
+		if (!empty($contactId)) {
+			return $this->contactAddressRepositoryContract->getAddresses($contactId, self::Address_Delivery);
+		}
+		return [];
 	}
 }

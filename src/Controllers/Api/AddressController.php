@@ -20,7 +20,17 @@ class AddressController extends BaseApiController
 	{
 		$address = pluginApp(AddressService::class);
 		$address = $address->create([
-
+			'name2' => $this->request->input('first_name'),
+			'name3' => $this->request->input('second_name'),
+			'countryId' => $this->request->input('country'),
+			'address1' => $this->request->input('address1'),
+			'address2' => $this->request->input('address2'),
+			'postalCode' => $this->request->input('zipcode'),
+			'town' => $this->request->input('town'),
+			'stateId' => $this->request->input('state'),//浙江的ID
+			'companyName' => $this->request->input('company_name'),
+			'email' => $this->request->input('email'),
+			'phone' => $this->request->input('phone')
 		]);
 
 		return $this->success($address->toArray());
