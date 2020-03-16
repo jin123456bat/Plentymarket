@@ -238,7 +238,11 @@ class IndexController extends BaseApiController
 	 */
 	public function country (): Response
 	{
-		return $this->success(pluginApp(CountryService::class)->getAll());
+		try {
+			return $this->success(pluginApp(CountryService::class)->getAll());
+		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
