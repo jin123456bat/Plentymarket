@@ -44,7 +44,7 @@
 							</div>
 
 							<!-- Shipping Address -->
-							<div id="shipping-form" class="mb-40">
+							<form id="shipping-form" class="mb-40">
 								<h4 class="checkout-title">New Address</h4>
 
 								<div class="row">
@@ -111,7 +111,7 @@
 									<button class="save-address">保存</button>
 								</div>
 
-							</div>
+							</form>
 
 						</div>
 						<div class="col-lg-5">
@@ -180,47 +180,112 @@
 </script>
 <script type="text/javascript">
 
-    $(".save-address").on("click", function()
-    {
-        var data = {
-            first_name: $.trim($("input[name=first_name]").val()),
-            second_name: $.trim($("input[name=second_name]").val()),
-            company_name: $.trim($("input[name=company_name]").val()),
-            email: $.trim($("input[name=email]").val()),
-            phone: $.trim($("input[name=phone]").val()),
-            address1: $.trim($("input[name=address1]").val()),
-            address2: $.trim($("input[name=address2]").val()),
-            country: $.trim($("select[name=country]").val()),
-            state: $.trim($("select[name=state]").val()),
-            town: $.trim($("input[name=town]").val()),
-            zipcode: $.trim($("input[name=zipcode]").val())
-        };
-        $.get("/api/address/create", data, function(response)
+    $("#shipping-form").validate({
+        rules: {
+            first_name: {
+                required: true,
+                maxlength: 32
+            },
+            second_name: {
+                required: true,
+                maxlength: 32
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            phone: {
+                required: true
+            },
+            address1: {
+                required: {
+                    depends: function()
+                    {
+                        return ($.trim($("input[name=address2]").val()).length <= 0);
+                    }
+                }
+            },
+            address2: {
+                required: {
+                    depends: function()
+                    {
+                        return ($.trim($("input[name=address1]").val()).length <= 0);
+                    }
+                }
+            },
+            country: {
+                required: true
+            },
+            town: {
+                required: true
+            }
+        },
+        errorPlacement: function(error, element)
         {
-            response = JSON.parse(response);
-            if (response.code == 1)
+            error.css({
+                color: "#f4516c",
+                marginTop: "0.2rem",
+                fontSize: "0.85rem",
+                fontFamily: "Poppins",
+                lineHeight: "1.5",
+                paddingLeft: "5px"
+            });
+            error.appendTo(element.parent());
+        },
+        focusInvalid: true,
+        errorClass: "col-offset-2 error",
+        success: function(error, element)
+        {
+            error.remove();
+        },
+        highlight: function(element, b, c)
+        {
+            $(element).css({
+                borderColor: "#f4516c"
+            });
+        },
+        submitHandler: function(form)
+        {
+            var data = {
+                first_name: $.trim($("input[name=first_name]").val()),
+                second_name: $.trim($("input[name=second_name]").val()),
+                company_name: $.trim($("input[name=company_name]").val()),
+                email: $.trim($("input[name=email]").val()),
+                phone: $.trim($("input[name=phone]").val()),
+                address1: $.trim($("input[name=address1]").val()),
+                address2: $.trim($("input[name=address2]").val()),
+                country: $.trim($("select[name=country]").val()),
+                state: $.trim($("select[name=state]").val()),
+                town: $.trim($("input[name=town]").val()),
+                zipcode: $.trim($("input[name=zipcode]").val())
+            };
+            $.get("/api/address/create", data, function(response)
             {
-                data.id = response.data.id;
-                var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
-                var address = $($("#address-tpl").html().replace(reg, function(key, value)
+                response = JSON.parse(response);
+                if (response.code == 1)
                 {
-                    return data[value];
-                }));
-                address.appendTo($(".address-list"));
-                address.find(".address-select").trigger("click");
+                    data.id = response.data.id;
+                    var reg = new RegExp("\\[([^\\[\\]]*?)\\]", "igm");
+                    var address = $($("#address-tpl").html().replace(reg, function(key, value)
+                    {
+                        return data[value];
+                    }));
+                    address.appendTo($(".address-list"));
+                    address.find(".address-select").trigger("click");
 
-                $("#shipping-form").slideUp();
-                $(".create-address").parent().fadeIn();
-            }
-            else
-            {
-                spop({
-                    template: '{{trans('Plentymarket::WebAccountCheckout.create_address_failed')}}',
-                    style: "error"
-                });
-            }
-        });
-        return false;
+                    $("#shipping-form").slideUp();
+                    $(".create-address").parent().fadeIn();
+                }
+                else
+                {
+                    spop({
+                        template: '{{trans('Plentymarket::WebAccountCheckout.create_address_failed')}}',
+                        style: "error"
+                    });
+                }
+            });
+            return false;
+        }
     });
 
     var loadState = function(country_id)
