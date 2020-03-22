@@ -57,16 +57,10 @@ class AccountService
 	 * 登录
 	 * @param string $email
 	 * @param string $password
-	 * @return bool
 	 */
-	function login (string $email, string $password): bool
+	function login (string $email, string $password)
 	{
-		try {
-			$this->contactAuthenticationRepositoryContract->authenticateWithContactEmail($email, $password);
-			return true;
-		} catch (Exception $e) {
-			return false;
-		}
+		$this->contactAuthenticationRepositoryContract->authenticateWithContactEmail($email, $password);
 	}
 
 	/**

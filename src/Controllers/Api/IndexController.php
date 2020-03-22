@@ -49,10 +49,11 @@ class IndexController extends BaseApiController
 			return $this->error('');
 		}
 
-		if ($this->accountService->login($email, $password)) {
+		try {
+			$this->accountService->login($email, $password);
 			return $this->success([]);
-		} else {
-			return $this->error('');
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
 	}
 
@@ -138,7 +139,8 @@ class IndexController extends BaseApiController
 	public function country (): Response
 	{
 		try {
-			return $this->success(pluginApp(CountryService::class)->getAll());
+			$country = pluginApp(CountryService::class)->getAll();
+			return $this->success($country);
 		} catch (Throwable $e) {
 			return $this->exception($e);
 		}

@@ -29,9 +29,10 @@ class CountryService
 	/**
 	 * 获取所有的可用的国家列表
 	 */
-	function getAll ()
+	function getAll (): array
 	{
-		return $this->countryRepositoryContract->getActiveCountriesList();
+		$countryList = $this->countryRepositoryContract->getActiveCountriesList();
+		return json_decode(json_encode($countryList), true);
 	}
 
 	/**
