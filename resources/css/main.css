@@ -6294,17 +6294,18 @@ h3.comment-counter {
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         justify-content: flex-start; } }
-    .cart-summary .cart-summary-button button {
-      margin-top: 10px;
-      width: 140px;
-      border-radius: 0;
-      height: 36px;
-      border: 1px solid #999999;
-      line-height: 24px;
-      padding: 5px 20px;
-      color: #232323;
-      background-color: transparent;
-      margin-left: 20px;
+.cart-summary .cart-summary-button button, .cart-summary .cart-summary-button a
+{
+  margin-top: 10px;
+  width: 140px;
+  border-radius: 0;
+  height: 36px;
+  border: 1px solid #999999;
+  line-height: 24px;
+  padding: 5px 20px;
+  color: #232323;
+  background-color: transparent;
+  margin-left: 20px;
       float: right; }
       .cart-summary .cart-summary-button button:last-child {
         margin-left: 0; }
