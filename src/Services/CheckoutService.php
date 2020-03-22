@@ -41,9 +41,11 @@ class CheckoutService
 	{
 		$methodOfPaymentID = (int)$this->checkout->getPaymentMethodId();
 
-		$methodOfPaymentList = pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList();
+		/** @var FrontendPaymentMethodRepositoryContract $frontendPaymentMethodRepository */
+		$frontendPaymentMethodRepository = pluginApp(FrontendPaymentMethodRepositoryContract::class);
 
-		$methodOfPaymentExpressCheckoutList = $this->getMethodOfPaymentExpressCheckoutList();
+		$methodOfPaymentList = $frontendPaymentMethodRepository->getCurrentPaymentMethodsList();
+		$methodOfPaymentExpressCheckoutList = $frontendPaymentMethodRepository->getCurrentPaymentMethodsForExpressCheckout();
 		$methodOfPaymentList = array_merge($methodOfPaymentList, $methodOfPaymentExpressCheckoutList);
 
 		$methodOfPaymentValid = false;
@@ -57,7 +59,8 @@ class CheckoutService
 			$methodOfPaymentID = $methodOfPaymentList[0]->id;
 
 			if (!is_null($methodOfPaymentID)) {
-				$this->setMethodOfPaymentId($methodOfPaymentID);
+				$this->checkout->setPaymentMethodId($methodOfPaymentID);
+				pluginApp(SessionService::class)->set('MethodOfPaymentID', $methodOfPaymentID);
 			}
 		}
 

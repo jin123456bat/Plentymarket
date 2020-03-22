@@ -145,7 +145,7 @@ class OrderItemBuilder
 				$quantity = $itemWithoutStock['stockNet'];
 
 				if ($quantity <= 0 && (int)$updatedItem['id'] > 0) {
-					$basketService->update($updatedItem['id']);
+					$basketService->delete($updatedItem['id']);
 				} elseif ((int)$updatedItem['id'] > 0) {
 					$updatedItem['quantity'] = $quantity;
 					$basketService->update($updatedItem['id'], $updatedItem);

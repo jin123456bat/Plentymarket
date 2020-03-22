@@ -8,6 +8,10 @@ use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Basket\Exceptions\BasketCheckException;
 use Plenty\Modules\Basket\Models\Basket;
 use Plenty\Modules\Basket\Models\BasketItem;
+use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;
+use Plenty\Modules\Item\Variation\Models\Variation;
+use Plenty\Modules\Item\VariationDescription\Contracts\VariationDescriptionRepositoryContract;
+use Plenty\Modules\Item\VariationDescription\Models\VariationDescription;
 use Plentymarket\Helper\Utils;
 
 /**
@@ -66,7 +70,7 @@ class BasketService
 			return [];
 		}
 
-		foreach ($basketItem['basketItemOrderParams'] as $param) {
+		foreach ($basketItem['basketItemOrderParams'] ?? [] as $param) {
 			$propertyId = (int)$param['propertyId'];
 
 			foreach ($basketItem['variation']['data']['properties'] as $property) {
