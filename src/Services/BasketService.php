@@ -2,11 +2,13 @@
 
 namespace Plentymarket\Services;
 
+use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Modules\Basket\Contracts\BasketItemRepositoryContract;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Basket\Exceptions\BasketCheckException;
 use Plenty\Modules\Basket\Models\Basket;
 use Plenty\Modules\Basket\Models\BasketItem;
+use Plentymarket\Helper\Utils;
 
 /**
  * Class BasketService
@@ -41,6 +43,140 @@ class BasketService
 	function getAll ()
 	{
 		return $this->basketItemRepositoryContract->all();
+	}
+
+	/**
+	 * List the basket items for order
+	 *
+	 * @return array
+	 */
+	public function getBasketItemsForOrder (): array
+	{
+		$basketItems = $this->getAll();
+		$basketItemData = $this->getOrderItemData($basketItems);
+		$basketItems = $this->addVariationData($basketItems, $basketItemData);
+
+		return $basketItems;
+	}
+
+	private function getSortedBasketItemOrderParams ($basketItem): array
+	{
+		$newParams = [];
+		if (!array_key_exists('basketItemOrderParams', $basketItem)) {
+			return [];
+		}
+
+		foreach ($basketItem['basketItemOrderParams'] as $param) {
+			$propertyId = (int)$param['propertyId'];
+
+			foreach ($basketItem['variation']['data']['properties'] as $property) {
+				if ($property['property']['id'] === $propertyId) {
+					$newParam = $param;
+					$newParam['position'] = $property['property']['position'];
+					$newParams[] = $newParam;
+				}
+			}
+		}
+
+		usort(
+			$newParams,
+			function ($documentA, $documentB) {
+				return $documentA['position'] - $documentB['position'];
+			}
+		);
+
+		return $newParams;
+	}
+
+	/**
+	 * Load the variation data for the basket item
+	 *
+	 * @param BasketItem[] $basketItems
+	 * @param array $basketItemData
+	 * @param boolean $sortOrderItems
+	 *
+	 * @return array
+	 */
+	private function addVariationData ($basketItems, $basketItemData, $sortOrderItems = false): array
+	{
+		$showNetPrice = pluginApp(AccountService::class)->showNetPrices();
+
+		$result = [];
+		foreach ($basketItems as $basketItem) {
+			if ($showNetPrice) {
+				$basketItem->price = round($basketItem->price * 100 / (100.0 + $basketItem->vat), 2);
+			}
+
+			$arr = $basketItem->toArray();
+
+			if (array_key_exists($basketItem->variationId, $basketItemData)) {
+				$arr["variation"] = $basketItemData[$basketItem->variationId];
+			} else {
+				$arr["variation"] = null;
+			}
+
+			if ($sortOrderItems && array_key_exists($basketItem->variationId, $basketItemData)) {
+				$arr['basketItemOrderParams'] = $this->getSortedBasketItemOrderParams($arr);
+			}
+
+			array_push(
+				$result,
+				$arr
+			);
+		}
+		return $result;
+	}
+
+	/**
+	 * Get the data of the basket items
+	 * @param BasketItem[] $basketItems
+	 * @return array
+	 */
+	private function getOrderItemData ($basketItems = array()): array
+	{
+		if (count($basketItems) <= 0) {
+			return array();
+		}
+
+		/**
+		 * @var VariationRepositoryContract $variationRepository
+		 */
+		$variationRepository = pluginApp(VariationRepositoryContract::class);
+
+		/**
+		 * @var VariationDescriptionRepositoryContract $variationDescriptionRepository
+		 */
+		$variationDescriptionRepository = pluginApp(VariationDescriptionRepositoryContract::class);
+
+		$lang = Utils::getLang();
+
+		/** @var AuthHelper $authHelper */
+		$authHelper = pluginApp(AuthHelper::class);
+
+		$result = [];
+		foreach ($basketItems as $basketItem) {
+			/**
+			 * @var Variation $variation
+			 */
+			$variation = $variationRepository->findById($basketItem->variationId);
+
+			/**
+			 * @var VariationDescription $texts
+			 */
+			$texts = $authHelper->processUnguarded(function () use ($variationDescriptionRepository, $basketItem, $lang) {
+				return $variationDescriptionRepository->find($basketItem->variationId, $lang);
+			});
+
+			$result[$basketItem->variationId]['data']['variation']['name'] = $variation->name ?? '';
+			$result[$basketItem->variationId]['data']['texts']['name1'] = $texts->name ?? '';
+			$result[$basketItem->variationId]['data']['texts']['name2'] = $texts->name2 ?? '';
+			$result[$basketItem->variationId]['data']['texts']['name3'] = $texts->name3 ?? '';
+			$result[$basketItem->variationId]['data']['variation']['vatId'] = $variation->vatId ?? $variation->parent->vatId;
+			$result[$basketItem->variationId]['data']['properties'] = $variation->variationProperties->toArray();
+			$result[$basketItem->variationId]['data']['basketItemOrderParams'] = $basketItem->basketItemOrderParams;
+		}
+
+		return $result;
 	}
 
 	/**

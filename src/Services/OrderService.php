@@ -45,11 +45,12 @@ class OrderService
 	/**
 	 *  创建订单
 	 * @param array $data
+	 * @param string|null $coupon
 	 * @return Order
 	 */
-	function create (array $data): Order
+	function create (array $data, string $coupon = null): Order
 	{
-		return $this->orderRepositoryContract->createOrder($data);
+		return $this->orderRepositoryContract->createOrder($data, $coupon);
 	}
 
 	/**

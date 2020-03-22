@@ -3,19 +3,14 @@
 namespace Plentymarket\Controllers\Api;
 
 use Exception;
-use Plenty\Modules\Account\Contact\Contracts\ContactAddressRepositoryContract;
+use Plenty\Modules\Frontend\PaymentMethod\Contracts\FrontendPaymentMethodRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
-use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
-use Plentymarket\Services\ItemService;
-use Plentymarket\Services\ItemSetService;
-use Plentymarket\Services\StockService;
-use Plentymarket\Services\WarehouseService;
 use Throwable;
 
 /**
@@ -82,6 +77,7 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * 根据国家ID获取城市信息
 	 * @return Response
 	 */
 	public function state (): Response
@@ -111,46 +107,6 @@ class IndexController extends BaseApiController
 	/**
 	 * @return Response
 	 */
-	public function category (): Response
-	{
-		return $this->success(pluginApp(CategoryService::class)->getAll());
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function itemset (): Response
-	{
-		return $this->success(pluginApp(ItemSetService::class)->getAll());
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function warehouse (): Response
-	{
-		return $this->success(pluginApp(WarehouseService::class)->getAll());
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function stock (): Response
-	{
-		return $this->success(pluginApp(StockService::class)->listStock());
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function item (): Response
-	{
-		return $this->success(pluginApp(ItemService::class)->getAll());
-	}
-
-	/**
-	 * @return Response
-	 */
 	public function blog (): Response
 	{
 		try {
@@ -158,48 +114,6 @@ class IndexController extends BaseApiController
 		} catch (Throwable $e) {
 			return $this->exception($e);
 		}
-	}
-
-	public function address ()
-	{
-		try {
-			$address = pluginApp(ContactAddressRepositoryContract::class);
-			$account = pluginApp(AccountService::class);
-			$contactId = $account->getContactId();
-			$addressModel = $address->createAddress([
-				//'gender' => 'male',
-				'countryId' => 1,//德国
-				//'name1' => '',
-				'name2' => '金',
-				'name3' => '程晨',
-				//'vatNumber' => '',
-				//'contactPerson' => '',
-				'address1' => '浙江省杭州市萧山区江南国际城4-2804',
-				'address2' => '浙江省杭州市萧山区江南国际城4-2804',
-				'postalCode' => '01013011',
-				'town' => '杭州市',
-				//'stateId' => '',//浙江的ID
-				'companyName' => '公司名称',
-				'email' => '326550324@qq.com',
-				'phone' => '15868481019'
-			], $contactId, 2);
-
-			$invoiceAddress = $address->addAddress($addressModel->id, $contactId, 1);
-
-			return $this->success([
-				'version' => 1.0,
-				'delivery' => $addressModel,
-				'invoice' => $invoiceAddress,
-				'list' => $address->getAddresses($contactId)
-			]);
-		} catch (Throwable $e) {
-			return $this->exception($e);
-		}
-	}
-
-	public function comment ()
-	{
-		return $this->success([]);
 	}
 
 	/**
@@ -214,23 +128,8 @@ class IndexController extends BaseApiController
 			$itemList = $itemListService->getCategoryItem(16, null, 1, 12, true);
 			return $this->success($itemList);
 		} catch (Exception $e) {
-			return $this->success([
-				'code' => $e->getCode(),
-				'file' => $e->getFile(),
-				'message' => $e->getMessage(),
-				'trace' => $e->getTrace(),
-			]);
+			return $this->exception($e);
 		}
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function contact (): Response
-	{
-		return $this->success([
-			'getIsAccountLoggedIn' => pluginApp(\Plenty\Modules\Frontend\Services\AccountService::class)->getIsAccountLoggedIn(),
-		]);
 	}
 
 	/**
@@ -241,6 +140,20 @@ class IndexController extends BaseApiController
 		try {
 			return $this->success(pluginApp(CountryService::class)->getAll());
 		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
+	}
+
+	/**
+	 * 支付方式
+	 * @return Response
+	 */
+	public function payment (): Response
+	{
+		try {
+			$methodOfPaymentList = pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList();
+			return $this->success($methodOfPaymentList);
+		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
 	}
