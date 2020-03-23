@@ -205,7 +205,7 @@ class BasketService
 				return $basketItem;
 			}
 		}
-		throw new \Exception('添加购物车失败');
+		throw new \Exception($basketItem);
 	}
 
 	/**

@@ -25,17 +25,11 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 //		});
 
 		//测试api
-		$router->get('/api/index/category', 'Plentymarket\Controllers\Api\IndexController@category');
-		$router->get('/api/index/itemset', 'Plentymarket\Controllers\Api\IndexController@itemset');
-		$router->get('/api/index/warehouse', 'Plentymarket\Controllers\Api\IndexController@warehouse');
-		$router->get('/api/index/stock', 'Plentymarket\Controllers\Api\IndexController@stock');
 		$router->get('/api/index/blog', 'Plentymarket\Controllers\Api\IndexController@blog');
-		$router->get('/api/index/item', 'Plentymarket\Controllers\Api\IndexController@item');
 		$router->get('/api/index/search', 'Plentymarket\Controllers\Api\IndexController@search');
 		$router->get('/api/index/test', 'Plentymarket\Controllers\Api\IndexController@test');
-		$router->get('/api/index/contact', 'Plentymarket\Controllers\Api\IndexController@contact');
 		$router->get('/api/index/country', 'Plentymarket\Controllers\Api\IndexController@country');
-		$router->get('/api/index/address', 'Plentymarket\Controllers\Api\IndexController@address');
+		$router->get('/api/index/payment', 'Plentymarket\Controllers\Api\IndexController@payment');
 
 		//生产api
 		$router->get('/api/index/register', 'Plentymarket\Controllers\Api\IndexController@register');

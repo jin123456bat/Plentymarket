@@ -180,6 +180,14 @@
 </script>
 <script type="text/javascript">
 
+    $(".place-order").on("click", function()
+    {
+        $.get("/api/order/create", { address_id: $("") }, function()
+        {
+
+        });
+    });
+
     $("#shipping-form").validate({
         rules: {
             first_name: {
@@ -264,7 +272,6 @@
             };
             $.get("/api/address/create", data, function(response)
             {
-                response = JSON.parse(response);
                 if (response.code == 1)
                 {
                     data.id = response.data.id;
@@ -296,7 +303,6 @@
         $("#state").empty();
         $.get("/api/index/state", { country_id: country_id }, function(response)
         {
-            response = JSON.parse(response);
             $.each(response.data, function(key, value)
             {
                 if (value.country_id == country_id)

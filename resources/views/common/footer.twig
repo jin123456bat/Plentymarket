@@ -289,7 +289,6 @@
 
     $.get("/api/wishlist/num", function(response)
     {
-        response = JSON.parse(response);
         $("#wishlist-num").text(response.data);
     });
 

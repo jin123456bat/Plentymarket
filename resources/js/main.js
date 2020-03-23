@@ -101,7 +101,6 @@
 	{
 		$.get("/api/basket/index", function(response)
 		{
-			response = JSON.parse(response);
 			$("#cart-num").text(0);
 			if (response.code == 1)
 			{
@@ -128,7 +127,6 @@
 						{
 							$.get("/api/basket/delete", { basketItemId: $(this).data("id") }, function(response)
 							{
-								response = JSON.parse(response);
 								if (response.code == 1)
 								{
 									tpl.remove();
@@ -1368,7 +1366,6 @@ var addBasket = function(variationId, quantity, args, callback)
 
 	$.get("/api/basket/create", { variationId: variationId, quantity: quantity }, function(response)
 	{
-		response = JSON.parse(response);
 		if (response.code == 1)
 		{
 			$("#cart-num").text(parseInt($("#cart-num").text()) + quantity);
@@ -1407,7 +1404,6 @@ var addBasket = function(variationId, quantity, args, callback)
 				{
 					$.get("/api/basket/delete", { basketItemId: $(this).data("id") }, function(response)
 					{
-						response = JSON.parse(response);
 						if (response.code == 1)
 						{
 							item.remove();

@@ -81,7 +81,6 @@
         var id = $(this).data("id");
         $.get("/api/wishlist/delete/" + id, function(response)
         {
-            response = JSON.parse(response);
             if (response.code == 1)
             {
                 tr.remove();

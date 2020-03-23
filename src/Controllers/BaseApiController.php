@@ -33,7 +33,7 @@ class BaseApiController extends BaseController
 			'message' => 'OK',
 			'data' => $data
 		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
-			'Content-Type: application/json',
+			'Content-Type' => 'application/json',
 		]);
 	}
 
@@ -48,7 +48,7 @@ class BaseApiController extends BaseController
 			'code' => 0,
 			'message' => $message,
 		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
-			'Content-Type: application/json',
+			'Content-Type' => 'application/json',
 		]);
 	}
 

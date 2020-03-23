@@ -726,7 +726,6 @@
     {
         $.get("/api/wishlist/delete/" + $(this).data("id"), function(response)
         {
-            response = JSON.parse(response);
             if (response.code == 1)
             {
                 var tmp = '<a href="#" id="add_to_wishlist" data-id="{{item.variationId}}"><i class="fa fa-heart"></i>{{trans("Plentymarket::WebIndexProduct.add_to_wishlist")}}</a>';
@@ -740,7 +739,6 @@
     {
         $.get("/api/wishlist/create/" + $(this).data("id"), function(response)
         {
-            response = JSON.parse(response);
             if (response.code == 1)
             {
                 var tmp = '<a href="#" id="remove_from_wishlist" data-id="{{item.variationId}}"><i class="fa fa-trash-o"></i>{{trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}</a>';

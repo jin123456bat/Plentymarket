@@ -222,7 +222,6 @@
     {
         $.get("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
         {
-            response = JSON.parse(response);
             if (response.code == 1)
             {
                 window.location.reload();
@@ -236,7 +235,6 @@
         $("#state").empty();
         $.get("/api/index/state", { country_id: country_id }, function(response)
         {
-            response = JSON.parse(response);
             $.each(response.data, function(key, value)
             {
                 if (value.country_id == country_id)
