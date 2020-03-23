@@ -74,15 +74,15 @@ class BasketService
 		foreach ($basketItem['basketItemOrderParams'] ?? [] as $param) {
 			$propertyId = (int)$param['propertyId'];
 
-			if (is_array($basketItem['variation']['data']['properties'])) {
-				foreach ($basketItem['variation']['data']['properties'] as $property) {
-					if ($property['property']['id'] === $propertyId) {
-						$newParam = $param;
-						$newParam['position'] = $property['property']['position'];
-						$newParams[] = $newParam;
-					}
-				}
-			}
+//			if (is_array($basketItem['variation']['data']['properties'])) {
+//				foreach ($basketItem['variation']['data']['properties'] as $property) {
+//					if ($property['property']['id'] === $propertyId) {
+//						$newParam = $param;
+//						$newParam['position'] = $property['property']['position'];
+//						$newParams[] = $newParam;
+//					}
+//				}
+//			}
 		}
 
 		usort(
