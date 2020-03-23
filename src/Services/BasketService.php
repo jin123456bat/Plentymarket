@@ -46,7 +46,8 @@ class BasketService
 	 */
 	function getAll ()
 	{
-		return $this->basketItemRepositoryContract->all();
+		$result = $this->basketItemRepositoryContract->all();
+		return json_decode(json_encode($result), true);
 	}
 
 	/**

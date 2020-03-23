@@ -110,6 +110,10 @@ class BasketController extends BaseApiController
 
 	function all (): Response
 	{
-		return $this->success(pluginApp(BasketService::class)->getAll());
+		try {
+			return $this->success(pluginApp(BasketService::class)->getAll());
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 }
