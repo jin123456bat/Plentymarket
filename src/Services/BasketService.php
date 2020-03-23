@@ -107,26 +107,24 @@ class BasketService
 		$showNetPrice = pluginApp(AccountService::class)->showNetPrices();
 
 		$result = [];
-		foreach ($basketItems as $basketItem) {
+		foreach ($basketItems as &$basketItem) {
 			if ($showNetPrice) {
-				$basketItem->price = round($basketItem->price * 100 / (100.0 + $basketItem->vat), 2);
+				$basketItem['price'] = round($basketItem['price'] * 100 / (100.0 + $basketItem['vat']), 2);
 			}
 
-			$arr = $basketItem->toArray();
-
-			if (array_key_exists($basketItem->variationId, $basketItemData)) {
-				$arr["variation"] = $basketItemData[$basketItem->variationId];
+			if (array_key_exists($basketItem['variationId'], $basketItemData)) {
+				$basketItem["variation"] = $basketItemData[$basketItem['variationId']];
 			} else {
-				$arr["variation"] = null;
+				$basketItem["variation"] = null;
 			}
 
-			if ($sortOrderItems && array_key_exists($basketItem->variationId, $basketItemData)) {
-				$arr['basketItemOrderParams'] = $this->getSortedBasketItemOrderParams($arr);
+			if ($sortOrderItems && array_key_exists($basketItem['variationId'], $basketItemData)) {
+				$basketItem['basketItemOrderParams'] = $this->getSortedBasketItemOrderParams($basketItem);
 			}
 
 			array_push(
 				$result,
-				$arr
+				$basketItem
 			);
 		}
 		return $result;
@@ -163,22 +161,22 @@ class BasketService
 			/**
 			 * @var Variation $variation
 			 */
-			$variation = $variationRepository->findById($basketItem->variationId);
+			$variation = $variationRepository->findById($basketItem['variationId']);
 
 			/**
 			 * @var VariationDescription $texts
 			 */
 			$texts = $authHelper->processUnguarded(function () use ($variationDescriptionRepository, $basketItem, $lang) {
-				return $variationDescriptionRepository->find($basketItem->variationId, $lang);
+				return $variationDescriptionRepository->find($basketItem['variationId'], $lang);
 			});
 
-			$result[$basketItem->variationId]['data']['variation']['name'] = $variation->name ?? '';
-			$result[$basketItem->variationId]['data']['texts']['name1'] = $texts->name ?? '';
-			$result[$basketItem->variationId]['data']['texts']['name2'] = $texts->name2 ?? '';
-			$result[$basketItem->variationId]['data']['texts']['name3'] = $texts->name3 ?? '';
-			$result[$basketItem->variationId]['data']['variation']['vatId'] = $variation->vatId ?? $variation->parent->vatId;
-			$result[$basketItem->variationId]['data']['properties'] = $variation->variationProperties->toArray();
-			$result[$basketItem->variationId]['data']['basketItemOrderParams'] = $basketItem->basketItemOrderParams;
+			$result[$basketItem['variationId']]['data']['variation']['name'] = $variation->name ?? '';
+			$result[$basketItem['variationId']]['data']['texts']['name1'] = $texts->name ?? '';
+			$result[$basketItem['variationId']]['data']['texts']['name2'] = $texts->name2 ?? '';
+			$result[$basketItem['variationId']]['data']['texts']['name3'] = $texts->name3 ?? '';
+			$result[$basketItem['variationId']]['data']['variation']['vatId'] = $variation->vatId ?? $variation->parent->vatId;
+			$result[$basketItem['variationId']]['data']['properties'] = $variation->variationProperties->toArray();
+			$result[$basketItem['variationId']]['data']['basketItemOrderParams'] = $basketItem['basketItemOrderParams'];
 		}
 
 		return $result;
