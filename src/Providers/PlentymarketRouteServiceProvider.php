@@ -3,7 +3,6 @@
 namespace Plentymarket\Providers;
 
 use Plenty\Plugin\RouteServiceProvider;
-use Plenty\Plugin\Routing\ApiRouter;
 use Plenty\Plugin\Routing\Router;
 
 /**
@@ -14,9 +13,8 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 {
 	/**
 	 * @param Router $router
-	 * @param ApiRouter $api
 	 */
-	public function map (Router $router, ApiRouter $api)
+	public function map (Router $router)
 	{
 		//接口声明
 //		$api->version(['v1'], ['namespace' => 'Plentymarket\Controllers\Api'], function (ApiRouter $api) {
@@ -44,6 +42,8 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/api/wishlist/has/{itemId}', 'Plentymarket\Controllers\Api\WishlistController@has');
 		$router->get('/api/wishlist/num', 'Plentymarket\Controllers\Api\WishlistController@num');
 		$router->get('/api/address/create', 'Plentymarket\Controllers\Api\AddressController@create');
+
+		$router->get('/api/order/create', 'Plentymarket\Controllers\Api\OrderController@create');
 
 		//页面声明
 		$router->get('/', 'Plentymarket\Controllers\Web\IndexController@index');

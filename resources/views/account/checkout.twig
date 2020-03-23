@@ -182,7 +182,7 @@
 
     $(".place-order").on("click", function()
     {
-        $.get("/api/order/create", { address_id: $("") }, function()
+        $.get("/api/order/create", { address_id: $(".address.selected").data("id"), comment: "" }, function()
         {
 
         });
@@ -249,13 +249,13 @@
         {
             error.remove();
         },
-        highlight: function(element, b, c)
+        highlight: function(element)
         {
             $(element).css({
                 borderColor: "#f4516c"
             });
         },
-        submitHandler: function(form)
+        submitHandler: function()
         {
             var data = {
                 first_name: $.trim($("input[name=first_name]").val()),
