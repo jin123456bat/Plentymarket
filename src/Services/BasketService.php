@@ -205,7 +205,6 @@ class BasketService
 				return $basketItem;
 			}
 		}
-		throw new \Exception($basketItem);
 	}
 
 	/**
