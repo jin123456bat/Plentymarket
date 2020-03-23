@@ -3,7 +3,6 @@
 namespace Plentymarket\Helper;
 
 use Plenty\Plugin\Application;
-use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\SessionService;
 
 /**
@@ -59,10 +58,6 @@ class Utils
 	public static function getLang ()
 	{
 		$sessionStorage = pluginApp(SessionService::class);
-		$lang = $sessionStorage->getLang();
-		if (empty($lang)) {
-			$lang = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
-		}
-		return $lang;
+		return $sessionStorage->getLang();
 	}
 }

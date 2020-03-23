@@ -70,7 +70,10 @@ class WishlistController extends BaseApiController
 	function num (): Response
 	{
 		try {
-			return $this->success(pluginApp(Wishlist::class)->num());
+			$num = pluginApp(Wishlist::class)->num();
+			return $this->success([
+				'num' => $num
+			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}

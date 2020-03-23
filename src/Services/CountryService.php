@@ -36,6 +36,7 @@ class CountryService
 	}
 
 	/**
+	 * 获取国家数据 树状
 	 * @return array
 	 */
 	function getTree ()

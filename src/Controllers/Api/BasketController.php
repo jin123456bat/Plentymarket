@@ -107,4 +107,9 @@ class BasketController extends BaseApiController
 			return $this->exception($e);
 		}
 	}
+
+	function all (): Response
+	{
+		return $this->success(pluginApp(BasketService::class)->getAll());
+	}
 }

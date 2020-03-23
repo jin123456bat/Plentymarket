@@ -289,7 +289,7 @@
 
     $.get("/api/wishlist/num", function(response)
     {
-        $("#wishlist-num").text(response.data);
+        $("#wishlist-num").text(response.data.num);
     });
 
     var storage = window.localStorage;
