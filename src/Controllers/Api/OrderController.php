@@ -2,7 +2,6 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use IO\Constants\SessionStorageKeys;
 use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Order\Property\Models\OrderPropertyType;
 use Plenty\Plugin\Http\Response;
