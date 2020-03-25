@@ -45,9 +45,9 @@ class SessionService
 	{
 		if (is_null($this->language)) {
 			$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
-			if (is_null($this->language) || !strlen($this->language)) {
-				$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
-			}
+//			if (is_null($this->language) || !strlen($this->language)) {
+//				$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
+//			}
 		}
 
 		return $this->language;
