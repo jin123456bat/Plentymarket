@@ -3,10 +3,8 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\Frontend\Contracts\Checkout;
-use Plenty\Modules\Frontend\Events\FrontendLanguageChanged;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Modules\Frontend\Session\Storage\Models\Customer;
-use Plenty\Plugin\Events\Dispatcher;
 
 /**
  * Class SessionService
@@ -28,13 +26,18 @@ class SessionService
 	 * SessionService constructor.
 	 * @param FrontendSessionStorageFactoryContract $frontendSessionStorageFactoryContract
 	 */
-	public function __construct (FrontendSessionStorageFactoryContract $frontendSessionStorageFactoryContract, Dispatcher $eventDispatcher)
+	public function __construct (FrontendSessionStorageFactoryContract $frontendSessionStorageFactoryContract)
 	{
 		$this->frontendSessionStorageFactoryContract = $frontendSessionStorageFactoryContract;
-		$eventDispatcher->listen(FrontendLanguageChanged::class, function (FrontendLanguageChanged $event) {
-			//设置当前语言
-			$this->language = $event->getLanguage();
-		});
+	}
+
+	/**
+	 * 设置语言
+	 * @param $language
+	 */
+	public function setLang ($language)
+	{
+		$this->language = $language;
 	}
 
 	/**
@@ -44,7 +47,8 @@ class SessionService
 	public function getLang ()
 	{
 		if (is_null($this->language)) {
-			$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
+			$this->language = 'de';
+			//$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
 //			if (is_null($this->language) || !strlen($this->language)) {
 //				$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
 //			}
