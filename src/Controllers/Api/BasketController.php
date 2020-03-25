@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Plenty\Modules\Basket\Exceptions\BasketItemCheckException;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\BasketService;
@@ -24,13 +25,43 @@ class BasketController extends BaseApiController
 			$quantity = $this->request->input('quantity');
 
 			$basket = pluginApp(BasketService::class);
-			$basketItem = $basket->create([
-				'variationId' => $variationId,
-				'quantity' => $quantity,
-			]);
-			return $this->success([
-				'basketItemId' => $basketItem->id
-			]);
+			try {
+				$basketItem = $basket->create([
+					'variationId' => $variationId,
+					'quantity' => $quantity,
+				]);
+				return $this->success([
+					'basketItemId' => $basketItem->id
+				]);
+			} catch (BasketItemQuantityCheckException $e) {
+				switch ($e->getCode()) {
+					case BasketItemQuantityCheckException::DID_REACH_MAXIMUM_QUANTITY_FOR_ITEM:
+						$code = 112;
+						break;
+					case BasketItemQuantityCheckException::DID_REACH_MAXIMUM_QUANTITY_FOR_VARIATION:
+						$code = 113;
+						break;
+					case BasketItemQuantityCheckException::DID_NOT_REACH_MINIMUM_QUANTITY_FOR_VARIATION:
+						$code = 114;
+						break;
+					default:
+						$code = 0;
+				}
+				return $this->error('添加失败,错误代码:' . $code);
+			} catch (BasketItemCheckException $e) {
+				switch ($e->getCode()) {
+					case BasketItemCheckException::VARIATION_NOT_FOUND:
+						$code = 110;
+						break;
+					case BasketItemCheckException::NOT_ENOUGH_STOCK_FOR_VARIATION:
+						$code = 111;
+						$placeholder = ['stock' => $e->getStockNet()];
+						break;
+					default:
+						$code = 0;
+				}
+				return $this->error('添加失败,错误代码:' . $code . ',placeholder:' . $e->getStockNet());
+			}
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}

@@ -187,24 +187,17 @@ class BasketService
 	/**
 	 * 添加到购物车
 	 * @param $data
-	 * @return BasketItem
-	 * @throws \Exception
 	 */
-	function create ($data): BasketItem
+	function create ($data)
 	{
 		$data['referrerId'] = $this->getBasket()->referrerId;
 		$basketItem = $this->basketItemRepositoryContract->findExistingOneByData($data);
 		if ($basketItem instanceof BasketItem) {
 			$data['id'] = $basketItem->id;
 			$data['quantity'] = (float)$data['quantity'] + $basketItem->quantity;
-			if ($this->update($basketItem->id, $data)) {
-				return $basketItem;
-			}
+			$this->update($basketItem->id, $data);
 		} else {
-			$basketItem = $this->basketItemRepositoryContract->addBasketItem($data);
-			if ($basketItem instanceof BasketItem) {
-				return $basketItem;
-			}
+			$this->basketItemRepositoryContract->addBasketItem($data);
 		}
 	}
 
