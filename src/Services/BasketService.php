@@ -169,11 +169,11 @@ class BasketService
 			 * @var VariationDescription $texts
 			 */
 			$texts = $authHelper->processUnguarded(function () use ($variationDescriptionRepository, $basketItem, $lang) {
-				try {
-					return $variationDescriptionRepository->find($basketItem['variationId'], $lang);
-				} catch (\Throwable $e) {
-					return '';
-				}
+				//try {
+				return $variationDescriptionRepository->find($basketItem['variationId'], $lang);
+				//} catch (\Throwable $e) {
+				//	return '';
+				//}
 			});
 
 			$result[$basketItem['variationId']]['data']['variation']['name'] = $variation->name ?? '';
