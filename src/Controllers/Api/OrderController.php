@@ -17,6 +17,7 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BasketService;
 use Plentymarket\Services\CheckoutService;
 use Plentymarket\Services\OrderService;
+use Plentymarket\Services\SessionService;
 
 /**
  * Class OrderController
@@ -55,7 +56,7 @@ class OrderController extends BaseApiController
 				->withOrderProperty(OrderPropertyType::SHIPPING_PROFILE, OrderOptionSubType::MAIN_VALUE, $basketService->getBasket()->shippingProfileId)
 				->withOrderProperty(OrderPropertyType::DOCUMENT_LANGUAGE, OrderOptionSubType::MAIN_VALUE, Utils::getLang())
 				->withOrderProperty(OrderPropertyType::SHIPPING_PRIVACY_HINT_ACCEPTED, OrderOptionSubType::MAIN_VALUE, 'false')
-				->withOrderProperty(OrderPropertyType::CUSTOMER_SIGN, OrderOptionSubType::MAIN_VALUE, $this->sessionStorage->getSessionValue('orderCustomerSign'), false)
+				->withOrderProperty(OrderPropertyType::CUSTOMER_SIGN, OrderOptionSubType::MAIN_VALUE, pluginApp(SessionService::class)->get('orderCustomerSign'), false)
 				->withComment(true, $this->request->input('comment', ''))
 				->done();
 
