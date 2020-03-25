@@ -3,6 +3,7 @@
 namespace Plentymarket\Controllers\Api;
 
 use Plenty\Modules\Basket\Exceptions\BasketItemCheckException;
+use Plenty\Modules\Basket\Exceptions\BasketItemQuantityCheckException;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\BasketService;
