@@ -10,6 +10,7 @@ use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
+use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Throwable;
@@ -175,6 +176,7 @@ class IndexController extends BaseApiController
 				'getUserInfo' => $this->request->getUserInfo(),
 				'getQueryString' => $this->request->getQueryString(),
 				'getUserInfo' => $this->request->getUserInfo(),
+				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList()
 			]);
 		} catch (Throwable $e) {
 			return $this->exception($e);
