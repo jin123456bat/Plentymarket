@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use IO\Constants\SessionStorageKeys;
 use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Order\Property\Models\OrderPropertyType;
 use Plenty\Plugin\Http\Response;
@@ -54,6 +55,7 @@ class OrderController extends BaseApiController
 				->withOrderProperty(OrderPropertyType::SHIPPING_PROFILE, OrderOptionSubType::MAIN_VALUE, $basketService->getBasket()->shippingProfileId)
 				->withOrderProperty(OrderPropertyType::DOCUMENT_LANGUAGE, OrderOptionSubType::MAIN_VALUE, Utils::getLang())
 				->withOrderProperty(OrderPropertyType::SHIPPING_PRIVACY_HINT_ACCEPTED, OrderOptionSubType::MAIN_VALUE, 'false')
+				->withOrderProperty(OrderPropertyType::CUSTOMER_SIGN, OrderOptionSubType::MAIN_VALUE, $this->sessionStorage->getSessionValue('orderCustomerSign'), false)
 				->withComment(true, $this->request->input('comment', ''))
 				->done();
 
