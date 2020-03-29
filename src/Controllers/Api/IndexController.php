@@ -176,7 +176,8 @@ class IndexController extends BaseApiController
 				'getUserInfo' => $this->request->getUserInfo(),
 				'getQueryString' => $this->request->getQueryString(),
 				'getUserInfo' => $this->request->getUserInfo(),
-				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList()
+				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
+				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
 			]);
 		} catch (Throwable $e) {
 			return $this->exception($e);
