@@ -4,6 +4,7 @@ namespace Plentymarket\Controllers\Api;
 
 use Exception;
 use Plenty\Modules\Frontend\PaymentMethod\Contracts\FrontendPaymentMethodRepositoryContract;
+use Plenty\Modules\Payment\Method\Contracts\PaymentMethodRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -178,6 +179,7 @@ class IndexController extends BaseApiController
 				'getUserInfo' => $this->request->getUserInfo(),
 				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
 				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
+				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
 			]);
 		} catch (Throwable $e) {
 			return $this->exception($e);
