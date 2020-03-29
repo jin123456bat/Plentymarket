@@ -163,6 +163,17 @@ class IndexController extends BaseApiController
 		}
 	}
 
+	public function data (): Response
+	{
+		try {
+			return $this->success([
+				'test' => 'this is a post request',
+			]);
+		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
+	}
+
 	/**
 	 * test
 	 * @return Response
