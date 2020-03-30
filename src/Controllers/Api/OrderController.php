@@ -30,6 +30,8 @@ class OrderController extends BaseApiController
 	function create (): Response
 	{
 		try {
+			pluginApp(CheckoutService::class)->setMethodOfPaymentId(6000);
+
 			/** @var OrderBuilder $orderBuilder */
 			$orderBuilder = pluginApp(OrderBuilder::class);
 

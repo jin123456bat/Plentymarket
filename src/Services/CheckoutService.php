@@ -33,6 +33,11 @@ class CheckoutService
 		return $currentShippingCountryId;
 	}
 
+	public function setMethodOfPaymentId ($paymentMethodId)
+	{
+		$this->checkout->setPaymentMethodId($paymentMethodId);
+	}
+
 	/**
 	 * Get the ID of the current payment method
 	 * @return int
