@@ -3,6 +3,7 @@
 namespace Plentymarket\Services;
 
 use Plenty\Modules\Order\Models\Order;
+use Plentymarket\Guards\AuthGuard;
 use Plentymarket\Helper\Utils;
 use Plentymarket\Models\PayPalAccessToken;
 
@@ -74,9 +75,9 @@ class PayPalService
 	 */
 	function execute (Order $order)
 	{
-		$return = url('');//支付成功跳转地址
-		$notify_url = url();//支付成功异步通知地址
-		$cancel_return = url();//取消支付跳转地址
+		$return = AuthGuard::getUrl('/account/index#order');//支付成功跳转地址
+		$notify_url = AuthGuard::getUrl('/api/payment/paypal');//支付成功异步通知地址
+		$cancel_return = $return;//取消支付跳转地址
 
 		$str = '<form method="post" id="form" name="form" action="' . $this->web . '/cgi-bin/webscr&pal=V4T754QB63XXL"><input type="hidden" name="cmd" value="_cart" />
 		  <input type="hidden" name="upload" value="1" />
