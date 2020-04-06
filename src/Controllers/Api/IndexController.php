@@ -7,6 +7,7 @@ use Plenty\Modules\Frontend\PaymentMethod\Contracts\FrontendPaymentMethodReposit
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
+use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CountryService;
@@ -180,14 +181,14 @@ class IndexController extends BaseApiController
 		try {
 			return $this->success([
 				'lang' => Utils::getLang(),
-				'getRequestUri' => $this->request->getRequestUri(),
-				'getUri' => $this->request->getUri(),
-				'getUserInfo' => $this->request->getUserInfo(),
-				'getQueryString' => $this->request->getQueryString(),
-				'getUserInfo' => $this->request->getUserInfo(),
-				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
-				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
-				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
+//				'getRequestUri' => $this->request->getRequestUri(),
+//				'getUri' => $this->request->getUri(),
+//				'getUserInfo' => $this->request->getUserInfo(),
+//				'getQueryString' => $this->request->getQueryString(),
+//				'getUserInfo' => $this->request->getUserInfo(),
+//				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
+//				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
+//				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
 			]);
 		} catch (Throwable $e) {
 			return $this->exception($e);
