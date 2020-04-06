@@ -2,9 +2,9 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use Illuminate\Http\Response;
 use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Order\Property\Models\OrderPropertyType;
+use Plenty\Plugin\Http\Response;
 use Plentymarket\Builder\Order\AddressType;
 use Plentymarket\Builder\Order\OrderBuilder;
 use Plentymarket\Builder\Order\OrderBuilderQuery;

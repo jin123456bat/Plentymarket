@@ -2,7 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use Illuminate\Http\Response;
+use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Log\Loggable;
 use Plentymarket\Controllers\BaseApiController;
 
