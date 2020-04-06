@@ -76,17 +76,7 @@ class PayPalService
   <input type="hidden" name="quantity_1" value="1" />
   <input type="hidden" name="weight_1" value="0" />
             <input type="hidden" name="currency_code" value="EUR" />
-  <input type="hidden" name="first_name" value="" />
-  <input type="hidden" name="last_name" value="" />
-  <input type="hidden" name="address1" value="" />
-  <input type="hidden" name="address2" value="" />
-  <input type="hidden" name="city" value="" />
-  <input type="hidden" name="zip" value="" />
-  <input type="hidden" name="country" value="" />
   <input type="hidden" name="address_override" value="0" />
-  <input type="hidden" name="email" value="326550324@qq.com" />
-  <input type="hidden" name="invoice" value="185 -  " />
-  <input type="hidden" name="lc" value="it-it" />
   <input type="hidden" name="rm" value="2" />
   <input type="hidden" name="no_note" value="1" />
   <input type="hidden" name="no_shipping" value="1" />
