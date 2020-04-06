@@ -177,22 +177,20 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
-//		pluginApp(PayPalService::class)->execute('123');
-//		try {
-//			return $this->success([
-//				'lang' => Utils::getLang(),
-//				'getRequestUri' => $this->request->getRequestUri(),
-//				'getUri' => $this->request->getUri(),
-//				'getUserInfo' => $this->request->getUserInfo(),
-//				'getQueryString' => $this->request->getQueryString(),
-//				'getUserInfo' => $this->request->getUserInfo(),
-//				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
-//				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
-//				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
-//				'paypal' => pluginApp(PayPalService::class)->createOrder(1),
-//			]);
-//		} catch (Throwable $e) {
-//			return $this->exception($e);
-//		}
+		try {
+			return $this->success([
+				'lang' => Utils::getLang(),
+				'getRequestUri' => $this->request->getRequestUri(),
+				'getUri' => $this->request->getUri(),
+				'getUserInfo' => $this->request->getUserInfo(),
+				'getQueryString' => $this->request->getQueryString(),
+				'getUserInfo' => $this->request->getUserInfo(),
+				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
+				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
+				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
+			]);
+		} catch (Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 }
