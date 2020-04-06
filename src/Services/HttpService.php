@@ -29,7 +29,7 @@ class HttpService
 			$query = '?' . http_build_query($data);
 		}
 		$curl = curl_init($url . $query);
-		curl_setopt($curl, [
+		curl_setopt_array($curl, [
 			CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_SSL_VERIFYHOST => false,
@@ -42,14 +42,14 @@ class HttpService
 
 	/**
 	 * @param string $url
-	 * @param array $data
+	 * @param mixed $data
 	 * @param array $header
 	 * @return bool|string
 	 */
-	function post (string $url, array $data = [], array $header = [])
+	function post (string $url, $data, array $header = [])
 	{
 		$curl = curl_init($url);
-		curl_setopt($curl, [
+		curl_setopt_array($curl, [
 			CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_SSL_VERIFYHOST => false,
