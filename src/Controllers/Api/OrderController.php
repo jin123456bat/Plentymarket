@@ -5,7 +5,6 @@ namespace Plentymarket\Controllers\Api;
 use Illuminate\Http\JsonResponse;
 use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Order\Property\Models\OrderPropertyType;
-use Plenty\Plugin\Http\Response;
 use Plentymarket\Builder\Order\AddressType;
 use Plentymarket\Builder\Order\OrderBuilder;
 use Plentymarket\Builder\Order\OrderBuilderQuery;
@@ -29,7 +28,7 @@ class OrderController extends BaseApiController
 	/**
 	 * 创建订单
 	 */
-	function create (): Response
+	function create (): JsonResponse
 	{
 		try {
 			pluginApp(CheckoutService::class)->setMethodOfPaymentId(6000);
