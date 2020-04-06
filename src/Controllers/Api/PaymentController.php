@@ -12,7 +12,7 @@ class PaymentController extends BaseApiController
 
 	function paypal (): JsonResponse
 	{
-		$content = file_get_contents('php://input');
+		$content = $this->request->getContent();
 		if (empty($content)) {
 			$this->getLogger(__CLASS__)->error(
 				"Plentymarket::Payment.Paypal",
@@ -35,6 +35,6 @@ class PaymentController extends BaseApiController
 
 		$content = json_decode($content, true);
 
-		$this->success($content);
+		return $this->success($content);
 	}
 }

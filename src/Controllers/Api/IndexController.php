@@ -11,7 +11,6 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
-use Plentymarket\Services\PayPalService;
 use Throwable;
 
 /**
@@ -178,7 +177,7 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
-		pluginApp(PayPalService::class)->execute('123');
+//		pluginApp(PayPalService::class)->execute('123');
 //		try {
 //			return $this->success([
 //				'lang' => Utils::getLang(),
