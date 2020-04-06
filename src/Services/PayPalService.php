@@ -68,8 +68,7 @@ class PayPalService
 	 */
 	function execute (string $orderId, array $data = [])
 	{
-		/*
-		 * <input type="hidden" name="cmd" value="_cart" />
+		$str = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL"><input type="hidden" name="cmd" value="_cart" />
   <input type="hidden" name="upload" value="1" />
   <input type="hidden" name="business" value="zlcontabile@gmail.com" />
       <input type="hidden" name="item_name_1" value="Spedizione, Gestione, Sconti e Tasse" />
@@ -99,16 +98,18 @@ class PayPalService
   <input type="hidden" name="paymentaction" value="sale" />
   <input type="hidden" name="custom" value="185" />
   <input type="hidden" name="bn" value="OpenCart_2.0_WPS" />
-		 */
+  <input type="submit" id="submit" value="submit">
+  <script>document.getElementById("form").submit();</script>
+  </form>';
 
-		$url = 'https://www.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL';
+//		$url = 'https://www.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL';
 //		$url = 'https://www.paypal.com/cgi-bin/webscr&pal='.$pal;
-		$param = '';
-		foreach ($data as $key => $value) {
-			$param .= '<input type="hidden" name="' . $key . '" value="' . $value . '">';
-		}
-		$param .= '<input type="submit" id="submit" value="submit"><script>document.getElementById(\'form\').submit();</script>';
-		$str = '<form id="form" action="' . $url . '" method="post">' . $param . '</form>';
+//		$param = '';
+//		foreach ($data as $key => $value) {
+//			$param .= '<input type="hidden" name="' . $key . '" value="' . $value . '">';
+//		}
+//		$param .= '<input type="submit" id="submit" value="submit"><script>document.getElementById(\'form\').submit();</script>';
+//		$str = '<form id="form" action="' . $url . '" method="post">' . $param . '</form>';
 		exit($str);
 	}
 
