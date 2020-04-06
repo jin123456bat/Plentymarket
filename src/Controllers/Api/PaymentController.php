@@ -2,7 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Plenty\Plugin\Log\Loggable;
 use Plentymarket\Controllers\BaseApiController;
 
@@ -10,7 +10,7 @@ class PaymentController extends BaseApiController
 {
 	use Loggable;
 
-	function paypal (): JsonResponse
+	function paypal (): Response
 	{
 		$content = $this->request->getContent();
 		if (empty($content)) {
