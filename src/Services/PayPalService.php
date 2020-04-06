@@ -48,7 +48,9 @@ class PayPalService
 					]
 				]
 			]
-		]));
+		]), [
+			'Authorization' => $this->getAuthorization()
+		]);
 
 		return json_decode($response, true);
 	}
