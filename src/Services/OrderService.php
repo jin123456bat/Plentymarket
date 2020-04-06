@@ -7,7 +7,6 @@ use Plenty\Modules\Order\Contracts\OrderRepositoryContract;
 use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Order\Models\OrderAmount;
 use Plenty\Modules\Order\Status\Contracts\OrderStatusRepositoryContract;
-use Plenty\Repositories\Models\PaginatedResult;
 
 /**
  * Class OrderService
@@ -105,15 +104,20 @@ class OrderService
 
 	/**
 	 * 获取用户订单列表
-	 * @param int $contactId 用户ID
 	 * @param int $page 页码
 	 * @param int $itemsPerPage 每页多少条
 	 * @param array $with 在订单列表中附加的关系数据
-	 * @return PaginatedResult
+	 * @return array
 	 */
-	function getList (int $contactId, int $page = 1, int $itemsPerPage = 50, array $with = ["addresses", "events", "dates", "relation", "reference", "location", "payments", "documents", "comments"])
+	function getList (int $page = 1, int $itemsPerPage = 50, array $with = ["addresses", "events", "dates", "relation", "reference", "location", "payments", "documents", "comments"])
 	{
-		return $this->orderRepositoryContract->allOrdersByContact($contactId, $page, $itemsPerPage, $with);
+		$contactId = pluginApp(AccountService::class)->getContactId();
+		if (!empty($contactId)) {
+			$result = $this->orderRepositoryContract->allOrdersByContact($contactId, $page, $itemsPerPage, $with)->toArray();
+			return $result;
+			//$result['item'] = pluginApp(OrderItemRepositoryContract::class)->search()
+		}
+		return [];
 	}
 
 	/**

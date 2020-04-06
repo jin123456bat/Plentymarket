@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Illuminate\Http\JsonResponse;
 use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Order\Property\Models\OrderPropertyType;
 use Plenty\Plugin\Http\Response;
@@ -16,6 +17,7 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BasketService;
 use Plentymarket\Services\CheckoutService;
 use Plentymarket\Services\OrderService;
+use Plentymarket\Services\PayPalService;
 use Plentymarket\Services\SessionService;
 
 /**
@@ -64,10 +66,27 @@ class OrderController extends BaseApiController
 			$order = pluginApp(OrderService::class)->create($order);
 
 			if ($order instanceof Order) {
-				return $this->success([]);
+				$result = pluginApp(PayPalService::class)->execute($order);
+				return $this->success([
+					'html' => $result
+				]);
 			} else {
 				return $this->error('创建订单失败');
 			}
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
+	}
+
+	/**
+	 * 订单列表
+	 * @return JsonResponse
+	 */
+	function index (): JsonResponse
+	{
+		try {
+			$list = pluginApp(OrderService::class)->getList();
+			return $this->success($list);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}

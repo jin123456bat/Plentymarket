@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Services;
 
+use Plenty\Modules\Order\Models\Order;
 use Plentymarket\Helper\Utils;
 use Plentymarket\Models\PayPalAccessToken;
 
@@ -11,7 +12,8 @@ use Plentymarket\Models\PayPalAccessToken;
  */
 class PayPalService
 {
-	//https://api.paypal.com
+	private $web = 'https://www.sandbox.paypal.com';
+
 	/**
 	 * @var string
 	 */
@@ -61,35 +63,44 @@ class PayPalService
 		return Utils::getLang();
 	}
 
+	private function getCurrency ()
+	{
+		return Utils::getCurrency();
+	}
+
 	/**
 	 * 跳转到支付页面
-	 * @param string $price
+	 * @param Order $order
 	 */
-	function execute (string $price)
+	function execute (Order $order)
 	{
-		$str = '<form method="post" id="form" name="form" action="https://www.sandbox.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL"><input type="hidden" name="cmd" value="_cart" />
-  <input type="hidden" name="upload" value="1" />
-  <input type="hidden" name="business" value="info@mercuryliving.it" />
-      <input type="hidden" name="item_name_1" value="Spedizione, Gestione, Sconti e Tasse" />
-  <input type="hidden" name="item_number_1" value="" />
-  <input type="hidden" name="amount_1" value="' . $price . '" />
-  <input type="hidden" name="quantity_1" value="1" />
-  <input type="hidden" name="weight_1" value="0" />
-            <input type="hidden" name="currency_code" value="EUR" />
-  <input type="hidden" name="address_override" value="0" />
-  <input type="hidden" name="rm" value="2" />
-  <input type="hidden" name="no_note" value="1" />
-  <input type="hidden" name="no_shipping" value="1" />
-  <input type="hidden" name="charset" value="utf-8" />
-  <input type="hidden" name="return" value="http://mobile.cn/index.php?route=checkout/success" />
-  <input type="hidden" name="notify_url" value="http://mobile.cn/index.php?route=extension/payment/pp_standard/callback" />
-  <input type="hidden" name="cancel_return" value="http://mobile.cn/index.php?route=checkout/checkout" />
-  <input type="hidden" name="paymentaction" value="sale" />
-  <input type="hidden" name="custom" value="185" />
-  <input type="hidden" name="bn" value="OpenCart_2.0_WPS" />
-  <input type="submit" id="submit" value="submit">
-    </form>
-    <script>document.getElementById("submit").click();</script>';
+		$return = url('');//支付成功跳转地址
+		$notify_url = url();//支付成功异步通知地址
+		$cancel_return = url();//取消支付跳转地址
+
+		$str = '<form method="post" id="form" name="form" action="' . $this->web . '/cgi-bin/webscr&pal=V4T754QB63XXL"><input type="hidden" name="cmd" value="_cart" />
+		  <input type="hidden" name="upload" value="1" />
+		  <input type="hidden" name="business" value="info@mercuryliving.it" />
+		  
+		  <input type="hidden" name="item_name_1" value="Spedizione, Gestione, Sconti e Tasse" />
+		  <input type="hidden" name="item_number_1" value="" />
+		  <input type="hidden" name="amount_1" value="' . $order->amount . '" />
+		  <input type="hidden" name="quantity_1" value="1" />
+		  <input type="hidden" name="weight_1" value="0" />
+		  
+		  <input type="hidden" name="currency_code" value="' . $this->getCurrency() . '" />
+		  <input type="hidden" name="address_override" value="0" />
+		  <input type="hidden" name="rm" value="2" />
+		  <input type="hidden" name="no_note" value="1" />
+		  <input type="hidden" name="no_shipping" value="1" />
+		  <input type="hidden" name="charset" value="utf-8" />
+		  <input type="hidden" name="custom" value="' . $order->id . '" />
+		  <input type="hidden" name="return" value="' . $return . '" />
+		  <input type="hidden" name="notify_url" value="' . $notify_url . '" />
+		  <input type="hidden" name="cancel_return" value="' . $cancel_return . '" />
+		  <input type="submit" id="submit" value="submit">
+		  </form>
+		  <script>document.getElementById("submit").click();</script>';
 
 //		$url = 'https://www.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL';
 //		$url = 'https://www.paypal.com/cgi-bin/webscr&pal='.$pal;
