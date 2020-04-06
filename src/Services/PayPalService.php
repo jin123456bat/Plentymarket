@@ -67,7 +67,7 @@ class PayPalService
 	 */
 	function execute (string $price)
 	{
-		$str = '<form id="form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL">
+		$str = '<form id="form" name="form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL">
 	<input type="hidden" name="cmd" value="_cart" />
     <input type="hidden" name="business" value="info@mercuryliving.it" />
     <input type="hidden" name="amount" value="' . $price . '" />
