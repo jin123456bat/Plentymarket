@@ -63,44 +63,22 @@ class PayPalService
 
 	/**
 	 * 跳转到支付页面
-	 * @param string $orderId
-	 * @param array $data
+	 * @param string $price
 	 */
-	function execute (string $orderId, array $data = [])
+	function execute (string $price)
 	{
-		$str = '<form method="post" action="https://www.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL"><input type="hidden" name="cmd" value="_cart" />
-  <input type="hidden" name="upload" value="1" />
-  <input type="hidden" name="business" value="zlcontabile@gmail.com" />
-      <input type="hidden" name="item_name_1" value="Spedizione, Gestione, Sconti e Tasse" />
-  <input type="hidden" name="item_number_1" value="" />
-  <input type="hidden" name="amount_1" value="179" />
-  <input type="hidden" name="quantity_1" value="1" />
-  <input type="hidden" name="weight_1" value="0" />
-            <input type="hidden" name="currency_code" value="EUR" />
-  <input type="hidden" name="first_name" value="" />
-  <input type="hidden" name="last_name" value="" />
-  <input type="hidden" name="address1" value="" />
-  <input type="hidden" name="address2" value="" />
-  <input type="hidden" name="city" value="" />
-  <input type="hidden" name="zip" value="" />
-  <input type="hidden" name="country" value="" />
-  <input type="hidden" name="address_override" value="0" />
-  <input type="hidden" name="email" value="326550324@qq.com" />
-  <input type="hidden" name="invoice" value="185 -  " />
-  <input type="hidden" name="lc" value="it-it" />
-  <input type="hidden" name="rm" value="2" />
-  <input type="hidden" name="no_note" value="1" />
-  <input type="hidden" name="no_shipping" value="1" />
-  <input type="hidden" name="charset" value="utf-8" />
-  <input type="hidden" name="return" value="http://mobile.cn/index.php?route=checkout/success" />
-  <input type="hidden" name="notify_url" value="http://mobile.cn/index.php?route=extension/payment/pp_standard/callback" />
-  <input type="hidden" name="cancel_return" value="http://mobile.cn/index.php?route=checkout/checkout" />
-  <input type="hidden" name="paymentaction" value="sale" />
-  <input type="hidden" name="custom" value="185" />
-  <input type="hidden" name="bn" value="OpenCart_2.0_WPS" />
-  <input type="submit" id="submit" value="submit">
-  <script>document.getElementById("form").submit();</script>
-  </form>';
+		$str = '<form id="form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL">
+	<input type="hidden" name="cmd" value="_cart" />
+    <input type="hidden" name="business" value="info@mercuryliving.it" />
+    <input type="hidden" name="amount" value="' . $price . '" />
+    <input type="hidden" name="currency_code" value="EUR" />
+    <input type="hidden" name="charset" value="utf-8" />
+    <input type="hidden" name="return" value="http://mobile.cn/index.php?route=checkout/success" />
+    <input type="hidden" name="notify_url" value="http://mobile.cn/index.php?route=extension/payment/pp_standard/callback" />
+    <input type="hidden" name="cancel_return" value="http://mobile.cn/index.php?route=checkout/checkout" />
+    <input type="submit" id="submit" value="submit">
+    </form>
+    <script>document.getElementById("form").submit();</script>';
 
 //		$url = 'https://www.paypal.com/cgi-bin/webscr&pal=V4T754QB63XXL';
 //		$url = 'https://www.paypal.com/cgi-bin/webscr&pal='.$pal;
