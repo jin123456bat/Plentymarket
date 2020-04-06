@@ -113,11 +113,19 @@ class OrderService
 	{
 		$contactId = pluginApp(AccountService::class)->getContactId();
 		if (!empty($contactId)) {
-			$result = $this->orderRepositoryContract->allOrdersByContact($contactId, $page, $itemsPerPage, $with)->toArray();
-			return $result;
-			//$result['item'] = pluginApp(OrderItemRepositoryContract::class)->search()
+			return $this->orderRepositoryContract->allOrdersByContact($contactId, $page, $itemsPerPage, $with)->toArray();
 		}
-		return [];
+
+		return [
+			'page' => $page,
+			'totalsCount' => 0,
+			'isLastPage' => true,
+			'entries' => [],
+			'lastPageNumber' => 1,
+			'firstOnPage' => 1,
+			'lastOnPage' => 1,
+			'itemsPerPage' => $itemsPerPage
+		];
 	}
 
 	/**

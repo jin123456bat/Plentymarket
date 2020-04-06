@@ -84,7 +84,9 @@ class OrderController extends BaseApiController
 	function index (): Response
 	{
 		try {
-			$list = pluginApp(OrderService::class)->getList();
+			/** @var OrderService $list */
+			$orderService = pluginApp(OrderService::class);
+			$list = $orderService->getList();
 			return $this->success($list);
 		} catch (\Throwable $e) {
 			return $this->exception($e);

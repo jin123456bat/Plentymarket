@@ -69,6 +69,15 @@ class PayPalService
 		return Utils::getCurrency();
 	}
 
+	private function getAmount ($amounts)
+	{
+		foreach ($amounts as $amount) {
+			if ($amount['currency'] == self::getCurrency()) {
+				return $amount;
+			}
+		}
+	}
+
 	/**
 	 * 跳转到支付页面
 	 * @param Order $order
@@ -81,15 +90,18 @@ class PayPalService
 
 		$str = '<form method="post" id="form" name="form" action="' . $this->web . '/cgi-bin/webscr&pal=V4T754QB63XXL"><input type="hidden" name="cmd" value="_cart" />
 		  <input type="hidden" name="upload" value="1" />
-		  <input type="hidden" name="business" value="info@mercuryliving.it" />
-		  
-		  <input type="hidden" name="item_name_1" value="Spedizione, Gestione, Sconti e Tasse" />
-		  <input type="hidden" name="item_number_1" value="" />
-		  <input type="hidden" name="amount_1" value="' . $order->amount . '" />
-		  <input type="hidden" name="quantity_1" value="1" />
-		  <input type="hidden" name="weight_1" value="0" />
-		  
-		  <input type="hidden" name="currency_code" value="' . $this->getCurrency() . '" />
+		  <input type="hidden" name="business" value="info@mercuryliving.it" />';
+		foreach ($order->orderItems as $key => $item) {
+			$amount = $this->getAmount($item['amounts']);
+
+			$str .= '<input type="hidden" name="item_name_' . ($key + 1) . '" value="' . $item['orderItemName'] . '" />
+				  <input type="hidden" name="item_number_' . ($key + 1) . '" value="" />
+				  <input type="hidden" name="amount_' . ($key + 1) . '" value="' . $amount['priceGross'] * (1 + $item['vatRate'] / 100) . '" />
+				  <input type="hidden" name="quantity_' . ($key + 1) . '" value="' . $item['quantity'] . '" />
+				  <input type="hidden" name="weight_' . ($key + 1) . '" value="0" />';
+		}
+
+		$str .= '<input type="hidden" name="currency_code" value="' . $this->getCurrency() . '" />
 		  <input type="hidden" name="address_override" value="0" />
 		  <input type="hidden" name="rm" value="2" />
 		  <input type="hidden" name="no_note" value="1" />
