@@ -136,11 +136,13 @@
 								<div class="col-12">
 									<h4 class="checkout-title">Payment Method</h4>
 									<div class="checkout-payment-method">
-										<div class="single-method">
-											<input type="radio" id="payment_paypal" name="payment-method" value="paypal">
-											<label for="payment_paypal">Paypal</label>
-											<p data-method="paypal">Paypay payment</p>
-										</div>
+										{%for payment in paymentList%}
+											<div class="single-method">
+												<input checked="checked" type="radio" id="{{payment.id}}" name="payment-method" value="paypal">
+												<label for="payment_paypal">Paypal</label>
+												<p data-method="paypal">Paypay payment</p>
+											</div>
+										{%endfor%}
 										<div class="single-method">
 											<input type="checkbox" id="accept_terms">
 											<label for="accept_terms">I’ve read and accept the terms &
@@ -182,9 +184,37 @@
 
     $(".place-order").on("click", function()
     {
-        $.get("/api/order/create", { address_id: $(".address.selected").data("id"), comment: "" }, function()
+        if ($("#accept_terms:checked").length == 0)
         {
+            spop({
+                template: '{{trans('Plentymarket::WebAccountCheckout.accept_terms')}}',
+                style: "error"
+            });
+            return false;
+        }
 
+        if ($("input[name=payment-method]:checked").length == 0)
+        {
+            spop({
+                template: '{{trans('Plentymarket::WebAccountCheckout.choice_payment')}}',
+                style: "error"
+            });
+            return false;
+        }
+
+        $.get("/api/order/create", { address_id: $(".address.selected").data("id"), comment: "" }, function(response)
+        {
+            if (response.code == 1)
+            {
+
+            }
+            else
+            {
+                spop({
+                    template: response.message,
+                    style: "error"
+                });
+            }
         });
     });
 

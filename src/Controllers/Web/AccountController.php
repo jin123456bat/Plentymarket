@@ -10,6 +10,7 @@ use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AddressService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
+use Plentymarket\Services\PaymentMethodService;
 
 /**
  * Class AccountController
@@ -91,6 +92,9 @@ class AccountController extends BaseWebController
 
 			$country = pluginApp(CountryService::class)->getTree();
 
+			//支付方式暂时搞不定
+			$paymentList = pluginApp(PaymentMethodService::class)->getAll();
+
 			return $this->render('account.checkout', [
 				$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
 			], [
@@ -99,6 +103,12 @@ class AccountController extends BaseWebController
 				'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
 				'ship' => $numberFormatFilter->formatMonetary(0, Utils::getCurrency()),
 				'country' => $country,
+				'paymentList' => [
+					[
+						'id' => 6000,
+						'name' => 'PayPal',
+					]
+				],
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);

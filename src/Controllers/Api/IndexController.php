@@ -14,6 +14,7 @@ use Plentymarket\Services\BlogService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
+use Plentymarket\Services\PayPalService;
 use Throwable;
 
 /**
@@ -191,6 +192,7 @@ class IndexController extends BaseApiController
 				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
 				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
 				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
+				'paypal' => pluginApp(PayPalService::class)->createOrder(1),
 			]);
 		} catch (Throwable $e) {
 			return $this->exception($e);
