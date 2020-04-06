@@ -49,6 +49,7 @@ class PayPalService
 				]
 			]
 		]), [
+			'Content-Type' => 'application/json',
 			'Authorization' => $this->getAuthorization()
 		]);
 
@@ -117,7 +118,8 @@ class PayPalService
 	 */
 	private function getAuthorization ()
 	{
-		return 'Bearer ' . $this->getAccessToken();
+		return 'Basic ' . base64_encode($this->client_id . ':' . $this->secret);
+//		return 'Bearer ' . $this->getAccessToken();
 	}
 
 	/**
