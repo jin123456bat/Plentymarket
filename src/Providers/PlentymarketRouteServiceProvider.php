@@ -45,7 +45,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->get('/api/wishlist/has/{itemId}', 'Plentymarket\Controllers\Api\WishlistController@has');
 		$router->get('/api/wishlist/num', 'Plentymarket\Controllers\Api\WishlistController@num');
 		$router->get('/api/address/create', 'Plentymarket\Controllers\Api\AddressController@create');
-		$router->get('/api/payment/paypal', 'Plentymarket\Controllers\Api\PaymentController@paypal');
+		$router->post('/api/payment/paypal', 'Plentymarket\Controllers\Api\PaymentController@paypal');
 		$router->get('/api/order/create', 'Plentymarket\Controllers\Api\OrderController@create');
 
 		//页面声明
