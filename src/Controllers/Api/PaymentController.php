@@ -53,10 +53,11 @@ class PaymentController extends BaseApiController
 		if (is_array($string)) {
 			return $string;
 		}
+
 		$array = explode('&', $string);
 		$data = [];
-		foreach ($array as $data) {
-			list($key, $value) = explode('=', $data, 2);
+		foreach ($array as $v) {
+			list($key, $value) = explode('=', $v, 2);
 			$data[$key] = $value;
 		}
 		return $data;
@@ -122,7 +123,7 @@ class PaymentController extends BaseApiController
 		$this->getLogger(__CLASS__)->error(
 			"Plentymarket::Payment.Paypal",
 			[
-				"resultName" => '获取到PayPal异步通知:' . $content,
+				"resultName" => '类型为' . $content,
 				"errorMessage" => '获取到PayPal异步通知:' . $content,
 			]
 		);
