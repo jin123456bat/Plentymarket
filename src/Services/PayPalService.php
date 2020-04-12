@@ -126,7 +126,7 @@ class PayPalService
 		<input type="submit" id="submit" value="submit">
 		</form>
 		<script>document.getElementById("submit").click();</script>';
-		exit($str);
+		return $str;
 	}
 
 	/**
