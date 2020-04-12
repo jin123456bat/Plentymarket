@@ -82,14 +82,8 @@ class OrderService
 		return $this->orderRepositoryContract->deleteOrder($orderId);
 	}
 
-	/**
-	 * 完成订单
-	 * @param int $orderId
-	 * @return Order
-	 */
-	function complete (int $orderId): Order
+	function setStatus ()
 	{
-		return $this->orderRepositoryContract->completeOrder($orderId);
 	}
 
 	/**

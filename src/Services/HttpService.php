@@ -44,19 +44,20 @@ class HttpService
 	 * @param string $url
 	 * @param mixed $data
 	 * @param array $header
+	 * @param array $opt
 	 * @return bool|string
 	 */
-	function post (string $url, $data, array $header = [])
+	function post (string $url, $data, array $header = [], array $opt = [])
 	{
 		$curl = curl_init($url);
 		curl_setopt_array($curl, [
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_SSL_VERIFYPEER => false,
-			CURLOPT_SSL_VERIFYHOST => false,
-			CURLOPT_POST => 1,
-			CURLOPT_POSTFIELDS => $data,
-			CURLOPT_HTTPHEADER => $header
-		]);
+				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_SSL_VERIFYHOST => false,
+				CURLOPT_POST => 1,
+				CURLOPT_POSTFIELDS => $data,
+				CURLOPT_HTTPHEADER => $header
+			] + $opt);
 		$output = curl_exec($curl);
 		curl_close($curl);
 		return $output;

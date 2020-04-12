@@ -69,7 +69,7 @@ class PayPalService
 		return Utils::getCurrency();
 	}
 
-	private function getAmount ($amounts)
+	public static function getAmount ($amounts)
 	{
 		foreach ($amounts as $amount) {
 			if ($amount['currency'] == self::getCurrency()) {
@@ -93,10 +93,10 @@ class PayPalService
 	    <input type="hidden" name="upload" value="1" />
 	    <input type="hidden" name="business" value="info@mercuryliving.it" />';
 		foreach ($order->orderItems as $key => $item) {
-			$amount = $this->getAmount($item['amounts']);
+			$amount = self::getAmount($item['amounts']);
 			$str .= '<input type="hidden" name="item_name_' . ($key + 1) . '" value="' . $item['orderItemName'] . '" />
 			  <input type="hidden" name="item_number_' . ($key + 1) . '" value="' . $item['orderItemName'] . '" />
-			  <input type="hidden" name="amount_' . ($key + 1) . '" value="' . $amount['priceGross'] * (1 + $item['vatRate'] / 100) . '" />
+			  <input type="hidden" name="amount_' . ($key + 1) . '" value="' . round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2) . '" />
 			  <input type="hidden" name="quantity_' . ($key + 1) . '" value="' . $item['quantity'] . '" />
 			  <input type="hidden" name="weight_' . ($key + 1) . '" value="0" />';
 		}
