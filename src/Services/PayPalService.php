@@ -64,7 +64,7 @@ class PayPalService
 		return Utils::getLang();
 	}
 
-	private function getCurrency ()
+	private static function getCurrency ()
 	{
 		return Utils::getCurrency();
 	}
@@ -101,7 +101,7 @@ class PayPalService
 			  <input type="hidden" name="weight_' . ($key + 1) . '" value="0" />';
 		}
 
-		$str .= '<input type="hidden" name="currency_code" value="' . $this->getCurrency() . '" />
+		$str .= '<input type="hidden" name="currency_code" value="' . self::getCurrency() . '" />
 		<input type="hidden" name="first_name" value="" />
 		<input type="hidden" name="last_name" value="" />
 		<input type="hidden" name="address1" value="" />

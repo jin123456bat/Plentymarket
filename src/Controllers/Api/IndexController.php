@@ -4,6 +4,7 @@ namespace Plentymarket\Controllers\Api;
 
 use Exception;
 use Plenty\Modules\Frontend\PaymentMethod\Contracts\FrontendPaymentMethodRepositoryContract;
+use Plenty\Modules\Order\Models\Order;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -183,6 +184,7 @@ class IndexController extends BaseApiController
 			return $this->success([
 				'lang' => Utils::getLang(),
 				'paypal' => pluginApp(OrderService::class)->getList(),
+				'order' => pluginApp(\ReflectionClass::class, [Order::class])->getMethods()
 //				'getRequestUri' => $this->request->getRequestUri(),
 //				'getUri' => $this->request->getUri(),
 //				'getUserInfo' => $this->request->getUserInfo(),

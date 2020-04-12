@@ -44,6 +44,17 @@ class PaymentController extends BaseApiController
 		return false;
 	}
 
+	function parse_str (string $string)
+	{
+		$array = explode('&', $string);
+		$data = [];
+		foreach ($array as $data) {
+			list($key, $value) = explode('=', $data, 2);
+			$data[$key] = $value;
+		}
+		return $data;
+	}
+
 	/**
 	 * array (size=38)
 	 * 'mc_gross' => string '7.40' (length=4)
@@ -109,8 +120,7 @@ class PaymentController extends BaseApiController
 			]
 		);
 
-		$contentArray = [];
-		parse_str($content, $contentArray);
+		$contentArray = $this->parse_str($content);
 
 		if ($this->verify($contentArray)) {
 			//实际支付金额
@@ -130,7 +140,7 @@ class PaymentController extends BaseApiController
 			if ($order_amount == $contentArray['mc_gross']) {
 				//修改订单状态
 				$order->statusId = 4;
-				$order->save();
+//				$order->save();
 				exit('success');
 			}
 		}
