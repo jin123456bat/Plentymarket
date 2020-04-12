@@ -48,8 +48,11 @@ class PaymentController extends BaseApiController
 		return false;
 	}
 
-	function parse_str (string $string)
+	function parse_str ($string): array
 	{
+		if (is_array($string)) {
+			return $string;
+		}
 		$array = explode('&', $string);
 		$data = [];
 		foreach ($array as $data) {
