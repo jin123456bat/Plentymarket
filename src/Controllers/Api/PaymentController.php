@@ -17,11 +17,13 @@ class PaymentController extends BaseApiController
 {
 	use Loggable;
 
-	function verify (array $content): bool
+	function verify (string $content): bool
 	{
-		$data = array_merge([
-			'cmd' => '_notify-validate',
-		], $content);
+//		$data = array_merge([
+//			'cmd' => '_notify-validate',
+//		], $content);
+
+		$data = 'cmd=_notify-validate&' . $content;
 
 		/** @var HttpService $http */
 		$http = pluginApp(HttpService::class);
@@ -130,7 +132,7 @@ class PaymentController extends BaseApiController
 
 		$contentArray = $this->parse_str($content);
 
-		if ($this->verify($contentArray)) {
+		if ($this->verify($content)) {
 			//实际支付金额
 			$contentArray['mc_gross'];
 
