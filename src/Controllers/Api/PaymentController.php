@@ -140,7 +140,7 @@ class PaymentController extends BaseApiController
 			if ($order_amount == $contentArray['mc_gross']) {
 				//修改订单状态
 				$order->statusId = 4;
-//				$order->save();
+				$order->update();
 				exit('success');
 			}
 		}
