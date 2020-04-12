@@ -2,6 +2,10 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Plenty\Modules\Order\Models\Order;
+use Plenty\Modules\Payment\Contracts\PaymentOrderRelationRepositoryContract;
+use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
+use Plenty\Modules\Payment\Models\Payment;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Log\Loggable;
 use Plentymarket\Controllers\BaseApiController;
@@ -130,20 +134,48 @@ class PaymentController extends BaseApiController
 			$orderService = pluginApp(OrderService::class);
 			$order = $orderService->getModel($contentArray['custom']);
 
-			$order_amount = 0;
-			foreach ($order->orderItems as $key => $item) {
-				$amount = PayPalService::getAmount($item['amounts']);
-				$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
-			}
-
 			//在验证一下金额
-			if ($order_amount == $contentArray['mc_gross']) {
+			if ($this->calcAmount($order) == $contentArray['mc_gross']) {
 				//修改订单状态
-				$order->statusId = 4;
-				$order->update();
+				$this->updateOrder($order, $contentArray);
 				exit('success');
 			}
 		}
 		exit('fail');
+	}
+
+	function calcAmount (Order $order)
+	{
+		$order_amount = 0;
+		foreach ($order->orderItems as $key => $item) {
+			$amount = PayPalService::getAmount($item['amounts']);
+			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
+		}
+		return $order_amount;
+	}
+
+	function updateOrder (Order $order, array $data)
+	{
+		//创建一个payment
+		/** @var PaymentOrderRelationRepositoryContract $paymentOrderRelationRepositoryContract */
+		$paymentOrderRelationRepositoryContract = pluginApp(PaymentOrderRelationRepositoryContract::class);
+		$payment = pluginApp(Payment::class);
+
+		$payment->mopId = 6000;
+		$payment->transactionType = 2;
+		$payment->status = 2;
+		$payment->currency = $data['mc_currency'];
+		$payment->amount = $this->calcAmount($order);
+		$payment->receivedAt = date('Y-m-d H:i:s', strtotime($data['payment_date']));
+		$payment->type = 'credit';
+		//$payment->parentId = null;
+//		$payment->unaccountable = null;
+		$payment->regenerateHash = true;
+
+		/** @var PaymentRepositoryContract $paymentRepositoryContract */
+		$paymentRepositoryContract = pluginApp(PaymentRepositoryContract::class);
+		$paymentRepositoryContract->createPayment($payment);
+
+		$paymentOrderRelationRepositoryContract->createOrderRelation($payment, $order);
 	}
 }
