@@ -171,7 +171,7 @@ class PaymentController extends BaseApiController
 		//$payment->parentId = null;
 //		$payment->unaccountable = null;
 		$payment->regenerateHash = true;
-
+		$payment->updateOrderPaymentStatus = true;
 		/** @var PaymentRepositoryContract $paymentRepositoryContract */
 		$paymentRepositoryContract = pluginApp(PaymentRepositoryContract::class);
 		$paymentRepositoryContract->createPayment($payment);
