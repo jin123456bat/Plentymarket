@@ -44,7 +44,7 @@ class PaymentController extends BaseApiController
 		$this->getLogger(__CLASS__)->error(
 			"Plentymarket::Payment.Paypal",
 			[
-				"resultName" => '异步验证失败:' . http_build_query($data),
+				"resultName" => '异步验证失败:' . $data,
 			]
 		);
 		return false;
