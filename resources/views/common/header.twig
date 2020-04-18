@@ -296,23 +296,26 @@
 									<a href="/">{{trans("Plentymarket::Common.home")}}</a></li>
 
 								{%for key,value in category%}
-									<li class="menu-item-has-children">
+									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>
 										<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>
-										<ul class="sub-menu">
-
-											{%for value2 in value.children%}
-												<li class="menu-item-has-children">
-													<a href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
-													<ul class="sub-menu">
-														{%for value3 in value2.children%}
-															<li>
-																<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
-															</li>
-														{%endfor%}
-													</ul>
-												</li>
-											{%endfor%}
-										</ul>
+										{%if value2.children|length > 0%}
+											<ul class="sub-menu">
+												{%for value2 in value.children%}
+													<li {%if value2.children|length > 0%}class="menu-item-has-children"{%endif%}>
+														<a href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
+														{%if value3.children|length > 0%}
+															<ul class="sub-menu">
+																{%for value3 in value2.children%}
+																	<li>
+																		<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
+																	</li>
+																{%endfor%}
+															</ul>
+														{%endif%}
+													</li>
+												{%endfor%}
+											</ul>
+										{%endif%}
 									</li>
 								{%endfor%}
 
