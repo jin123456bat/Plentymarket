@@ -292,7 +292,8 @@
 						<nav>
 							<ul>
 
-								<li class="active"><a href="/">{{trans("Plentymarket::Common.home")}}</a></li>
+								<li {%if services.request.getRequestUri() == '/'%}class="active"{%endif%}>
+									<a href="/">{{trans("Plentymarket::Common.home")}}</a></li>
 
 								{%for key,value in category%}
 									<li class="menu-item-has-children">
@@ -332,7 +333,8 @@
 									</ul>
 								</li>
 
-								<li><a href="/index/contact">{{trans('Plentymarket::Common.contact')}}</a></li>
+								<li {%if services.request.getRequestUri() == '/index/contact'%}class="active"{%endif%}>
+									<a href="/index/contact">{{trans('Plentymarket::Common.contact')}}</a></li>
 
 							</ul>
 						</nav>
