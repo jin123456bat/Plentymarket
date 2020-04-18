@@ -320,7 +320,8 @@
 								{#								{%endfor%}#}
 
 								<li {%if services.request.getRequestUri() == '/index/blog_list'%}class="active"{%endif%}>
-									<a href="/index/blog_list">{{trans('Plentymarket::Common.blog')}}</a></li>
+									<a href="/index/blog_list">{{trans('Plentymarket::Common.blog')}}    {{services.request.getRequestUri()}}</a>
+								</li>
 
 								<li {%if services.request.getRequestUri() == '/index/about'%}class="active"{%endif%}>
 									<a href="/index/about">{{trans('Plentymarket::Common.about')}}</a></li>
