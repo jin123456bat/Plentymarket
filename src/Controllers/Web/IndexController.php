@@ -18,6 +18,8 @@ class IndexController extends BaseWebController
 	 */
 	public function index (): string
 	{
+		exit($this->request->getRequestUri());
+
 		return $this->render('index.index');
 	}
 

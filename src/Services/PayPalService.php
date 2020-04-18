@@ -81,6 +81,7 @@ class PayPalService
 	/**
 	 * 跳转到支付页面
 	 * @param Order $order
+	 * @return string
 	 */
 	function execute (Order $order)
 	{
