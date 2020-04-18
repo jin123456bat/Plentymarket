@@ -295,46 +295,35 @@
 								<li {%if services.request.getRequestUri() == '/'%}class="active"{%endif%}>
 									<a href="/">{{trans("Plentymarket::Common.home")}}</a></li>
 
-								{%for key,value in category%}
-									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>
-										<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>
-										{%if value2.children|length > 0%}
-											<ul class="sub-menu">
-												{%for value2 in value.children%}
-													<li {%if value2.children|length > 0%}class="menu-item-has-children"{%endif%}>
-														<a href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
-														{%if value3.children|length > 0%}
-															<ul class="sub-menu">
-																{%for value3 in value2.children%}
-																	<li>
-																		<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
-																	</li>
-																{%endfor%}
-															</ul>
-														{%endif%}
-													</li>
-												{%endfor%}
-											</ul>
-										{%endif%}
-									</li>
-								{%endfor%}
+								{#								{%for key,value in category%}#}
+								{#									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>#}
+								{#										<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>#}
+								{#										{%if value2.children|length > 0%}#}
+								{#											<ul class="sub-menu">#}
+								{#												{%for value2 in value.children%}#}
+								{#													<li {%if value2.children|length > 0%}class="menu-item-has-children"{%endif%}>#}
+								{#														<a href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>#}
+								{#														{%if value3.children|length > 0%}#}
+								{#															<ul class="sub-menu">#}
+								{#																{%for value3 in value2.children%}#}
+								{#																	<li>#}
+								{#																		<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>#}
+								{#																	</li>#}
+								{#																{%endfor%}#}
+								{#															</ul>#}
+								{#														{%endif%}#}
+								{#													</li>#}
+								{#												{%endfor%}#}
+								{#											</ul>#}
+								{#										{%endif%}#}
+								{#									</li>#}
+								{#								{%endfor%}#}
 
-								<li class="menu-item-has-children"><a href="#">BLOG</a>
-									<ul class="sub-menu">
-										<li><a href="blog-3-column.html">Blog 3 column</a></li>
-										<li><a href="blog-grid-left-sidebar.html">Blog Grid Left Sidebar</a></li>
-										<li><a href="blog-grid-right-sidebar.html">Blog Grid Right Sidebar</a></li>
-										<li><a href="blog-list-left-sidebar.html">Blog List Left Sidebar</a></li>
-										<li><a href="blog-list-right-sidebar.html">Blog List Right Sidebar</a></li>
-										<li><a href="blog-post-left-sidebar.html">Blog Post Left Sidebar</a></li>
-										<li><a href="blog-post-right-sidebar.html">Blog Post Right Sidebar</a></li>
-										<li><a href="blog-post-image-format.html">Blog Post Image Format</a></li>
-										<li><a href="blog-post-image-gallery.html">Blog Post Image Gallery Format</a>
-										</li>
-										<li><a href="blog-post-audio-format.html">Blog Post Audio Format</a></li>
-										<li><a href="blog-post-video-format.html">Blog Post Video Format</a></li>
-									</ul>
-								</li>
+								<li {%if services.request.getRequestUri() == '/index/blog_list'%}class="active"{%endif%}>
+									<a href="/index/blog_list">{{trans('Plentymarket::Common.blog')}}</a></li>
+
+								<li {%if services.request.getRequestUri() == '/index/about'%}class="active"{%endif%}>
+									<a href="/index/about">{{trans('Plentymarket::Common.about')}}</a></li>
 
 								<li {%if services.request.getRequestUri() == '/index/contact'%}class="active"{%endif%}>
 									<a href="/index/contact">{{trans('Plentymarket::Common.contact')}}</a></li>
