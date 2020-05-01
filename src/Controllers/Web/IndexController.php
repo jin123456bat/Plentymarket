@@ -140,6 +140,12 @@ class IndexController extends BaseWebController
 	{
 		$blog = pluginApp(BlogService::class)->get($blog_id);
 
+		$blog['createdAt'] = date('d F, Y', strtotime($list['entries'][$key]['createdAt']));
+
+		$blog['data']['images'] = array_filter(array_map(function ($value) {
+			return $value['path'];
+		}, $blog['images']));
+
 		return $this->render('index.blog', [
 			$this->trans('WebIndexBlog.blog') => '/index/blog',
 		], [
