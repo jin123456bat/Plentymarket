@@ -132,6 +132,18 @@ class IndexController extends BaseWebController
 		]);
 	}
 
+	private function htmlspecialchars_decode ($string, $style = ENT_COMPAT)
+	{
+		$data = [
+			'"' => '&quot;',
+			'\'' => '&#39;',
+			'<' => '&lt;',
+			'>' => '&gt;',
+			'&' => '&amp;',
+		];
+		return str_replace(array_values($data), array_keys($data), $string);
+	}
+
 	/**
 	 * 文章详情
 	 * @param $blog_id
