@@ -27,6 +27,20 @@
 					"options": {
 						"defaultValue": "Address"
 					}
+				},
+				"basic.footer_article_1": {
+					"type": "categoryPicker",
+					"required": false,
+					"deprecated": true,
+					"label": "Config.footer_article_1",
+					"options": {}
+				},
+				"basic.footer_article_2": {
+					"type": "categoryPicker",
+					"required": false,
+					"deprecated": true,
+					"label": "Config.footer_article_2",
+					"options": {}
 				}
 			}
 		},

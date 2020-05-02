@@ -81,7 +81,28 @@ class BlogService
 				return $item['data']['category']['id'] == $param;
 				break;
 			case 'tag':
+				break;
+			case 'title_equal':
+				return $item['data']['post']['title'] == $param;
 		}
+	}
+
+	function getTitle ($title): ?BlogPost
+	{
+		$data = [];
+		$inner_page = 1;
+		do {
+			$result = $this->getAll($inner_page);
+
+			foreach ($result['entries'] as $item) {
+				if ($this->isLike('title_equal', $item, $title)) {
+					return $item;
+				}
+			}
+
+			$inner_page++;
+		} while (!$result['isLastPage']);
+		return null;
 	}
 
 	/**

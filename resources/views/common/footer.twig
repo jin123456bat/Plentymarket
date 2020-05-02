@@ -29,13 +29,11 @@
 					<!--=======  single footer  =======-->
 
 					<div class="single-footer">
-						<h3 class="footer-title mb-20">Products</h3>
+						<h3 class="footer-title mb-20">{{footer_article_1.details.0.name}}</h3>
 						<ul>
-							<li><a href="#">Prices Drop</a></li>
-							<li><a href="#">New Products</a></li>
-							<li><a href="#">Best Sales</a></li>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">My Account</a></li>
+							{%for article in footer_article_1_list%}
+								<li><a href="#">{{article.data.post.title}}</a></li>
+							{%endfor%}
 						</ul>
 					</div>
 
@@ -46,14 +44,11 @@
 					<!--=======  single footer  =======-->
 
 					<div class="single-footer">
-						<h3 class="footer-title mb-20">Our Company</h3>
+						<h3 class="footer-title mb-20">{{footer_article_2.details.0.name}}</h3>
 						<ul>
-							<li><a href="#">Delivery</a></li>
-							<li><a href="#">Legal Notice</a></li>
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">Sitemap</a></li>
-							<li><a href="#">Stores</a></li>
+							{%for article in footer_article_2_list%}
+								<li><a href="#">{{article.data.post.title}}</a></li>
+							{%endfor%}
 						</ul>
 					</div>
 

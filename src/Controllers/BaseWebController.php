@@ -6,7 +6,9 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ConfigService;
 
 /**
  * Class BaseWebController
@@ -48,6 +50,14 @@ class BaseWebController extends BaseController
 
 		//分类
 		$context['category'] = pluginApp(CategoryService::class)->getTree();
+
+		//footer中的文章信息
+		$footer_article_1 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1');
+		$context['footer_article_1'] = $footer_article_1;
+		$footer_article_2 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1');
+		$context['footer_article_2'] = $footer_article_2;
+		$context['footer_article_1_list'] = pluginApp(BlogService::class)->category_id($footer_article_1 . id);
+		$context['footer_article_2_list'] = pluginApp(BlogService::class)->category_id($footer_article_2 . id);
 
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
