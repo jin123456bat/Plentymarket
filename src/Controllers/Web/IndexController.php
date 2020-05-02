@@ -141,7 +141,7 @@ class IndexController extends BaseWebController
 			'>' => '&gt;',
 			'&' => '&amp;',
 		];
-		return str_replace(array_values($data), array_keys($data), $string);
+		return str_replace(array_keys($data), array_values($data), $string);
 	}
 
 	/**
