@@ -132,6 +132,15 @@ class IndexController extends BaseWebController
 		]);
 	}
 
+	private function htmlspecialchars_decode ($string, $style = ENT_COMPAT)
+	{
+		$translation = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $style));
+		if ($style === ENT_QUOTES) {
+			$translation['&#039;'] = '\'';
+		}
+		return strtr($string, $translation);
+	}
+
 	/**
 	 * 文章详情
 	 * @param $blog_id
@@ -149,7 +158,7 @@ class IndexController extends BaseWebController
 			return $value['path'];
 		}, $blog['data']['images']));
 
-		$blog['data']['post']['body'] = htmlspecialchars_decode($blog['data']['post']['body']);
+		$blog['data']['post']['body'] = $this->htmlspecialchars_decode($blog['data']['post']['body']);
 
 		return $this->render('index.blog', [
 			$this->trans('WebIndexBlog.blog') => '/index/blog',
