@@ -1,6 +1,35 @@
 {
 	"formatVersion": 1,
 	"menu": {
+		"Config.Basic": {
+			"label": "Config.Basic",
+			"formFields": {
+				"basic.phone": {
+					"type": "inputText",
+					"required": false,
+					"label": "Config.Phone",
+					"options": {
+						"defaultValue": "Phone"
+					}
+				},
+				"basic.email": {
+					"type": "inputText",
+					"required": false,
+					"label": "Config.Email",
+					"options": {
+						"defaultValue": "Email"
+					}
+				},
+				"basic.address": {
+					"type": "inputText",
+					"required": false,
+					"label": "Config.Address",
+					"options": {
+						"defaultValue": "Address"
+					}
+				}
+			}
+		},
 		"Config.LanguagesTab": {
 			"label": "Config.languagesTab",
 			"formFields": {

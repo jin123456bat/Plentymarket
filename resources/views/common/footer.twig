@@ -13,28 +13,11 @@
 
 					<div class="single-footer">
 						<!--=======  Single block  =======-->
-
 						<div class="single-block mb-35">
-							<h3 class="footer-title">Need Help?</h3>
-							<p>Call: 1-800-345-6789</p>
+							<h3 class="footer-title">Contact Us</h3>
+							<p>Phone: {{services.config.getTemplateConfig('basic.phone')}}</p>
+							<p>Email: {{services.config.getTemplateConfig('basic.email')}}</p>
 						</div>
-
-						<!--=======  End of Single block  =======-->
-						<!--=======  Single block  =======-->
-
-						<div class="single-block mb-35">
-							<h3 class="footer-title">Products & Sales</h3>
-							<p>Call: 1-877-345-6789</p>
-						</div>
-
-						<!--=======  End of Single block  =======-->
-						<!--=======  Single block  =======-->
-
-						<div class="single-block">
-							<h3 class="footer-title">Check Order Status</h3>
-							<p><a href="my-account.html">Click here</a> to check Order Status.</p>
-						</div>
-
 						<!--=======  End of Single block  =======-->
 					</div>
 
@@ -79,36 +62,10 @@
 
 				<div class="col-12 col-lg-4 col-md-6 col-sm-6">
 					<!--=======  single footer  =======-->
-
-					<div class="single-footer mb-35">
-						<h3 class="footer-title mb-20">Newsletter</h3>
-
-						<div class="newsletter-form mb-20">
-							<form id="mc-form" class="mc-form subscribe-form">
-								<input type="email" placeholder="Your email address">
-								<button type="submit" value="submit"><i class="lnr lnr-envelope"></i></button>
-							</form>
-						</div>
-						<!-- mailchimp-alerts Start -->
-						<div class="mailchimp-alerts mb-20">
-							<div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-							<div class="mailchimp-success"></div><!-- mailchimp-success end -->
-							<div class="mailchimp-error"></div><!-- mailchimp-error end -->
-						</div><!-- mailchimp-alerts end -->
-
-					</div>
-
-					<!--=======  End of single footer  =======-->
-
-					<!--=======  single footer  =======-->
-
 					<div class="single-footer">
 						<h3 class="footer-title mb-20">Address</h3>
-						<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi corporis, necessitatibus
-							officiis dolor facere ipsum rem sed itaque ea eos.</p>
-						<p>New York</p>
+						<p>{{services.config.getTemplateConfig('basic.address')}}</p>
 					</div>
-
 					<!--=======  End of single footer  =======-->
 				</div>
 			</div>
