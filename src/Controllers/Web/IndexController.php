@@ -149,6 +149,8 @@ class IndexController extends BaseWebController
 			return $value['path'];
 		}, $blog['data']['images']));
 
+		$blog['data']['post']['body'] = htmlspecialchars_decode($blog['data']['post']['body']);
+
 		return $this->render('index.blog', [
 			$this->trans('WebIndexBlog.blog') => '/index/blog',
 		], [
