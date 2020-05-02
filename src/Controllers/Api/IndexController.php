@@ -183,6 +183,7 @@ class IndexController extends BaseApiController
 			return $this->success([
 				'lang' => Utils::getLang(),
 				'paypal' => pluginApp(OrderService::class)->getList(),
+				'blog' => pluginApp(BlogService::class)->get('ac29b540-9d76-556a-86ce-7769440352ac'),
 //				'order' => get_class_methods(Order::class)
 //				'getRequestUri' => $this->request->getRequestUri(),
 //				'getUri' => $this->request->getUri(),

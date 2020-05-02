@@ -136,20 +136,20 @@ class IndexController extends BaseWebController
 	 * @param $blog_id
 	 * @return string
 	 */
-	function blog ($blog_id): string
-	{
-		$blog = pluginApp(BlogService::class)->get($blog_id);
-
-		$blog['createdAt'] = date('d F, Y', strtotime($blog['createdAt']));
-
-		$blog['data']['images'] = array_filter(array_map(function ($value) {
-			return $value['path'];
-		}, $blog['images']));
-
-		return $this->render('index.blog', [
-			$this->trans('WebIndexBlog.blog') => '/index/blog',
-		], [
-			'blog' => $blog
-		]);
-	}
+//	function blog ($blog_id): string
+//	{
+//		$blog = pluginApp(BlogService::class)->get($blog_id);
+//
+//		$blog['createdAt'] = date('d F, Y', strtotime($blog['createdAt']));
+//
+//		$blog['data']['images'] = array_filter(array_map(function ($value) {
+//			return $value['path'];
+//		}, $blog['images']));
+//
+//		return $this->render('index.blog', [
+//			$this->trans('WebIndexBlog.blog') => '/index/blog',
+//		], [
+//			'blog' => $blog
+//		]);
+//	}
 }
