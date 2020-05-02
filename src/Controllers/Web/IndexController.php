@@ -2,6 +2,7 @@
 
 namespace Plentymarket\Controllers\Web;
 
+use Plenty\Modules\Blog\Models\BlogPost;
 use Plentymarket\Controllers\BaseWebController;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\ItemListService;
@@ -138,7 +139,9 @@ class IndexController extends BaseWebController
 	 */
 	function blog ($blog_id): string
 	{
+		/** @var BlogPost $blog */
 		$blog = pluginApp(BlogService::class)->get($blog_id);
+		$blog = $blog->toArray();
 
 		$blog['createdAt'] = date('d F, Y', strtotime($blog['createdAt']));
 
