@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ConfigService;
 
 /**
  * Class BaseWebController
