@@ -111,7 +111,7 @@
 						<ul>
 							{%for article in footer_article_2_list%}
 								<li>
-									<a href="#">About Us</a>
+									<a href="/index/blog/{{article.id}}">{{article.data.post.title}}</a>
 									{%if not loop.last%}
 										<span class="separator">|</span>
 									{%endif%}
