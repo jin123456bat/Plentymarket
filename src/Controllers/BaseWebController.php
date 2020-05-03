@@ -6,6 +6,7 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\ConfigService;
 
