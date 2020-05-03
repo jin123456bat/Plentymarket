@@ -50,12 +50,17 @@ class BaseWebController extends BaseController
 		$context['category'] = pluginApp(CategoryService::class)->getTree();
 
 		//footer中的文章信息
-//		$footer_article_1 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1');
-//		$context['footer_article_1'] = $footer_article_1;
-//		$footer_article_2 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1');
-//		$context['footer_article_2'] = $footer_article_2;
-//		$context['footer_article_1_list'] = pluginApp(BlogService::class)->category_id($footer_article_1 . id);
-//		$context['footer_article_2_list'] = pluginApp(BlogService::class)->category_id($footer_article_2 . id);
+		$footer_article_1 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1');
+		if (!empty($footer_article_1)) {
+			$context['footer_article_1'] = $footer_article_1;
+			$context['footer_article_1_list'] = pluginApp(BlogService::class)->category_id($footer_article_1 . id);
+		}
+
+		$footer_article_2 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1');
+		if (!empty($footer_article_2)) {
+			$context['footer_article_2'] = $footer_article_2;
+			$context['footer_article_2_list'] = pluginApp(BlogService::class)->category_id($footer_article_2 . id);
+		}
 
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
