@@ -87,7 +87,7 @@ class BlogService
 		}
 	}
 
-	function getTitle ($title): ?BlogPost
+	function getTitle ($title)
 	{
 		$data = [];
 		$inner_page = 1;
