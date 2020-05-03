@@ -4718,11 +4718,6 @@ a#more-btn {
     margin-bottom: 20px; }
     .ptk-product .image a {
       display: block; }
-      .ptk-product .image a img
-      {
-        width: 255px;
-        height: 306px;
-      }
       .ptk-product .image a.hover-icon {
         position: absolute;
         display: inline-block;

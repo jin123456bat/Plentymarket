@@ -15,21 +15,15 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 mb-sm-20 d-flex align-items-center">
                             <!--=======  view mode  =======-->
-
                             <div class="view-mode-icons">
                                 <a class="active" href="#" data-target="grid"><i class="fa fa-th"></i></a>
                                 <a href="#" data-target="list"><i class="fa fa-list"></i></a>
                             </div>
-
                             <p class="result-show-message">Showing {{page}}–{{page * 12}} of {{items.total}} results</p>
-
                             <!--=======  End of view mode  =======-->
-
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column flex-sm-row justify-content-start justify-content-md-end align-items-sm-center">
-
                             <!--=======  Sort by dropdown  =======-->
-
                             <div class="sort-by-dropdown d-flex align-items-center mb-xs-10">
                                 <p class="mr-10 mb-0">Sort By: </p>
                                 <select name="sort-by" id="sort-by" class="nice-select">
@@ -40,10 +34,7 @@
                                     <option value="0">Sort By Price: High to Low</option>
                                 </select>
                             </div>
-
                             <!--=======  End of Sort by dropdown  =======-->
-
-
                         </div>
                     </div>
                 </div>
@@ -62,25 +53,19 @@
                             <div class="ptk-product shop-grid-view-product">
                                 <div class="image">
                                     <a href="/index/product/{{item.id}}">
-                                        <img src="{{item.images.0}}" class="img-fluid" alt="">
+                                        <img src="{{item.images.0}}" class="img-fluid" alt="" style="width: 255px;height: 306px;">
                                     </a>
                                     <!--=======  hover icons  =======-->
-
                                     <a class="hover-icon" href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="lnr lnr-eye"></i></a>
                                     <a class="hover-icon" href="#"><i class="lnr lnr-heart"></i></a>
                                     <a class="hover-icon" href="#"><i class="lnr lnr-cart"></i></a>
-
                                     <!--=======  End of hover icons  =======-->
-
                                     <!--=======  badge  =======-->
-
                                     <div class="product-badge">
                                         <span class="new-badge">NEW</span>
                                         <span class="discount-badge">-8%</span>
                                     </div>
-
                                     <!--=======  End of badge  =======-->
-
                                 </div>
                                 <div class="content">
                                     <p class="product-title"><a href="/index/product/{{item.id}}">{{item.name}}</a></p>
