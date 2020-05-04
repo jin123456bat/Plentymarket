@@ -102,21 +102,6 @@
         $("#accountList").slideUp("slow");
     });
 
-    var add_to_wishlist = function(id, success, failed)
-    {
-        $.get("/api/wishlist/create/" + id, function(response)
-        {
-            if (response.code == 1)
-            {
-                success();
-            }
-            else
-            {
-                failed();
-            }
-        });
-    };
-
     /*----------  cart minibox toggle  ----------*/
     $("#cart-floating-box").on("flush", function()
     {
@@ -1493,13 +1478,28 @@ var addBasket = function(variationId, quantity, args, callback)
 							}
 						}
 					});
-					return false;
-				});
+                    return false;
+                });
 
-				$(".cart-items").append(item);
-			}
-		}
+                $(".cart-items").append(item);
+            }
+        }
 
-		callback(response.code);
-	});
+        callback(response.code);
+    });
+};
+
+var add_to_wishlist = function(id, success, failed)
+{
+    $.get("/api/wishlist/create/" + id, function(response)
+    {
+        if (response.code == 1)
+        {
+            success();
+        }
+        else
+        {
+            failed();
+        }
+    });
 };
