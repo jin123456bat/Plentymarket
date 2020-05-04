@@ -56,9 +56,9 @@
                                         <img src="{{item.images.0}}" class="img-fluid" alt="" style="width: 255px;height: 306px;">
                                     </a>
                                     <!--=======  hover icons  =======-->
-                                    <a class="hover-icon" href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="lnr lnr-eye"></i></a>
-                                    <a class="hover-icon" href="#"><i class="lnr lnr-heart"></i></a>
-                                    <a class="hover-icon" href="#"><i class="lnr lnr-cart"></i></a>
+                                    <a class="hover-icon preview" data-id="{{item.id}}" href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="lnr lnr-eye"></i></a>
+                                    <a class="hover-icon add_to_wishlist" data-id="{{item.variationId}}"><i class="lnr lnr-heart"></i></a>
+                                    <a class="hover-icon add_to_cart" data-discount_price="{{item.discount_price}}" data-format_discount_price="{{item.format_discount_price}}" data-id="{{item.variationId}}" data-name="{{item.name}}" data-image="{{item.images.0}}"><i class="lnr lnr-cart"></i></a>
                                     <!--=======  End of hover icons  =======-->
                                     <!--=======  badge  =======-->
                                     <div class="product-badge">
@@ -95,10 +95,10 @@
 
                                     <!--=======  badge  =======-->
 
-                                    <div class="product-badge">
-                                        <span class="new-badge">NEW</span>
-                                        <span class="discount-badge">-8%</span>
-                                    </div>
+                                    {#                                    <div class="product-badge">#}
+                                    {#                                        <span class="new-badge">NEW</span>#}
+                                    {#                                        <span class="discount-badge">-8%</span>#}
+                                    {#                                    </div>#}
 
                                     <!--=======  End of badge  =======-->
 
@@ -292,3 +292,67 @@
 </div>
 <!--=====  End of Quick view modal  ======-->
 {%include 'Plentymarket::common.footer'%}
+<script type="text/javascript">
+    $(".add_to_wishlist").on("click", function()
+    {
+        var _this = $(this);
+        add_to_wishlist($(this).data("id"), function()
+        {
+            $("#wishlist-num").text(parseInt($("#wishlist-num").text()) + 1);
+            _this.hide();
+            spop({
+                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
+                style: "success"
+            });
+        }, function()
+        {
+            spop({
+                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
+                style: "error"
+            });
+        });
+    });
+
+    $(".add_to_cart").on("click", function()
+    {
+        var quantity = 1;
+        var variationId = $(this).data("id");
+        var name = $(this).data("name");
+        var image = $(this).data("image");
+        var format_discount_price = $(this).data("format_discount_price");
+        var discount_price = $(this).data("discount_price");
+        addBasket(variationId, quantity, {
+            name: name,
+            image: image,
+            format_discount_price: format_discount_price,
+            discount_price: discount_price,
+            variationId: variationId
+        }, function(success)
+        {
+            if (success)
+            {
+                spop({
+                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
+                    style: "success"
+                });
+            }
+            else
+            {
+                spop({
+                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
+                    style: "error"
+                });
+            }
+        });
+    });
+
+    //preview
+    $(".preview").on("click", function()
+    {
+        var id = $(this).data("id");
+        $.get("/api/index/product/" + id, function(response)
+        {
+            $("#quick-view-modal-container").modal("show");
+        });
+    });
+</script>

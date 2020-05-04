@@ -13,7 +13,6 @@
                 <div class="product-image-slider pts-product-image-slider pts3-product-image-slider">
                     <!--product large image start -->
                     <div class="tab-content product-large-image-list pts-product-large-image-list pts3-product-large-image-list" id="myTabContent">
-
                         {%for image in item.images%}
                             <div class="tab-pane fade {%if loop.first%}show active{%endif%}" id="single-slide-{{loop.index}}" role="tabpanel" aria-labelledby="single-slide-tab-{{loop.index}}">
                                 <!--Single Product Image Start-->
@@ -24,7 +23,6 @@
                                 <!--Single Product Image End-->
                             </div>
                         {%endfor%}
-
                     </div>
                     <!--product large image End-->
 
@@ -737,27 +735,23 @@
         return false;
     }).on("click", "#add_to_wishlist", function()
     {
-        $.get("/api/wishlist/create/" + $(this).data("id"), function(response)
+        add_to_wishlist($(this).data("id"), function()
         {
-            if (response.code == 1)
-            {
-                var tmp = '<a href="#" id="remove_from_wishlist" data-id="{{item.variationId}}"><i class="fa fa-trash-o"></i>{{trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}</a>';
-                $(".wishlist-link").html(tmp);
+            var tmp = '<a href="#" id="remove_from_wishlist" data-id="{{item.variationId}}"><i class="fa fa-trash-o"></i>{{trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}</a>';
+            $(".wishlist-link").html(tmp);
 
-                $("#wishlist-num").text(parseInt($("#wishlist-num").text()) + 1);
+            $("#wishlist-num").text(parseInt($("#wishlist-num").text()) + 1);
 
-                spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
-                    style: "success"
-                });
-            }
-            else
-            {
-                spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
-                    style: "error"
-                });
-            }
+            spop({
+                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
+                style: "success"
+            });
+        }, function()
+        {
+            spop({
+                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
+                style: "error"
+            });
         });
         return false;
     });

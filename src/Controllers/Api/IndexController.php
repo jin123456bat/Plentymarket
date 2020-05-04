@@ -81,6 +81,23 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * 获取商品信息
+	 * @param $product_id
+	 * @return Response
+	 */
+	public function product ($product_id): Response
+	{
+		try {
+			/** @var ItemListService $itemListService */
+			$itemListService = pluginApp(ItemListService::class);
+			$item = $itemListService->getItem($product_id);
+			return $this->success($item);
+		} catch (\Exception $e) {
+			return $this->exception($e);
+		}
+	}
+
+	/**
 	 * 根据国家ID获取城市信息
 	 * @return Response
 	 */
