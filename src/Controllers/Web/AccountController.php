@@ -10,6 +10,7 @@ use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AddressService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
+use Plentymarket\Services\OrderService;
 use Plentymarket\Services\PaymentMethodService;
 
 /**
@@ -29,8 +30,19 @@ class AccountController extends BaseWebController
 	 */
 	function index (): string
 	{
+		/** @var OrderService $orderService */
+		$orderService = pluginApp(OrderService::class);
+		$orders = $orderService->getList(1, 10000);
+
+		/** @var AddressService $addressOrders */
+		$addressOrders = pluginApp(AddressService::class);
+		$address = $addressOrders->getAll();
+
 		return $this->render('account.index', [
 			$this->trans('WebAccountIndex.account') => '/account/index'
+		], [
+			'orders' => $orders,
+			'address' => $address,
 		]);
 	}
 

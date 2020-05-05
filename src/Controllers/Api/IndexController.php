@@ -180,17 +180,6 @@ class IndexController extends BaseApiController
 		}
 	}
 
-	public function data (): Response
-	{
-		try {
-			return $this->success([
-				'test' => 'this is a post request',
-			]);
-		} catch (Throwable $e) {
-			return $this->exception($e);
-		}
-	}
-
 	/**
 	 * test
 	 * @return Response
@@ -202,8 +191,8 @@ class IndexController extends BaseApiController
 				'lang' => Utils::getLang(),
 				'paypal' => pluginApp(OrderService::class)->getList(),
 				'blog' => pluginApp(BlogService::class)->get('ac29b540-9d76-556a-86ce-7769440352ac'),
-				'footer' => pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1')
-//				'order' => get_class_methods(Order::class)
+				'footer' => pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1'),
+				'order' => pluginApp(OrderService::class)->getList()
 //				'getRequestUri' => $this->request->getRequestUri(),
 //				'getUri' => $this->request->getUri(),
 //				'getUserInfo' => $this->request->getUserInfo(),
