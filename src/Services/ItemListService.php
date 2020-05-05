@@ -71,6 +71,33 @@ class ItemListService
 	}
 
 	/**
+	 * 商品搜索
+	 * @param $query
+	 * @param null $sorting
+	 * @param int $page
+	 * @param int $maxItems
+	 * @param bool $source
+	 * @return array
+	 */
+	public function searchItem ($query, $sorting = null, $page = 1, $maxItems = 12, $source = false): array
+	{
+		/** @var ItemSearchService $searchService */
+		$searchService = pluginApp(ItemSearchService::class);
+
+		$searchFactory = CategoryItems::getSearchFactory([
+			'query' => $query,
+			'sorting' => $sorting
+		]);
+
+		$searchFactory->setPage($page, $maxItems);
+
+		if ($source) {
+			return $searchService->getResult($searchFactory);
+		}
+		return $this->formatItemsList($searchService->getResult($searchFactory));
+	}
+
+	/**
 	 * @param null $id
 	 * @param null $sorting
 	 * @param int $page

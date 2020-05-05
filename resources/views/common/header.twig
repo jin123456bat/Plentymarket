@@ -146,10 +146,10 @@
 				</div>
 				<div class="col-12 col-lg-6 col-md-5 mb-sm-20">
 					<!--=======  Search bar  =======-->
-					<form action="index.html">
+					<form action="/index/search" method="get">
 						<div class="search-bar">
-							<input type="search" placeholder="Search entire store here ...">
-							<button><i class="lnr lnr-magnifier"></i></button>
+							<input type="search" name="query" placeholder="{{trans('Plentymarket::Common.search_text')}}">
+							<button type="submit"><i class="lnr lnr-magnifier"></i></button>
 						</div>
 					</form>
 

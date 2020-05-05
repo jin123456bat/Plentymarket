@@ -67,6 +67,32 @@ class IndexController extends BaseWebController
 	}
 
 	/**
+	 * 商品搜索页面
+	 * @param $query
+	 * @return string
+	 */
+	function search (): string
+	{
+		$query = $this->request->get('query', '');
+		$page = $this->request->get('page', 1);
+		$sort = $this->request->get('sort');
+
+		/** @var ItemListService $itemListService */
+		$itemListService = pluginApp(ItemListService::class);
+		$itemList = $itemListService->searchItem($query, $sort, $page, 12);
+
+		$paginate = $this->paginate(ceil($itemList['total'] / 12), $page, 'text-md-right');
+
+		return $this->render('index.product-list-category', [
+		], [
+			'query' => $query,
+			'items' => $itemList,
+			'page' => $page,
+			'paginate' => $paginate,
+		]);
+	}
+
+	/**
 	 * 分类商品列表
 	 * @return string
 	 */

@@ -32,6 +32,7 @@ class CategoryItems implements SearchPreset
 		$categoryId = $options['categoryId'] ?? null;
 		$itemId = $options['itemId'] ?? null;
 		$facets = $options['facets'];
+		$query = $options['query'] ?? null;
 
 		$variationIds = $options['variationIds'] ?? null;
 
@@ -64,6 +65,8 @@ class CategoryItems implements SearchPreset
 			->groupByTemplateConfig()
 			->withLinkToContent()
 			->withGroupedAttributeValues()
+			->hasNameString($query)
+			->hasSearchString($query)
 			->withReducedResults();
 
 		return $searchFactory;

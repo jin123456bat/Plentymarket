@@ -554,6 +554,10 @@ class VariationSearchFactory extends BaseSearchFactory
 	 */
 	public function hasSearchString ($query, $lang = null, $searchType = ElasticSearch::SEARCH_TYPE_EXACT, $operator = ElasticSearch::OR_OPERATOR)
 	{
+		if (empty($query)) {
+			return $this;
+		}
+
 		if ($lang === null) {
 			$lang = Utils::getLang();
 		}
@@ -585,6 +589,10 @@ class VariationSearchFactory extends BaseSearchFactory
 	 */
 	public function hasNameString ($query, $lang = null)
 	{
+		if (empty($query)) {
+			return $this;
+		}
+
 		if ($lang === null) {
 			$lang = Utils::getLang();
 		}
