@@ -12,6 +12,7 @@ use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\OrderService;
 use Plentymarket\Services\PaymentMethodService;
+use Plentymarket\Services\PayPalService;
 
 /**
  * Class AccountController
@@ -24,6 +25,21 @@ class AccountController extends BaseWebController
 		parent::__construct($request, $response);
 	}
 
+	private function calcAmount ($order)
+	{
+		$order_amount = 0;
+		foreach ($order['orderItems'] as $key => $item) {
+			$amount = PayPalService::getAmount($item['amounts']);
+			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
+		}
+
+		/** @var NumberFormatFilter $numberFormatFilter */
+		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
+		$numberFormatFilter->formatMonetary($order_amount, Utils::getCurrency());
+
+		return $order_amount;
+	}
+
 	/**
 	 * 个人中心首页
 	 * @return string
@@ -34,15 +50,24 @@ class AccountController extends BaseWebController
 		$orderService = pluginApp(OrderService::class);
 		$orders = $orderService->getList(1, 10000);
 
+		$entries = [];
+		foreach ($orders['entries'] as $order) {
+			$entries = $order;
+			$entries['items_name'] = implode(',', array_column($order['orderItems'], 'orderItemName'));
+			$entries['createdAt'] = date('Y-m-d', strtotime($order['createdAt']));
+			$entries['total_amount'] = $this->calcAmount($order);
+		}
+		$orders['entries'] = $entries;
+
 		/** @var AddressService $addressOrders */
 		$addressOrders = pluginApp(AddressService::class);
-		$address = $addressOrders->getAll();
+		$addresses = $addressOrders->getAll();
 
 		return $this->render('account.index', [
 			$this->trans('WebAccountIndex.account') => '/account/index'
 		], [
 			'orders' => $orders,
-			'address' => $address,
+			'addresses' => $addresses,
 		]);
 	}
 

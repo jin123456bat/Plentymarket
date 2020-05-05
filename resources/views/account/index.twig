@@ -49,14 +49,16 @@
 											</thead>
 
 											<tbody>
-											{%for order in orders%}
+											{%for order in orders.entries%}
 												<tr>
-													<td>{{order.}}</td>
-													<td>Murikhete Paris</td>
-													<td>June 12, 2017</td>
-													<td>On Hold</td>
-													<td>$99</td>
-													<td><a href="cart.html" class="btn">View</a></td>
+													<td>{{order.id}}</td>
+													<td>{{order.items_name}}</td>
+													<td>{{order.createdAt}}</td>
+													<td>{{order.statusName}}</td>
+													<td>{{order.total_amount}}</td>
+													<td>
+														<a href="/account/orderdetail/{{order.id}}" class="btn">{{trans('Plentymarket::WebAccountIndex.view')}}</a>
+													</td>
 												</tr>
 											{%endfor%}
 											</tbody>
