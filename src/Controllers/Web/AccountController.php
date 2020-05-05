@@ -52,10 +52,11 @@ class AccountController extends BaseWebController
 
 		$entries = [];
 		foreach ($orders['entries'] as $order) {
-			$entries = $order;
-			$entries['items_name'] = implode(',', array_column($order['orderItems'], 'orderItemName'));
-			$entries['createdAt'] = date('Y-m-d', strtotime($order['createdAt']));
-			$entries['total_amount'] = $this->calcAmount($order);
+			$temp = $order;
+			$temp['items_name'] = implode(',', array_column($order['orderItems'], 'orderItemName'));
+			$temp['createdAt'] = date('Y-m-d', strtotime($order['createdAt']));
+			$temp['total_amount'] = $this->calcAmount($order);
+			$entries[] = $temp;
 		}
 		$orders['entries'] = $entries;
 

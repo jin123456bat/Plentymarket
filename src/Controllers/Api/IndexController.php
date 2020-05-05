@@ -2,8 +2,6 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use Exception;
-use Plenty\Modules\Frontend\PaymentMethod\Contracts\FrontendPaymentMethodRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -126,60 +124,6 @@ class IndexController extends BaseApiController
 		}
 	}
 
-	/**
-	 * @return Response
-	 */
-	public function blog (): Response
-	{
-		try {
-			return $this->success(pluginApp(BlogService::class)->getAll());
-		} catch (Throwable $e) {
-			return $this->exception($e);
-		}
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function search (): Response
-	{
-		try {
-			/** @var ItemListService $itemListService */
-			$itemListService = pluginApp(ItemListService::class);
-
-			$itemList = $itemListService->getCategoryItem(16, null, 1, 12, true);
-			return $this->success($itemList);
-		} catch (Exception $e) {
-			return $this->exception($e);
-		}
-	}
-
-	/**
-	 * @return Response
-	 */
-	public function country (): Response
-	{
-		try {
-			$country = pluginApp(CountryService::class)->getAll();
-			return $this->success($country);
-		} catch (Throwable $e) {
-			return $this->exception($e);
-		}
-	}
-
-	/**
-	 * 支付方式
-	 * @return Response
-	 */
-	public function payment (): Response
-	{
-		try {
-			$methodOfPaymentList = pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList();
-			return $this->success($methodOfPaymentList);
-		} catch (\Throwable $e) {
-			return $this->exception($e);
-		}
-	}
 
 	/**
 	 * test
