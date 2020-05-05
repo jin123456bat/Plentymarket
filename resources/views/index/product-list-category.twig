@@ -135,7 +135,35 @@
 
                 <!--=======  End of shop product wrap    =======-->
 
-                {{paginate|raw}}
+                {%if items.total > 12%}
+                    <!--=======  pagination  =======-->
+                    <div class="pagination-container mt-50 pb-20 mb-md-80 mb-sm-80">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 text-center text-md-left mb-sm-20">
+                                <!--=======  showing result text  =======-->
+                                <p class="show-result-text">Showing {{page}}-{{page*12}} of {{items.total}} item(s)</p>
+                                <!--=======  End of showing result text  =======-->
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-12">
+                                <!--=======  pagination-content  =======-->
+                                <div class="pagination-content text-center text-md-right">
+                                    <ul>
+                                        <li><a href="?page={{page-1}}"><i class="fa fa-angle-left"></i> Previous</a>
+                                        </li>
+                                        {%set max = (items.total/12)|ceil%}
+                                        {%for i in 1..max%}
+                                            <li><a {%if page == i%}class="active"{%endif%} href="?page={{i}}">{{i}}</a>
+                                            </li>
+                                        {%endfor%}
+                                        <li><a href="?page={{page+1}}">Next <i class="fa fa-angle-right"></i> </a></li>
+                                    </ul>
+                                </div>
+                                <!--=======  End of pagination-content  =======-->
+                            </div>
+                        </div>
+                    </div>
+                    <!--=======  End of pagination  =======-->
+                {%endif%}
 
             </div>
         </div>
