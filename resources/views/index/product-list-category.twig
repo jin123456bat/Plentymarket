@@ -302,8 +302,12 @@
         var id = $(this).data("id");
         $.get("/api/index/product/" + id, function(response)
         {
+            $(".modal .small-image-slider").empty();
+            $(".modal .product-large-image-list").empty();
+            var last = 0;
             $.each(response.data.images, function(index, value)
             {
+                last = index;
                 var tpl = $("<div class=\"single-small-image img-full\">\n" +
                     "                                        <a data-toggle=\"tab\" id=\"single-slide-tab-quick-" + index + "\" href=\"#single-slide-quick-" + index + "\">\n" +
                     "                                            <img src=\"" + value + "\" class=\"img-fluid\" alt=\"\">\n" +
@@ -320,6 +324,28 @@
                     "                                </div>");
                 $(".modal .product-large-image-list").append(tpl);
             });
+
+            $.each(response.data.images, function(index, value)
+            {
+                index = last + index + 1;
+                var tpl = $("<div class=\"single-small-image img-full\">\n" +
+                    "                                        <a data-toggle=\"tab\" id=\"single-slide-tab-quick-" + index + "\" href=\"#single-slide-quick-" + index + "\">\n" +
+                    "                                            <img src=\"" + value + "\" class=\"img-fluid\" alt=\"\">\n" +
+                    "                                        </a>\n" +
+                    "                                    </div>");
+                $(".modal .small-image-slider").append(tpl);
+
+                var first = index == 0 ? "show active" : "";
+
+                var tpl = $("<div class=\"tab-pane fade " + first + "\" id=\"single-slide-quick-" + index + "\" role=\"tabpanel\" aria-labelledby=\"single-slide-tab-quick-" + index + "\">\n" +
+                    "                                    <div class=\"single-product-img img-full\">\n" +
+                    "                                        <img src=\"" + value + "\" class=\"img-fluid\" alt=\"\">\n" +
+                    "                                    </div>\n" +
+                    "                                </div>");
+                $(".modal .product-large-image-list").append(tpl);
+            });
+
+
             $(".modal .product-title").html(response.data.name);
             $(".modal .main-price").html(response.data.format_main_price);
             $(".modal .discounted-price").html(response.data.format_discount_price);
