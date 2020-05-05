@@ -9,6 +9,7 @@ use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\AddressService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
@@ -192,7 +193,8 @@ class IndexController extends BaseApiController
 				'paypal' => pluginApp(OrderService::class)->getList(),
 				'blog' => pluginApp(BlogService::class)->get('ac29b540-9d76-556a-86ce-7769440352ac'),
 				'footer' => pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1'),
-				'order' => pluginApp(OrderService::class)->getList()
+				'order' => pluginApp(OrderService::class)->getList(),
+				'address' => pluginApp(AddressService::class)->getAll()
 //				'getRequestUri' => $this->request->getRequestUri(),
 //				'getUri' => $this->request->getUri(),
 //				'getUserInfo' => $this->request->getUserInfo(),
