@@ -73,15 +73,17 @@
 								<div class="myaccount-content">
 									<h3>{{trans('Plentymarket::WebAccountIndex.address')}}</h3>
 
-									<address>
-										<p><strong>Alex Tuntuni</strong></p>
-										<p>1355 Market St, Suite 900 <br>
-										   San Francisco, CA 94103</p>
-										<p>Mobile: (123) 456-7890</p>
-									</address>
+									{%for address in addresses%}
+										<address style="display: inline-block;">
+											<p><strong>{{address.name2}} {{address.name3}}</strong></p>
+											<p>{{address.address1}}</p>
+											<p>{{trans('Plentymarket::WebAccountIndex.mobile')}}: {{address.phone}}</p>
 
-									<a href="#" class="btn d-inline-block edit-address-btn"><i class="fa fa-edit"></i>Edit
-									                                                                                  Address</a>
+											{#										<a href="#" class="btn d-inline-block edit-address-btn">#}
+											{#											<i class="fa fa-edit"></i>Edit Address#}
+											{#										</a>#}
+										</address>
+									{%endfor%}
 								</div>
 							</div>
 							<!-- Single Tab Content End -->
