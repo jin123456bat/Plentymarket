@@ -37,6 +37,13 @@ class PaymentController extends BaseApiController
 			CURLOPT_FORBID_REUSE => 1,
 		]);
 
+		$this->getLogger(__CLASS__)->error(
+			"Plentymarket::Payment.Paypal",
+			[
+				"resultName" => '异步验证成功',
+			]
+		);
+
 		if ($response == 'VERIFIED') {
 			return true;
 		}
@@ -143,8 +150,22 @@ class PaymentController extends BaseApiController
 			//在验证一下金额
 			if ($this->calcAmount($order) == $contentArray['mc_gross']) {
 				//修改订单状态
+				$this->getLogger(__CLASS__)->error(
+					"Plentymarket::Payment.Paypal",
+					[
+						"resultName" => '金额验证成功',
+					]
+				);
+
 				$this->updateOrder($order, $contentArray);
 				exit('success');
+			} else {
+				$this->getLogger(__CLASS__)->error(
+					"Plentymarket::Payment.Paypal",
+					[
+						"resultName" => '金额验证失败',
+					]
+				);
 			}
 		}
 		exit('fail');
@@ -183,5 +204,12 @@ class PaymentController extends BaseApiController
 		$paymentRepositoryContract->createPayment($payment);
 
 		$paymentOrderRelationRepositoryContract->createOrderRelation($payment, $order);
+
+		$this->getLogger(__CLASS__)->error(
+			"Plentymarket::Payment.Paypal",
+			[
+				"resultName" => '修改订单状态成功',
+			]
+		);
 	}
 }
