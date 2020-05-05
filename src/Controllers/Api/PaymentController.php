@@ -19,10 +19,6 @@ class PaymentController extends BaseApiController
 
 	function verify (string $content): bool
 	{
-//		$data = array_merge([
-//			'cmd' => '_notify-validate',
-//		], $content);
-
 		$data = 'cmd=_notify-validate&' . $content;
 
 		/** @var HttpService $http */
@@ -38,13 +34,6 @@ class PaymentController extends BaseApiController
 		]);
 
 		if ($response == 'VERIFIED') {
-			$this->getLogger(__CLASS__)->error(
-				"Plentymarket::Payment.Paypal",
-				[
-					"resultName" => '异步验证成功',
-				]
-			);
-
 			return true;
 		}
 
@@ -193,7 +182,7 @@ class PaymentController extends BaseApiController
 		$payment->status = 2;
 		$payment->currency = $data['mc_currency'];
 		$payment->amount = $this->calcAmount($order);
-		$payment->receivedAt = date('Y-m-d H:i:s', strtotime($data['payment_date']));
+		$payment->receivedAt = date('Y-m-d H:i:s');
 		$payment->type = 'credit';
 		//$payment->parentId = null;
 //		$payment->unaccountable = null;
