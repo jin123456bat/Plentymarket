@@ -76,23 +76,24 @@ class BaseWebController extends BaseController
 	 * 生成分页数据
 	 * @param int $pages
 	 * @param int $current
+	 * @param string $class
 	 * @return string
 	 */
-	protected function paginate (int $pages, int $current = 1): string
+	protected function paginate (int $pages, int $current = 1, $class = ''): string
 	{
-		$str = '<div class="col-lg-8 col-md-8 col-sm-12">
-                    <div class="pagination-content text-center text-md-right">
+		$str = '<div class="pagination-content text-center ' . $class . '">
                         <ul>
                             <li><a href="?page=' . ($current - 1) . '"><i class="fa fa-angle-left"></i> <i class="fa fa-angle-left"></i></a></li>
                             ';
+
 		for ($i = 0; $i < $pages; $i++) {
-			$str .= '<li><a class="active" href="?page=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
+			$active = $i + 1 == $current ? 'class="active"' : '';
+			$str .= '<li><a ' . $active . ' href="?page=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
 		}
 
 		$str .= '<li><a href="?page=' . ($current + 1) . '">  <i class="fa fa-angle-right"></i> <i class="fa fa-angle-right"></i> </a></li>
                         </ul>
-                    </div>
-                </div>';
+                    </div>';
 
 		return $str;
 	}

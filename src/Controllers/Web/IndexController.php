@@ -79,7 +79,7 @@ class IndexController extends BaseWebController
 		$itemListService = pluginApp(ItemListService::class);
 		$itemList = $itemListService->getCategoryItem($category_id, $sort, $page, 12);
 
-		$paginate = $this->paginate(ceil($itemList['total'] / 12), $page);
+		$paginate = $this->paginate(ceil($itemList['total'] / 12), $page, 'text-md-right');
 
 		return $this->render('index.product-list-category', [
 		], [
@@ -128,10 +128,13 @@ class IndexController extends BaseWebController
 			}, $r['data']['images']));
 		}
 
+		$paginate = $this->paginate(ceil($list['totalsCount'] / 9), $page);
+
 		return $this->render('index.blog-list', [
 			$this->trans('WebIndexBlogList.blog') => '/index/blog_list'
 		], [
-			'list' => $list
+			'list' => $list,
+			'paginate' => $paginate,
 		]);
 	}
 

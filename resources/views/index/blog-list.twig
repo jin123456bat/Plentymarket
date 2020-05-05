@@ -110,26 +110,7 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-lg-12">
-									<!--=======  pagination-content  =======-->
-
-									<div class="pagination-content text-center">
-										<ul>
-											<li>
-												<a href="?page={{page-1}}"><i class="fa fa-angle-left"></i>{{trans('Plentymarket::WebIndexProductListCategory.previous')}}
-												</a></li>
-											{%set max = (list.totalsCount/9)|ceil%}
-											{%for i in 1..max%}
-												<li>
-													<a {%if page==i%}class="active"{%endif%} href="?page={{i}}">{{i}}</a>
-												</li>
-											{%endfor%}
-											<li>
-												<a href="?page={{page+1}}">{{trans('Plentymarket::WebIndexProductListCategory.next')}}
-													<i class="fa fa-angle-right"></i> </a></li>
-										</ul>
-									</div>
-
-									<!--=======  End of pagination-content  =======-->
+									{{paginate|raw}}
 								</div>
 							</div>
 						</div>
