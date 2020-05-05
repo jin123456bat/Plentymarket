@@ -73,6 +73,31 @@ class BaseWebController extends BaseController
 	}
 
 	/**
+	 * 生成分页数据
+	 * @param int $pages
+	 * @param int $current
+	 * @return string
+	 */
+	protected function paginate (int $pages, int $current = 1): string
+	{
+		$str = '<div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="pagination-content text-center text-md-right">
+                        <ul>
+                            <li><a href="?page=' . ($current - 1) . '"><i class="fa fa-angle-left"></i> <i class="fa fa-angle-left"></i></a></li>
+                            ';
+		for ($i = 0; $i < $pages; $i++) {
+			$str .= '<li><a class="active" href="?page=' . ($i + 1) . '">' . ($i + 1) . '</a></li>';
+		}
+
+		$str .= '<li><a href="?page=' . ($current + 1) . '">  <i class="fa fa-angle-right"></i> <i class="fa fa-angle-right"></i> </a></li>
+                        </ul>
+                    </div>
+                </div>';
+
+		return $str;
+	}
+
+	/**
 	 * 输出异常信息
 	 * @param \Throwable $e
 	 * @return string

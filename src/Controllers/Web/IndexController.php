@@ -79,11 +79,14 @@ class IndexController extends BaseWebController
 		$itemListService = pluginApp(ItemListService::class);
 		$itemList = $itemListService->getCategoryItem($category_id, $sort, $page, 12);
 
+		$paginate = $this->paginate(ceil($itemList['total'] / 12), $page);
+
 		return $this->render('index.product-list-category', [
 		], [
 			'category_id' => $category_id,
 			'items' => $itemList,
-			'page' => $page
+			'page' => $page,
+			'paginate' => $paginate,
 		]);
 	}
 
