@@ -37,14 +37,14 @@ class PaymentController extends BaseApiController
 			CURLOPT_FORBID_REUSE => 1,
 		]);
 
-		$this->getLogger(__CLASS__)->error(
-			"Plentymarket::Payment.Paypal",
-			[
-				"resultName" => '异步验证成功',
-			]
-		);
-
 		if ($response == 'VERIFIED') {
+			$this->getLogger(__CLASS__)->error(
+				"Plentymarket::Payment.Paypal",
+				[
+					"resultName" => '异步验证成功',
+				]
+			);
+
 			return true;
 		}
 
@@ -132,8 +132,10 @@ class PaymentController extends BaseApiController
 		$this->getLogger(__CLASS__)->error(
 			"Plentymarket::Payment.Paypal",
 			[
-				"resultName" => '类型为' . $content,
 				"errorMessage" => '获取到PayPal异步通知:' . $content,
+				"request_all" => $this->request->all(),
+				'request_header' => $this->request->header(),
+				'request_query' => $this->request->query(),
 			]
 		);
 
