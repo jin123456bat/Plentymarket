@@ -142,8 +142,6 @@ class PaymentController extends BaseApiController
 		$contentArray = $this->parse_str($content);
 
 		if ($this->verify($content)) {
-			//实际支付金额
-			$contentArray['mc_gross'];
 
 			/** @var OrderService $orderService */
 			$orderService = pluginApp(OrderService::class);

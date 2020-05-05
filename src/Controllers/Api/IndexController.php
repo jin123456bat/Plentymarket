@@ -2,17 +2,18 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use Plenty\Modules\Order\Models\Order;
+use Plenty\Modules\Payment\Contracts\PaymentOrderRelationRepositoryContract;
+use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
+use Plenty\Modules\Payment\Models\Payment;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
-use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AccountService;
-use Plentymarket\Services\AddressService;
-use Plentymarket\Services\BlogService;
-use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\OrderService;
+use Plentymarket\Services\PayPalService;
 use Throwable;
 
 /**
@@ -124,6 +125,15 @@ class IndexController extends BaseApiController
 		}
 	}
 
+	function calcAmount (Order $order)
+	{
+		$order_amount = 0;
+		foreach ($order->orderItems as $key => $item) {
+			$amount = PayPalService::getAmount($item['amounts']);
+			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
+		}
+		return $order_amount;
+	}
 
 	/**
 	 * test
@@ -131,25 +141,32 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
-		try {
-			return $this->success([
-				'lang' => Utils::getLang(),
-				'paypal' => pluginApp(OrderService::class)->getList(),
-				'blog' => pluginApp(BlogService::class)->get('ac29b540-9d76-556a-86ce-7769440352ac'),
-				'footer' => pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_1'),
-				'order' => pluginApp(OrderService::class)->getList(),
-				'address' => pluginApp(AddressService::class)->getAll()
-//				'getRequestUri' => $this->request->getRequestUri(),
-//				'getUri' => $this->request->getUri(),
-//				'getUserInfo' => $this->request->getUserInfo(),
-//				'getQueryString' => $this->request->getQueryString(),
-//				'getUserInfo' => $this->request->getUserInfo(),
-//				'getActiveLanguageList' => pluginApp(ConfigService::class)->getActiveLanguageList(),
-//				'PaymentMethodRepositoryContract' => pluginApp(PaymentMethodRepositoryContract::class)->all(),
-//				'FrontendPaymentMethodRepositoryContract' => pluginApp(FrontendPaymentMethodRepositoryContract::class)->getCurrentPaymentMethodsList(),
-			]);
-		} catch (Throwable $e) {
-			return $this->exception($e);
-		}
+		/** @var OrderService $orderService */
+		$orderService = pluginApp(OrderService::class);
+		$order = $orderService->getModel(149);
+
+		//创建一个payment
+		/** @var PaymentOrderRelationRepositoryContract $paymentOrderRelationRepositoryContract */
+		$paymentOrderRelationRepositoryContract = pluginApp(PaymentOrderRelationRepositoryContract::class);
+		$payment = pluginApp(Payment::class);
+
+		$payment->mopId = 6000;
+		$payment->transactionType = 2;
+		$payment->status = 2;
+		$payment->currency = 'EUR';
+		$payment->amount = $this->calcAmount($order);
+		$payment->receivedAt = date('Y-m-d H:i:s');
+		$payment->type = 'credit';
+		//$payment->parentId = null;
+//		$payment->unaccountable = null;
+		$payment->regenerateHash = true;
+		$payment->updateOrderPaymentStatus = true;
+		/** @var PaymentRepositoryContract $paymentRepositoryContract */
+		$paymentRepositoryContract = pluginApp(PaymentRepositoryContract::class);
+		$paymentRepositoryContract->createPayment($payment);
+
+		$paymentOrderRelationRepositoryContract->createOrderRelation($payment, $order);
+
+		exit('success');
 	}
 }
