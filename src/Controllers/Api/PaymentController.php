@@ -37,7 +37,7 @@ class PaymentController extends BaseApiController
 			return true;
 		}
 
-		$this->getLogger(__CLASS__)->error(
+		$this->getLogger(__CLASS__)->info(
 			"Plentymarket::Payment.Paypal",
 			[
 				"resultName" => '异步验证失败:' . $data,
@@ -107,7 +107,7 @@ class PaymentController extends BaseApiController
 	{
 		$content = $this->request->getContent();
 		if (empty($content)) {
-			$this->getLogger(__CLASS__)->error(
+			$this->getLogger(__CLASS__)->info(
 				"Plentymarket::Payment.Paypal",
 				[
 					"resultName" => '请求内容为空',
@@ -115,10 +115,10 @@ class PaymentController extends BaseApiController
 				]
 			);
 
-			return $this->error('请求内容为空');
+			return $this->info('请求内容为空');
 		}
 
-		$this->getLogger(__CLASS__)->error(
+		$this->getLogger(__CLASS__)->info(
 			"Plentymarket::Payment.Paypal",
 			[
 				"errorMessage" => '获取到PayPal异步通知:' . $content,
@@ -139,7 +139,7 @@ class PaymentController extends BaseApiController
 			//在验证一下金额
 			if ($this->calcAmount($order) == $contentArray['mc_gross']) {
 				//修改订单状态
-				$this->getLogger(__CLASS__)->error(
+				$this->getLogger(__CLASS__)->info(
 					"Plentymarket::Payment.Paypal",
 					[
 						"resultName" => '金额验证成功',
@@ -149,7 +149,7 @@ class PaymentController extends BaseApiController
 				$this->updateOrder($order, $contentArray);
 				exit('success');
 			} else {
-				$this->getLogger(__CLASS__)->error(
+				$this->getLogger(__CLASS__)->info(
 					"Plentymarket::Payment.Paypal",
 					[
 						"resultName" => '金额验证失败',
@@ -194,7 +194,7 @@ class PaymentController extends BaseApiController
 
 		$paymentOrderRelationRepositoryContract->createOrderRelation($payment, $order);
 
-		$this->getLogger(__CLASS__)->error(
+		$this->getLogger(__CLASS__)->info(
 			"Plentymarket::Payment.Paypal",
 			[
 				"resultName" => '修改订单状态成功',
