@@ -46,21 +46,6 @@ class PaymentController extends BaseApiController
 		return false;
 	}
 
-	function parse_str ($string): array
-	{
-		if (is_array($string)) {
-			return $string;
-		}
-
-		$array = explode('&', $string);
-		$data = [];
-		foreach ($array as $v) {
-			list($key, $value) = explode('=', $v, 2);
-			$data[$key] = $value;
-		}
-		return $data;
-	}
-
 	/**
 	 * array (size=38)
 	 * 'mc_gross' => string '7.40' (length=4)
@@ -128,10 +113,9 @@ class PaymentController extends BaseApiController
 			]
 		);
 
-		$contentArray = $this->parse_str($content);
+		$contentArray = $this->request->all();
 
 		if ($this->verify($content)) {
-
 			/** @var OrderService $orderService */
 			$orderService = pluginApp(OrderService::class);
 			$order = $orderService->getModel($contentArray['custom']);
