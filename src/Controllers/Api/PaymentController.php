@@ -137,7 +137,10 @@ class PaymentController extends BaseApiController
 				"Plentymarket::Payment.Paypal",
 				[
 					"resultName" => '程序出现异常',
-					'exception' => $this->exception($e)->content(),
+					'code' => $e->getCode(),
+					'file' => $e->getFile(),
+					'line' => $e->getLine(),
+					'trace' => $e->getTrace(),
 				]
 			);
 			return 'exception';
