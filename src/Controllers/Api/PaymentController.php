@@ -108,7 +108,8 @@ class PaymentController extends BaseApiController
 			if ($this->verify($content)) {
 				/** @var OrderService $orderService */
 				$orderService = pluginApp(OrderService::class);
-				$order = $orderService->getModel($contentArray['custom']);
+				list($orderId, $accessKey) = explode('|', $contentArray['custom'], 2);
+				$order = $orderService->getByAccessKey($orderId, $accessKey);
 
 				//在验证一下金额
 				if ($this->calcAmount($order) == $contentArray['mc_gross']) {

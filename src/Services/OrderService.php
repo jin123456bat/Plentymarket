@@ -53,6 +53,27 @@ class OrderService
 	}
 
 	/**
+	 * 生成订单的AccessKey
+	 * @param $orderId
+	 * @return string
+	 */
+	function getAccessKey ($orderId): string
+	{
+		return $this->orderRepositoryContract->generateAccessKey($orderId);
+	}
+
+	/**
+	 * 使用AccessKey获取订单信息
+	 * @param $orderId
+	 * @param $accessKey
+	 * @return Order
+	 */
+	function getByAccessKey ($orderId, $accessKey): Order
+	{
+		return $this->orderRepositoryContract->findOrderByAccessKey($orderId, $accessKey);
+	}
+
+	/**
 	 * 更新订单信息
 	 * @param int $orderId
 	 * @param array $data
@@ -82,6 +103,9 @@ class OrderService
 		return $this->orderRepositoryContract->deleteOrder($orderId);
 	}
 
+	/**
+	 *
+	 */
 	function setStatus ()
 	{
 	}
