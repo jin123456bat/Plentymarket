@@ -140,6 +140,7 @@ class PaymentController extends BaseApiController
 					'exception' => $this->exception($e)->content(),
 				]
 			);
+			return 'exception';
 		}
 	}
 
