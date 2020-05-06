@@ -89,58 +89,58 @@ class PaymentController extends BaseApiController
 	 */
 	function paypal (): string
 	{
-		$content = $this->request->getContent();
-		if (empty($content)) {
+		try {
+			$content = $this->request->getContent();
+			if (empty($content)) {
+				$this->getLogger(__CLASS__)->error(
+					"Plentymarket::Payment.Paypal",
+					[
+						"resultName" => '请求内容为空',
+						"errorMessage" => '请求内容为空'
+					]
+				);
+
+				return 'failed';
+			}
+
+			$contentArray = $this->request->all();
+
+			if ($this->verify($content)) {
+				/** @var OrderService $orderService */
+				$orderService = pluginApp(OrderService::class);
+				$order = $orderService->getModel($contentArray['custom']);
+
+				//在验证一下金额
+				if ($this->calcAmount($order) == $contentArray['mc_gross']) {
+					//修改订单状态
+					$this->getLogger(__CLASS__)->error(
+						"Plentymarket::Payment.Paypal",
+						[
+							"resultName" => '金额验证成功',
+						]
+					);
+
+					$this->updateOrder($order, $contentArray);
+					return 'success';
+				} else {
+					$this->getLogger(__CLASS__)->error(
+						"Plentymarket::Payment.Paypal",
+						[
+							"resultName" => '金额验证失败',
+						]
+					);
+				}
+			}
+			return 'failed';
+		} catch (\Throwable $e) {
 			$this->getLogger(__CLASS__)->error(
 				"Plentymarket::Payment.Paypal",
 				[
-					"resultName" => '请求内容为空',
-					"errorMessage" => '请求内容为空'
+					"resultName" => '程序出现异常',
+					'exception' => $e
 				]
 			);
-
-			return 'failed';
 		}
-
-		$this->getLogger(__CLASS__)->error(
-			"Plentymarket::Payment.Paypal",
-			[
-				"errorMessage" => '获取到PayPal异步通知:' . $content,
-				"request_all" => $this->request->all(),
-				'request_header' => $this->request->header(),
-				'request_query' => $this->request->query(),
-			]
-		);
-
-		$contentArray = $this->request->all();
-
-		if ($this->verify($content)) {
-			/** @var OrderService $orderService */
-			$orderService = pluginApp(OrderService::class);
-			$order = $orderService->getModel($contentArray['custom']);
-
-			//在验证一下金额
-			if ($this->calcAmount($order) == $contentArray['mc_gross']) {
-				//修改订单状态
-				$this->getLogger(__CLASS__)->error(
-					"Plentymarket::Payment.Paypal",
-					[
-						"resultName" => '金额验证成功',
-					]
-				);
-
-				$this->updateOrder($order, $contentArray);
-				return 'success';
-			} else {
-				$this->getLogger(__CLASS__)->error(
-					"Plentymarket::Payment.Paypal",
-					[
-						"resultName" => '金额验证失败',
-					]
-				);
-			}
-		}
-		return 'failed';
 	}
 
 	function calcAmount (Order $order)
