@@ -140,7 +140,8 @@ class IndexController extends BaseApiController
 	{
 		/** @var OrderService $orderService */
 		$orderService = pluginApp(OrderService::class);
-		$order = $orderService->getModel('159');
+		$accessKey = $orderService->getAccessKey('159');
+		$order = $orderService->getByAccessKey('159', $accessKey);
 		return $this->success($order->toArray());
 	}
 }
