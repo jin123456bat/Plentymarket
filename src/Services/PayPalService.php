@@ -89,8 +89,9 @@ class PayPalService
 		$notify_url = AuthGuard::getUrl('/api/payment/paypal');//支付成功异步通知地址
 		$cancel_return = $return;//取消支付跳转地址
 
-		/** @var OrderService */
-		$accessKey = pluginApp(OrderService::class)->getAccessKey($order->id);
+		/** @var OrderService $orderService */
+		$orderService = pluginApp(OrderService::class);
+		$accessKey = $orderService->getAccessKey($order->id);
 
 		$str = '<form method="post" id="form" name="form" action="' . $this->web . '/cgi-bin/webscr&pal=V4T754QB63XXL">
 		<input type="hidden" name="cmd" value="_cart" />
