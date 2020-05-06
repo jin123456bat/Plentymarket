@@ -88,7 +88,7 @@ class PaymentController extends BaseApiController
 	 * 'ipn_track_id' => string '3a4046afdbec6' (length=13)
 	 * @return Response
 	 */
-	function paypal (): Response
+	function paypal (): string
 	{
 		$content = $this->request->getContent();
 		if (empty($content)) {
@@ -131,7 +131,7 @@ class PaymentController extends BaseApiController
 				);
 
 				$this->updateOrder($order, $contentArray);
-				exit('success');
+				return 'success';
 			} else {
 				$this->getLogger(__CLASS__)->error(
 					"Plentymarket::Payment.Paypal",
@@ -141,7 +141,7 @@ class PaymentController extends BaseApiController
 				);
 			}
 		}
-		exit('fail');
+		return 'failed';
 	}
 
 	function calcAmount (Order $order)
