@@ -3,9 +3,6 @@
 namespace Plentymarket\Controllers\Api;
 
 use Plenty\Modules\Order\Models\Order;
-use Plenty\Modules\Payment\Contracts\PaymentOrderRelationRepositoryContract;
-use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
-use Plenty\Modules\Payment\Models\Payment;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -143,30 +140,7 @@ class IndexController extends BaseApiController
 	{
 		/** @var OrderService $orderService */
 		$orderService = pluginApp(OrderService::class);
-		$order = $orderService->getModel(149);
-
-		//创建一个payment
-		/** @var PaymentOrderRelationRepositoryContract $paymentOrderRelationRepositoryContract */
-		$paymentOrderRelationRepositoryContract = pluginApp(PaymentOrderRelationRepositoryContract::class);
-		$payment = pluginApp(Payment::class);
-
-		$payment->mopId = 6000;
-		$payment->transactionType = 2;
-		$payment->status = 2;
-		$payment->currency = 'EUR';
-		$payment->amount = $this->calcAmount($order);
-		$payment->receivedAt = date('Y-m-d H:i:s');
-		$payment->type = 'credit';
-		//$payment->parentId = null;
-//		$payment->unaccountable = null;
-		$payment->regenerateHash = true;
-		$payment->updateOrderPaymentStatus = true;
-		/** @var PaymentRepositoryContract $paymentRepositoryContract */
-		$paymentRepositoryContract = pluginApp(PaymentRepositoryContract::class);
-		$paymentRepositoryContract->createPayment($payment);
-
-		$paymentOrderRelationRepositoryContract->createOrderRelation($payment, $order);
-
-		exit('success');
+		$order = $orderService->getModel('159');
+		return $this->success($order->toArray());
 	}
 }
