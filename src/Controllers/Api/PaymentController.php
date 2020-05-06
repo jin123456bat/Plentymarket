@@ -100,7 +100,7 @@ class PaymentController extends BaseApiController
 				]
 			);
 
-			return $this->error('请求内容为空');
+			return 'failed';
 		}
 
 		$this->getLogger(__CLASS__)->error(
