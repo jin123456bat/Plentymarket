@@ -150,12 +150,12 @@ class PaymentController extends BaseApiController
 		}
 	}
 
-	function calcAmount (Order $order)
+	function calcAmount (Order $order, bool $includeVat = true)
 	{
 		$order_amount = 0;
 		foreach ($order->orderItems as $key => $item) {
 			$amount = PayPalService::getAmount($item['amounts']);
-			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
+			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + ($includeVat ? $item['vatRate'] : 0) / 100)), 2);
 		}
 		return $order_amount;
 	}
@@ -171,7 +171,7 @@ class PaymentController extends BaseApiController
 		$payment->transactionType = 2;
 		$payment->status = 2;
 		$payment->currency = $data['mc_currency'];
-		$payment->amount = $this->calcAmount($order);
+		$payment->amount = $this->calcAmount($order, false);
 		$payment->receivedAt = date('Y-m-d H:i:s');
 		$payment->type = 'credit';
 		//$payment->parentId = null;
