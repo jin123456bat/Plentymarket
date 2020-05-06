@@ -6,7 +6,6 @@ use Plenty\Modules\Order\Models\Order;
 use Plenty\Modules\Payment\Contracts\PaymentOrderRelationRepositoryContract;
 use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 use Plenty\Modules\Payment\Models\Payment;
-use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Log\Loggable;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\HttpService;
@@ -86,7 +85,7 @@ class PaymentController extends BaseApiController
 	 * 'transaction_subject' => string '' (length=0)
 	 * 'payment_gross' => string '' (length=0)
 	 * 'ipn_track_id' => string '3a4046afdbec6' (length=13)
-	 * @return Response
+	 * @return string
 	 */
 	function paypal (): string
 	{
