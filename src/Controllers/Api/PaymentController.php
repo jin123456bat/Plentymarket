@@ -143,6 +143,7 @@ class PaymentController extends BaseApiController
 					'file' => $e->getFile(),
 					'line' => $e->getLine(),
 					'trace' => $e->getTrace(),
+					'request' => $this->request->all(),
 				]
 			);
 			return 'exception';
