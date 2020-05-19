@@ -8,7 +8,7 @@
 	<div class="footer-navigation-container mb-60">
 		<div class="container">
 			<div class="row">
-				<div class="col-12 col-lg-4 col-md-6 col-sm-6 mb-20 mb-lg-0 mb-xl-0 mb-md-35 mb-sm-35">
+				<div class="col-6 col-lg-2 col-md-3 col-sm-3 mb-10 mb-lg-0 mb-xl-0 mb-md-15 mb-sm-15">
 					<!--=======  single footer  =======-->
 
 					<div class="single-footer">
@@ -40,13 +40,28 @@
 					<!--=======  End of single footer  =======-->
 				</div>
 
-				<div class="col-12 col-lg-2 col-md-6 col-sm-6 mb-20 mb-xs-35 mb-lg-0 mb-xl-0">
+				<div class="col-12 col-lg-2 col-md-6 col-sm-6 mb-20 mb-lg-0 mb-xl-0 mb-md-35 mb-sm-35">
 					<!--=======  single footer  =======-->
 
 					<div class="single-footer">
 						<h3 class="footer-title mb-20">{{footer_article_2.details.0.name}}</h3>
 						<ul>
 							{%for article in footer_article_2_list%}
+								<li><a href="/index/blog/{{article.id}}">{{article.data.post.title}}</a></li>
+							{%endfor%}
+						</ul>
+					</div>
+
+					<!--=======  End of single footer  =======-->
+				</div>
+
+				<div class="col-12 col-lg-2 col-md-6 col-sm-6 mb-20 mb-lg-0 mb-xl-0 mb-md-35 mb-sm-35">
+					<!--=======  single footer  =======-->
+
+					<div class="single-footer">
+						<h3 class="footer-title mb-20">{{footer_article_3.details.0.name}}</h3>
+						<ul>
+							{%for article in footer_article_3_list%}
 								<li><a href="/index/blog/{{article.id}}">{{article.data.post.title}}</a></li>
 							{%endfor%}
 						</ul>
@@ -109,7 +124,7 @@
 
 					<div class="navigation-container">
 						<ul>
-							{%for article in footer_article_2_list%}
+							{%for article in footer_article_4_list%}
 								<li>
 									<a href="/index/blog/{{article.id}}">{{article.data.post.title}}</a>
 									{%if not loop.last%}
@@ -117,7 +132,6 @@
 									{%endif%}
 								</li>
 							{%endfor%}
-							<li><a href="#">Terms &amp; Conditions</a></li>
 						</ul>
 					</div>
 

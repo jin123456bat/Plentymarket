@@ -69,6 +69,11 @@ class BaseWebController extends BaseController
 			$context['footer_article_3_list'] = pluginApp(BlogService::class)->category_id($footer_article_3);
 		}
 
+		$footer_article_4 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_4');
+		if (!empty($footer_article_4)) {
+			$context['footer_article_4_list'] = pluginApp(BlogService::class)->category_id($footer_article_4);
+		}
+
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
 

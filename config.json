@@ -48,6 +48,13 @@
 					"deprecated": false,
 					"label": "Config.footer_article_3",
 					"options": {}
+				},
+				"basic.footer_article_4": {
+					"type": "categoryPicker",
+					"required": true,
+					"deprecated": false,
+					"label": "Config.footer_article_4",
+					"options": {}
 				}
 			}
 		},
