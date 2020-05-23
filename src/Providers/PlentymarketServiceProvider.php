@@ -14,10 +14,25 @@ use Plentymarket\Services\BasketService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CheckoutService;
+use Plentymarket\Services\CommentService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\CurrencyService;
+use Plentymarket\Services\FeedbackService;
+use Plentymarket\Services\HttpService;
+use Plentymarket\Services\ImageService;
+use Plentymarket\Services\ItemListService;
+use Plentymarket\Services\ItemService;
+use Plentymarket\Services\ItemSetService;
+use Plentymarket\Services\ManufacturerService;
+use Plentymarket\Services\OrderService;
+use Plentymarket\Services\PaymentMethodService;
+use Plentymarket\Services\PayPalService;
+use Plentymarket\Services\PriceDetectService;
 use Plentymarket\Services\SessionService;
+use Plentymarket\Services\StockService;
+use Plentymarket\Services\UnitService;
+use Plentymarket\Services\WarehouseService;
 
 /**
  * Class PlentymarketServiceProvider
@@ -42,10 +57,26 @@ class PlentymarketServiceProvider extends ServiceProvider
 			BlogService::class,
 			CategoryService::class,
 			CheckoutService::class,
+			CommentService::class,
 			ConfigService::class,
 			CountryService::class,
 			CurrencyService::class,
 			SessionService::class,
+			FeedbackService::class,
+			HttpService::class,
+			ImageService::class,
+			ItemListService::class,
+			ItemService::class,
+			ItemSetService::class,
+			ManufacturerService::class,
+			OrderService::class,
+			PaymentMethodService::class,
+			PayPalService::class,
+			PriceDetectService::class,
+			SessionService::class,
+			StockService::class,
+			UnitService::class,
+			WarehouseService::class
 		]);
 	}
 
