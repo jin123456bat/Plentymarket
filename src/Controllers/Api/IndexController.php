@@ -7,9 +7,9 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
-use Plentymarket\Services\OrderService;
 use Plentymarket\Services\PayPalService;
 use Throwable;
 
@@ -138,13 +138,8 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
-		/** @var OrderService $orderService */
-		$orderService = pluginApp(OrderService::class);
-		$accessKey = $orderService->getAccessKey('159');
-		$order = $orderService->getByAccessKey('159', $accessKey);
 		return $this->success([
-			'accessKey' => $accessKey,
-//			'order' => $order->toArray()
+			'category' => pluginApp(CategoryService::class)->getAll(),
 		]);
 	}
 }
