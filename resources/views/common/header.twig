@@ -251,35 +251,6 @@
 										{%endif%}
 									</li>
 								{%endfor%}
-								{%if category|length > 7%}
-									{%for key,value in 1..(7 - category|length)%}
-										<li class="hidden {%if value.children|length > 0%}menu-item-has-children{%endif%}">
-											<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>
-											{%if value.children|length > 0%}
-												<!-- Mega Category Menu Start -->
-												<ul class="category-mega-menu">
-													{%for value2 in value.children%}
-														<li class="menu-item-has-children">
-															<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
-															{%if value2.children|length > 0%}
-																<ul>
-																	{%for value3 in value2.children%}
-																		<li>
-																			<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
-																		</li>
-																	{%endfor%}
-																</ul>
-															{%endif%}
-														</li>
-													{%endfor%}
-												</ul><!-- Mega Category Menu End -->
-											{%endif%}
-										</li>
-									{%endfor%}
-									<li>
-										<a href="#" id="more-btn"><span class="lnr lnr-plus-circle"></span> {{trans('Plentymarket::Common.moreCategories')}}
-										</a></li>
-								{%endif%}
 							</ul>
 						</nav>
 					</div>
