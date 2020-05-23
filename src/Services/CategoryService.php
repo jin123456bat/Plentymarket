@@ -159,7 +159,7 @@ class CategoryService
 		$temp_category_list = [];
 		foreach ($category_list as $value) {
 			if ($value['parentCategoryId'] == $category_id && $value['type'] == $type) {
-				$value['children'] = $this->getSubCategory($category_list, $value['id']);
+				$value['children'] = $this->getSubCategory($category_list, $value['id'], $type);
 				$temp_category_list[] = $value;
 			}
 		}
