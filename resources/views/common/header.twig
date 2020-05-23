@@ -137,7 +137,7 @@
 					<!--=======  logo  =======-->
 
 					<div class="logo">
-						<a href="index.html">
+						<a href="/">
 							<img src="{{plugin_path("Plentymarket")}}/images/logo.png" class="img-fluid" alt="">
 						</a>
 					</div>
@@ -227,18 +227,18 @@
 						<!-- Category Menu -->
 						<nav class="category-menu">
 							<ul>
-								{%for key,value in category|slice(0,7)%}
+								{%for key,value in category%}
 									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>
 										<a href="/index/product_list_category/{{value.id}}">{{value.details.0.name}}</a>
 										{%if value.children|length > 0%}
 											<!-- Mega Category Menu Start -->
 											<ul class="category-mega-menu">
-												{%for value2 in value.children|slice(0,3)%}
+												{%for value2 in value.children%}
 													<li class="menu-item-has-children">
 														<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
 														{%if value2.children|length > 0%}
 															<ul>
-																{%for value3 in value2.children|slice(0,5)%}
+																{%for value3 in value2.children%}
 																	<li>
 																		<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
 																	</li>
@@ -258,12 +258,12 @@
 											{%if value.children|length > 0%}
 												<!-- Mega Category Menu Start -->
 												<ul class="category-mega-menu">
-													{%for value2 in value.children|slice(0,3)%}
+													{%for value2 in value.children%}
 														<li class="menu-item-has-children">
 															<a class="megamenu-head" href="/index/product_list_category/{{value2.id}}">{{value2.details.0.name}}</a>
 															{%if value2.children|length > 0%}
 																<ul>
-																	{%for value3 in value2.children|slice(0,5)%}
+																	{%for value3 in value2.children%}
 																		<li>
 																			<a href="/index/product_list_category/{{value3.id}}">{{value3.details.0.name}}</a>
 																		</li>
