@@ -7,7 +7,6 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
-use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\PayPalService;
@@ -138,8 +137,12 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
+//		return $this->success([
+//			'category' => pluginApp(CategoryService::class)->getAll(),
+//		]);
+		$id = $this->request->input('id');
 		return $this->success([
-			'category' => pluginApp(CategoryService::class)->getAll(),
+			'product' => pluginApp(ItemListService::class)->getItem($id)
 		]);
 	}
 }
