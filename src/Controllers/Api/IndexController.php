@@ -137,9 +137,6 @@ class IndexController extends BaseApiController
 	 */
 	public function test (): Response
 	{
-//		return $this->success([
-//			'category' => pluginApp(CategoryService::class)->getAll(),
-//		]);
 		$id = $this->request->input('id');
 		return $this->success([
 			'product' => pluginApp(ItemListService::class)->getItem($id)
