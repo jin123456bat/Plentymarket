@@ -49,7 +49,6 @@ class CategoryItems implements SearchPreset
 			->hasItemId($itemId)
 			->withLanguage()
 			->withImages()
-			->withUrls()
 			->withPrices()
 			->withDefaultImage()
 			->isInCategory($categoryId)
