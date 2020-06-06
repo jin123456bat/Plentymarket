@@ -55,6 +55,34 @@
 					"deprecated": false,
 					"label": "Config.footer_article_4",
 					"options": {}
+				},
+				"basic.home_category_1": {
+					"type": "categoryPicker",
+					"required": true,
+					"deprecated": false,
+					"label": "Config.home_category_1",
+					"options": {}
+				},
+				"basic.home_category_2": {
+					"type": "categoryPicker",
+					"required": true,
+					"deprecated": false,
+					"label": "Config.home_category_2",
+					"options": {}
+				},
+				"basic.home_category_3": {
+					"type": "categoryPicker",
+					"required": true,
+					"deprecated": false,
+					"label": "Config.home_category_3",
+					"options": {}
+				},
+				"basic.home_category_4": {
+					"type": "categoryPicker",
+					"required": true,
+					"deprecated": false,
+					"label": "Config.home_category_4",
+					"options": {}
 				}
 			}
 		},
