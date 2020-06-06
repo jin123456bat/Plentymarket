@@ -30,10 +30,24 @@ class IndexController extends BaseWebController
 			$categoryList['home_category_' . $i] = $category;
 		}
 
+		$home_product_new = $configService->getTemplateConfig('home_product_new');
+		$home_product_new = explode(',', $home_product_new);
+		$data = [];
+		foreach ($home_product_new as $value) {
+			if (strpos($value, '-')) {
+				list($start, $end) = explode('-', $value);
+				$data = array_merge($data, range($start, $end));
+			} else {
+				$data[] = $value;
+			}
+		}
+		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
+
 		return $this->render('index.index', [
 
 		], [
-			'categoryList' => $categoryList
+			'categoryList' => $categoryList,
+			'product_new' => $home_product_new
 		]);
 	}
 

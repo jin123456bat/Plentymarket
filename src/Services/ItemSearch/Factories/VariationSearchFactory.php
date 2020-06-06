@@ -113,7 +113,13 @@ class VariationSearchFactory extends BaseSearchFactory
 	{
 		if (!empty($itemId)) {
 			$variationFilter = $this->createFilter(VariationBaseFilter::class);
-			$variationFilter->hasItemId($itemId);
+			if (is_scalar($itemId)) {
+				$variationFilter->hasItemId($itemId);
+			} else if (is_array($itemId)) {
+				foreach ($itemId as $id) {
+					$variationFilter->hasItemId($id);
+				}
+			}
 		}
 		return $this;
 	}

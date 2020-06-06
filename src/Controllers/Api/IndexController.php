@@ -2,7 +2,6 @@
 
 namespace Plentymarket\Controllers\Api;
 
-use Plenty\Modules\Order\Models\Order;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
@@ -10,7 +9,6 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
-use Plentymarket\Services\PayPalService;
 use Throwable;
 
 /**
@@ -120,16 +118,6 @@ class IndexController extends BaseApiController
 		} catch (Throwable $e) {
 			return $this->exception($e);
 		}
-	}
-
-	function calcAmount (Order $order)
-	{
-		$order_amount = 0;
-		foreach ($order->orderItems as $key => $item) {
-			$amount = PayPalService::getAmount($item['amounts']);
-			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
-		}
-		return $order_amount;
 	}
 
 	/**

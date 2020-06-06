@@ -14,6 +14,9 @@ use Plentymarket\Services\ItemSearch\Services\ItemSearchService;
  */
 class ItemListService
 {
+	/**
+	 * @return array
+	 */
 	public function getItemsFromWishlist ()
 	{
 		$wishlist = pluginApp(Wishlist::class);
@@ -161,6 +164,31 @@ class ItemListService
 		]);
 
 		$searchFactory->setPage(1, 1);
+		$result = $searchService->getResult($searchFactory);
+
+		if (empty($result['documents'])) {
+			return [];
+		}
+
+		if ($source) {
+			return current($result['documents']);
+		}
+
+		return $this->formatItem(current($result['documents']));
+	}
+
+	/**
+	 * @param array $itemId
+	 * @param bool $source
+	 * @return array
+	 */
+	public function getItems (array $itemId, $source = false)
+	{
+		$searchService = pluginApp(ItemSearchService::class);
+		$searchFactory = CategoryItems::getSearchFactory([
+			'itemId' => $itemId
+		]);
+		$searchFactory->setPage(1, count($itemId));
 		$result = $searchService->getResult($searchFactory);
 
 		if (empty($result['documents'])) {
