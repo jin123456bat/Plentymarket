@@ -937,59 +937,59 @@
 
     /*----------  quickview image gallery active  ----------*/
 
-    $(".quickview-small-image-slider").slick({
-        prevArrow: "<i class=\"fa fa-angle-up slick-prev\"></i>",
-        nextArrow: "<i class=\"fa fa-angle-down slick-next\"></i>",
-        slidesToShow: 3,
-        vertical: true,
-        responsive: [
-            {
-                breakpoint: 1499,
-                settings: {
-                    slidesToShow: 3
-                }
-            },
-            {
-				breakpoint: 1199,
-				settings: {
-                    slidesToShow: 3
-                }
-			},
-			{
-				breakpoint: 991,
-				settings: {
-                    slidesToShow: 3
-                }
-			},
-			{
-				breakpoint: 767,
-				settings: {
-                    slidesToShow: 3
-                }
-			},
-			{
-				breakpoint: 575,
-				settings: {
-                    slidesToShow: 3
-                }
-            },
-            {
-                breakpoint: 479,
-                settings: {
-                    slidesToShow: 3
-                }
-            }
-        ]
-    });
+    // $(".quickview-small-image-slider").slick({
+    //     prevArrow: "<i class=\"fa fa-angle-up slick-prev\"></i>",
+    //     nextArrow: "<i class=\"fa fa-angle-down slick-next\"></i>",
+    //     slidesToShow: 3,
+    //     vertical: true,
+    //     responsive: [
+    //         {
+    //             breakpoint: 1499,
+    //             settings: {
+    //                 slidesToShow: 3
+    //             }
+    //         },
+    //         {
+    // 			breakpoint: 1199,
+    // 			settings: {
+    //                 slidesToShow: 3
+    //             }
+    // 		},
+    // 		{
+    // 			breakpoint: 991,
+    // 			settings: {
+    //                 slidesToShow: 3
+    //             }
+    // 		},
+    // 		{
+    // 			breakpoint: 767,
+    // 			settings: {
+    //                 slidesToShow: 3
+    //             }
+    // 		},
+    // 		{
+    // 			breakpoint: 575,
+    // 			settings: {
+    //                 slidesToShow: 3
+    //             }
+    //         },
+    //         {
+    //             breakpoint: 479,
+    //             settings: {
+    //                 slidesToShow: 3
+    //             }
+    //         }
+    //     ]
+    // });
+    //
+    // $(".modal").on("shown.bs.modal", function(e)
+    // {
+    //     $(".small-image-slider").resize();
+    //     $(".small-image-slider").slick("setPosition");
+    //
+    // });
 
-    $(".modal").on("shown.bs.modal", function(e)
-    {
-        $(".small-image-slider").resize();
-        $(".small-image-slider").slick("setPosition");
-
-    });
-
-    $(".small-image-slider a").on("click", function(e)
+    $(".small-image-slider").on("click", "a", function(e)
     {
         e.preventDefault();
 

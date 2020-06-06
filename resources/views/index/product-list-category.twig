@@ -273,25 +273,33 @@
     });
 
     //preview
+    var hasSlick = false;
     $(".preview").on("click", function()
     {
         var id = $(this).data("id");
         $.get("/api/index/product/" + id, function(response)
         {
+            if (hasSlick)
+            {
+                $(".quickview-small-image-slider").slick("unslick");
+            }
+
             $(".modal .small-image-slider").empty();
-            // $(".modal .quickview-small-image-slider").slickRemove();
+
             $(".modal .product-large-image-list").empty();
             $.each(response.data.images, function(index, value)
             {
+                index = index + 1;
+
                 var tpl = $("<div class=\"single-small-image img-full\">\n" +
                     "                                        <a data-toggle=\"tab\" id=\"single-slide-tab-quick-" + index + "\" href=\"#single-slide-quick-" + index + "\">\n" +
                     "                                            <img src=\"" + value + "\" class=\"img-fluid\" alt=\"\">\n" +
                     "                                        </a>\n" +
                     "                                    </div>");
                 $(".modal .small-image-slider").append(tpl);
-                // $(".modal .quickview-small-image-slider").slickAdd(tpl);
+                // $(".quickview-small-image-slider").slickAdd(tpl);
 
-                var first = index == 0 ? "show active" : "";
+                var first = index == 1 ? "show active" : "";
 
                 var tpl = $("<div class=\"tab-pane fade " + first + "\" id=\"single-slide-quick-" + index + "\" role=\"tabpanel\" aria-labelledby=\"single-slide-tab-quick-" + index + "\">\n" +
                     "                                    <div class=\"single-product-img img-full\">\n" +
@@ -312,14 +320,67 @@
             $(".modal .add-to-cart-btn").data("format_discount_price", response.data.format_discount_price);
             $(".modal .add-to-cart-btn").data("discount_price", response.data.discount_price);
 
+
+            $(".quickview-small-image-slider").slick({
+                prevArrow: "<i class=\"fa fa-angle-up slick-prev\"></i>",
+                nextArrow: "<i class=\"fa fa-angle-down slick-next\"></i>",
+                slidesToShow: 3,
+                vertical: true,
+                responsive: [
+                    {
+                        breakpoint: 1499,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 1199,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 991,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 767,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 575,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 479,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }
+                ]
+            });
+
+            $(".small-image-slider").resize();
+            $(".small-image-slider").slick("setPosition");
+
+            hasSlick = true;
+
             $("#quick-view-modal-container").modal("show");
+
+            $(".small-image-slider")[0].slick.refresh();
         });
         return false;
     });
 
     $(".modal .add-to-cart-btn").on("click", function()
     {
-        var quantity = parseInt($(".modal .pro-qty input").text());
+        var quantity = parseInt($(".modal .pro-qty input").val());
         var variationId = $(this).data("id");
         var name = $(this).data("name");
         var image = $(this).data("image");
@@ -348,5 +409,6 @@
                 });
             }
         });
+        return false;
     });
 </script>
