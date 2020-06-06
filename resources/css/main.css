@@ -4729,7 +4729,9 @@ a#more-btn {
         text-align: center;
         visibility: hidden;
         opacity: 0;
-        font-size: 14px; }
+        border: 1px solid #cea45f;
+        font-size: 14px;
+      }
         .ptk-product .image a.hover-icon:hover i.lnr {
           color: #cea45f; }
         .ptk-product .image a.hover-icon i.lnr {

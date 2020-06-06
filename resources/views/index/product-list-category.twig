@@ -22,20 +22,6 @@
                             <p class="result-show-message">Showing {{page}}–{{page * 12}} of {{items.total}} results</p>
                             <!--=======  End of view mode  =======-->
                         </div>
-                        {#                        <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column flex-sm-row justify-content-start justify-content-md-end align-items-sm-center">#}
-                        {#                            <!--=======  Sort by dropdown  =======-->#}
-                        {#                            <div class="sort-by-dropdown d-flex align-items-center mb-xs-10">#}
-                        {#                                <p class="mr-10 mb-0">Sort By: </p>#}
-                        {#                                <select name="sort-by" id="sort-by" class="nice-select">#}
-                        {#                                    <option value="0">Sort By Popularity</option>#}
-                        {#                                    <option value="0">Sort By Average Rating</option>#}
-                        {#                                    <option value="0">Sort By Newness</option>#}
-                        {#                                    <option value="0">Sort By Price: Low to High</option>#}
-                        {#                                    <option value="0">Sort By Price: High to Low</option>#}
-                        {#                                </select>#}
-                        {#                            </div>#}
-                        {#                            <!--=======  En   d of Sort by dropdown  =======-->#}
-                        {#                        </div>#}
                     </div>
                 </div>
 
@@ -56,15 +42,17 @@
                                         <img src="{{item.images.0}}" class="img-fluid" alt="" style="width: 255px;height: 306px;">
                                     </a>
                                     <!--=======  hover icons  =======-->
-                                    {#                                    <a class="hover-icon preview" data-id="{{item.id}}" href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="lnr lnr-eye"></i></a>#}
+                                    <a class="hover-icon preview" data-id="{{item.id}}" href="#"><i class="lnr lnr-eye"></i></a>
                                     <a class="hover-icon add_to_wishlist" data-id="{{item.variationId}}"><i class="lnr lnr-heart"></i></a>
                                     <a class="hover-icon add_to_cart" data-discount_price="{{item.discount_price}}" data-format_discount_price="{{item.format_discount_price}}" data-id="{{item.variationId}}" data-name="{{item.name}}" data-image="{{item.images.0}}"><i class="lnr lnr-cart"></i></a>
                                     <!--=======  End of hover icons  =======-->
                                     <!--=======  badge  =======-->
+                                    <!--
                                     <div class="product-badge">
                                         <span class="new-badge">NEW</span>
                                         <span class="discount-badge">-8%</span>
                                     </div>
+                                    -->
                                     <!--=======  End of badge  =======-->
                                 </div>
                                 <div class="content">
@@ -74,13 +62,13 @@
                                         <span class="discounted-price">{{item.format_discount_price}}</span>
                                     </p>
                                 </div>
-                                {#                                <div class="rating">#}
-                                {#                                    <i class="lnr lnr-star active"></i>#}
-                                {#                                    <i class="lnr lnr-star active"></i>#}
-                                {#                                    <i class="lnr lnr-star active"></i>#}
-                                {#                                    <i class="lnr lnr-star active"></i>#}
-                                {#                                    <i class="lnr lnr-star"></i>#}
-                                {#                                </div>#}
+                                <div class="rating">
+                                    <i class="lnr lnr-star active"></i>
+                                    <i class="lnr lnr-star active"></i>
+                                    <i class="lnr lnr-star active"></i>
+                                    <i class="lnr lnr-star active"></i>
+                                    <i class="lnr lnr-star active"></i>
+                                </div>
                             </div>
 
                             <!--=======  End of grid view product  =======-->
@@ -110,7 +98,7 @@
                                         <i class="lnr lnr-star active"></i>
                                         <i class="lnr lnr-star active"></i>
                                         <i class="lnr lnr-star active"></i>
-                                        <i class="lnr lnr-star"></i>
+                                        <i class="lnr lnr-star active"></i>
                                     </div>
                                     <p class="product-price">
                                         <span class="main-price discounted">{{item.format_main_price}}</span>
@@ -119,7 +107,7 @@
                                     <p class="product-description">{{item.short_desc}}</p>
                                     <!--=======  hover icons  =======-->
                                     <div class="hover-icons">
-                                        <a class="hover-icon" href="#" data-toggle="modal" data-target="#quick-view-modal-container"><i class="lnr lnr-eye"></i></a>
+                                        <a class="hover-icon preview" data-id="{{item.id}}}" href="#"><i class="lnr lnr-eye"></i></a>
                                         <a class="hover-icon" href="#"><i class="lnr lnr-heart"></i></a>
                                         <a class="hover-icon" href="#"><i class="lnr lnr-cart"></i></a>
                                     </div>
