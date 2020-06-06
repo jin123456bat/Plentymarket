@@ -25,7 +25,7 @@ class IndexController extends BaseWebController
 		$categoryService = pluginApp(CategoryService::class);
 		$categoryList = [];
 		for ($i = 1; $i <= 4; $i++) {
-			$category = $categoryService->get($configService->getTemplateConfig('basic.home_category_' . $i));
+			$category = $categoryService->get($configService->getTemplateConfig('basic.home_category_' . $i))->toArray();
 			$category['details'][0]['imagePath'] = 'https://' . $this->request->getHttpHost() . '/documents' . $category['details'][0]['imagePath'];
 			$categoryList['home_category_' . $i] = $category;
 		}
