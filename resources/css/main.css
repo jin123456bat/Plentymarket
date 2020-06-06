@@ -4473,7 +4473,9 @@ a#more-btn {
         text-align: center;
         visibility: hidden;
         opacity: 0;
-        font-size: 14px; }
+        border: 1px solid #cea45f;
+        font-size: 14px;
+      }
         .home-two-wrapper .ptk-product .image a.hover-icon:hover i.lnr {
           color: #369599; }
         .home-two-wrapper .ptk-product .image a.hover-icon i.lnr {
