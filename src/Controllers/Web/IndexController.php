@@ -5,6 +5,8 @@ namespace Plentymarket\Controllers\Web;
 use Plenty\Modules\Blog\Models\BlogPost;
 use Plentymarket\Controllers\BaseWebController;
 use Plentymarket\Services\BlogService;
+use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\ItemListService;
 
 /**
@@ -19,7 +21,20 @@ class IndexController extends BaseWebController
 	 */
 	public function index (): string
 	{
-		return $this->render('index.index');
+		$configService = pluginApp(ConfigService::class);
+		$categoryService = pluginApp(CategoryService::class);
+		$categoryList = [];
+		for ($i = 1; $i <= 4; $i++) {
+			$category = $categoryService->get($configService->getTemplateConfig('basic.home_category_' . $i));
+			$category['details'][0]['imagePath'] = 'https://' . $this->request->getHttpHost() . '/documents' . $category['details'][0]['imagePath'];
+			$categoryList['home_category_' . $i] = $category;
+		}
+
+		return $this->render('index.index', [
+
+		], [
+			'categoryList' => $categoryList
+		]);
 	}
 
 	/**
