@@ -233,20 +233,17 @@ class ItemListService
 			'country' => $data['data']['item']['producingCountry']['names']['name'],//原产国
 			'manufacturer' => $data['data']['item']['manufacturer']['name'],//供应商
 			'min_num' => $this->getSalesPrices($data['data']['salesPrices'], 'minimumOrderQuantity'),//最低购买量
-			'currency' => $data['data']['prices']['default']['currency'],//货币单位
-			'main_price' => $data['data']['prices']['default']['price']['value'],//价格
+			'main_price' => $data['data']['prices']['rrp']['price']['value'],//价格
 			'format_main_price' => $data['data']['prices']['default']['price']['formatted'],//格式化价格
-
 			'discount_price' => $data['data']['prices']['default']['price']['value'],//价格
 			'format_discount_price' => $data['data']['prices']['default']['price']['formatted'],//格式化价格
-
+			'discount' => ceil(100 * ($data['data']['prices']['rrp']['price']['value'] - $data['data']['prices']['default']['price']['value']) / $data['data']['prices']['rrp']['price']['value']),
 			'currency' => $data['data']['prices']['default']['currency'],//货币
 			'stock' => $data['data']['stock']['net'],//库存
 			'desc' => strip_tags($data['data']['texts']['description']),//商品描述
 			'short_desc' => strip_tags($data['data']['texts']['shortDescription']),//短描述
 			'unit' => $data['data']['unit']['names']['name'],//单位
 			'vat' => $data['data']['prices']['default']['vat']['value'],//增值税
-
 			'wishlist' => $wishlist->has($data['id']),//是否添加到愿望清单了
 		];
 	}

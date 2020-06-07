@@ -257,7 +257,7 @@
 									<div class="ptk-product">
 										<div class="image">
 											<a href="/index/product/{{item.id}}">
-												<img src="{{item.images.0}}" class="img-fluid" alt="" style="width: 255px;height: 347px;">
+												<img src="{{item.images.0}}" class="img-fluid" alt="" style="width: 255px;height: 297px;">
 											</a>
 											<!--=======  hover icons  =======-->
 											<a class="hover-icon preview" data-id="{{item.id}}" href="#"><i class="lnr lnr-eye"></i></a>
@@ -266,7 +266,7 @@
 											<!--=======  End of hover icons  =======-->
 											<!--=======  badge  =======-->
 											<div class="product-badge">
-												<span class="discount-badge">-8%</span>
+												<span class="discount-badge">-{{item.discount}}}%</span>
 											</div>
 											<!--=======  End of badge  =======-->
 										</div>
@@ -517,9 +517,8 @@
 							<h2 class="product-price mb-15">
 								<span class="main-price discounted"></span>
 								<span class="discounted-price"></span>
-								{#								<span class="discount-percentage">Save 8%</span>#}
+								<span class="discount-percentage">-{{item.discount}}%</span>
 							</h2>
-
 							<p class="product-description mb-20"></p>
 							<div class="cart-buttons mb-20">
 								<div class="pro-qty mr-10">
@@ -572,6 +571,7 @@
                 style: "error"
             });
         });
+        return false;
     });
 
     $(".add_to_cart").on("click", function()
@@ -605,6 +605,7 @@
                 });
             }
         });
+        return false;
     });
 
     //preview
@@ -659,7 +660,7 @@
             $(".quickview-small-image-slider").slick({
                 prevArrow: "<i class=\"fa fa-angle-up slick-prev\"></i>",
                 nextArrow: "<i class=\"fa fa-angle-down slick-next\"></i>",
-                slidesToShow: 3,
+                slidesToShow: 4,
                 vertical: true,
                 responsive: [
                     {

@@ -21,8 +21,12 @@ class IndexController extends BaseWebController
 	 */
 	public function index (): string
 	{
+		/** @var ConfigService $configService */
 		$configService = pluginApp(ConfigService::class);
+		/** @var CategoryService $categoryService */
 		$categoryService = pluginApp(CategoryService::class);
+		/** @var ItemListService $itemListService */
+		$itemListService = pluginApp(ItemListService::class);
 		$categoryList = [];
 		for ($i = 1; $i <= 4; $i++) {
 			$category = $categoryService->get($configService->getTemplateConfig('basic.home_category_' . $i))->toArray();
@@ -43,7 +47,7 @@ class IndexController extends BaseWebController
 				$data[] = $value;
 			}
 		}
-		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
+		$home_product_new = $itemListService->getItems($data);
 
 		//特惠
 //		$home_product_new = $configService->getTemplateConfig('basic.home_product_deals');
@@ -74,7 +78,7 @@ class IndexController extends BaseWebController
 				$data[] = $value;
 			}
 		}
-		$home_product_popular = pluginApp(ItemListService::class)->getItems($data);
+		$home_product_popular = $itemListService->getItems($data);
 
 		//TOP
 //		$home_product_top_string = $configService->getTemplateConfig('basic.home_product_top');
@@ -89,10 +93,10 @@ class IndexController extends BaseWebController
 				$data[] = $value;
 			}
 		}
-		$home_product_top = pluginApp(ItemListService::class)->getItems($data);
+		$home_product_top = $itemListService->getItems($data);
 
 		//最底部文章
-		$home_category_blog = pluginApp(ConfigService::class)->getTemplateConfig('basic.home_category_blog');
+		$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
 		if (!empty($home_category_blog)) {
 			$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
 		}
