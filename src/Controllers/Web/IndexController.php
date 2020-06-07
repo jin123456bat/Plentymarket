@@ -80,8 +80,9 @@ class IndexController extends BaseWebController
 				];
 			}
 		}
-		$home_product_deals = pluginApp(ItemListService::class)->getItems($data);
-		foreach ($home_product_deals['list'] as &$item) {
+		$home_product_deals = pluginApp(ItemListService::class)->getItems(array_keys($data));
+		$home_product_deals_list = $home_product_deals['list'];
+		foreach ($home_product_deals_list as &$item) {
 			$item['countdown'] = $data[$item['id']] ?? [
 					'countdown' => date('Y/m/d'),
 					'endtime' => [
@@ -92,6 +93,7 @@ class IndexController extends BaseWebController
 					]
 				];
 		}
+		$home_product_deals['list'] = $home_product_deals_list;
 
 		//流行
 //		$home_product_popular_string = $configService->getTemplateConfig('basic.home_product_popular');
