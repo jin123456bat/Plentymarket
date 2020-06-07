@@ -126,17 +126,17 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-6">
 						<div class="banner">
-							<a href="/index/product_list_category/{{categoryList.home_category_3.id}}" style="white-space: nowrap;
+							<a href="/index/product_list_category/{{categoryList.home_category_3.id}}">
+								<img src="{{categoryList.home_category_3.details.0.imagePath}}" class="img-fluid" alt="">
+							</a>
+							<span class="banner-category-title">
+								<a style="white-space: nowrap;
     overflow-x: hidden;
     overflow-y: hidden;
     height: 30px;
     line-height: 30px;
     text-overflow: ellipsis;
-    width: 80%;">
-								<img src="{{categoryList.home_category_3.details.0.imagePath}}" class="img-fluid" alt="">
-							</a>
-							<span class="banner-category-title">
-								<a href="/index/product_list_category/{{categoryList.home_category_3.id}}">{{categoryList.home_category_3.details.0.name}}</a>
+    width: 80%;" href="/index/product_list_category/{{categoryList.home_category_3.id}}">{{categoryList.home_category_3.details.0.name}}</a>
 							</span>
 						</div>
 					</div>
