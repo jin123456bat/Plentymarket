@@ -30,8 +30,9 @@ class IndexController extends BaseWebController
 			$categoryList['home_category_' . $i] = $category;
 		}
 
-		$home_product_new = $configService->getTemplateConfig('basic.home_product_new');
-		$home_product_new = explode(',', $home_product_new);
+//		$home_product_new = $configService->getTemplateConfig('basic.home_product_new');
+		$home_product_new_string = '139,147,153,155-184';
+		$home_product_new = explode(',', $home_product_new_string);
 		$data = [];
 		foreach ($home_product_new as $value) {
 			if (strpos($value, '-')) {

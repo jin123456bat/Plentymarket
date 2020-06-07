@@ -133,7 +133,8 @@ class IndexController extends BaseApiController
 //		]);
 
 		$configService = pluginApp(ConfigService::class);
-		$home_product_new_string = $configService->getTemplateConfig('basic.home_product_new');
+//		$home_product_new_string = $configService->getTemplateConfig('basic.home_product_new');
+		$home_product_new_string = '139,147,153,155-184';
 		$home_product_new = explode(',', $home_product_new_string);
 		$data = [];
 		foreach ($home_product_new as $value) {
@@ -147,7 +148,7 @@ class IndexController extends BaseApiController
 		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
 		return $this->success([
-			'product' => $home_product_new_string,
+			'product' => $home_product_new,
 			'category' => pluginApp(CategoryService::class)->get(43)
 		]);
 	}
