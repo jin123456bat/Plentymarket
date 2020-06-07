@@ -105,14 +105,18 @@
 						<div class="single-dropdown">
 							{%if language=='en'%}
 								<img src="{{plugin_path("Plentymarket")}}/images/flags/1.jpg" alt="">
-							{%else%}
+							{%elseif language=='de'%}
+								<img src="{{plugin_path("Plentymarket")}}/images/flags/2.png" alt="">
+							{%elseif language=='it'%}
 								<img src="{{plugin_path("Plentymarket")}}/images/flags/3.png" alt="">
 							{%endif%}
 							<a href="#" id="changeLanguage">
 								<span id="languageName">
 									{%if language=='en'%}
 										English
-									{%else%}
+									{%elseif language=='de'%}
+										Germany
+									{%elseif language=='it'%}
 										Italy
 									{%endif%}
 									<i class="fa fa-angle-down"></i>
