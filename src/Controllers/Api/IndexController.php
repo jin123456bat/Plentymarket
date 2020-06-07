@@ -130,7 +130,7 @@ class IndexController extends BaseApiController
 		/** @var SessionService $sessionService */
 		$sessionService = pluginApp(SessionService::class);
 		$id = $this->request->input('id');
-		$sessionService->set($id);
+		$sessionService->setLang($id);
 		return $this->success([
 			'id' => $id
 		]);
