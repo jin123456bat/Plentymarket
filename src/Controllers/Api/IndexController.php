@@ -132,24 +132,28 @@ class IndexController extends BaseApiController
 //			'product' => pluginApp(ItemListService::class)->getItem($id)
 //		]);
 
-		$configService = pluginApp(ConfigService::class);
+		try {
+			$configService = pluginApp(ConfigService::class);
 //		$home_product_new_string = $configService->getTemplateConfig('basic.home_product_new');
-		$home_product_new_string = '139,147,153,155-184';
-		$home_product_new = explode(',', $home_product_new_string);
-		$data = [];
-		foreach ($home_product_new as $value) {
-			if (strpos($value, '-')) {
-				list($start, $end) = explode('-', $value, 2);
-				$data = array_merge($data, range($start, $end));
-			} else {
-				$data[] = $value;
+			$home_product_new_string = '139,147,153,155-184';
+			$home_product_new = explode(',', $home_product_new_string);
+			$data = [];
+			foreach ($home_product_new as $value) {
+				if (strpos($value, '-')) {
+					list($start, $end) = explode('-', $value, 2);
+					$data = array_merge($data, range($start, $end));
+				} else {
+					$data[] = $value;
+				}
 			}
-		}
-		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
+			$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
-		return $this->success([
-			'product' => $home_product_new,
-			'category' => pluginApp(CategoryService::class)->get(43)
-		]);
+			return $this->success([
+				'product' => $home_product_new,
+				'category' => pluginApp(CategoryService::class)->get(43)
+			]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 }
