@@ -2,10 +2,12 @@
 
 namespace Plentymarket\Controllers\Api;
 
+use IO\Services\WebstoreConfigurationService;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\HomeService;
 use Plentymarket\Services\ItemListService;
@@ -146,6 +148,7 @@ class IndexController extends BaseApiController
 			/** @var HomeService $homeService */
 			$homeService = pluginApp(HomeService::class);
 			return $this->success([
+				'language' => pluginApp(ConfigService::class)->getActiveLanguageList(),
 				'product' => $homeService->product_new(),
 				'blog' => $homeService->article()
 			]);
