@@ -99,6 +99,11 @@ class IndexController extends BaseWebController
 		$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
 		if (!empty($home_category_blog)) {
 			$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
+			foreach ($home_category_blog_list as $key => $r) {
+				$home_category_blog_list[$key]['data']['images'] = array_filter(array_map(function ($value) {
+					return $value['path'];
+				}, $r['data']['images']));
+			}
 		}
 
 		return $this->render('index.index', [
