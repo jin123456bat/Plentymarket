@@ -158,9 +158,9 @@ class HomeService
 		if (!empty($home_category_blog)) {
 			$home_category_blog_list = $this->blogService->category_id($home_category_blog);
 			foreach ($home_category_blog_list as $key => $r) {
-				$home_category_blog_list[$key]['data']['images'] = array_filter(array_map(function ($value) {
+				$home_category_blog_list[$key]['data']['images'] = array_values(array_filter(array_map(function ($value) {
 					return $value['path'];
-				}, $r['data']['images']));
+				}, $r['data']['images'])));
 			}
 			return $home_category_blog_list;
 		}
