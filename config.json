@@ -86,8 +86,8 @@
 				},
 				"basic.home_product_new": {
 					"type": "inputText",
-					"required": false,
-					"label": "Config.首页新品",
+					"required": true,
+					"label": "Config.home_product_new",
 					"options": {
 						"defaultValue": "139,147,153,155-184"
 					}

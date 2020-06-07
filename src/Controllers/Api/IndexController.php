@@ -138,7 +138,7 @@ class IndexController extends BaseApiController
 		$data = [];
 		foreach ($home_product_new as $value) {
 			if (strpos($value, '-')) {
-				list($start, $end) = explode('-', $value);
+				list($start, $end) = explode('-', $value, 2);
 				$data = array_merge($data, range($start, $end));
 			} else {
 				$data[] = $value;
