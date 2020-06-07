@@ -34,9 +34,6 @@ class BaseApiController extends BaseController
 			'data' => $data
 		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), 200, [
 			'Content-Type' => 'application/json',
-			'Access-Control-Allow-Origin' => '*',
-			'Access-Control-Allow-Credentials' => 'false',
-			'Access-Control-Allow-Methods' => 'GET, POST, OPTIONS',
 		]);
 	}
 
