@@ -44,25 +44,25 @@
 					<!--=======  single feature  =======-->
 					<div class="single-feature mb-md-20 mb-sm-20">
 						<span class="icon"><i class="lnr lnr-rocket"></i></span>
-						<p>{{trans('Plentymarket::WebIndexIndex.free_shipping')}}</p>
+						<p>{{trans('Plentymarket::WebIndexIndex.free_shipping')|raw}}</p>
 					</div>
 					<!--=======  End of single feature  =======-->
 					<!--=======  single feature  =======-->
 					<div class="single-feature mb-md-20 mb-sm-20">
 						<span class="icon"><i class="lnr lnr-phone"></i></span>
-						<p>{{trans('Plentymarket::WebIndexIndex.support')}}</p>
+						<p>{{trans('Plentymarket::WebIndexIndex.support')|raw}}</p>
 					</div>
 					<!--=======  End of single feature  =======-->
 					<!--=======  single feature  =======-->
 					<div class="single-feature mb-xxs-20">
 						<span class="icon"><i class="lnr lnr-undo"></i></span>
-						<p>{{trans('Plentymarket::WebIndexIndex.return')}}</p>
+						<p>{{trans('Plentymarket::WebIndexIndex.return')|raw}}</p>
 					</div>
 					<!--=======  End of single feature  =======-->
 					<!--=======  single feature  =======-->
 					<div class="single-feature mb-xxs-20">
 						<span class="icon"><i class="lnr lnr-gift"></i></span>
-						<p>{{trans('Plentymarket::WebIndexIndex.payment')}}</p>
+						<p>{{trans('Plentymarket::WebIndexIndex.payment')|raw}}</p>
 					</div>
 					<!--=======  End of single feature  =======-->
 				</div>
@@ -83,8 +83,8 @@
 		<div class="row">
 			<div class="col-lg-12 text-center mb-40">
 				<div class="section-title">
-					<h2>{{trans('Plentymarket::WebIndexIndex.featured_category')}}</h2>
-					<p>{{trans('Plentymarket::WebIndexIndex.featured_category_desc')}}</p>
+					<h2>{{trans('Plentymarket::WebIndexIndex.featured_category')|raw}}</h2>
+					<p>{{trans('Plentymarket::WebIndexIndex.featured_category_desc')|raw}}</p>
 				</div>
 			</div>
 		</div>
@@ -156,8 +156,8 @@
 		<div class="row">
 			<div class="col-lg-12 text-center mb-40">
 				<div class="section-title">
-					<h2>{{trans('Plentymarket::WebIndexIndex.new_collections_of_arrivals')}}</h2>
-					<p>{{trans('Plentymarket::WebIndexIndex.new_collections_of_arrivals_desc')}}</p>
+					<h2>{{trans('Plentymarket::WebIndexIndex.new_collections_of_arrivals')|raw}}</h2>
+					<p>{{trans('Plentymarket::WebIndexIndex.new_collections_of_arrivals_desc')|raw}}</p>
 				</div>
 			</div>
 		</div>
@@ -221,9 +221,9 @@
 			<div class="col-xl-6 col-lg-7 col-md-9 col-12">
 				<!--=======  fullwidth banner content  =======-->
 				<div class="fullwidth-banner-content">
-					<p class="fullwidth-banner-title">{{trans('Plentymarket::WebIndexIndex.full_banner')}}</p>
-					<p>{{trans('Plentymarket::WebIndexIndex.full_banner_desc')}}</p>
-					<a href="/index/search/">{{trans('Plentymarket::WebIndexIndex.all_products')}}
+					<p class="fullwidth-banner-title">{{trans('Plentymarket::WebIndexIndex.full_banner')|raw}}</p>
+					<p>{{trans('Plentymarket::WebIndexIndex.full_banner_desc')|raw}}</p>
+					<a href="/index/search/">{{trans('Plentymarket::WebIndexIndex.all_products')|raw}}
 						<i class="fa fa-angle-right"></i></a>
 				</div>
 				<!--=======  End of fullwidth banner content  =======-->
@@ -243,8 +243,8 @@
 		<div class="row">
 			<div class="col-lg-6 mb-md-80 mb-sm-80">
 				<div class="section-title mb-40">
-					<h2>{{trans('Plentymarket::WebIndexIndex.deals_of_the_week')}}</h2>
-					<p>{{trans('Plentymarket::WebIndexIndex.deals_of_the_week_desc')}}</p>
+					<h2>{{trans('Plentymarket::WebIndexIndex.deals_of_the_week')|raw}}</h2>
+					<p>{{trans('Plentymarket::WebIndexIndex.deals_of_the_week_desc')|raw}}</p>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
@@ -379,8 +379,8 @@
 		<div class="row">
 			<div class="col-lg-12 text-center mb-40">
 				<div class="section-title">
-					<h2>{{trans('Plentymarket::WebIndexIndex.top_selling_products')}}</h2>
-					<p>{{trans('Plentymarket::WebIndexIndex.top_selling_products_desc')}}</p>
+					<h2>{{trans('Plentymarket::WebIndexIndex.top_selling_products')|raw}}</h2>
+					<p>{{trans('Plentymarket::WebIndexIndex.top_selling_products_desc')|raw}}</p>
 				</div>
 			</div>
 		</div>
@@ -440,8 +440,8 @@
 		<div class="row">
 			<div class="col-lg-12 text-center mb-40">
 				<div class="section-title">
-					<h2>{{trans('Plentymarket::WebIndexIndex.our_blog_posts')}}</h2>
-					<p>{{trans('Plentymarket::WebIndexIndex.our_blog_posts_desc')}}</p>
+					<h2>{{trans('Plentymarket::WebIndexIndex.our_blog_posts')|raw}}</h2>
+					<p>{{trans('Plentymarket::WebIndexIndex.our_blog_posts_desc')|raw}}</p>
 				</div>
 			</div>
 		</div>
@@ -464,7 +464,7 @@
 									<p class="blog-title">
 										<a href="/index/blog/{{article.id}}">{{article.data.post.title}}</a>
 									</p>
-									<a href="/index/blog/{{article.id}}" class="readmore-btn">{{trans('Plentymarket::WebIndexIndex.read_more')}}</a>
+									<a href="/index/blog/{{article.id}}" class="readmore-btn">{{trans('Plentymarket::WebIndexIndex.read_more')|raw}}</a>
 								</div>
 							</div>
 							<!--=======  End of single slider post  =======-->
@@ -528,12 +528,12 @@
 								<div class="add-to-cart-btn">
 									<a href="#" class="pataku-btn">
 										<i class="fa fa-shopping-cart"></i>
-										{{trans('Plentymarket::WebIndexProductListCategory.add_to_cart')}}
+										{{trans('Plentymarket::WebIndexProductListCategory.add_to_cart')|raw}}
 									</a>
 								</div>
 							</div>
 							<div class="social-share-buttons">
-								<h3>{{trans('Plentymarket::WebIndexProductListCategory.share_this_product')}}</h3>
+								<h3>{{trans('Plentymarket::WebIndexProductListCategory.share_this_product')|raw}}</h3>
 								<ul>
 									<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
 									<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
