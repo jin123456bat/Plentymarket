@@ -112,7 +112,7 @@ class BlogService
 	 * @param int $itemsPerPage
 	 * @return array
 	 */
-	function category_id (int $category_id, $page = 1, $itemsPerPage = 50)
+	function category_id (int $category_id, $page = 1, $itemsPerPage = 50): array
 	{
 		$data = [];
 		$inner_page = 1;

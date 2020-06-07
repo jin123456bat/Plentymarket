@@ -27,27 +27,15 @@ class IndexController extends BaseWebController
 		$categoryService = pluginApp(CategoryService::class);
 		/** @var ItemListService $itemListService */
 		$itemListService = pluginApp(ItemListService::class);
+		/** @var BlogService $blogService */
+		$blogService = pluginApp(BlogService::class);
+
 		$categoryList = [];
 		for ($i = 1; $i <= 4; $i++) {
 			$category = $categoryService->get($configService->getTemplateConfig('basic.home_category_' . $i))->toArray();
 			$category['details'][0]['imagePath'] = 'https://' . $this->request->getHttpHost() . '/documents/' . $category['details'][0]['imagePath'];
 			$categoryList['home_category_' . $i] = $category;
 		}
-
-		//新品
-//		$home_product_new = $configService->getTemplateConfig('basic.home_product_new');
-		$home_product_new_string = '139,147,153,155-184';
-		$home_product_new = explode(',', $home_product_new_string);
-		$data = [];
-		foreach ($home_product_new as $value) {
-			if (strpos($value, '-')) {
-				list($start, $end) = explode('-', $value, 2);
-				$data = array_merge($data, range($start, $end));
-			} else {
-				$data[] = (int)$value;
-			}
-		}
-		$home_product_new = $itemListService->getItems(array_filter(array_unique($data)));
 
 		//特惠
 //		$home_product_new = $configService->getTemplateConfig('basic.home_product_deals');
@@ -98,13 +86,28 @@ class IndexController extends BaseWebController
 		//最底部文章
 		$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
 		if (!empty($home_category_blog)) {
-			$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
+			$home_category_blog_list = $blogService->category_id($home_category_blog);
 			foreach ($home_category_blog_list as $key => $r) {
 				$home_category_blog_list[$key]['data']['images'] = array_filter(array_map(function ($value) {
 					return $value['path'];
 				}, $r['data']['images']));
 			}
 		}
+
+		//新品
+//		$home_product_new = $configService->getTemplateConfig('basic.home_product_new');
+		$home_product_new_string = '139,147,153,155-184';
+		$home_product_new_array = explode(',', $home_product_new_string);
+		$data = [];
+		foreach ($home_product_new_array as $value) {
+			if (strpos($value, '-')) {
+				list($start, $end) = explode('-', $value, 2);
+				$data = array_merge($data, range($start, $end));
+			} else {
+				$data[] = (int)$value;
+			}
+		}
+		$home_product_new = $itemListService->getItems(array_filter(array_unique($data)));
 
 		return $this->render('index.index', [
 

@@ -146,12 +146,16 @@ class IndexController extends BaseApiController
 					$data[] = (int)$value;
 				}
 			}
-			$home_product_new = pluginApp(ItemListService::class)->getItems($data);
+			$home_product_new = pluginApp(ItemListService::class)->getItems(array_filter(array_unique($data)));
 
-			$home_category_blog_list = [];
 			$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
 			if (!empty($home_category_blog)) {
 				$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
+				foreach ($home_category_blog_list as $key => $r) {
+					$home_category_blog_list[$key]['data']['images'] = array_filter(array_map(function ($value) {
+						return $value['path'];
+					}, $r['data']['images']));
+				}
 			}
 
 			return $this->success([
