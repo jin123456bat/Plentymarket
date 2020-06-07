@@ -41,6 +41,7 @@ class PlentymarketRouteServiceProvider extends RouteServiceProvider
 		$router->post('/api/payment/paypal', 'Plentymarket\Controllers\Api\PaymentController@paypal');
 		$router->get('/api/order/create', 'Plentymarket\Controllers\Api\OrderController@create');
 		$router->get('/api/index/product/{product_id}', 'Plentymarket\Controllers\Api\IndexController@product');
+		$router->get('/api/index/language', 'Plentymarket\Controllers\Api\IndexController@language');
 
 		//页面声明
 		$router->get('/', 'Plentymarket\Controllers\Web\IndexController@index');

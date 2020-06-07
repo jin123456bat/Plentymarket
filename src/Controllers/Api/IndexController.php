@@ -9,6 +9,7 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\HomeService;
 use Plentymarket\Services\ItemListService;
+use Plentymarket\Services\SessionService;
 use Throwable;
 
 /**
@@ -121,16 +122,26 @@ class IndexController extends BaseApiController
 	}
 
 	/**
+	 * 设置语言
+	 * @return Response
+	 */
+	public function language (): Response
+	{
+		/** @var SessionService $sessionService */
+		$sessionService = pluginApp(SessionService::class);
+		$id = $this->request->input('id');
+		$sessionService->set($id);
+		return $this->success([
+			'id' => $id
+		]);
+	}
+
+	/**
 	 * test
 	 * @return Response
 	 */
 	public function test (): Response
 	{
-//		$id = $this->request->input('id');
-//		return $this->success([
-//			'product' => pluginApp(ItemListService::class)->getItem($id)
-//		]);
-
 		try {
 			/** @var HomeService $homeService */
 			$homeService = pluginApp(HomeService::class);

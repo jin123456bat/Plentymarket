@@ -1406,12 +1406,20 @@
                     }
                 }
             ]
-		});
-	});
+        });
+    });
+
+    $("#languageList").on("click", "a", function()
+    {
+        $.get("/api/index/language", { id: $(this).data("id") }, function()
+        {
+            window.location.reload();
+        });
+        return false;
+    });
 
 
 })(jQuery);
-
 
 var addBasket = function(variationId, quantity, args, callback)
 {

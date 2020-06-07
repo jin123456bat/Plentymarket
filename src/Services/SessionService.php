@@ -47,7 +47,7 @@ class SessionService
 	public function getLang ()
 	{
 		if (is_null($this->language)) {
-			$this->language = 'de';
+			$this->language = 'it';
 			//$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
 //			if (is_null($this->language) || !strlen($this->language)) {
 //				$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');

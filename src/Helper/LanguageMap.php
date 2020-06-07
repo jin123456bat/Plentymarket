@@ -44,7 +44,7 @@ class LanguageMap
 		'cz' => 'cs',
 		'ru' => 'ru',
 		'sk' => 'sk',
-		'cn' => 'zh',
+		'cn' => 'it',
 		'vn' => 'vi'
 	);
 

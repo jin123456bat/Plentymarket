@@ -103,15 +103,30 @@
 						<!--=======  single dropdown  =======-->
 
 						<div class="single-dropdown">
-							<img src="{{plugin_path("Plentymarket")}}/images/flags/1.jpg" alt="">
-							<a href="#" id="changeLanguage"><span id="languageName">English <i
-										class="fa fa-angle-down"></i></span></a>
+							{%if language=en%}
+								<img src="{{plugin_path("Plentymarket")}}/images/flags/1.jpg" alt="">
+							{%else%}
+								<img src="{{plugin_path("Plentymarket")}}/images/flags/3.png" alt="">
+							{%endif%}
+							<a href="#" id="changeLanguage">
+								<span id="languageName">
+									{%if language=en%}
+										English
+									{%else%}
+										Italy
+									{%endif%}
+									<i class="fa fa-angle-down"></i>
+								</span>
+							</a>
 							<div class="language-currency-list hidden" id="languageList">
 								<ul>
-									<li><a href="#"><img src="{{plugin_path("Plentymarket")}}/images/flags/1.jpg"
-									                     alt=""> English</a></li>
 									<li>
-										<a href="#">
+										<a href="#" data-id="en">
+											<img src="{{plugin_path("Plentymarket")}}/images/flags/1.jpg" alt="">
+											English
+										</a></li>
+									<li>
+										<a href="#" data-id="it">
 											<img src="{{plugin_path("Plentymarket")}}/images/flags/3.png" alt="">
 											Italy
 										</a>

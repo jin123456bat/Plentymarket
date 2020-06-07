@@ -5,6 +5,7 @@ namespace Plentymarket\Controllers;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
+use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
@@ -74,6 +75,8 @@ class BaseWebController extends BaseController
 		if (!empty($footer_article_4)) {
 			$context['footer_article_4_list'] = pluginApp(BlogService::class)->category_id($footer_article_4);
 		}
+
+		$context['language'] = Utils::getLang();
 
 		return $this->twig->render('Plentymarket::' . $template, $context);
 	}
