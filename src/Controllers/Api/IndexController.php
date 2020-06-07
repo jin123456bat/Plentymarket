@@ -144,10 +144,7 @@ class IndexController extends BaseApiController
 				$data[] = $value;
 			}
 		}
-		$home_product_new = [];
-		foreach ($data as $id) {
-			$home_product_new[] = pluginApp(ItemListService::class)->getItems($id);
-		}
+		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
 		return $this->success([
 			'product' => $home_product_new,

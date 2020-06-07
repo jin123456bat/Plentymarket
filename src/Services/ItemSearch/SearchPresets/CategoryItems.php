@@ -31,6 +31,7 @@ class CategoryItems implements SearchPreset
 	{
 		$categoryId = $options['categoryId'] ?? null;
 		$itemId = $options['itemId'] ?? null;
+		$itemIds = $options['itemIds'] ?? [];
 		$facets = $options['facets'];
 		$query = $options['query'] ?? null;
 
@@ -47,6 +48,7 @@ class CategoryItems implements SearchPreset
 		$searchFactory->withResultFields(ResultFieldTemplate::load(ResultFieldTemplate::TEMPLATE_LIST_ITEM))
 			->hasVariationIds($variationIds)
 			->hasItemId($itemId)
+			->hasItemIds($itemIds)
 			->withLanguage()
 			->withImages()
 			->withPrices()

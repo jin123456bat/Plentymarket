@@ -182,13 +182,13 @@ class ItemListService
 	 * @param bool $source
 	 * @return array
 	 */
-	public function getItems (array $itemId, $source = false)
+	public function getItems (array $itemIds, $source = false)
 	{
 		$searchService = pluginApp(ItemSearchService::class);
 		$searchFactory = CategoryItems::getSearchFactory([
-			'itemId' => $itemId
+			'itemIds' => $itemIds
 		]);
-		$searchFactory->setPage(1, count($itemId));
+		$searchFactory->setPage(1, count($itemIds));
 		$result = $searchService->getResult($searchFactory);
 
 		if (empty($result['documents'])) {

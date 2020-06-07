@@ -41,10 +41,7 @@ class IndexController extends BaseWebController
 				$data[] = $value;
 			}
 		}
-		$home_product_new = [];
-		foreach ($data as $id) {
-			$home_product_new[] = pluginApp(ItemListService::class)->getItems($id);
-		}
+		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
 		return $this->render('index.index', [
 
