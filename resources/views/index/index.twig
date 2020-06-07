@@ -253,11 +253,11 @@
 							{%for item in product_deals.list%}
 								<div class="col">
 									<!--=======  single product  =======-->
-									<div class="product-countdown" data-countdown="{{item.countdown.countdown}}"></div>
+									<div class="product-countdown" data-countdown="{{item.countdown}}"></div>
 									<div class="ptk-product">
 										<div class="image">
 											<a href="/index/product/{{item.id}}">
-												<img src="{{item.images.0}}" class="img-fluid" alt="">
+												<img src="{{item.images.0}}" class="img-fluid" alt="" style="width: 255px;height: 347px;">
 											</a>
 											<!--=======  hover icons  =======-->
 											<a class="hover-icon preview" data-id="{{item.id}}" href="#"><i class="lnr lnr-eye"></i></a>

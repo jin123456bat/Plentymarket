@@ -52,46 +52,12 @@ class IndexController extends BaseWebController
 		$data = [];
 		foreach ($home_product_deals as $value) {
 			list($itemId, $endtime) = explode(':', $value, 2);
-			//计算当前时间和结束时间中间的day hour minute second
-			if (strtotime($endtime) > time()) {
-				$second = strtotime($endtime) - time();
-				$d = floor($second / (24 * 3600));
-				$h = floor(($second - $d * 24 * 3600) / 3600);
-				$m = floor(($second - $d * 24 * 3600 - $h * 3600) / 60);
-				$s = $second - $d * 24 * 3600 - $h * 3600 - $m * 60;
-				$data[$itemId] = [
-					'countdown' => date('Y/m/d', strtotime($endtime)),
-					'endtime' => [
-						'd' => $d,
-						'h' => $h,
-						'm' => $m,
-						's' => $s,
-					]
-				];
-			} else {
-				$data[$itemId] = [
-					'countdown' => date('Y/m/d', strtotime($endtime)),
-					'endtime' => [
-						'd' => 0,
-						'h' => 0,
-						'm' => 0,
-						's' => 0,
-					]
-				];
-			}
+			$data[$itemId] = $endtime;
 		}
 		$home_product_deals = pluginApp(ItemListService::class)->getItems(array_keys($data));
 		$home_product_deals_list = $home_product_deals['list'];
 		foreach ($home_product_deals_list as &$item) {
-			$item['countdown'] = $data[$item['id']] ?? [
-					'countdown' => date('Y/m/d'),
-					'endtime' => [
-						'd' => 0,
-						'h' => 0,
-						'm' => 0,
-						's' => 0,
-					]
-				];
+			$item['countdown'] = date('Y/m/d', strtotime($data[$item['id']] ?? date('Y/m/d')));
 		}
 		$home_product_deals['list'] = $home_product_deals_list;
 
