@@ -245,6 +245,10 @@ class ItemListService
 			'unit' => $data['data']['unit']['names']['name'],//单位
 			'vat' => $data['data']['prices']['default']['vat']['value'],//增值税
 			'wishlist' => $wishlist->has($data['id']),//是否添加到愿望清单了
+			'crossSelling' => array_map(function ($item) {
+				return $item['itemId'];
+			}, $data['data']['crossSelling'] ?? []),
+			'technicalData' => strip_tags($data['data']['texts']['technicalData']),//技术规格
 		];
 	}
 

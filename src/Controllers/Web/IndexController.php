@@ -139,6 +139,8 @@ class IndexController extends BaseWebController
 			$itemListService = pluginApp(ItemListService::class);
 			$item = $itemListService->getItem($product_id);
 
+			$item['crossSelling'] = $itemListService->getItems($item['crossSelling']);
+
 			return $this->render('index.product', [
 			], [
 				'item' => $item
