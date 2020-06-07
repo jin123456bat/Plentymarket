@@ -6,7 +6,7 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
-use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\BlogService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
@@ -148,11 +148,18 @@ class IndexController extends BaseApiController
 			}
 			$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
+			$home_category_blog_list = [];
+			$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
+			if (!empty($home_category_blog)) {
+				$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
+			}
+
 			return $this->success([
 				'product_array' => $home_product_new_array,
 				'product_data' => $data,
 				'product' => $home_product_new,
-				'category' => pluginApp(CategoryService::class)->get(43)
+				'blog_category' => $home_category_blog,
+				'blog' => $home_category_blog_list
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
