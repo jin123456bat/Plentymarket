@@ -38,6 +38,7 @@ class SessionService
 	public function setLang ($language)
 	{
 		$this->language = $language;
+		$this->set('language', $language);
 	}
 
 	/**
@@ -46,12 +47,23 @@ class SessionService
 	 */
 	public function getLang ()
 	{
-		if (is_null($this->language)) {
+		if (empty($this->language)) {
+			$this->language = $this->get('language');
+		}
+
+		if (empty($this->language)) {
+			$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
+			$this->setLang($this->language);
+		}
+
+		if (empty($this->language)) {
+			$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
+			$this->setLang($this->language);
+		}
+
+		if (empty($this->language)) {
 			$this->language = 'de';
-			//$this->language = $this->frontendSessionStorageFactoryContract->getLocaleSettings()->language;
-//			if (is_null($this->language) || !strlen($this->language)) {
-//				$this->language = pluginApp(ConfigService::class)->getWebsiteConfig('defaultLanguage');
-//			}
+			$this->setLang($this->language);
 		}
 
 		return $this->language;
