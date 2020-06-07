@@ -143,7 +143,7 @@ class IndexController extends BaseApiController
 					list($start, $end) = explode('-', $value, 2);
 					$data = array_merge($data, range($start, $end));
 				} else {
-					$data[] = $value;
+					$data[] = (int)$value;
 				}
 			}
 			$home_product_new = pluginApp(ItemListService::class)->getItems($data);

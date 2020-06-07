@@ -44,10 +44,10 @@ class IndexController extends BaseWebController
 				list($start, $end) = explode('-', $value, 2);
 				$data = array_merge($data, range($start, $end));
 			} else {
-				$data[] = $value;
+				$data[] = (int)$value;
 			}
 		}
-		$home_product_new = $itemListService->getItems($data);
+		$home_product_new = $itemListService->getItems(array_filter(array_unique($data)));
 
 		//特惠
 //		$home_product_new = $configService->getTemplateConfig('basic.home_product_deals');
@@ -75,10 +75,10 @@ class IndexController extends BaseWebController
 				list($start, $end) = explode('-', $value, 2);
 				$data = array_merge($data, range($start, $end));
 			} else {
-				$data[] = $value;
+				$data[] = (int)$value;
 			}
 		}
-		$home_product_popular = $itemListService->getItems($data);
+		$home_product_popular = $itemListService->getItems(array_filter(array_unique($data)));
 
 		//TOP
 //		$home_product_top_string = $configService->getTemplateConfig('basic.home_product_top');
@@ -90,10 +90,10 @@ class IndexController extends BaseWebController
 				list($start, $end) = explode('-', $value, 2);
 				$data = array_merge($data, range($start, $end));
 			} else {
-				$data[] = $value;
+				$data[] = (int)$value;
 			}
 		}
-		$home_product_top = $itemListService->getItems($data);
+		$home_product_top = $itemListService->getItems(array_filter(array_unique($data)));
 
 		//最底部文章
 		$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
