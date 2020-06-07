@@ -178,7 +178,7 @@ class ItemListService
 	}
 
 	/**
-	 * @param array $itemId
+	 * @param array $itemIds
 	 * @param bool $source
 	 * @return array
 	 */
