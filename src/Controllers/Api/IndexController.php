@@ -148,7 +148,7 @@ class IndexController extends BaseApiController
 		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
 		return $this->success([
-			'product' => $home_product_new,
+			'product' => $data,
 			'category' => pluginApp(CategoryService::class)->get(43)
 		]);
 	}
