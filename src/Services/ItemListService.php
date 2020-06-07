@@ -234,9 +234,9 @@ class ItemListService
 			'manufacturer' => $data['data']['item']['manufacturer']['name'],//供应商
 			'min_num' => $this->getSalesPrices($data['data']['salesPrices'], 'minimumOrderQuantity'),//最低购买量
 			'main_price' => $data['data']['prices']['rrp']['price']['value'],//价格
-			'format_main_price' => $data['data']['prices']['default']['price']['formatted'],//格式化价格
+			'format_main_price' => '€' . $data['data']['prices']['rrp']['price']['value'],//$data['data']['prices']['default']['price']['formatted'],//格式化价格
 			'discount_price' => $data['data']['prices']['default']['price']['value'],//价格
-			'format_discount_price' => $data['data']['prices']['default']['price']['formatted'],//格式化价格
+			'format_discount_price' => '€' . $data['data']['prices']['default']['price']['value'],//$data['data']['prices']['default']['price']['formatted'],//格式化价格
 			'discount' => empty($data['data']['prices']['rrp']['price']['value']) ? 0 : ceil(100 * ($data['data']['prices']['rrp']['price']['value'] - $data['data']['prices']['default']['price']['value']) / $data['data']['prices']['rrp']['price']['value']),
 			'currency' => $data['data']['prices']['default']['currency'],//货币
 			'stock' => $data['data']['stock']['net'],//库存
