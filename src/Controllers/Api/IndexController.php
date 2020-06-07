@@ -136,9 +136,9 @@ class IndexController extends BaseApiController
 			$configService = pluginApp(ConfigService::class);
 //		$home_product_new_string = $configService->getTemplateConfig('basic.home_product_new');
 			$home_product_new_string = '139,147,153,155-184';
-			$home_product_new = explode(',', $home_product_new_string);
+			$home_product_new_array = explode(',', $home_product_new_string);
 			$data = [];
-			foreach ($home_product_new as $value) {
+			foreach ($home_product_new_array as $value) {
 				if (strpos($value, '-')) {
 					list($start, $end) = explode('-', $value, 2);
 					$data = array_merge($data, range($start, $end));
@@ -149,6 +149,8 @@ class IndexController extends BaseApiController
 			$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
 			return $this->success([
+				'product_array' => $home_product_new_array,
+				'product_data' => $data,
 				'product' => $home_product_new,
 				'category' => pluginApp(CategoryService::class)->get(43)
 			]);
