@@ -184,22 +184,19 @@ class ItemListService
 	 */
 	public function getItems (array $itemIds, $source = false)
 	{
+		/** @var ItemSearchService $searchService */
 		$searchService = pluginApp(ItemSearchService::class);
-		$searchFactory = CategoryItems::getSearchFactory([
-			'itemIds' => $itemIds
-		]);
-		$searchFactory->setPage(1, count($itemIds));
-		$result = $searchService->getResult($searchFactory);
 
-		if (empty($result['documents'])) {
-			return [];
-		}
+		$searchFactory = CategoryItems::getSearchFactory([
+			'itemIds' => $itemIds,
+		]);
+
+		$searchFactory->setPage(1, count($itemIds));
 
 		if ($source) {
-			return current($result['documents']);
+			return $searchService->getResult($searchFactory);
 		}
-
-		return $this->formatItem(current($result['documents']));
+		return $this->formatItemsList($searchService->getResult($searchFactory));
 	}
 
 	/**
