@@ -6,9 +6,8 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
-use Plentymarket\Services\BlogService;
-use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
+use Plentymarket\Services\HomeService;
 use Plentymarket\Services\ItemListService;
 use Throwable;
 
@@ -133,37 +132,11 @@ class IndexController extends BaseApiController
 //		]);
 
 		try {
-			$configService = pluginApp(ConfigService::class);
-//		$home_product_new_string = $configService->getTemplateConfig('basic.home_product_new');
-			$home_product_new_string = '139,147,153,155-184';
-			$home_product_new_array = explode(',', $home_product_new_string);
-			$data = [];
-			foreach ($home_product_new_array as $value) {
-				if (strpos($value, '-')) {
-					list($start, $end) = explode('-', $value, 2);
-					$data = array_merge($data, range($start, $end));
-				} else {
-					$data[] = (int)$value;
-				}
-			}
-			$home_product_new = pluginApp(ItemListService::class)->getItems(array_filter(array_unique($data)));
-
-			$home_category_blog = $configService->getTemplateConfig('basic.home_category_blog');
-			if (!empty($home_category_blog)) {
-				$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
-				foreach ($home_category_blog_list as $key => $r) {
-					$home_category_blog_list[$key]['data']['images'] = array_filter(array_map(function ($value) {
-						return $value['path'];
-					}, $r['data']['images']));
-				}
-			}
-
+			/** @var HomeService $homeService */
+			$homeService = pluginApp(HomeService::class);
 			return $this->success([
-				'product_array' => $home_product_new_array,
-				'product_data' => $data,
-				'product' => $home_product_new,
-				'blog_category' => $home_category_blog,
-				'blog' => $home_category_blog_list
+				'product' => $homeService->product_new(),
+				'blog' => $homeService->article()
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
