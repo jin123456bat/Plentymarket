@@ -40,7 +40,7 @@ class IndexController extends BaseWebController
 		//特惠
 //		$home_product_new = $configService->getTemplateConfig('basic.home_product_deals');
 		$home_product_deals_string = '139:2020-07-08,147:2020-07-08,153:2020-07-08';
-		$home_product_deals = explode(',', $home_product_new_string);
+		$home_product_deals = explode(',', $home_product_deals_string);
 		$data = [];
 		foreach ($home_product_deals as $value) {
 			list($itemId, $endtime) = explode(':', $value, 2);
