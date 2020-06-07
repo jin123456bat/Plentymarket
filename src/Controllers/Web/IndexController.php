@@ -26,7 +26,7 @@ class IndexController extends BaseWebController
 		$categoryList = [];
 		for ($i = 1; $i <= 4; $i++) {
 			$category = $categoryService->get($configService->getTemplateConfig('basic.home_category_' . $i))->toArray();
-			$category['details'][0]['imagePath'] = 'https://' . $this->request->getHttpHost() . '/documents' . $category['details'][0]['imagePath'];
+			$category['details'][0]['imagePath'] = 'https://' . $this->request->getHttpHost() . '/documents/' . $category['details'][0]['imagePath'];
 			$categoryList['home_category_' . $i] = $category;
 		}
 
@@ -41,7 +41,10 @@ class IndexController extends BaseWebController
 				$data[] = $value;
 			}
 		}
-		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
+		$home_product_new = [];
+		foreach ($data as $id) {
+			$home_product_new[] = pluginApp(ItemListService::class)->getItems($id);
+		}
 
 		return $this->render('index.index', [
 

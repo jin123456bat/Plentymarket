@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CategoryService;
+use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Throwable;
@@ -131,7 +132,25 @@ class IndexController extends BaseApiController
 //			'product' => pluginApp(ItemListService::class)->getItem($id)
 //		]);
 
+		$configService = pluginApp(ConfigService::class);
+		$home_product_new = $configService->getTemplateConfig('home_product_new');
+		$home_product_new = explode(',', $home_product_new);
+		$data = [];
+		foreach ($home_product_new as $value) {
+			if (strpos($value, '-')) {
+				list($start, $end) = explode('-', $value);
+				$data = array_merge($data, range($start, $end));
+			} else {
+				$data[] = $value;
+			}
+		}
+		$home_product_new = [];
+		foreach ($data as $id) {
+			$home_product_new[] = pluginApp(ItemListService::class)->getItems($id);
+		}
+
 		return $this->success([
+			'product' => $home_product_new,
 			'category' => pluginApp(CategoryService::class)->get(43)
 		]);
 	}
