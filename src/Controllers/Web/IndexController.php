@@ -30,13 +30,14 @@ class IndexController extends BaseWebController
 			$categoryList['home_category_' . $i] = $category;
 		}
 
+		//新品
 //		$home_product_new = $configService->getTemplateConfig('basic.home_product_new');
 		$home_product_new_string = '139,147,153,155-184';
 		$home_product_new = explode(',', $home_product_new_string);
 		$data = [];
 		foreach ($home_product_new as $value) {
 			if (strpos($value, '-')) {
-				list($start, $end) = explode('-', $value);
+				list($start, $end) = explode('-', $value, 2);
 				$data = array_merge($data, range($start, $end));
 			} else {
 				$data[] = $value;
@@ -44,11 +45,99 @@ class IndexController extends BaseWebController
 		}
 		$home_product_new = pluginApp(ItemListService::class)->getItems($data);
 
+		//特惠
+//		$home_product_new = $configService->getTemplateConfig('basic.home_product_deals');
+		$home_product_deals_string = '139:2020-07-08,147:2020-07-08,153:2020-07-08';
+		$home_product_deals = explode(',', $home_product_new_string);
+		$data = [];
+		foreach ($home_product_deals as $value) {
+			list($itemId, $endtime) = explode(':', $value, 2);
+			//计算当前时间和结束时间中间的day hour minute second
+			if (strtotime($endtime) > time()) {
+				$second = strtotime($endtime) - time();
+				$d = floor($second / (24 * 3600));
+				$h = floor(($second - $d * 24 * 3600) / 3600);
+				$m = floor(($second - $d * 24 * 3600 - $h * 3600) / 60);
+				$s = $second - $d * 24 * 3600 - $h * 3600 - $m * 60;
+				$data[$itemId] = [
+					'countdown' => date('Y/m/d', strtotime($endtime)),
+					'endtime' => [
+						'd' => $d,
+						'h' => $h,
+						'm' => $m,
+						's' => $s,
+					]
+				];
+			} else {
+				$data[$itemId] = [
+					'countdown' => date('Y/m/d', strtotime($endtime)),
+					'endtime' => [
+						'd' => 0,
+						'h' => 0,
+						'm' => 0,
+						's' => 0,
+					]
+				];
+			}
+		}
+		$home_product_deals = pluginApp(ItemListService::class)->getItems($data);
+		foreach ($home_product_deals['list'] as &$item) {
+			$item['countdown'] = $data[$item['id']] ?? [
+					'countdown' => date('Y/m/d'),
+					'endtime' => [
+						'd' => 0,
+						'h' => 0,
+						'm' => 0,
+						's' => 0,
+					]
+				];
+		}
+
+		//流行
+//		$home_product_popular_string = $configService->getTemplateConfig('basic.home_product_popular');
+		$home_product_popular_string = '139,147,153,155-184';
+		$home_product_popular = explode(',', $home_product_popular_string);
+		$data = [];
+		foreach ($home_product_popular as $value) {
+			if (strpos($value, '-')) {
+				list($start, $end) = explode('-', $value, 2);
+				$data = array_merge($data, range($start, $end));
+			} else {
+				$data[] = $value;
+			}
+		}
+		$home_product_popular = pluginApp(ItemListService::class)->getItems($data);
+
+		//TOP
+//		$home_product_top_string = $configService->getTemplateConfig('basic.home_product_top');
+		$home_product_top_string = '139,147,153,155-184';
+		$home_product_top = explode(',', $home_product_top_string);
+		$data = [];
+		foreach ($home_product_top as $value) {
+			if (strpos($value, '-')) {
+				list($start, $end) = explode('-', $value, 2);
+				$data = array_merge($data, range($start, $end));
+			} else {
+				$data[] = $value;
+			}
+		}
+		$home_product_top = pluginApp(ItemListService::class)->getItems($data);
+
+		//最底部文章
+		$home_category_blog = pluginApp(ConfigService::class)->getTemplateConfig('basic.home_category_blog');
+		if (!empty($home_category_blog)) {
+			$home_category_blog_list = pluginApp(BlogService::class)->category_id($home_category_blog);
+		}
+
 		return $this->render('index.index', [
 
 		], [
 			'categoryList' => $categoryList,
-			'product_new' => $home_product_new
+			'product_new' => $home_product_new,
+			'product_deals' => $home_product_deals,
+			'product_popular' => $home_product_popular,
+			'product_top' => $home_product_top,
+			'category_blog' => $home_category_blog_list ?? []
 		]);
 	}
 

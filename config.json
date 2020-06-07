@@ -91,6 +91,37 @@
 					"options": {
 						"defaultValue": "139,147,153,155-184"
 					}
+				},
+				"basic.home_product_deals": {
+					"type": "inputText",
+					"required": true,
+					"label": "Config.home_product_deals",
+					"options": {
+						"defaultValue": "139:2020-07-08,147:2020-07-08,153:2020-07-08"
+					}
+				},
+				"basic.home_product_popular": {
+					"type": "inputText",
+					"required": true,
+					"label": "Config.home_product_popular",
+					"options": {
+						"defaultValue": "139,147,153,155-184"
+					}
+				},
+				"basic.home_product_top": {
+					"type": "inputText",
+					"required": true,
+					"label": "Config.home_product_top",
+					"options": {
+						"defaultValue": "139,147,153,155-184"
+					}
+				},
+				"basic.home_category_blog": {
+					"type": "categoryPicker",
+					"required": true,
+					"deprecated": false,
+					"label": "Config.home_category_blog",
+					"options": {}
 				}
 			}
 		},
