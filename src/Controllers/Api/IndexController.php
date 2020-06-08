@@ -147,8 +147,11 @@ class IndexController extends BaseApiController
 		try {
 			/** @var HomeService $homeService */
 			$homeService = pluginApp(HomeService::class);
+			$itemListService = pluginApp(ItemListService::class);
+			$item = $itemListService->getItem(170);
 			return $this->success([
 				'language' => pluginApp(ConfigService::class)->getActiveLanguageList(),
+				'crossSelling' => $itemListService->getItems($item['crossSelling']),
 				'product174' => pluginApp(ItemListService::class)->getItem(174, true),
 				'product139' => pluginApp(ItemListService::class)->getItem(139, true),
 				'blog' => $homeService->article()

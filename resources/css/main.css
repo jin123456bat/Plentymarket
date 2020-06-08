@@ -4536,11 +4536,13 @@ a#more-btn {
     font-weight: 400;
     color: #369599; }
   .home-two-wrapper .ptk-product .content p.product-price span.discounted {
+    display: none;
     font-size: 13px;
     line-height: 13px;
     color: #999999;
     padding-right: 5px;
-    text-decoration: line-through; }
+    text-decoration: line-through;
+  }
   .home-two-wrapper .ptk-product .content p.product-price span.discounted-price {
     font-size: 16px;
     font-weight: 400;

@@ -47,14 +47,14 @@
 
                 <div class="single-product-details-container">
                     <p class="product-title mb-15">{{item.name}}</p>
-                    <!--
                     <div class="rating d-inline-block mb-15">
                         <i class="lnr lnr-star active"></i>
                         <i class="lnr lnr-star active"></i>
                         <i class="lnr lnr-star active"></i>
                         <i class="lnr lnr-star active"></i>
-                        <i class="lnr lnr-star"></i>
+                        <i class="lnr lnr-star active"></i>
                     </div>
+                    <!--
                     <p class="review-links d-inline-block">
                         <a href="#"><i class="fa fa-comment-o"></i> Read reviews (1) </a>
                         <a href="#"><i class="fa fa-pencil"></i> Write a review</a>
@@ -317,7 +317,7 @@
                 <!--=======  top selling product slider container  =======-->
 
                 <div class="ptk-slider related-product-slider-container">
-                    {%for product in item.crossSelling%}
+                    {%for product in crossSelling%}
                         <div class="col">
                             <!--=======  single product  =======-->
                             <div class="ptk-product">
