@@ -62,7 +62,7 @@ class BaseWebController extends BaseController
 		$context['contact'] = $accountService->getContact();
 
 		//分类
-//		$context['category'] = $categoryService->getTree();
+		$context['category'] = $categoryService->getTree();
 //
 //		//footer中的文章信息
 //		$footer_article_1 = $configService->getTemplateConfig('basic.footer_article_1');
