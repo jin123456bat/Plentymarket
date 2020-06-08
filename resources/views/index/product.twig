@@ -12,7 +12,7 @@
                 <!-- single product tabstyle one image gallery -->
                 <div class="product-image-slider pts-product-image-slider pts3-product-image-slider">
                     <!--product large image start -->
-                    <div class="tab-content product-large-image-list pts-product-large-image-list pts3-product-large-image-list" id="myTabContent">
+                    <div style="height: 647px; width: 540px;" class="tab-content product-large-image-list pts-product-large-image-list pts3-product-large-image-list" id="myTabContent">
                         {%for image in item.images%}
                             <div class="tab-pane fade {%if loop.first%}show active{%endif%}" id="single-slide-{{loop.index}}" role="tabpanel" aria-labelledby="single-slide-tab-{{loop.index}}">
                                 <!--Single Product Image Start-->
@@ -32,7 +32,7 @@
                             {%for image in item.images%}
                                 <div class="single-small-image img-full">
                                     <a data-toggle="tab" id="single-slide-tab-{{loop.index}}" href="#single-slide-{{loop.index}}">
-                                        <img src="{{image}}" class="img-fluid" alt="">
+                                        <img src="{{image}}" class="img-fluid" alt="" style="width: 167px;height: 200px;">
                                     </a>
                                 </div>
                             {%endfor%}
@@ -47,6 +47,7 @@
 
                 <div class="single-product-details-container">
                     <p class="product-title mb-15">{{item.name}}</p>
+                    <p class="reference-text mb-15">Manufacturer: {{item.manufacturer}}</p>
                     <div class="rating d-inline-block mb-15">
                         <i class="lnr lnr-star active"></i>
                         <i class="lnr lnr-star active"></i>
@@ -144,7 +145,7 @@
                             <p class="product-desc">{{item.desc}}</p>
                         </div>
                         <div class="tab-pane fade" id="features" role="tabpanel" aria-labelledby="features-tab">
-                            {{item.technicalData}}
+                            <p class="product-desc">{{item.technicalData}}</p>
                         </div>
                         {#                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">#}
                         {#                            <div class="product-ratting-wrap">#}
@@ -406,7 +407,8 @@
                                 <span class="discounted-price"></span>
                                 {#								<span class="discount-percentage">-{{item.discount}}%</span>#}
                             </h2>
-                            <p class="product-description mb-20"></p>
+                            <p class="product-description mb-20">
+                            </p>
                             <div class="cart-buttons mb-20">
                                 <div class="pro-qty mr-10">
                                     <input type="text" value="1">
