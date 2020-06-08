@@ -2,8 +2,6 @@
 
 namespace Plentymarket\Controllers\Web;
 
-use Plenty\Plugin\Http\Request;
-use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseWebController;
 use Plentymarket\Extensions\Filters\NumberFormatFilter;
 use Plentymarket\Helper\Utils;
@@ -20,11 +18,6 @@ use Plentymarket\Services\PayPalService;
  */
 class AccountController extends BaseWebController
 {
-	function __construct (Request $request, Response $response)
-	{
-		parent::__construct($request, $response);
-	}
-
 	private function calcAmount ($order)
 	{
 		$order_amount = 0;
@@ -46,30 +39,34 @@ class AccountController extends BaseWebController
 	 */
 	function index (): string
 	{
-		/** @var OrderService $orderService */
-		$orderService = pluginApp(OrderService::class);
-		$orders = $orderService->getList(1, 10000);
+		try {
+			/** @var OrderService $orderService */
+			$orderService = pluginApp(OrderService::class);
+			$orders = $orderService->getList(1, 10000);
 
-		$entries = [];
-		foreach ($orders['entries'] as $order) {
-			$temp = $order;
-			$temp['items_name'] = implode(',', array_column($order['orderItems'], 'orderItemName'));
-			$temp['createdAt'] = date('Y-m-d', strtotime($order['createdAt']));
-			$temp['total_amount'] = $this->calcAmount($order);
-			$entries[] = $temp;
+			$entries = [];
+			foreach ($orders['entries'] as $order) {
+				$temp = $order;
+				$temp['items_name'] = implode(',', array_column($order['orderItems'], 'orderItemName'));
+				$temp['createdAt'] = date('Y-m-d', strtotime($order['createdAt']));
+				$temp['total_amount'] = $this->calcAmount($order);
+				$entries[] = $temp;
+			}
+			$orders['entries'] = $entries;
+
+			/** @var AddressService $addressOrders */
+			$addressOrders = pluginApp(AddressService::class);
+			$addresses = $addressOrders->getAll();
+
+			return $this->render('account.index', [
+				$this->trans('WebAccountIndex.account') => '/account/index'
+			], [
+				'orders' => $orders,
+				'addresses' => $addresses,
+			]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
-		$orders['entries'] = $entries;
-
-		/** @var AddressService $addressOrders */
-		$addressOrders = pluginApp(AddressService::class);
-		$addresses = $addressOrders->getAll();
-
-		return $this->render('account.index', [
-			$this->trans('WebAccountIndex.account') => '/account/index'
-		], [
-			'orders' => $orders,
-			'addresses' => $addresses,
-		]);
 	}
 
 	/**
@@ -78,36 +75,40 @@ class AccountController extends BaseWebController
 	 */
 	function cart (): string
 	{
-		$total = 0;//商品总金额
-		$vat = 0;//增值税
-		$ship = 0;//运费
-		$list = pluginApp(ItemListService::class)->getItemsFromBasket();
-		$virtaul_cart = [];
-		foreach ($list as $r) {
-			$total += ($r['quantity'] * $r['discount_price']);
-			$vat += ($r['quantity'] * $r['discount_price'] * $r['vat'] / 100);
+		try {
+			$total = 0;//商品总金额
+			$vat = 0;//增值税
+			$ship = 0;//运费
+			$list = pluginApp(ItemListService::class)->getItemsFromBasket();
+			$virtaul_cart = [];
+			foreach ($list as $r) {
+				$total += ($r['quantity'] * $r['discount_price']);
+				$vat += ($r['quantity'] * $r['discount_price'] * $r['vat'] / 100);
 
-			$virtaul_cart[] = [
-				'id' => $r['basketItemId'],
-				'quantity' => $r['quantity'],
-			];
+				$virtaul_cart[] = [
+					'id' => $r['basketItemId'],
+					'quantity' => $r['quantity'],
+				];
+			}
+
+			$numberFormatFilter = pluginApp(NumberFormatFilter::class);
+
+			$country = pluginApp(CountryService::class)->getTree();
+
+			return $this->render('account.cart', [
+				$this->trans('WebAccountCart.cart') => '/account/cart'
+			], [
+				'list' => $list,
+				'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
+				'vat' => $numberFormatFilter->formatMonetary($vat, Utils::getCurrency()),
+				'ship' => $numberFormatFilter->formatMonetary($ship, Utils::getCurrency()),
+				'summary' => $numberFormatFilter->formatMonetary($total + $vat + $ship, Utils::getCurrency()),
+				'country' => $country,
+				'virtual_cart' => json_encode($virtaul_cart),
+			]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
-
-		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-
-		$country = pluginApp(CountryService::class)->getTree();
-
-		return $this->render('account.cart', [
-			$this->trans('WebAccountCart.cart') => '/account/cart'
-		], [
-			'list' => $list,
-			'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
-			'vat' => $numberFormatFilter->formatMonetary($vat, Utils::getCurrency()),
-			'ship' => $numberFormatFilter->formatMonetary($ship, Utils::getCurrency()),
-			'summary' => $numberFormatFilter->formatMonetary($total + $vat + $ship, Utils::getCurrency()),
-			'country' => $country,
-			'virtual_cart' => json_encode($virtaul_cart),
-		]);
 	}
 
 	/**
@@ -159,12 +160,16 @@ class AccountController extends BaseWebController
 	 */
 	function wishlist (): string
 	{
-		$list = pluginApp(ItemListService::class)->getItemsFromWishlist();
+		try {
+			$list = pluginApp(ItemListService::class)->getItemsFromWishlist();
 
-		return $this->render('account.wishlist', [
-			$this->trans('WebAccountWishlist.wishlist') => '/account/wishlist'
-		], [
-			'list' => $list
-		]);
+			return $this->render('account.wishlist', [
+				$this->trans('WebAccountWishlist.wishlist') => '/account/wishlist'
+			], [
+				'list' => $list
+			]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 }

@@ -64,17 +64,21 @@ class IndexController extends BaseApiController
 	 */
 	public function register (): Response
 	{
-		$email = $this->request->get('email');
-		$password = $this->request->get('password');
+		try {
+			$email = $this->request->get('email');
+			$password = $this->request->get('password');
 
-		if (empty($email) || empty($password)) {
-			return $this->error('');
-		}
+			if (empty($email) || empty($password)) {
+				return $this->error('');
+			}
 
-		if ($this->accountService->register($email, $password)) {
-			return $this->success([]);
-		} else {
-			return $this->error('');
+			if ($this->accountService->register($email, $password)) {
+				return $this->success([]);
+			} else {
+				return $this->error('');
+			}
+		} catch (\Throwable $e) {
+			return $this->exception($e);
 		}
 	}
 
@@ -129,13 +133,17 @@ class IndexController extends BaseApiController
 	 */
 	public function language (): Response
 	{
-		/** @var SessionService $sessionService */
-		$sessionService = pluginApp(SessionService::class);
-		$id = $this->request->input('id');
-		$sessionService->setLang($id);
-		return $this->success([
-			'id' => $id
-		]);
+		try {
+			/** @var SessionService $sessionService */
+			$sessionService = pluginApp(SessionService::class);
+			$id = $this->request->input('id');
+			$sessionService->setLang($id);
+			return $this->success([
+				'id' => $id
+			]);
+		} catch (\Throwable $e) {
+			return $this->exception($e);
+		}
 	}
 
 	/**
