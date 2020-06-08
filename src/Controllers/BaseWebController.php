@@ -62,31 +62,31 @@ class BaseWebController extends BaseController
 		$context['contact'] = $accountService->getContact();
 
 		//分类
-		$context['category'] = $categoryService->getTree();
-
-		//footer中的文章信息
-		$footer_article_1 = $configService->getTemplateConfig('basic.footer_article_1');
-		if (!empty($footer_article_1)) {
-			$context['footer_article_1'] = $categoryService->get($footer_article_1);
-			$context['footer_article_1_list'] = $blogService->category_id($footer_article_1);
-		}
-
-		$footer_article_2 = $configService->getTemplateConfig('basic.footer_article_2');
-		if (!empty($footer_article_2)) {
-			$context['footer_article_2'] = $categoryService->get($footer_article_2);
-			$context['footer_article_2_list'] = $blogService->category_id($footer_article_2);
-		}
-
-		$footer_article_3 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_3');
-		if (!empty($footer_article_3)) {
-			$context['footer_article_3'] = $categoryService->get($footer_article_3);
-			$context['footer_article_3_list'] = $blogService->category_id($footer_article_3);
-		}
-
-		$footer_article_4 = $configService->getTemplateConfig('basic.footer_article_4');
-		if (!empty($footer_article_4)) {
-			$context['footer_article_4_list'] = $blogService->category_id($footer_article_4);
-		}
+//		$context['category'] = $categoryService->getTree();
+//
+//		//footer中的文章信息
+//		$footer_article_1 = $configService->getTemplateConfig('basic.footer_article_1');
+//		if (!empty($footer_article_1)) {
+//			$context['footer_article_1'] = $categoryService->get($footer_article_1);
+//			$context['footer_article_1_list'] = $blogService->category_id($footer_article_1);
+//		}
+//
+//		$footer_article_2 = $configService->getTemplateConfig('basic.footer_article_2');
+//		if (!empty($footer_article_2)) {
+//			$context['footer_article_2'] = $categoryService->get($footer_article_2);
+//			$context['footer_article_2_list'] = $blogService->category_id($footer_article_2);
+//		}
+//
+//		$footer_article_3 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_3');
+//		if (!empty($footer_article_3)) {
+//			$context['footer_article_3'] = $categoryService->get($footer_article_3);
+//			$context['footer_article_3_list'] = $blogService->category_id($footer_article_3);
+//		}
+//
+//		$footer_article_4 = $configService->getTemplateConfig('basic.footer_article_4');
+//		if (!empty($footer_article_4)) {
+//			$context['footer_article_4_list'] = $blogService->category_id($footer_article_4);
+//		}
 
 		$context['language'] = Utils::getLang();
 
