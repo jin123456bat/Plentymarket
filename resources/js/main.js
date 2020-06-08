@@ -473,6 +473,7 @@
 
     var topSellingSlider = $(".top-selling-product-slider-container, .related-product-slider-container");
     topSellingSlider.slick({
+        centerMode: false,
         arrows: true,
         autoplay: false,
         dots: false,
