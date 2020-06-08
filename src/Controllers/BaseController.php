@@ -31,6 +31,7 @@ class BaseController extends Controller
 	 */
 	protected function trans ($key): string
 	{
-		return trans('Plentymarket::' . $key);
+		return app('translator')->trans('Plentymarket::' . $key, [], 'messages', null);
+//		return trans('Plentymarket::' . $key);
 	}
 }
