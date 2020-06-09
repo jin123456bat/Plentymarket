@@ -7,8 +7,8 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\CommonService;
 use Plentymarket\Services\CountryService;
-use Plentymarket\Services\HomeService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\SessionService;
 use Throwable;
@@ -152,12 +152,20 @@ class IndexController extends BaseApiController
 	public function test (): Response
 	{
 		try {
-			/** @var HomeService $homeService */
-			$homeService = pluginApp(HomeService::class);
-			$itemListService = pluginApp(ItemListService::class);
-			$item = $itemListService->getItem(170);
-			return $this->success([
-			]);
+			/** @var CommonService $commonService */
+			$commonService = pluginApp(CommonService::class);
+
+			//用户信息
+			$context['contact'] = $commonService->contract();
+
+			//分类
+			$context['category'] = $commonService->category();
+
+//			$context = array_merge($context, $commonService->footer_article(1));
+//			$context = array_merge($context, $commonService->footer_article(2));
+//			$context = array_merge($context, $commonService->footer_article(3));
+//			$context = array_merge($context, $commonService->footer_article_list());
+			return $this->success($context);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
