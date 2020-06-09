@@ -14,6 +14,9 @@ use Plentymarket\Services\PayPalService;
 
 class PaymentController extends BaseApiController
 {
+	private $url_test = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
+	private $url = 'https://ipnpb.paypal.com/cgi-bin/webscr';
+
 	use Loggable;
 
 	function verify (string $content): bool
@@ -22,7 +25,7 @@ class PaymentController extends BaseApiController
 
 		/** @var HttpService $http */
 		$http = pluginApp(HttpService::class);
-		$response = $http->post('https://ipnpb.sandbox.paypal.com/cgi-bin/webscr', $data, [
+		$response = $http->post($this->url, $data, [
 			'User-Agent' => 'PHP-IPN-Verification-Script',
 		], [
 			CURLOPT_SSL_VERIFYPEER => 1,

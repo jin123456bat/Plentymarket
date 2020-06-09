@@ -13,11 +13,15 @@ use Plentymarket\Models\PayPalAccessToken;
  */
 class PayPalService
 {
-	private $web = 'https://www.sandbox.paypal.com';
+	private $web_test = 'https://www.sandbox.paypal.com';
+
+	private $web = 'https://www.paypal.com';
 
 	/**
 	 * @var string
 	 */
+	private $host_test = 'https://api.paypal.com';
+
 	private $host = 'https://api.sandbox.paypal.com';
 
 	private $client_id = 'AS9I0npDdg-n2Ia02jbN-cb9l2dSECVd_urkBFCZyGo5cvW8RATra_HZqD_NtZwnEwWDaiyFh_-RD6ji';
