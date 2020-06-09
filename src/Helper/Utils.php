@@ -17,6 +17,8 @@ class Utils
 	 */
 	public static function isAdminPreview ()
 	{
+		return false;
+		/** @var Application $app */
 		$app = pluginApp(Application::class);
 		return $app->isAdminPreview();
 	}

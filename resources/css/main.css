@@ -4828,10 +4828,13 @@ a#more-btn {
 
 /*----------  countdown product  ----------*/
 .deal-slider-container .ptk-product .content .product-price .discounted-price {
-  color: #727272; }
+  color: #369599;
+}
 
-.deal-slider-container .ptk-product .content .product-price .main-price {
-  color: #727272; }
+.deal-slider-container .ptk-product .content .product-price .main-price
+{
+  color: #369599;
+}
 
 .product-countdown {
   display: -webkit-box;
@@ -4866,8 +4869,10 @@ a#more-btn {
       margin-left: 15px;
       -ms-flex-preferred-size: 80%;
       flex-basis: 80%; }
-      .popular-product-slider .ptk-product .content .product-price .discounted-price {
-        color: #727272; }
+      .popular-product-slider .ptk-product .content .product-price .discounted-price
+      {
+        color: #369599;
+      }
       .popular-product-slider .ptk-product .content .product-price .main-price {
         color: #727272; }
 
@@ -4984,12 +4989,15 @@ a#more-btn {
         font-size: 22px;
         font-weight: 400;
         color: #cea45f; }
-      .shop-list-view-product .content p.product-price span.discounted {
+      .shop-list-view-product .content p.product-price span.discounted
+      {
+        display: none;
         font-size: 18px;
         line-height: 18px;
         color: #999999;
         padding-right: 5px;
-        text-decoration: line-through; }
+        text-decoration: line-through;
+      }
       .shop-list-view-product .content p.product-price span.discounted-price {
         font-size: 22px;
         font-weight: 400;

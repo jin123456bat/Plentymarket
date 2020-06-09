@@ -34,11 +34,12 @@ class BaseController extends Controller
 	/**
 	 * 翻译
 	 * @param $key
+	 * @param array $params
+	 * @param null $locale
 	 * @return string
 	 */
-	protected function trans ($key): string
+	protected function trans ($key, $params = [], $locale = null): string
 	{
-		return $key;
-//		return $this->translator->trans('Plentymarket::' . $key);
+		return $this->translator->trans('Plentymarket::' . $key, $params, $locale);
 	}
 }
