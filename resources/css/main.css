@@ -5302,7 +5302,9 @@ ul.tag-container li {
   font-size: 28px;
   color: #999999;
   padding-right: 5px;
-  text-decoration: line-through; }
+  text-decoration: line-through;
+  display: none;
+}
 
 .single-product-details-container p.product-price span.discounted-price {
   font-size: 28px;
