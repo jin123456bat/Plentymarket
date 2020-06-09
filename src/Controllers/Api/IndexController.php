@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CommonService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
@@ -156,10 +157,11 @@ class IndexController extends BaseApiController
 			$commonService = pluginApp(CommonService::class);
 
 			//用户信息
-			$context['contact'] = $commonService->contract();
+//			$context['contact'] = $commonService->contract();
 
+			$context['category'] = pluginApp(CategoryService::class)->getAll();
 			//分类
-			$context['category'] = $commonService->category();
+//			$context['category'] = $commonService->category();
 
 //			$context = array_merge($context, $commonService->footer_article(1));
 //			$context = array_merge($context, $commonService->footer_article(2));
