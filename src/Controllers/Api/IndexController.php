@@ -156,12 +156,12 @@ class IndexController extends BaseApiController
 			$commonService = pluginApp(CommonService::class);
 
 			//用户信息
-			$context['contact'] = $commonService->contract();
+//			$context['contact'] = $commonService->contract();
 
 			//分类
-			$context['category'] = $commonService->category();
+//			$context['category'] = $commonService->category();
 
-//			$context = array_merge($context, $commonService->footer_article(1));
+			$context = $commonService->footer_article(1);
 //			$context = array_merge($context, $commonService->footer_article(2));
 //			$context = array_merge($context, $commonService->footer_article(3));
 //			$context = array_merge($context, $commonService->footer_article_list());
