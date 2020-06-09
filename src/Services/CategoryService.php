@@ -129,6 +129,15 @@ class CategoryService
 		$this->currentItem = $item;
 	}
 
+	private function getDetails ($category)
+	{
+		foreach ($category['details'] as $detail) {
+			if ($detail['lang'] == Utils::getLang()) {
+				return [$detail];
+			}
+		}
+	}
+
 	/**
 	 * 获取树状分类图
 	 * @param string $type
@@ -138,6 +147,9 @@ class CategoryService
 	{
 		$categoryTree = [];
 		$category_list = $this->getAll()->getResult();
+		foreach ($category_list as &$category) {
+			$category['details'] = $this->getDetails($category);
+		}
 		foreach ($category_list as $value) {
 			if (empty($value['parentCategoryId']) && $value['type'] == $type) {
 				$value['children'] = $this->getSubCategory($category_list, $value['id'], $type);

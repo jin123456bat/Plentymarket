@@ -159,7 +159,7 @@ class IndexController extends BaseApiController
 			//用户信息
 //			$context['contact'] = $commonService->contract();
 
-			$context['category'] = pluginApp(CategoryService::class)->getAll();
+			$context['category_result'] = pluginApp(CategoryService::class)->getAll()->getResult();
 			//分类
 //			$context['category'] = $commonService->category();
 
