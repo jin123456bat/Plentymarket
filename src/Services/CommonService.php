@@ -59,7 +59,9 @@ class CommonService
 	{
 		$footer_article_4 = $this->configService->getTemplateConfig('basic.footer_article_4');
 		if (!empty($footer_article_4)) {
-			return ['footer_article_4_list' => $this->blogService->category_id($footer_article_4)];
+			return [
+				'footer_article_4_list' => $this->blogService->category_id($footer_article_4)
+			];
 		}
 	}
 }

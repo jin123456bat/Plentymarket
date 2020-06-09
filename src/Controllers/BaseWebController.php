@@ -53,10 +53,9 @@ class BaseWebController extends BaseController
 		$context['category'] = $commonService->category();
 
 		$context = array_merge($context, $commonService->footer_article(1));
-
+		$context = array_merge($context, $commonService->footer_article(2));
 		$context = array_merge($context, $commonService->footer_article(3));
-
-		$context = array_merge($context, $commonService->footer_article(4));
+		$context = array_merge($context, $commonService->footer_article_list());
 
 		$context['language'] = Utils::getLang();
 
