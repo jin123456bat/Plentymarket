@@ -6,10 +6,7 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plenty\Plugin\Templates\Twig;
 use Plentymarket\Helper\Utils;
-use Plentymarket\Services\AccountService;
-use Plentymarket\Services\BlogService;
-use Plentymarket\Services\CategoryService;
-use Plentymarket\Services\ConfigService;
+use Plentymarket\Services\CommonService;
 
 /**
  * Class BaseWebController
@@ -46,47 +43,20 @@ class BaseWebController extends BaseController
 			$this->trans('Common.home') => '/',
 		], $breadcrumb);
 
-		/** @var AccountService $accountService */
-		$accountService = pluginApp(AccountService::class);
-
-		/** @var CategoryService $categoryService */
-		$categoryService = pluginApp(CategoryService::class);
-
-		/** @var BlogService $blogService */
-		$blogService = pluginApp(BlogService::class);
-
-		/** @var ConfigService $configService */
-		$configService = pluginApp(ConfigService::class);
+		/** @var CommonService $commonService */
+		$commonService = pluginApp(CommonService::class);
 
 		//用户信息
-		$context['contact'] = $accountService->getContact();
+		$context['contact'] = $commonService->contract();
 
 		//分类
-		$context['category'] = $categoryService->getTree();
+		$context['category'] = $commonService->category();
 
-		//footer中的文章信息
-		$footer_article_1 = $configService->getTemplateConfig('basic.footer_article_1');
-		if (!empty($footer_article_1)) {
-			$context['footer_article_1'] = $categoryService->get($footer_article_1);
-			$context['footer_article_1_list'] = $blogService->category_id($footer_article_1);
-		}
+		$context = array_merge($context, $commonService->footer_article(1));
 
-		$footer_article_2 = $configService->getTemplateConfig('basic.footer_article_2');
-		if (!empty($footer_article_2)) {
-			$context['footer_article_2'] = $categoryService->get($footer_article_2);
-			$context['footer_article_2_list'] = $blogService->category_id($footer_article_2);
-		}
+		$context = array_merge($context, $commonService->footer_article(3));
 
-		$footer_article_3 = pluginApp(ConfigService::class)->getTemplateConfig('basic.footer_article_3');
-		if (!empty($footer_article_3)) {
-			$context['footer_article_3'] = $categoryService->get($footer_article_3);
-			$context['footer_article_3_list'] = $blogService->category_id($footer_article_3);
-		}
-
-		$footer_article_4 = $configService->getTemplateConfig('basic.footer_article_4');
-		if (!empty($footer_article_4)) {
-			$context['footer_article_4_list'] = $blogService->category_id($footer_article_4);
-		}
+		$context = array_merge($context, $commonService->footer_article(4));
 
 		$context['language'] = Utils::getLang();
 

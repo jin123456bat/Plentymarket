@@ -7,7 +7,6 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
-use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\HomeService;
 use Plentymarket\Services\ItemListService;
@@ -158,11 +157,6 @@ class IndexController extends BaseApiController
 			$itemListService = pluginApp(ItemListService::class);
 			$item = $itemListService->getItem(170);
 			return $this->success([
-				'language' => pluginApp(ConfigService::class)->getActiveLanguageList(),
-				'crossSelling' => $itemListService->getItems($item['crossSelling']),
-				'product174' => pluginApp(ItemListService::class)->getItem(174, true),
-				'product139' => pluginApp(ItemListService::class)->getItem(139, true),
-				'blog' => $homeService->article()
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
