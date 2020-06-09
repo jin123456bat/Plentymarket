@@ -40,7 +40,7 @@ class BaseController extends Controller
 	 */
 	protected function trans ($key, $params = [], $locale = null): string
 	{
-		return $key;
-//		return $this->translator->trans('Plentymarket::' . $key, $params, $locale);
+//		return $key;
+		return $this->translator->trans('Plentymarket::' . $key, $params, $locale);
 	}
 }
