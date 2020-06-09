@@ -136,6 +136,7 @@ class CategoryService
 				return [$detail];
 			}
 		}
+		return [$category['details'][0]];
 	}
 
 	/**
