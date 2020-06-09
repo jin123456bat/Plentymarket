@@ -41,7 +41,7 @@ class CommonService
 
 	function category ()
 	{
-		$this->categoryService->getTree();
+		return $this->categoryService->getTree();
 	}
 
 	function footer_article ($index)
