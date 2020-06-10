@@ -4800,7 +4800,9 @@ a#more-btn {
     line-height: 13px;
     color: #999999;
     padding-right: 5px;
-    text-decoration: line-through; }
+    text-decoration: line-through;
+    display: none;
+  }
   .ptk-product .content p.product-price span.discounted-price {
     font-size: 16px;
     font-weight: 400;
@@ -4834,6 +4836,7 @@ a#more-btn {
 .deal-slider-container .ptk-product .content .product-price .main-price
 {
   color: #369599;
+  display: none;
 }
 
 .product-countdown {
@@ -4873,8 +4876,11 @@ a#more-btn {
       {
         color: #369599;
       }
-      .popular-product-slider .ptk-product .content .product-price .main-price {
-        color: #727272; }
+      .popular-product-slider .ptk-product .content .product-price .main-price
+      {
+        color: #727272;
+        display: none;
+      }
 
 /*=====  End of 07. Product  ======*/
 /*=============================================
