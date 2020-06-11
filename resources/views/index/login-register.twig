@@ -13,32 +13,34 @@
 				<form action="#" id="login">
 
 					<div class="login-form">
-						<h4 class="login-title">{{trans("Plentymarket::WebIndexLoginRegister.login")}}</h4>
+						<h4 class="login-title">{{services.translate.trans("Plentymarket::WebIndexLoginRegister.login")}}</h4>
 
 						<div class="row">
 							<div class="col-md-12 col-12 mb-20">
-								<label>{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}*</label>
-								<input class="mb-0" type="email" name="email" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
+								<label>{{services.translate.trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}
+									*</label>
+								<input class="mb-0" type="email" name="email" required="required" placeholder="{{services.translate.trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
 							</div>
 							<div class="col-12 mb-20">
-								<label>{{trans("Plentymarket::WebIndexLoginRegister.password")}}</label>
-								<input class="mb-0" type="password" name="password" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.password")}}">
+								<label>{{services.translate.trans("Plentymarket::WebIndexLoginRegister.password")}}</label>
+								<input class="mb-0" type="password" name="password" required="required" placeholder="{{services.translate.trans("Plentymarket::WebIndexLoginRegister.password")}}">
 							</div>
 							<div class="col-md-8">
 
 								<div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
 									<input type="checkbox" id="remember_me">
-									<label for="remember_me">{{trans("Plentymarket::WebIndexLoginRegister.rememberMe")}}</label>
+									<label for="remember_me">{{services.translate.trans("Plentymarket::WebIndexLoginRegister.rememberMe")}}</label>
 								</div>
 
 							</div>
 
 							<div class="col-md-4 mt-10 mb-20 text-left text-md-right">
-								<a href="#"> {{trans("Plentymarket::WebIndexLoginRegister.forgottenPassword")}}?</a>
+								<a href="#"> {{services.translate.trans("Plentymarket::WebIndexLoginRegister.forgottenPassword")}}
+									?</a>
 							</div>
 
 							<div class="col-md-12">
-								<button class="register-button mt-0">{{trans("Plentymarket::WebIndexLoginRegister.login")}}</button>
+								<button class="register-button mt-0">{{services.translate.trans("Plentymarket::WebIndexLoginRegister.login")}}</button>
 							</div>
 
 						</div>
@@ -49,22 +51,23 @@
 			<div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
 				<form action="#" id="register">
 					<div class="login-form">
-						<h4 class="login-title">{{trans("Plentymarket::WebIndexLoginRegister.register")}}</h4>
+						<h4 class="login-title">{{services.translate.trans("Plentymarket::WebIndexLoginRegister.register")}}</h4>
 						<div class="row">
 							<div class="col-md-12 mb-20">
-								<label>{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}*</label>
-								<input class="mb-0" type="email" name="email" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
+								<label>{{services.translate.trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}
+									*</label>
+								<input class="mb-0" type="email" name="email" required="required" placeholder="{{services.translate.trans("Plentymarket::WebIndexLoginRegister.emailAddress")}}">
 							</div>
 							<div class="col-md-6 mb-20">
-								<label>{{trans("Plentymarket::WebIndexLoginRegister.password")}}</label>
-								<input class="mb-0" type="password" name="password" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.password")}}">
+								<label>{{services.translate.trans("Plentymarket::WebIndexLoginRegister.password")}}</label>
+								<input class="mb-0" type="password" name="password" required="required" placeholder="{{services.translate.trans("Plentymarket::WebIndexLoginRegister.password")}}">
 							</div>
 							<div class="col-md-6 mb-20">
-								<label>{{trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}</label>
-								<input class="mb-0" type="password" name="repassword" required="required" placeholder="{{trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}">
+								<label>{{services.translate.trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}</label>
+								<input class="mb-0" type="password" name="repassword" required="required" placeholder="{{services.translate.trans("Plentymarket::WebIndexLoginRegister.confirmPassword")}}">
 							</div>
 							<div class="col-12">
-								<button class="register-button mt-0">{{trans("Plentymarket::WebIndexLoginRegister.register")}}</button>
+								<button class="register-button mt-0">{{services.translate.trans("Plentymarket::WebIndexLoginRegister.register")}}</button>
 							</div>
 						</div>
 					</div>
@@ -93,7 +96,7 @@
             else
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexLoginRegister.emailOrPasswordError')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexLoginRegister.emailOrPasswordError')}}',
                     style: "error"
                 });
             }
@@ -109,7 +112,7 @@
         if (password != repassword)
         {
             spop({
-                template: '{{trans('Plentymarket::WebIndexLoginRegister.RepasswordError')}}',
+                template: '{{services.translate.trans('Plentymarket::WebIndexLoginRegister.RepasswordError')}}',
                 style: "error"
             });
             return false;
@@ -126,7 +129,7 @@
             else
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexLoginRegister.emailUsed')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexLoginRegister.emailUsed')}}',
                     style: "error"
                 });
             }

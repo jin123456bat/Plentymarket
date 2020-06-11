@@ -14,13 +14,13 @@
 					<div class="col-lg-3 col-12">
 						<div class="myaccount-tab-menu nav" role="tablist">
 
-							<a href="#orders" class="active" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>{{trans('Plentymarket::WebAccountIndex.orders')}}
+							<a href="#orders" class="active" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>{{services.translate.trans('Plentymarket::WebAccountIndex.orders')}}
 							</a>
 
-							<a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>{{trans('Plentymarket::WebAccountIndex.address')}}
+							<a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i>{{services.translate.trans('Plentymarket::WebAccountIndex.address')}}
 							</a>
 
-							<a href=""><i class="fa fa-sign-out"></i>{{trans('Plentymarket::WebAccountIndex.logout')}}
+							<a href=""><i class="fa fa-sign-out"></i>{{services.translate.trans('Plentymarket::WebAccountIndex.logout')}}
 							</a>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 							<!-- Single Tab Content Start -->
 							<div class="tab-pane fade  show active" id="orders" role="tabpanel">
 								<div class="myaccount-content">
-									<h3>{{trans('Plentymarket::WebAccountIndex.orders')}}</h3>
+									<h3>{{services.translate.trans('Plentymarket::WebAccountIndex.orders')}}</h3>
 
 									<div class="myaccount-table table-responsive text-center">
 										<table class="table table-bordered">
@@ -57,7 +57,7 @@
 													<td>{{order.statusName}}</td>
 													<td>{{order.total_amount}}</td>
 													<td>
-														<a href="/account/orderdetail/{{order.id}}" class="btn">{{trans('Plentymarket::WebAccountIndex.view')}}</a>
+														<a href="/account/orderdetail/{{order.id}}" class="btn">{{services.translate.trans('Plentymarket::WebAccountIndex.view')}}</a>
 													</td>
 												</tr>
 											{%endfor%}
@@ -71,13 +71,14 @@
 							<!-- Single Tab Content Start -->
 							<div class="tab-pane fade" id="address-edit" role="tabpanel">
 								<div class="myaccount-content">
-									<h3>{{trans('Plentymarket::WebAccountIndex.address')}}</h3>
+									<h3>{{services.translate.trans('Plentymarket::WebAccountIndex.address')}}</h3>
 
 									{%for address in addresses%}
 										<address style="display: inline-block;">
 											<p><strong>{{address.name2}} {{address.name3}}</strong></p>
 											<p>{{address.address1}}</p>
-											<p>{{trans('Plentymarket::WebAccountIndex.mobile')}}: {{address.phone}}</p>
+											<p>{{services.translate.trans('Plentymarket::WebAccountIndex.mobile')}}
+												: {{address.phone}}</p>
 
 											{#										<a href="#" class="btn d-inline-block edit-address-btn">#}
 											{#											<i class="fa fa-edit"></i>Edit Address#}

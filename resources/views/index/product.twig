@@ -69,21 +69,21 @@
                         {{item.short_desc}}
                     </p>
                     <div class="cart-buttons mb-30">
-                        <p class="mb-15">{{trans("Plentymarket::WebIndexProduct.quantity")}}</p>
+                        <p class="mb-15">{{services.translate.trans("Plentymarket::WebIndexProduct.quantity")}}</p>
                         <div class="pro-qty mr-10">
                             <input type="text" value="{{item.min_num}}" min="{{item.min_num}}" max="{{item.stock}}">
                         </div>
-                        <a href="#" class="pataku-btn" data-variationid="{{item.variationId}}"><i class="fa fa-shopping-cart"></i> {{trans("Plentymarket::WebIndexProduct.add_to_cart")}}
+                        <a href="#" class="pataku-btn" data-variationid="{{item.variationId}}"><i class="fa fa-shopping-cart"></i> {{services.translate.trans("Plentymarket::WebIndexProduct.add_to_cart")}}
                         </a>
                     </div>
                     <p class="wishlist-link mb-30">
                         {%if item.wishlist%}
                             <a href="#" id="remove_from_wishlist" data-id="{{item.variationId}}">
-                                <i class="fa fa-trash-o"></i>{{trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}
+                                <i class="fa fa-trash-o"></i>{{services.translate.trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}
                             </a>
                         {%else%}
                             <a href="#" id="add_to_wishlist" data-id="{{item.variationId}}">
-                                <i class="fa fa-heart"></i>{{trans("Plentymarket::WebIndexProduct.add_to_wishlist")}}
+                                <i class="fa fa-heart"></i>{{services.translate.trans("Plentymarket::WebIndexProduct.add_to_wishlist")}}
                             </a>
                         {%endif%}
                     </p>
@@ -422,12 +422,12 @@
                                 <div class="add-to-cart-btn">
                                     <a href="#" class="pataku-btn">
                                         <i class="fa fa-shopping-cart"></i>
-                                        {{trans('Plentymarket::WebIndexProductListCategory.add_to_cart')|raw}}
+                                        {{services.translate.trans('Plentymarket::WebIndexProductListCategory.add_to_cart')|raw}}
                                     </a>
                                 </div>
                             </div>
                             <div class="social-share-buttons">
-                                <h3>{{trans('Plentymarket::WebIndexProductListCategory.share_this_product')|raw}}</h3>
+                                <h3>{{services.translate.trans('Plentymarket::WebIndexProductListCategory.share_this_product')|raw}}</h3>
                                 <ul>
                                     <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
                                     <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
@@ -464,14 +464,14 @@
             if (success)
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
                     style: "success"
                 });
             }
             else
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
                     style: "error"
                 });
             }
@@ -485,7 +485,7 @@
         {
             if (response.code == 1)
             {
-                var tmp = '<a href="#" id="add_to_wishlist" data-id="{{item.variationId}}"><i class="fa fa-heart"></i>{{trans("Plentymarket::WebIndexProduct.add_to_wishlist")}}</a>';
+                var tmp = '<a href="#" id="add_to_wishlist" data-id="{{item.variationId}}"><i class="fa fa-heart"></i>{{services.translate.trans("Plentymarket::WebIndexProduct.add_to_wishlist")}}</a>';
                 $(".wishlist-link").html(tmp);
 
                 $("#wishlist-num").text(parseInt($("#wishlist-num").text()) - 1);
@@ -496,19 +496,19 @@
     {
         add_to_wishlist($(this).data("id"), function()
         {
-            var tmp = '<a href="#" id="remove_from_wishlist" data-id="{{item.variationId}}"><i class="fa fa-trash-o"></i>{{trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}</a>';
+            var tmp = '<a href="#" id="remove_from_wishlist" data-id="{{item.variationId}}"><i class="fa fa-trash-o"></i>{{services.translate.trans("Plentymarket::WebIndexProduct.remove_from_wishlist")}}</a>';
             $(".wishlist-link").html(tmp);
 
             $("#wishlist-num").text(parseInt($("#wishlist-num").text()) + 1);
 
             spop({
-                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
+                template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
                 style: "success"
             });
         }, function()
         {
             spop({
-                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
+                template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
                 style: "error"
             });
         });
@@ -524,13 +524,13 @@
             $("#wishlist-num").text(parseInt($("#wishlist-num").text()) + 1);
             _this.hide();
             spop({
-                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
+                template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_wishlist_success')}}',
                 style: "success"
             });
         }, function()
         {
             spop({
-                template: '{{trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
+                template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_wishlist_failed')}}',
                 style: "error"
             });
         });
@@ -556,14 +556,14 @@
             if (success)
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
                     style: "success"
                 });
             }
             else
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
                     style: "error"
                 });
             }
@@ -696,14 +696,14 @@
             if (success)
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_cart_success')}}',
                     style: "success"
                 });
             }
             else
             {
                 spop({
-                    template: '{{trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
+                    template: '{{services.translate.trans('Plentymarket::WebIndexProduct.add_to_cart_failed')}}',
                     style: "error"
                 });
             }

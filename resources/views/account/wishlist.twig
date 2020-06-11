@@ -17,11 +17,11 @@
 							<table class="table">
 								<thead>
 								<tr>
-									<th class="pro-thumbnail">{{trans('Plentymarket::WebAccountCart.image')}}</th>
-									<th class="pro-title">{{trans('Plentymarket::WebAccountCart.product')}}</th>
-									<th class="pro-price">{{trans('Plentymarket::WebAccountCart.price')}}</th>
-									<th class="pro-vat">{{trans('Plentymarket::WebAccountCart.vat')}}</th>
-									<th class="pro-remove">{{trans('Plentymarket::WebAccountCart.remove')}}</th>
+									<th class="pro-thumbnail">{{services.translate.trans('Plentymarket::WebAccountCart.image')}}</th>
+									<th class="pro-title">{{services.translate.trans('Plentymarket::WebAccountCart.product')}}</th>
+									<th class="pro-price">{{services.translate.trans('Plentymarket::WebAccountCart.price')}}</th>
+									<th class="pro-vat">{{services.translate.trans('Plentymarket::WebAccountCart.vat')}}</th>
+									<th class="pro-remove">{{services.translate.trans('Plentymarket::WebAccountCart.remove')}}</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -30,7 +30,8 @@
 										<td class="pro-thumbnail">
 											<a href="/index/product/{{item.id}}"><img src="{{item.images.0}}" class="img-fluid" alt="Product"></a>
 										</td>
-										<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a></td>
+										<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a>
+										</td>
 										<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
 										<td class="pro-vat"><span>{{item.vat_price}}</span></td>
 										<td class="pro-remove" data-id="{{item.variationId}}">
@@ -48,20 +49,20 @@
 				{%else%}
 					<div class="cart empty">
 						<div class="page-title" style="border-bottom: 1px solid #000;">
-							<h1>{{trans('Plentymarket::WebAccountWishlist.wishlist')}}</h1>
+							<h1>{{services.translate.trans('Plentymarket::WebAccountWishlist.wishlist')}}</h1>
 						</div>
 						<div class="cart-empty">
 							<p style="background-color: #fefad7;
     padding: 15px;
     margin-top: 15px;font-size: 14px;
-    font-weight: 400;">{{trans('Plentymarket::WebAccountWishlist.wishlist_empty_desc')}}</p>
+    font-weight: 400;">{{services.translate.trans('Plentymarket::WebAccountWishlist.wishlist_empty_desc')}}</p>
 							<div class="buttons-set">
-								<a href="/" title="{{trans('Plentymarket::WebAccountWishlist.continue')}}" class="checkout-btn" style="font-weight: 400;
+								<a href="/" title="{{services.translate.trans('Plentymarket::WebAccountWishlist.continue')}}" class="checkout-btn" style="font-weight: 400;
     text-transform: uppercase;
     color: #ffffff;
     background-color: #1e1e1e;
     border-color: #1e1e1e;    padding: 15px;">
-									<span class="button_label">{{trans('Plentymarket::WebAccountWishlist.continue')}}</span>
+									<span class="button_label">{{services.translate.trans('Plentymarket::WebAccountWishlist.continue')}}</span>
 								</a>
 							</div>
 						</div>

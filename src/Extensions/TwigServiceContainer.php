@@ -4,6 +4,7 @@ namespace Plentymarket\Extensions;
 
 use Plenty\Plugin\Http\Request;
 use Plentymarket\Services\ConfigService;
+use Plentymarket\Services\TranslateService;
 
 class TwigServiceContainer
 {
@@ -15,5 +16,10 @@ class TwigServiceContainer
 	public function getConfig ()
 	{
 		return pluginApp(ConfigService::class);
+	}
+
+	public function getTranslate ()
+	{
+		return pluginApp(TranslateService::class);
 	}
 }

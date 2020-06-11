@@ -187,7 +187,7 @@
         if ($("#accept_terms:checked").length == 0)
         {
             spop({
-                template: '{{trans('Plentymarket::WebAccountCheckout.accept_terms')}}',
+                template: '{{services.translate.trans('Plentymarket::WebAccountCheckout.accept_terms')}}',
                 style: "error"
             });
             return false;
@@ -196,7 +196,7 @@
         if ($("input[name=payment-method]:checked").length == 0)
         {
             spop({
-                template: '{{trans('Plentymarket::WebAccountCheckout.choice_payment')}}',
+                template: '{{services.translate.trans('Plentymarket::WebAccountCheckout.choice_payment')}}',
                 style: "error"
             });
             return false;
@@ -319,7 +319,7 @@
                 else
                 {
                     spop({
-                        template: '{{trans('Plentymarket::WebAccountCheckout.create_address_failed')}}',
+                        template: '{{services.translate.trans('Plentymarket::WebAccountCheckout.create_address_failed')}}',
                         style: "error"
                     });
                 }

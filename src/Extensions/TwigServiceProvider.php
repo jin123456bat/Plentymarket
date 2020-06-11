@@ -65,7 +65,7 @@ class TwigServiceProvider extends Twig_Extension
 	public function getGlobals (): array
 	{
 		return [
-			"services" => pluginApp(TwigServiceContainer::class)
+			"services" => pluginApp(TwigServiceContainer::class),
 		];
 	}
 }

@@ -49,7 +49,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-md-6 text-center text-md-left mb-sm-15">
-					<span class="header-top-text">{{trans('Plentymarket::Common.welcome')}}</span>
+					<span class="header-top-text">{{services.translate.trans('Plentymarket::Common.welcome')}}</span>
 				</div>
 				<div class="col-12 col-md-6">
 					<!--=======  header top dropdowns  =======-->
@@ -58,7 +58,7 @@
 						{%if contact is null%}
 							<div class="single-dropdown">
 								<a href="/account/login_register">
-									<span id="accountMenuName">{{trans('Plentymarket::Common.my_account')}}</span>
+									<span id="accountMenuName">{{services.translate.trans('Plentymarket::Common.my_account')}}</span>
 								</a>
 							</div>
 						{%else%}
@@ -147,7 +147,7 @@
 					<!--=======  Search bar  =======-->
 					<form action="/index/search" method="get">
 						<div class="search-bar">
-							<input type="search" name="query" placeholder="{{trans('Plentymarket::Common.search_text')}}">
+							<input type="search" name="query" placeholder="{{services.translate.trans('Plentymarket::Common.search_text')}}">
 							<button type="submit"><i class="lnr lnr-magnifier"></i></button>
 						</div>
 					</form>
@@ -160,7 +160,7 @@
 						<div class="single-icon mr-20">
 							<a href="/account/wishlist">
 								<i class="lnr lnr-heart"></i>
-								<span class="text">{{trans('Plentymarket::Common.wishlist')}}</span>
+								<span class="text">{{services.translate.trans('Plentymarket::Common.wishlist')}}</span>
 								<span class="count" id="wishlist-num">0</span>
 							</a>
 						</div>
@@ -169,7 +169,7 @@
 						<div class="single-icon">
 							<a href="javascript:void(0)" id="cart-icon">
 								<i class="lnr lnr-cart"></i>
-								<span class="text">{{trans('Plentymarket::Common.my_cart')}}</span>
+								<span class="text">{{services.translate.trans('Plentymarket::Common.my_cart')}}</span>
 								<span class="count" id="cart-num">0</span>
 							</a>
 							<!-- cart floating box -->
@@ -182,8 +182,8 @@
 										<p class="total">Subtotal <span id="basket_total_price">0</span></p>
 									</div>
 									<div class="floating-cart-btn text-center">
-										<a class="floating-cart-btn" href="/account/checkout">{{trans('Plentymarket::Common.checkout')}}</a>
-										<a class="floating-cart-btn" href="/account/cart">{{trans('Plentymarket::Common.view_cart')}}</a>
+										<a class="floating-cart-btn" href="/account/checkout">{{services.translate.trans('Plentymarket::Common.checkout')}}</a>
+										<a class="floating-cart-btn" href="/account/cart">{{services.translate.trans('Plentymarket::Common.view_cart')}}</a>
 									</div>
 								</div>
 							</div>
@@ -209,7 +209,7 @@
 						<div class="category-toggle-wrap">
 							<!-- Category Toggle -->
 							<button class="category-toggle">
-								<span class="lnr lnr-text-align-left"></span> {{trans("Plentymarket::Common.browseCategories")}}
+								<span class="lnr lnr-text-align-left"></span> {{services.translate.trans("Plentymarket::Common.browseCategories")}}
 								<span class="lnr lnr-chevron-down"></span></button>
 						</div>
 						<!-- Category Menu -->
@@ -252,7 +252,7 @@
 							<ul>
 
 								<li {%if services.request.getRequestUri() == '/'%}class="active"{%endif%}>
-									<a href="/">{{trans("Plentymarket::Common.home")}}</a></li>
+									<a href="/">{{services.translate.trans("Plentymarket::Common.home")}}</a></li>
 
 								{#								{%for key,value in category%}#}
 								{#									<li {%if value.children|length > 0%}class="menu-item-has-children"{%endif%}>#}
@@ -279,14 +279,16 @@
 								{#								{%endfor%}#}
 
 								<li {%if services.request.getRequestUri() == '/index/blog_list'%}class="active"{%endif%}>
-									<a href="/index/blog_list">{{trans('Plentymarket::Common.blog')}}    {{services.request.getRequestUri()}}</a>
+									<a href="/index/blog_list">{{services.translate.trans('Plentymarket::Common.blog')}}    {{services.request.getRequestUri()}}</a>
 								</li>
 
 								<li {%if services.request.getRequestUri() == '/index/about'%}class="active"{%endif%}>
-									<a href="/index/about">{{trans('Plentymarket::Common.about')}}</a></li>
+									<a href="/index/about">{{services.translate.trans('Plentymarket::Common.about')}}</a>
+								</li>
 
 								<li {%if services.request.getRequestUri() == '/index/contact'%}class="active"{%endif%}>
-									<a href="/index/contact">{{trans('Plentymarket::Common.contact')}}</a></li>
+									<a href="/index/contact">{{services.translate.trans('Plentymarket::Common.contact')}}</a>
+								</li>
 
 							</ul>
 						</nav>
@@ -314,14 +316,14 @@
 			<p class="total">Subtotal <span id="basket_total_price">0</span></p>
 		</div>
 		<div class="floating-cart-btn text-center">
-			<a class="floating-cart-btn" href="/account/checkout">{{trans('Plentymarket::Common.checkout')}}</a>
-			<a class="floating-cart-btn" href="/account/cart">{{trans('Plentymarket::Common.view_cart')}}</a>
+			<a class="floating-cart-btn" href="/account/checkout">{{services.translate.trans('Plentymarket::Common.checkout')}}</a>
+			<a class="floating-cart-btn" href="/account/cart">{{services.translate.trans('Plentymarket::Common.view_cart')}}</a>
 		</div>
 	</div>
 </script>
 <script type="text/html" id="basket_empty">
 	<div class="cart-empty">
-		{{trans('Plentymarket::Common.cart_empty')}}
+		{{services.translate.trans('Plentymarket::Common.cart_empty')}}
 	</div>
 </script>
 <script type="text/html" id="basket_item_tpl">
