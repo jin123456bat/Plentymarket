@@ -312,7 +312,7 @@ class TranslateService
 		if ($lang == 'de') {
 			$lang = 'en';
 		}
-		list($k1, $k2) = explode(',', $key, 2);
+		list($k1, $k2) = explode('.', $key, 2);
 		list($v1, $v2) = explode('::', $k1, 2);
 		return $this->language[$lang][$v2][$k2] ?? $this->language['en'][$v2][$k2] ?? '';
 	}
