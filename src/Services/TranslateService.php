@@ -303,10 +303,10 @@ class TranslateService
 	];
 
 	/**
-	 * @param $key
-	 * @return mixed|string
+	 * @param string $key
+	 * @return string
 	 */
-	function trans ($key)
+	function trans ($key): string
 	{
 		$lang = Utils::getLang();
 		if ($lang == 'de') {
