@@ -15,10 +15,12 @@ use Plentymarket\Services\BlogService;
 use Plentymarket\Services\CategoryService;
 use Plentymarket\Services\CheckoutService;
 use Plentymarket\Services\CommentService;
+use Plentymarket\Services\CommonService;
 use Plentymarket\Services\ConfigService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\CurrencyService;
 use Plentymarket\Services\FeedbackService;
+use Plentymarket\Services\HomeService;
 use Plentymarket\Services\HttpService;
 use Plentymarket\Services\ImageService;
 use Plentymarket\Services\ItemListService;
@@ -31,6 +33,7 @@ use Plentymarket\Services\PayPalService;
 use Plentymarket\Services\PriceDetectService;
 use Plentymarket\Services\SessionService;
 use Plentymarket\Services\StockService;
+use Plentymarket\Services\TranslateService;
 use Plentymarket\Services\UnitService;
 use Plentymarket\Services\WarehouseService;
 
@@ -76,7 +79,10 @@ class PlentymarketServiceProvider extends ServiceProvider
 			SessionService::class,
 			StockService::class,
 			UnitService::class,
-			WarehouseService::class
+			WarehouseService::class,
+			CommonService::class,
+			HomeService::class,
+			TranslateService::class,
 		]);
 	}
 

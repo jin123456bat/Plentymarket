@@ -13,12 +13,12 @@ class TwigServiceContainer
 		return pluginApp(Request::class);
 	}
 
-	public function getConfig ()
+	public function getConfig (): ConfigService
 	{
 		return pluginApp(ConfigService::class);
 	}
 
-	public function getTranslate ()
+	public function getTranslate (): TranslateService
 	{
 		return pluginApp(TranslateService::class);
 	}
