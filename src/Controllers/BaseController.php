@@ -5,7 +5,7 @@ namespace Plentymarket\Controllers;
 use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
-use Plenty\Plugin\Translation\Translator;
+use Plentymarket\Services\TranslateService;
 
 class BaseController extends Controller
 {
@@ -20,7 +20,7 @@ class BaseController extends Controller
 	protected $request;
 
 	/**
-	 * @var Translator
+	 * @var TranslateService
 	 */
 	private $translator;
 
@@ -28,19 +28,16 @@ class BaseController extends Controller
 	{
 		$this->request = $request;
 		$this->response = $response;
-		$this->translator = pluginApp(Translator::class);
+		$this->translator = pluginApp(TranslateService::class);
 	}
 
 	/**
 	 * 翻译
 	 * @param $key
-	 * @param array $params
-	 * @param null $locale
 	 * @return string
 	 */
-	protected function trans ($key, $params = [], $locale = null): string
+	protected function trans ($key): string
 	{
-//		return $key;
-		return $this->translator->trans('Plentymarket::' . $key, $params, $locale);
+		return $this->translator->trans('Plentymarket::' . $key);
 	}
 }
