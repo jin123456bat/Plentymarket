@@ -40,23 +40,20 @@ class AddressService
 	 * @param array $data 地址数据
 	 * @return Address
 	 */
-	function create (array $data): ?Address
+	function create (array $data): Address
 	{
 		$contactId = pluginApp(AccountService::class)->getContactId();
-		if (!empty($contactId)) {
-			//添加配送地址
-			$address = $this->contactAddressRepositoryContract->createAddress($data, $contactId, self::Address_Delivery);
+		//添加配送地址
+		$address = $this->contactAddressRepositoryContract->createAddress($data, $contactId, self::Address_Delivery);
 
-			//把配送地址关联到账单地址上
-			$this->contactAddressRepositoryContract->addAddress($address->id, $contactId, self::Address_Invoice);
+		//把配送地址关联到账单地址上
+		$this->contactAddressRepositoryContract->addAddress($address->id, $contactId, self::Address_Invoice);
 
-			//设置默认地址
-			$this->contactAddressRepositoryContract->setPrimaryAddress($address->id, $contactId, self::Address_Delivery);
-			$this->contactAddressRepositoryContract->setPrimaryAddress($address->id, $contactId, self::Address_Invoice);
+		//设置默认地址
+		$this->contactAddressRepositoryContract->setPrimaryAddress($address->id, $contactId, self::Address_Delivery);
+		$this->contactAddressRepositoryContract->setPrimaryAddress($address->id, $contactId, self::Address_Invoice);
 
-			return $address;
-		}
-		return null;
+		return $address;
 	}
 
 	/**
@@ -65,18 +62,12 @@ class AddressService
 	 * @param array $data
 	 * @return Address|null
 	 */
-	function update (int $addressId, array $data): ?Address
+	function update (int $addressId, array $data): Address
 	{
 		$contactId = pluginApp(AccountService::class)->getContactId();
-		if (!empty($contactId)) {
-			$address = $this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Delivery);
-			if ($address instanceof Address) {
-				$this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Invoice);
-				return $address;
-			}
-			return null;
-		}
-		return null;
+		$address = $this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Delivery);
+		$this->contactAddressRepositoryContract->updateAddress($data, $addressId, $contactId, self::Address_Invoice);
+		return $address;
 	}
 
 	/**
