@@ -249,6 +249,9 @@ class TranslateService
 				'your_message' => 'Your Message',
 				'subject' => 'Subject',
 				'your_email' => 'Your Email',
+				'email' => 'Email',
+				'address' => 'Address',
+				'phone' => 'Phone',
 			],
 			'WebIndexFaq' => [
 				'faq' => 'FAQ',
