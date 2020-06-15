@@ -9,7 +9,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				{%if list.list|length > 0%}
+				{%if list.total > 0%}
 					<form action="#">
 						<!--=======  wishlist table  =======-->
 						<div class="cart-table table-responsive">
@@ -23,7 +23,7 @@
 								</tr>
 								</thead>
 								<tbody>
-								{%for item in list%}
+								{%for item in list.list%}
 									<tr>
 										<td class="pro-thumbnail">
 											<a href="/index/product/{{item.id}}"><img src="{{item.images.0}}" class="img-fluid" alt="Product"></a>
