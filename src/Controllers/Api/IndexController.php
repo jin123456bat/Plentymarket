@@ -152,7 +152,7 @@ class IndexController extends BaseApiController
 	{
 		try {
 			return $this->success([
-				'list' => pluginApp(ItemListService::class)->getItemsFromWishlist()
+				'ffff' => pluginApp(ItemListService::class)->getItemsFromWishlist()
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
