@@ -27,7 +27,8 @@
 					<!--=======  single contact block  =======-->
 
 					<div class="single-contact-block">
-						<h4><img src="assets/images/icons/contact-icon1.png" alt=""> Address</h4>
+						<h4><img src="{{plugin_path("Plentymarket")}}/images/icons/contact-icon1.png" alt=""> Address
+						</h4>
 						<p>{{services.config.getTemplateConfig('basic.address')}}</p>
 					</div>
 
@@ -36,7 +37,7 @@
 					<!--=======  single contact block  =======-->
 
 					<div class="single-contact-block">
-						<h4><img src="assets/images/icons/contact-icon2.png" alt=""> Phone</h4>
+						<h4><img src="{{plugin_path("Plentymarket")}}/images/icons/contact-icon2.png" alt=""> Phone</h4>
 						<p>{{services.config.getTemplateConfig('basic.phone')}}</p>
 					</div>
 
@@ -45,7 +46,7 @@
 					<!--=======  single contact block  =======-->
 
 					<div class="single-contact-block">
-						<h4><img src="assets/images/icons/contact-icon3.png" alt=""> Email</h4>
+						<h4><img src="{{plugin_path("Plentymarket")}}/images/icons/contact-icon3.png" alt=""> Email</h4>
 						<p>{{services.config.getTemplateConfig('basic.email')}}</p>
 					</div>
 
@@ -59,24 +60,26 @@
 				<!--=======  contact form content  =======-->
 
 				<div class="contact-form-content">
-					<h3 class="contact-page-title">Tell Us Your Message</h3>
+					<h3 class="contact-page-title">{{services.translate.trans('Plentymarket::WebIndexContact.tell_us_your_message')}}</h3>
 
 					<div class="contact-form">
-						<form id="contact-form" action="assets/php/mail.php" method="post">
+						<form id="contact-form" action="/api/index/mail" method="post">
 							<div class="form-group">
-								<label>Your Name <span class="required">*</span></label>
+								<label>{{services.translate.trans('Plentymarket::WebIndexContact.your_name')}}
+									<span class="required">*</span></label>
 								<input type="text" name="customerName" id="customername" required>
 							</div>
 							<div class="form-group">
-								<label>Your Email <span class="required">*</span></label>
+								<label>{{services.translate.trans('Plentymarket::WebIndexContact.your_email')}}
+									<span class="required">*</span></label>
 								<input type="email" name="customerEmail" id="customerEmail" required>
 							</div>
 							<div class="form-group">
-								<label>Subject</label>
+								<label>{{services.translate.trans('Plentymarket::WebIndexContact.subject')}}</label>
 								<input type="text" name="contactSubject" id="contactSubject">
 							</div>
 							<div class="form-group">
-								<label>Your Message</label>
+								<label>{{services.translate.trans('Plentymarket::WebIndexContact.your_message')}}</label>
 								<textarea name="contactMessage" id="contactMessage"></textarea>
 							</div>
 							<div class="form-group mb-0">
@@ -87,7 +90,6 @@
 					</div>
 					<p class="form-messege pt-10 pb-10 mt-10 mb-10"></p>
 				</div>
-
 				<!--=======  End of contact form content =======-->
 			</div>
 		</div>
@@ -97,7 +99,7 @@
 <!--=====  End of Contact page content  ======-->
 
 <!-- AJAX mail JS -->
-<script src="assets/js/ajax-mail.js"></script>
+<script src="{{plugin_path("Plentymarket")}}/js/ajax-mail.js"></script>
 
 <!-- Google Map -->
 <script src="http://ditu.google.cn/maps/api/js?sensor=false&libraries=geometry&v=3.22&key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo"></script>
@@ -292,9 +294,12 @@
             position: new google.maps.LatLng(40.740610, -73.935242),
             map: map,
             title: "Greenfarm",
-            icon: "assets/images/icons/map-marker.png",
-            animation: google.maps.Animation.BOUNCE
-        });
+            icon: "{{plugin_path(\"Plentymarket\")}}/images/icons/map-marker.png",
+        animation;
+    :
+        google.maps.Animation.BOUNCE;
+    })
+        ;
     }
 </script>
 

@@ -244,6 +244,11 @@ class TranslateService
 			],
 			'WebIndexContact' => [
 				'contact' => 'Contact person',
+				'tell_us_your_message' => 'Tell Us Your Message',
+				'your_name' => 'Your Name',
+				'your_message' => 'Your Message',
+				'subject' => 'Subject',
+				'your_email' => 'Your Email',
 			],
 			'WebIndexFaq' => [
 				'faq' => 'FAQ',
