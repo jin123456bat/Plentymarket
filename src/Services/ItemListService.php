@@ -30,7 +30,7 @@ class ItemListService
 
 		$list = array_map(function ($item) use ($numberFormatFilter) {
 			$item['image'] = empty($item['images']) ? '' : current($item['images']);
-			$item['vat_price'] = '€' . sprintf('%.2f', $item['vat'] * $item['discount_price'] / 100);
+			$item['vat_price'] = '€' . sprintf('%.2f', $item['discount_price']);
 			return $item;
 		}, $list);
 
@@ -66,8 +66,8 @@ class ItemListService
 			$item['image'] = empty($item['images']) ? '' : current($item['images']);
 			$item['quantity'] = $dict[$item['variationId']]['quantity'];
 			$item['basketItemId'] = $dict[$item['variationId']]['basketItemId'];
-			$item['vat_price'] = '€' . sprintf('%.2f', $item['vat'] * $item['quantity'] * $item['discount_price'] / 100);
-			$item['format_discount_price_quantity'] = '€' . sprintf('%.2f', (1 + $item['vat'] / 100) * $item['quantity'] * $item['discount_price']);
+			$item['vat_price'] = '€' . sprintf('%.2f', $item['quantity'] * $item['discount_price']);
+			$item['format_discount_price_quantity'] = '€' . sprintf('%.2f', $item['quantity'] * $item['discount_price']);
 			return $item;
 		}, $data['list']);
 	}
@@ -223,8 +223,6 @@ class ItemListService
 			$wishlist = pluginApp(Wishlist::class);
 		}
 
-		$vat = $data['data']['prices']['default']['vat']['value'] / 100;
-
 		return [
 			'id' => $data['data']['item']['id'],//商品ID
 			'variationId' => $data['id'],//添加购物车用这个ID
@@ -234,17 +232,17 @@ class ItemListService
 			'country' => $data['data']['item']['producingCountry']['names']['name'],//原产国
 			'manufacturer' => $data['data']['item']['manufacturer']['name'],//供应商
 			'min_num' => $this->getSalesPrices($data['data']['salesPrices'], 'minimumOrderQuantity'),//最低购买量
-			'main_price' => sprintf('%.2f', $data['data']['prices']['rrp']['price']['value'] / ($vat + 1)),//价格
-			'format_main_price' => '€' . sprintf('%.2f', $data['data']['prices']['rrp']['price']['value']($vat + 1)),//$data['data']['prices']['default']['price']['formatted'],//格式化价格
-			'discount_price' => sprintf('%.2f', $data['data']['prices']['default']['price']['value'] / ($vat + 1)),//价格
-			'format_discount_price' => '€' . sprintf('%.2f', $data['data']['prices']['default']['price']['value'] / ($vat + 1)),//$data['data']['prices']['default']['price']['formatted'],//格式化价格
+			'main_price' => sprintf('%.2f', $data['data']['prices']['rrp']['price']['value']),//价格
+			'format_main_price' => '€' . sprintf('%.2f', $data['data']['prices']['rrp']['price']['value']),//$data['data']['prices']['default']['price']['formatted'],//格式化价格
+			'discount_price' => sprintf('%.2f', $data['data']['prices']['default']['price']['value']),//价格
+			'format_discount_price' => '€' . sprintf('%.2f', $data['data']['prices']['default']['price']['value']),//$data['data']['prices']['default']['price']['formatted'],//格式化价格
 			'discount' => empty($data['data']['prices']['rrp']['price']['value']) ? 0 : ceil(100 * ($data['data']['prices']['rrp']['price']['value'] - $data['data']['prices']['default']['price']['value']) / $data['data']['prices']['rrp']['price']['value']),
 			'currency' => $data['data']['prices']['default']['currency'],//货币
 			'stock' => $data['data']['stock']['net'],//库存
 			'desc' => strip_tags($data['data']['texts']['description']),//商品描述
 			'short_desc' => strip_tags($data['data']['texts']['shortDescription']),//短描述
 			'unit' => $data['data']['unit']['names']['name'],//单位
-			'vat' => $vat,//增值税
+			'vat' => $data['data']['prices']['default']['vat']['value'],//增值税
 			'wishlist' => $wishlist->has($data['id']),//是否添加到愿望清单了
 			'crossSelling' => array_map(function ($item) {
 				return $item['itemId'];
