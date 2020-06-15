@@ -20,7 +20,6 @@
 									<th class="pro-thumbnail">{{services.translate.trans('Plentymarket::WebAccountCart.image')}}</th>
 									<th class="pro-title">{{services.translate.trans('Plentymarket::WebAccountCart.product')}}</th>
 									<th class="pro-price">{{services.translate.trans('Plentymarket::WebAccountCart.price')}}</th>
-									<th class="pro-vat">{{services.translate.trans('Plentymarket::WebAccountCart.vat')}}</th>
 									<th class="pro-quantity">{{services.translate.trans('Plentymarket::WebAccountCart.quantity')}}</th>
 									<th class="pro-subtotal">{{services.translate.trans('Plentymarket::WebAccountCart.total')}}</th>
 									<th class="pro-remove">{{services.translate.trans('Plentymarket::WebAccountCart.remove')}}</th>
@@ -35,7 +34,6 @@
 										<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a>
 										</td>
 										<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
-										<td class="pro-vat"><span>{{item.vat_price}}</span></td>
 										<td class="pro-quantity">
 											<div class="pro-qty" data-id="{{item.basketItemId}}">
 												<input type="text" value="{{item.quantity}}" min="{{item.min_num}}" max="{{item.stock}}">
