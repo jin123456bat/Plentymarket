@@ -10,7 +10,6 @@ use Plentymarket\Services\AccountService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\SessionService;
-use Plentymarket\Services\TranslateService;
 use Throwable;
 
 /**
@@ -153,7 +152,7 @@ class IndexController extends BaseApiController
 	{
 		try {
 			return $this->success([
-				'Plentymarket::WebIndexIndex.payment' => pluginApp(TranslateService::class)->trans('Plentymarket::WebIndexIndex.payment')
+				'list' => pluginApp(ItemListService::class)->getItemsFromWishlist()
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
