@@ -7408,7 +7408,7 @@ span.required {
   font-weight: 400;
   letter-spacing: .02em;
   line-height: 24px;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .single-footer ul li a {
