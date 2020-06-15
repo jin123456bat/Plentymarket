@@ -12,7 +12,7 @@
                 <!-- single product tabstyle one image gallery -->
                 <div class="product-image-slider pts-product-image-slider pts3-product-image-slider">
                     <!--product large image start -->
-                    <div style="height: 647px; width: 540px;" class="tab-content product-large-image-list pts-product-large-image-list pts3-product-large-image-list" id="myTabContent">
+                    <div class="tab-content product-large-image-list pts-product-large-image-list pts3-product-large-image-list" id="myTabContent">
                         {%for image in item.images%}
                             <div class="tab-pane fade {%if loop.first%}show active{%endif%}" id="single-slide-{{loop.index}}" role="tabpanel" aria-labelledby="single-slide-tab-{{loop.index}}">
                                 <!--Single Product Image Start-->
