@@ -2,7 +2,6 @@
 
 namespace Plentymarket\Services;
 
-use Plentymarket\Extensions\Filters\NumberFormatFilter;
 use Plentymarket\Models\Wishlist;
 use Plentymarket\Services\ItemSearch\SearchPresets\CategoryItems;
 use Plentymarket\Services\ItemSearch\Services\ItemSearchService;
@@ -26,13 +25,11 @@ class ItemListService
 
 		$list = $this->getItemVariationIds($itemIds);
 
-		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-
-		$list = array_map(function ($item) use ($numberFormatFilter) {
+		$list['list'] = array_map(function ($item) {
 			$item['image'] = empty($item['images']) ? '' : current($item['images']);
 			$item['vat_price'] = '€' . sprintf('%.2f', $item['discount_price']);
 			return $item;
-		}, $list);
+		}, $list['list']);
 
 		return $list;
 	}
@@ -60,9 +57,7 @@ class ItemListService
 
 		$data = $this->getItemVariationIds($variationId);
 
-		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-
-		return array_map(function ($item) use ($dict, $numberFormatFilter) {
+		return array_map(function ($item) use ($dict) {
 			$item['image'] = empty($item['images']) ? '' : current($item['images']);
 			$item['quantity'] = $dict[$item['variationId']]['quantity'];
 			$item['basketItemId'] = $dict[$item['variationId']]['basketItemId'];

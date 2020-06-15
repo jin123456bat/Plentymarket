@@ -9,10 +9,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				{%if list|length > 0%}
+				{%if list.list|length > 0%}
 					<form action="#">
 						<!--=======  wishlist table  =======-->
-
 						<div class="cart-table table-responsive">
 							<table class="table">
 								<thead>
@@ -20,7 +19,6 @@
 									<th class="pro-thumbnail">{{services.translate.trans('Plentymarket::WebAccountCart.image')}}</th>
 									<th class="pro-title">{{services.translate.trans('Plentymarket::WebAccountCart.product')}}</th>
 									<th class="pro-price">{{services.translate.trans('Plentymarket::WebAccountCart.price')}}</th>
-									<th class="pro-vat">{{services.translate.trans('Plentymarket::WebAccountCart.vat')}}</th>
 									<th class="pro-remove">{{services.translate.trans('Plentymarket::WebAccountCart.remove')}}</th>
 								</tr>
 								</thead>
@@ -33,7 +31,6 @@
 										<td class="pro-title"><a href="/index/product/{{item.id}}">{{item.name}}</a>
 										</td>
 										<td class="pro-price"><span>{{item.format_discount_price}}</span></td>
-										<td class="pro-vat"><span>{{item.vat_price}}</span></td>
 										<td class="pro-remove" data-id="{{item.variationId}}">
 											<a href="#"><i class="fa fa-trash-o"></i></a>
 										</td>
@@ -42,9 +39,7 @@
 								</tbody>
 							</table>
 						</div>
-
 						<!--=======  End of wishlist table  =======-->
-
 					</form>
 				{%else%}
 					<div class="cart empty">

@@ -631,7 +631,9 @@ a.scroll-top {
     font-size: 24px;
     color: #999999;
     padding-right: 5px;
-    text-decoration: line-through; }
+    text-decoration: line-through;
+    display: none;
+  }
   .product-feature-details h2.product-price span.discounted-price {
     font-size: 28px;
     font-weight: 500;

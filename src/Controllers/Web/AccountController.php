@@ -3,13 +3,10 @@
 namespace Plentymarket\Controllers\Web;
 
 use Plentymarket\Controllers\BaseWebController;
-use Plentymarket\Extensions\Filters\NumberFormatFilter;
-use Plentymarket\Helper\Utils;
 use Plentymarket\Services\AddressService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\OrderService;
-use Plentymarket\Services\PaymentMethodService;
 use Plentymarket\Services\PayPalService;
 
 /**
@@ -25,10 +22,6 @@ class AccountController extends BaseWebController
 			$amount = PayPalService::getAmount($item['amounts']);
 			$order_amount += round($item['quantity'] * ($amount['priceGross'] * (1 + $item['vatRate'] / 100)), 2);
 		}
-
-		/** @var NumberFormatFilter $numberFormatFilter */
-		$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-		$numberFormatFilter->formatMonetary($order_amount, Utils::getCurrency());
 
 		return $order_amount;
 	}
@@ -91,18 +84,16 @@ class AccountController extends BaseWebController
 				];
 			}
 
-			$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-
 			$country = pluginApp(CountryService::class)->getTree();
 
 			return $this->render('account.cart', [
 				$this->trans('WebAccountCart.cart') => '/account/cart'
 			], [
 				'list' => $list,
-				'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
-				'vat' => $numberFormatFilter->formatMonetary($vat, Utils::getCurrency()),
-				'ship' => $numberFormatFilter->formatMonetary($ship, Utils::getCurrency()),
-				'summary' => $numberFormatFilter->formatMonetary($total + $vat + $ship, Utils::getCurrency()),
+				'total' => '€' . sprintf('%.2f', $total),
+				'vat' => '€' . sprintf('%.2f', $vat),
+				'ship' => '€' . sprintf('%.2f', $ship),
+				'summary' => '€' . sprintf('%.2f', $total + $vat + $ship),
 				'country' => $country,
 				'virtual_cart' => json_encode($virtaul_cart),
 			]);
@@ -127,20 +118,15 @@ class AccountController extends BaseWebController
 				$total += ($value['quantity'] * $value['discount_price'] * (1 + $value['vat'] / 100));
 			}
 
-			$numberFormatFilter = pluginApp(NumberFormatFilter::class);
-
 			$country = pluginApp(CountryService::class)->getTree();
-
-			//支付方式暂时搞不定
-			$paymentList = pluginApp(PaymentMethodService::class)->getAll();
 
 			return $this->render('account.checkout', [
 				$this->trans('WebAccountCheckout.checkout') => '/account/checkout'
 			], [
 				'addresses' => $address,
 				'items' => $list,
-				'total' => $numberFormatFilter->formatMonetary($total, Utils::getCurrency()),
-				'ship' => $numberFormatFilter->formatMonetary(0, Utils::getCurrency()),
+				'total' => '€' . sprintf('%.2f', $total),
+				'ship' => '€' . sprintf('%.2f', 0),
 				'country' => $country,
 				'paymentList' => [
 					[
@@ -161,7 +147,9 @@ class AccountController extends BaseWebController
 	function wishlist (): string
 	{
 		try {
-			$list = pluginApp(ItemListService::class)->getItemsFromWishlist();
+			/** @var ItemListService $itemListService */
+			$itemListService = pluginApp(ItemListService::class);
+			$list = $itemListService->getItemsFromWishlist();
 
 			return $this->render('account.wishlist', [
 				$this->trans('WebAccountWishlist.wishlist') => '/account/wishlist'
