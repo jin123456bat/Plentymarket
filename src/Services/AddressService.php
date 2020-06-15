@@ -40,7 +40,7 @@ class AddressService
 	 * @param array $data 地址数据
 	 * @return Address
 	 */
-	function create (array $data): Address
+	function create (array $data): ?Address
 	{
 		$contactId = pluginApp(AccountService::class)->getContactId();
 		if (!empty($contactId)) {
@@ -65,7 +65,7 @@ class AddressService
 	 * @param array $data
 	 * @return Address|null
 	 */
-	function update (int $addressId, array $data): Address
+	function update (int $addressId, array $data): ?Address
 	{
 		$contactId = pluginApp(AccountService::class)->getContactId();
 		if (!empty($contactId)) {
