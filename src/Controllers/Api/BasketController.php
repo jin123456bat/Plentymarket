@@ -25,6 +25,7 @@ class BasketController extends BaseApiController
 			$variationId = $this->request->input('variationId');
 			$quantity = $this->request->input('quantity');
 
+			/** @var BasketService $basket */
 			$basket = pluginApp(BasketService::class);
 			try {
 				$basketItem = $basket->create([
