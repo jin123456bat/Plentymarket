@@ -37,7 +37,7 @@ class BlogService
 		$result = $this->blogPostRepositoryContract->listPosts($page, $itemsPerPage);
 		$lang = Utils::getLang();
 		if ($lang == 'de') {
-			$lang == 'en';
+			$lang = 'en';
 		}
 		foreach ($result['entries'] as $key => $item) {
 			if ($item['data']['post']['lang'] != $lang) {
