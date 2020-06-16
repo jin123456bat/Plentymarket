@@ -154,7 +154,7 @@ class PaymentController extends BaseApiController
 		}
 	}
 
-	function calcAmount (Order $order, bool $includeVat = false)
+	function calcAmount (Order $order, bool $includeVat = true)
 	{
 		$order_amount = 0;
 		foreach ($order->orderItems as $key => $item) {
