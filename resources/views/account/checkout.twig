@@ -16,7 +16,7 @@
 
 							<!-- Shipping Address -->
 							<div id="billing-form" class="mb-40">
-								<h4 class="checkout-title">Shipping Address</h4>
+								<h4 class="checkout-title">{{services.translate.trans('Plentymarket::WebAccountCheckout.shipping_address')}}</h4>
 								<div class="row">
 									<div class="address-list col-md-12 col-12 mb-20">
 
@@ -32,85 +32,79 @@
 													{{address.phone}}
 												</div>
 												<button class="address-select">
-													使用这个地址
+													{{services.translate.trans('Plentymarket::WebAccountCheckout.address_selected')}}
 												</button>
 											</div>
 										{%endfor%}
 									</div>
 									<div class="col-md-12 col-12 mb-20">
-										<button class="create-address">添加一个新地址</button>
+										<button class="create-address">{{services.translate.trans('Plentymarket::WebAccountCheckout.address_add')}}</button>
 									</div>
 								</div>
 							</div>
 
 							<!-- Shipping Address -->
 							<form id="shipping-form" class="mb-40">
-								<h4 class="checkout-title">New Address</h4>
-
+								<h4 class="checkout-title">{{services.translate.trans('Plentymarket::WebAccountCheckout.address_new')}}</h4>
 								<div class="row">
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>First Name*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.first_name')}}
+											*</label>
 										<input type="text" placeholder="First Name" name="first_name">
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>Last Name*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.last_name')}}
+											*</label>
 										<input type="text" placeholder="Last Name" name="second_name">
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>Email Address*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.email_address')}}
+											*</label>
 										<input type="email" placeholder="Email Address" name="email">
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>Phone no*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.phone_no')}}
+											*</label>
 										<input type="text" placeholder="Phone number" name="phone">
 									</div>
-
 									<div class="col-12 mb-20">
-										<label>Company Name</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.company_name')}}</label>
 										<input type="text" placeholder="Company Name" name="company_name">
 									</div>
-
 									<div class="col-12 mb-20">
-										<label>Address*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.address')}}
+											*</label>
 										<input type="text" placeholder="Address line 1" name="address1">
 										<input type="text" placeholder="Address line 2" name="address2">
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>Country*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.country')}}
+											*</label>
 										<select class="nice-select" name="country">
 											{%for c in country%}
 												<option value="{{c.id}}">{{c.name}}</option>
 											{%endfor%}
 										</select>
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>State*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.state')}}
+											*</label>
 										<select class="nice-select" name="state">
 										</select>
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>Town/City*</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.town_and_city')}}
+											*</label>
 										<input type="text" placeholder="Town/City" name="town">
 									</div>
-
 									<div class="col-md-6 col-12 mb-20">
-										<label>Zip Code</label>
+										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.zip_code')}}</label>
 										<input type="text" placeholder="Zip Code" name="zipcode">
 									</div>
-
 								</div>
-
 								<div class="col-md-12 col-12 mb-20">
-									<button class="save-address">保存</button>
+									<button class="save-address">{{services.translate.trans('Plentymarket::WebAccountCheckout.save')}}</button>
 								</div>
-
 							</form>
 
 						</div>
@@ -118,38 +112,42 @@
 							<div class="row">
 								<!-- Cart Total -->
 								<div class="col-12 mb-60">
-									<h4 class="checkout-title">Cart Total</h4>
+									<h4 class="checkout-title">{{services.translate.trans('Plentymarket::WebAccountCheckout.cart_total')}}</h4>
 									<div class="checkout-cart-total">
-										<h4>Product <span>Total</span></h4>
+										<h4>{{services.translate.trans('Plentymarket::WebAccountCheckout.product')}}
+											<span>{{services.translate.trans('Plentymarket::WebAccountCheckout.total')}}</span>
+										</h4>
 										<ul>
 											{%for item in items%}
 												<li>{{item.name}} X {{item.quantity}}
 													<span>{{item.format_discount_price_quantity}}</span></li>
 											{%endfor%}
 										</ul>
-										<p>Sub Total <span>{{total}}</span></p>
-										<p>Shipping Fee <span>{{ship}}</span></p>
-										<h4>Grand Total <span>{{total}}</span></h4>
+										<p>{{services.translate.trans('Plentymarket::WebAccountCheckout.sub_total')}}
+											<span>{{total}}</span></p>
+										<p>{{services.translate.trans('Plentymarket::WebAccountCheckout.shipping_fee')}}
+											<span>{{ship}}</span></p>
+										<h4>{{services.translate.trans('Plentymarket::WebAccountCheckout.grand_total')}}
+											<span>{{total}}</span></h4>
 									</div>
 								</div>
 								<!-- Payment Method -->
 								<div class="col-12">
-									<h4 class="checkout-title">Payment Method</h4>
+									<h4 class="checkout-title">{{services.translate.trans('Plentymarket::WebAccountCheckout.payment_method')}}</h4>
 									<div class="checkout-payment-method">
 										{%for payment in paymentList%}
 											<div class="single-method">
 												<input checked="checked" type="radio" id="{{payment.id}}" name="payment-method" value="paypal">
-												<label for="payment_paypal">Paypal</label>
-												<p data-method="paypal">Paypay payment</p>
+												<label for="payment_paypal">{{services.translate.trans('Plentymarket::WebAccountCheckout.paypal')}}</label>
+												<p data-method="paypal">{{services.translate.trans('Plentymarket::WebAccountCheckout.paypay_payment')}}</p>
 											</div>
 										{%endfor%}
 										<div class="single-method">
 											<input type="checkbox" id="accept_terms">
-											<label for="accept_terms">I’ve read and accept the terms &
-											                          conditions</label>
+											<label for="accept_terms">{{services.translate.trans('Plentymarket::WebAccountCheckout.accept_terms')}}</label>
 										</div>
 									</div>
-									<button class="place-order">Place order</button>
+									<button class="place-order">{{services.translate.trans('Plentymarket::WebAccountCheckout.create_order')}}</button>
 								</div>
 
 							</div>
@@ -176,7 +174,7 @@
 			[phone]
 		</div>
 		<button class="address-select">
-			使用这个地址
+			{{services.translate.trans('Plentymarket::WebAccountCheckout.address_selected')}}
 		</button>
 	</div>
 </script>
