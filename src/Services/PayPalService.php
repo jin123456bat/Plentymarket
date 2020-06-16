@@ -13,7 +13,7 @@ use Plentymarket\Models\PayPalAccessToken;
  */
 class PayPalService
 {
-	private $sandbox = true;
+	private $sandbox = false;
 
 	private $web_test = 'https://www.sandbox.paypal.com';
 

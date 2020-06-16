@@ -14,7 +14,7 @@ use Plentymarket\Services\PayPalService;
 
 class PaymentController extends BaseApiController
 {
-	private $sandbox = true;
+	private $sandbox = false;
 	private $url_test = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
 	private $url = 'https://ipnpb.paypal.com/cgi-bin/webscr';
 
