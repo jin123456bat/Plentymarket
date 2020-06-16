@@ -7,6 +7,7 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
+use Plentymarket\Services\CommonService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\SessionService;
@@ -151,9 +152,8 @@ class IndexController extends BaseApiController
 	public function test (): Response
 	{
 		try {
-			return $this->success([
-				'ffff' => pluginApp(ItemListService::class)->getItemsFromWishlist()
-			]);
+			$commonService = pluginApp(CommonService::class);
+			return $this->success($commonService->footer_article(2));
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
