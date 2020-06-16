@@ -13,6 +13,8 @@ use Plentymarket\Models\PayPalAccessToken;
  */
 class PayPalService
 {
+	private $sandbox = true;
+
 	private $web_test = 'https://www.sandbox.paypal.com';
 
 	private $web = 'https://www.paypal.com';
@@ -44,7 +46,7 @@ class PayPalService
 
 	public function createOrder ($price)
 	{
-		$url = $this->host . '/v2/checkout/orders';
+		$url = ($this->sandbox ? $this->host_test : $this->host) . '/v2/checkout/orders';
 		$response = $this->httpService->post($url, json_encode([
 			'intent' => 'CAPTURE',
 			'purchase_units' => [
@@ -97,7 +99,7 @@ class PayPalService
 		$orderService = pluginApp(OrderService::class);
 		$accessKey = $orderService->getAccessKey($order->id);
 
-		$str = '<form method="post" id="form" name="form" action="' . $this->web . '/cgi-bin/webscr&pal=V4T754QB63XXL">
+		$str = '<form method="post" id="form" name="form" action="' . ($this->sandbox ? $this->web_test : $this->web) . '/cgi-bin/webscr&pal=V4T754QB63XXL">
 		<input type="hidden" name="cmd" value="_cart" />
 	    <input type="hidden" name="upload" value="1" />
 	    <input type="hidden" name="business" value="info@mercuryliving.it" />';
