@@ -93,7 +93,7 @@ class AccountController extends BaseWebController
 				'total' => '€' . sprintf('%.2f', $total),
 				'vat' => '€' . sprintf('%.2f', $vat),
 				'ship' => '€' . sprintf('%.2f', $ship),
-				'summary' => '€' . sprintf('%.2f', $total + $vat + $ship),
+				'summary' => '€' . sprintf('%.2f', $total + $ship),
 				'country' => $country,
 				'virtual_cart' => json_encode($virtaul_cart),
 			]);

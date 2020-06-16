@@ -101,6 +101,14 @@ class TranslateService
 			],
 			'WebIndexContact' => [
 				'contact' => 'Referente',
+				'tell_us_your_message' => 'Dicci il tuo messaggio',
+				'your_name' => 'Il tuo nome',
+				'your_message' => 'Il tuo messaggio',
+				'subject' => 'Oggetto',
+				'your_email' => 'La tua email',
+				'email' => 'Email',
+				'address' => 'Indirizzo',
+				'phone' => 'Telefono',
 			],
 			'WebIndexFaq' => [
 				'faq' => 'FAQ',

@@ -57,7 +57,7 @@
 
 						<div class="col-lg-6 col-12">
 							<!--=======  Calculate Shipping  =======-->
-
+							<!--
 							<div class="calculate-shipping">
 								<h4>Calculate Shipping</h4>
 								<form id="ship_form">
@@ -82,7 +82,7 @@
 									</div>
 								</form>
 							</div>
-
+							-->
 							<!--=======  End of Calculate Shipping  =======-->
 
 							<!--=======  Discount Coupon  =======-->
@@ -113,8 +113,10 @@
 									<h4>{{services.translate.trans('Plentymarket::WebAccountCart.cart_summary')}}</h4>
 									<p>{{services.translate.trans('Plentymarket::WebAccountCart.sub_total')}}
 										<span>{{total}}</span></p>
+									<!--
 									<p>{{services.translate.trans('Plentymarket::WebAccountCart.vat')}}
 										<span>{{vat}}</span></p>
+									-->
 									<p>{{services.translate.trans('Plentymarket::WebAccountCart.shipping_cost')}}
 										<span>{{ship}}</span></p>
 									<h2>{{services.translate.trans('Plentymarket::WebAccountCart.grand_total')}}
@@ -123,7 +125,9 @@
 								</div>
 								<div class="cart-summary-button">
 									<a class="checkout-btn" href="/account/checkout">{{services.translate.trans('Plentymarket::WebAccountCart.checkout')}}</a>
+									<!--
 									<button class="update-btn">{{services.translate.trans('Plentymarket::WebAccountCart.update_cart')}}</button>
+									-->
 								</div>
 							</div>
 
@@ -162,10 +166,10 @@
 <!--=====  End of Cart page content  ======-->
 {%include 'Plentymarket::common.footer'%}
 <script type="text/javascript">
-    $("#ship_form").on("submit", function()
-    {
-        return false;
-    });
+    // $("#ship_form").on("submit", function()
+    // {
+    //     return false;
+    // });
     $("#coupon_form").on("submit", function()
     {
         spop({
@@ -205,6 +209,7 @@
                 cart[key].quantity = num;
             }
         });
+        update_cart();
     });
 
     $(".pro-remove").on("click", function()
@@ -218,38 +223,44 @@
             }
         });
         $(this).parents("tr").remove();
+        update_cart();
     });
 
-    $(".update-btn").on("click", function()
+    function update_cart(callback)
     {
-        $.get("/api/basket/update", { cart: JSON.stringify(cart) }, function(response)
-        {
-            if (response.code == 1)
-            {
-                window.location.reload();
-            }
-        });
-        return false;
-    });
+        $.get("/api/basket/update", { cart: JSON.stringify(cart) }, callback);
+    }
 
-    var loadState = function(country_id)
-    {
-        $("#state").empty();
-        $.get("/api/index/state", { country_id: country_id }, function(response)
-        {
-            $.each(response.data, function(key, value)
-            {
-                if (value.country_id == country_id)
-                {
-                    $("#state").append("<option value=\"" + value.id + "\">" + value.name + "</option>");
-                }
-            });
-            $("#state").niceSelect("update");
-        });
-    };
-    loadState($("#country").val());
-    $("#country").on("change", function()
-    {
-        loadState($(this).val());
-    });
+    // $(".update-btn").on("click", function()
+    // {
+    //     update_cart(function(response)
+    //     {
+    //         if (response.code == 1)
+    //         {
+    //             window.location.reload();
+    //         }
+    //     });
+    //     return false;
+    // });
+
+    // var loadState = function(country_id)
+    // {
+    //     $("#state").empty();
+    //     $.get("/api/index/state", { country_id: country_id }, function(response)
+    //     {
+    //         $.each(response.data, function(key, value)
+    //         {
+    //             if (value.country_id == country_id)
+    //             {
+    //                 $("#state").append("<option value=\"" + value.id + "\">" + value.name + "</option>");
+    //             }
+    //         });
+    //         $("#state").niceSelect("update");
+    //     });
+    // };
+    // loadState($("#country").val());
+    // $("#country").on("change", function()
+    // {
+    //     loadState($(this).val());
+    // });
 </script>
