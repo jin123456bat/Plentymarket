@@ -59,6 +59,7 @@ class Utils
 	 */
 	public static function getLang ()
 	{
+		/** @var SessionService $sessionStorage */
 		$sessionStorage = pluginApp(SessionService::class);
 		return $sessionStorage->getLang();
 	}

@@ -4,6 +4,7 @@ namespace Plentymarket\Services;
 
 use Plenty\Modules\Blog\Contracts\BlogPostRepositoryContract;
 use Plenty\Modules\Blog\Models\BlogPost;
+use Plentymarket\Helper\Utils;
 
 /**
  * Class BlogService
@@ -33,7 +34,17 @@ class BlogService
 	 */
 	function getAll (int $page = 1, int $itemsPerPage = 50)
 	{
-		return $this->blogPostRepositoryContract->listPosts($page, $itemsPerPage);
+		$result = $this->blogPostRepositoryContract->listPosts($page, $itemsPerPage);
+		$lang = Utils::getLang();
+		if ($lang == 'de') {
+			$lang == 'en';
+		}
+		foreach ($result['entries'] as $key => $item) {
+			if ($item['data']['post']['lang'] != $lang) {
+				unset($result['entries'][$key]);
+			}
+		}
+		return $result;
 	}
 
 	/**
