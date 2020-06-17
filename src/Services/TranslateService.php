@@ -94,6 +94,7 @@ class TranslateService
 				'accept_terms' => 'I ve read and Accette i termini &Q condizioni',
 				'create_order' => 'Ordine del luogo',
 				'shipping_address' => 'Indirizzo di spedizione',
+				'choice_address' => 'Seleziona un indirizzo'
 			],
 			'WebAccountIndex' => [
 				'account' => 'il mio account',
@@ -272,6 +273,7 @@ class TranslateService
 				'accept_terms' => 'I’ve read and accept the terms & conditions',
 				'create_order' => 'Place order',
 				'shipping_address' => 'Shipping Address',
+				'choice_address' => 'Please Create Or Choice Your Address'
 			],
 			'WebAccountIndex' => [
 				'account' => 'Account',

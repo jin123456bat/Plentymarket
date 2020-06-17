@@ -200,6 +200,15 @@
             return false;
         }
 
+        if ($(".address.selected").length == 0)
+        {
+            spop({
+                template: '{{services.translate.trans('Plentymarket::WebAccountCheckout.choice_address')}}',
+                style: "error"
+            });
+            return false;
+        }
+
         $.get("/api/order/create", { address_id: $(".address.selected").data("id"), comment: "" }, function(response)
         {
             if (response.code == 1)
