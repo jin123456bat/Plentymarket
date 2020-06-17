@@ -157,6 +157,11 @@ class IndexController extends BaseApiController
 			/** @var CountryService $countryService */
 			$countryService = pluginApp(CountryService::class);
 
+			$countrys = $countryService->getCountriesList(0, []);
+			foreach ($countrys as $country) {
+				$countryService->activateCountry($country['id']);
+			}
+
 			return $this->success([
 				'all_0' => $countryService->getCountriesList(0, []),
 				'all_1' => $countryService->getCountriesList(1, []),
