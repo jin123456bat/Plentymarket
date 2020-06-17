@@ -7,7 +7,6 @@ use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
 use Plentymarket\Controllers\BaseApiController;
 use Plentymarket\Services\AccountService;
-use Plentymarket\Services\CommonService;
 use Plentymarket\Services\CountryService;
 use Plentymarket\Services\ItemListService;
 use Plentymarket\Services\SessionService;
@@ -152,7 +151,7 @@ class IndexController extends BaseApiController
 	public function test (): Response
 	{
 		try {
-			$commonService = pluginApp(CommonService::class);
+//			$commonService = pluginApp(CommonService::class);
 
 			/** @var CountryService $countryService */
 			$countryService = pluginApp(CountryService::class);
@@ -162,14 +161,16 @@ class IndexController extends BaseApiController
 //				$countryService->activateCountry($country['id']);
 //			}
 
-			return $this->success([
-				'state_gb_1' => $countryService->getCountryStateByIso(12, $countryService->findIsoCode(12, 'GB')),
-				'state_gbr_1' => $countryService->getCountryStateByIso(12, $countryService->findIsoCode(12, 'GBR')),
+			$countries = $countryService->getTree();
+			foreach ($countries as $country) {
+				if (empty($country['states'])) {
+					$countryService->deactivateCountry($country['id']);
+				}
+			}
 
+			return $this->success([
 				'all_0' => $countryService->getCountriesList(0, []),
 				'all_1' => $countryService->getCountriesList(1, []),
-				'state_gb' => $countryService->getCountryStateByIso(12, 'GB'),
-				'state_gbr' => $countryService->getCountryStateByIso(12, 'GBR'),
 			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
