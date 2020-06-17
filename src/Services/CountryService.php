@@ -46,6 +46,11 @@ class CountryService
 		return json_decode(json_encode($countryList), true);
 	}
 
+	function getCountryStateByIso (int $countryId, string $isoCode)
+	{
+		return $this->countryRepositoryContract->getCountryStateByIso($countryId, $isoCode);
+	}
+
 	/**
 	 * 获取国家数据 树状
 	 * @return array
