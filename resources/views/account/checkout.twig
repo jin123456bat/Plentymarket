@@ -80,7 +80,7 @@
 									<div class="col-md-6 col-12 mb-20">
 										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.country')}}
 											*</label>
-										<select class="nice-select" name="country">
+										<select class="nice-select" name="country" id="country">
 											{%for c in country%}
 												<option value="{{c.id}}">{{c.name}}</option>
 											{%endfor%}
@@ -89,7 +89,7 @@
 									<div class="col-md-6 col-12 mb-20">
 										<label>{{services.translate.trans('Plentymarket::WebAccountCheckout.state')}}
 											*</label>
-										<select class="nice-select" name="state">
+										<select class="nice-select" name="state" id="state">
 										</select>
 									</div>
 									<div class="col-md-6 col-12 mb-20">
