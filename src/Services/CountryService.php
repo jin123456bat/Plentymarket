@@ -51,6 +51,11 @@ class CountryService
 		return $this->countryRepositoryContract->getCountryStateByIso($countryId, $isoCode);
 	}
 
+	function deactivateCountry (int $countryId)
+	{
+		return $this->countryRepositoryContract->deactivateCountry($countryId);
+	}
+
 	/**
 	 * 获取国家数据 树状
 	 * @return array
