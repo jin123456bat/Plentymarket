@@ -163,6 +163,9 @@ class IndexController extends BaseApiController
 //			}
 
 			return $this->success([
+				'state_gb_1' => $countryService->getCountryStateByIso(12, $countryService->findIsoCode(12, 'GB')),
+				'state_gbr_1' => $countryService->getCountryStateByIso(12, $countryService->findIsoCode(12, 'GBR')),
+
 				'all_0' => $countryService->getCountriesList(0, []),
 				'all_1' => $countryService->getCountriesList(1, []),
 				'state_gb' => $countryService->getCountryStateByIso(12, 'GB'),
