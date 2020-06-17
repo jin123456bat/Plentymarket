@@ -35,6 +35,17 @@ class CountryService
 		return json_decode(json_encode($countryList), true);
 	}
 
+	function activateCountry (int $countryId): Country
+	{
+		return $this->countryRepositoryContract->activateCountry($countryId);
+	}
+
+	function getCountriesList (int $active, array $with): array
+	{
+		$countryList = $this->countryRepositoryContract->getCountriesList($active, $with);
+		return json_decode(json_encode($countryList), true);
+	}
+
 	/**
 	 * 获取国家数据 树状
 	 * @return array

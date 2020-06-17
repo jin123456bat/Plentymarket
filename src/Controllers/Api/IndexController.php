@@ -153,7 +153,15 @@ class IndexController extends BaseApiController
 	{
 		try {
 			$commonService = pluginApp(CommonService::class);
-			return $this->success($commonService->footer_article(2));
+
+			/** @var CountryService $countryService */
+			$countryService = pluginApp(CountryService::class);
+
+			return $this->success([
+				'all_0' => $countryService->getCountriesList(0, []),
+				'all_1' => $countryService->getCountriesList(1, []),
+				'all_2' => $countryService->getCountriesList(2, []),
+			]);
 		} catch (\Throwable $e) {
 			return $this->exception($e);
 		}
